@@ -1,0 +1,102 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    font-size: 100%;
+    vertical-align: baseline;
+    /*color: #131313;*/
+    text-decoration: none;
+}
+
+body {
+   font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0
+
+}
+#topo {
+	width: 100%;
+	height: 90px;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	border: none;
+	text-align: center;
+	margin: 0 0 10px 0;
+	
+}
+#topo img {
+	float: left;
+	margin: 10px 0 10px 0;
+	padding: 0;
+	border: none;
+}
+#topo p {
+	margin: 0;
+	padding: 0;
+	float: right;
+	border: none;
+	font-size: 12px ;
+	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+	line-height: 15px;
+}
+label.destaque {
+	font-weight: bold;
+	float: right;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+
+table.TableRelat {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  width: 100%
+}
+
+table.TableRelat caption {
+  text-align: left;
+  color: silver;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+}
+
+table.TableRelat thead {
+  background: SteelBlue;
+  color: white;
+  text-align: left;
+}
+
+table.TableRelat th, td {
+  padding: 5px 10px;
+  text-align: left;
+}
+
+table.TableRelat tbody tr:nth-child(even) {
+  background: WhiteSmoke;
+}
+
+table.TableRelat tbody tr td:nth-child(2) {
+  text-align:left;
+}
+
+table.TableRelat tbody tr td:nth-child(3),
+tbody tr td:nth-child(4) {
+  text-align: left;
+  font-family: monospace;
+}
+
+table.TableRelat tfoot {
+  background: SeaGreen;
+  color: white;
+  text-align: right;
+}
+
+table.TableRelat tfoot tr th:last-child {
+  font-family: monospace;
+}

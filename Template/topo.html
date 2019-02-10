@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block topo %}
+<div id="topo">
+<img src="data:image/png;base64,{{ logo }}" height="70">
+<p align="right">
+<label class="destaque">{{ nomeFantasia }}</label>
+<label>{{ endereco }}, {{ numero }}</label>
+<label>{{ bairro }}</label>
+<label>{{ cep }} - {{ cidade }} - {{ estado }}</label>
+<label class="destaque">{{ telefone }}</label></p>
+</div>
+{% endblock %}

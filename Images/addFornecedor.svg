@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="80.320023mm"
+   height="22.763962mm"
+   viewBox="0 0 80.320028 22.763961"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="addFornecedor.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.3409091"
+     inkscape:cx="40.593304"
+     inkscape:cy="225.28857"
+     inkscape:document-units="cm"
+     inkscape:current-layer="g1479"
+     showgrid="false"
+     units="mm"
+     inkscape:window-width="1920"
+     inkscape:window-height="1004"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-78.732417,-92.460882)">
+    <g
+       id="g857"
+       transform="matrix(0.22748943,0,0,0.22748943,67.202206,44.928892)"
+       style="fill:#00ff00">
+      <g
+         id="g1479"
+         transform="matrix(3.5714289,0,0,3.5714289,81.682305,-172.4826)"
+         style="fill:#ffffff">
+        <text
+           inkscape:export-ydpi="95.999992"
+           inkscape:export-xdpi="95.999992"
+           inkscape:export-filename="/Files/Python/Novo/Images/addNovo.png"
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.01545906px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.42538786;"
+           x="-11.759736"
+           y="111.178"
+           id="text843"
+           transform="scale(0.82619788,1.2103638)"><tspan
+             sodipodi:role="line"
+             id="tspan841"
+             x="-11.759736"
+             y="111.178"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:17.01545906px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;stroke-width:0.42538786;">FORNECEDOR</tspan></text>
+        <text
+           inkscape:export-ydpi="95.999992"
+           inkscape:export-xdpi="95.999992"
+           inkscape:export-filename="/Files/Python/Novo/Images/addNovo.png"
+           id="text839-0"
+           y="116.78639"
+           x="1.0847559"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.71877766px;line-height:1.25;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.34296998;"
+           xml:space="preserve"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.71877766px;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;stroke-width:0.34296998;"
+             y="116.78639"
+             x="1.0847559"
+             id="tspan837-5"
+             sodipodi:role="line">ADICIONAR</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

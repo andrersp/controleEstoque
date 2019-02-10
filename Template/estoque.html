@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends "topo.html" %}
+
+{% block body %}
+	<table class='TableRelat' >
+		<caption>{{ titulo }}</caption>
+
+		<thead >
+		<tr>
+			{% for row in headertable %}
+			<th> {{ row }}</th>
+			{% endfor %}
+		</tr>
+		</thead>
+		<tbody>
+		{% for i in range(descPRoduto | length)  %}
+		<tr>
+			<td>
+				{{codProduto[i]}}
+			</td>
+			<td>
+				{{ descPRoduto[i] }}
+			</td>
+			<td>
+				{{ qtdeEstoque[i]}}
+			</td>
+			<td>
+				{{ valorUnitario[i]}}
+				
+			</td>
+			<td>
+				{{ valorAtacado[i] }}
+			</td>
+			<td>
+				{{ qtdeAtacado[i] }}
+			</td>
+				
+		</tr>
+		</tbody>
+		{% endfor %}
+		<!-- <tfoot>
+			<tr>
+				<th colspan="4">Só testando</th>
+				<th>Thats Ok</th>
+			</tr>
+			
+		</tfoot> -->
+	</table>
+
+
+
+{% endblock %}

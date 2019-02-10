@@ -1,0 +1,1427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ct_FormProdutos</class>
+ <widget class="QFrame" name="ct_FormProdutos">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Raised</enum>
+  </property>
+  <widget class="QFrame" name="fr_FormProdutos">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: #FFF;
+border: none</string>
+   </property>
+   <widget class="QLabel" name="lb_FormProdutos">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>10</y>
+      <width>780</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 14px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+
+border-bottom: 2px solid #A2A2A2
+}</string>
+    </property>
+    <property name="text">
+     <string>CADASTRAR PRODUTO</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_idProduto">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>85</y>
+      <width>150</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border: 1px solid #A2A2A2;
+color: #000;
+font-size: 14px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FotoProduto">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>150</width>
+      <height>150</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: 1px solid #A2A2A2;
+background: url('Images/icon/Photo.svg') center no-repeat 
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_2">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>60</y>
+      <width>150</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>DESCRIÇÃO</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_DescricaoProduto">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>85</y>
+      <width>450</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="placeholderText">
+     <string>Descrição Produto</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_3">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>120</y>
+      <width>215</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>CATEGORIA</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb_CategoriaProduto">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>145</y>
+      <width>190</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase
+}
+QComboBox:Focus {
+border: 1px solid red;
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(Images/down.png);
+ }
+</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>SELECIONE</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="bt_AddCategoriaProduto">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>145</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+background: #7AB32E;
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_4">
+    <property name="geometry">
+     <rect>
+      <x>435</x>
+      <y>120</y>
+      <width>215</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>MARCA</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb_MarcaProduto">
+    <property name="geometry">
+     <rect>
+      <x>435</x>
+      <y>145</y>
+      <width>190</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase
+}
+QComboBox:Focus {
+border: 1px solid red;
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(Images/down.png);
+ }
+</string>
+    </property>
+    <property name="insertPolicy">
+     <enum>QComboBox::InsertAtBottom</enum>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <item>
+     <property name="text">
+      <string>SELECIONE</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="bt_AddMarcaProduto">
+    <property name="geometry">
+     <rect>
+      <x>625</x>
+      <y>145</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+background: #7AB32E;
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_5">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>180</y>
+      <width>215</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>ESTOQUE MÍNIMO</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_6">
+    <property name="geometry">
+     <rect>
+      <x>435</x>
+      <y>180</y>
+      <width>215</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>ESTOQUE MÁXIMO</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_EstoqueMinimoProduto">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>205</y>
+      <width>215</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; 
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_EstoqueMaximoProduto">
+    <property name="geometry">
+     <rect>
+      <x>435</x>
+      <y>205</y>
+      <width>215</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; 
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="placeholderText">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_ObsProduto">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>260</y>
+      <width>450</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="placeholderText">
+     <string>Observação</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_7">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>235</y>
+      <width>150</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>OBSERVAÇÃO</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_8">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>290</y>
+      <width>960</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 14px;
+font-family: &quot;Arial&quot;;
+font-weight: normal;
+
+border-bottom: 2px solid #A2A2A2;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>PREÇOS</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tb_HistoricoComprasProduto">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>85</y>
+      <width>310</width>
+      <height>200</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTableView{
+color: #797979;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+font-size: 12px;
+background: #FFF;
+}
+QHeaderView:section{
+background: #FFF;
+font-size: 12px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #797979;
+border: none;
+border-bottom: 1px solid #CCC;
+height: 25px;
+}
+</string>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="showGrid">
+     <bool>false</bool>
+    </property>
+    <attribute name="verticalHeaderVisible">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="verticalHeaderHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>DATA</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignLeading|AlignVCenter</set>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>QTDE</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignLeading|AlignVCenter</set>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>VALOR</string>
+     </property>
+     <property name="textAlignment">
+      <set>AlignLeading|AlignVCenter</set>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_9">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>60</y>
+      <width>310</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>HISTÓRICO DE COMPRAS</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_ValorCompraProduto">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>360</y>
+      <width>150</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 14px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>R$ 0.00</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_10">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>335</y>
+      <width>50</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>CUSTO</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_11">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>335</y>
+      <width>90</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 9px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979;
+
+}</string>
+    </property>
+    <property name="text">
+     <string>(ÚLTIMA COMPRA)</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_ValorUnitarioProduto">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>360</y>
+      <width>150</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 14px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>R$ 0.00</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_12">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>335</y>
+      <width>150</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>VENDA VAREJO</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_13">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>395</y>
+      <width>150</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+    </property>
+    <property name="text">
+     <string>VENDA ATACADO</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_ValorAtacadoProduto">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>420</y>
+      <width>150</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 14px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>R$ 0.00</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="fr_BotoesFormProdutos">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>470</y>
+      <width>1000</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:#E1DFE0;
+border: none;</string>
+    </property>
+    <widget class="QPushButton" name="bt_CancelarProdutos">
+     <property name="geometry">
+      <rect>
+       <x>880</x>
+       <y>0</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #1E87F0;
+color: #FFF
+ }
+QPushButton:hover{
+background-color: #40a286
+}</string>
+     </property>
+     <property name="text">
+      <string>CANCELAR</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>75</width>
+       <height>35</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_SalvarProdutos">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>0</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Tahoma</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #7AB32E;
+color: #FFF
+ }
+QPushButton:hover{
+background-color: #40a286
+}</string>
+     </property>
+     <property name="text">
+      <string>SALVAR</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>75</width>
+       <height>35</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="lb_qtdeMin">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>350</y>
+      <width>40</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_MinimoAtacado">
+    <property name="geometry">
+     <rect>
+      <x>860</x>
+      <y>405</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 12px &quot;Arial&quot; ;
+text-transform: uppercase
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_14">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>385</y>
+      <width>140</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 10px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: normal;
+color: red
+}</string>
+    </property>
+    <property name="text">
+     <string>QTDE. MÍNIMA P/ ATACADO</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_15">
+    <property name="geometry">
+     <rect>
+      <x>445</x>
+      <y>360</y>
+      <width>150</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #000
+}</string>
+    </property>
+    <property name="text">
+     <string>MARGEM LUCRO</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_PorcentagemVarejo">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>360</y>
+      <width>60</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #FFF;
+border-radius: 2px;
+color: #7AB32E;
+font: 20px &quot;Arial&quot; ;
+font-weight: bold
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_17">
+    <property name="geometry">
+     <rect>
+      <x>445</x>
+      <y>380</y>
+      <width>150</width>
+      <height>10</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 8px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: normal;
+color: #000
+}</string>
+    </property>
+    <property name="text">
+     <string>(APROXIMADA NO VAREJO)</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_porcVar">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>360</y>
+      <width>20</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 20px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #7AB32E
+}</string>
+    </property>
+    <property name="text">
+     <string>%</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_16">
+    <property name="geometry">
+     <rect>
+      <x>445</x>
+      <y>420</y>
+      <width>150</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #000
+}</string>
+    </property>
+    <property name="text">
+     <string>MARGEM LUCRO</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormProdutos_19">
+    <property name="geometry">
+     <rect>
+      <x>445</x>
+      <y>440</y>
+      <width>150</width>
+      <height>10</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 8px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: normal;
+color: #000
+}</string>
+    </property>
+    <property name="text">
+     <string>(APROXIMADA NO ATACADO</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_porcAtac">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>420</y>
+      <width>20</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 20px;
+font-family: &quot;Arial Unicode MS&quot;;
+font-weight: bold;
+color: #7AB32E
+}</string>
+    </property>
+    <property name="text">
+     <string>%</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_PorcentagemAtacado">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>420</y>
+      <width>60</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #FFF;
+border-radius: 2px;
+color: #7AB32E;
+font: 20px &quot;Arial&quot; ;
+font-weight: bold
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>150</width>
+      <height>50</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../Images/CodBarra.png</pixmap>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_AddMarca">
+    <property name="geometry">
+     <rect>
+      <x>435</x>
+      <y>145</y>
+      <width>190</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="placeholderText">
+     <string>NOVA MARCA</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_AddCategoria">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>145</y>
+      <width>190</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="inputMask">
+     <string/>
+    </property>
+    <property name="placeholderText">
+     <string>NOVA CATEGORIA</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_CancelAddCatergoria">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>145</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cancelar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+background: #7AB32E;
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_CalcelAddMarca">
+    <property name="geometry">
+     <rect>
+      <x>625</x>
+      <y>145</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cancelar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+background: #7AB32E;
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_AddImagem">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>230</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;CADASTRAR IMGEM&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+background: #7AB32E;
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_DelImagem">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>230</y>
+      <width>25</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Deletar Imagem&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+background: #7AB32E;
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>tx_AddMarca</zorder>
+   <zorder>tx_AddCategoria</zorder>
+   <zorder>bt_CancelAddCatergoria</zorder>
+   <zorder>bt_CalcelAddMarca</zorder>
+   <zorder>lb_FormProdutos</zorder>
+   <zorder>tx_idProduto</zorder>
+   <zorder>lb_FotoProduto</zorder>
+   <zorder>lb_FormProdutos_2</zorder>
+   <zorder>tx_DescricaoProduto</zorder>
+   <zorder>lb_FormProdutos_3</zorder>
+   <zorder>cb_CategoriaProduto</zorder>
+   <zorder>bt_AddCategoriaProduto</zorder>
+   <zorder>lb_FormProdutos_4</zorder>
+   <zorder>cb_MarcaProduto</zorder>
+   <zorder>bt_AddMarcaProduto</zorder>
+   <zorder>lb_FormProdutos_5</zorder>
+   <zorder>lb_FormProdutos_6</zorder>
+   <zorder>tx_EstoqueMinimoProduto</zorder>
+   <zorder>tx_EstoqueMaximoProduto</zorder>
+   <zorder>tx_ObsProduto</zorder>
+   <zorder>lb_FormProdutos_7</zorder>
+   <zorder>lb_FormProdutos_8</zorder>
+   <zorder>tb_HistoricoComprasProduto</zorder>
+   <zorder>lb_FormProdutos_9</zorder>
+   <zorder>tx_ValorCompraProduto</zorder>
+   <zorder>lb_FormProdutos_10</zorder>
+   <zorder>lb_FormProdutos_11</zorder>
+   <zorder>tx_ValorUnitarioProduto</zorder>
+   <zorder>lb_FormProdutos_12</zorder>
+   <zorder>lb_FormProdutos_13</zorder>
+   <zorder>tx_ValorAtacadoProduto</zorder>
+   <zorder>fr_BotoesFormProdutos</zorder>
+   <zorder>lb_qtdeMin</zorder>
+   <zorder>tx_MinimoAtacado</zorder>
+   <zorder>lb_FormProdutos_14</zorder>
+   <zorder>lb_FormProdutos_15</zorder>
+   <zorder>tx_PorcentagemVarejo</zorder>
+   <zorder>lb_FormProdutos_17</zorder>
+   <zorder>lb_porcVar</zorder>
+   <zorder>lb_FormProdutos_16</zorder>
+   <zorder>lb_FormProdutos_19</zorder>
+   <zorder>lb_porcAtac</zorder>
+   <zorder>tx_PorcentagemAtacado</zorder>
+   <zorder>label_2</zorder>
+   <zorder>bt_DelImagem</zorder>
+   <zorder>bt_AddImagem</zorder>
+  </widget>
+ </widget>
+ <tabstops>
+  <tabstop>tx_idProduto</tabstop>
+  <tabstop>tx_DescricaoProduto</tabstop>
+  <tabstop>cb_CategoriaProduto</tabstop>
+  <tabstop>bt_AddCategoriaProduto</tabstop>
+  <tabstop>cb_MarcaProduto</tabstop>
+  <tabstop>bt_AddMarcaProduto</tabstop>
+  <tabstop>tx_EstoqueMinimoProduto</tabstop>
+  <tabstop>tx_EstoqueMaximoProduto</tabstop>
+  <tabstop>tx_ObsProduto</tabstop>
+  <tabstop>tx_ValorCompraProduto</tabstop>
+  <tabstop>tx_ValorUnitarioProduto</tabstop>
+  <tabstop>tx_ValorAtacadoProduto</tabstop>
+  <tabstop>tx_MinimoAtacado</tabstop>
+  <tabstop>tx_PorcentagemVarejo</tabstop>
+  <tabstop>tx_PorcentagemAtacado</tabstop>
+  <tabstop>tx_AddMarca</tabstop>
+  <tabstop>tx_AddCategoria</tabstop>
+  <tabstop>bt_CancelAddCatergoria</tabstop>
+  <tabstop>bt_CalcelAddMarca</tabstop>
+  <tabstop>tb_HistoricoComprasProduto</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

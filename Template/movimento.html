@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        p,
+        li {
+            white-space: pre-wrap;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{{ estilo }}">
+</head>
+
+<body>
+    <table class='TableRelat'>
+        <caption>{{ titulo }}</caption>
+
+        <tbody>
+            {% for row in despesas %}
+            <tr>
+                <td>
+                    {{row}}
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        <tfoot>
+            <tr>
+                <th colspan="1">Total</th>
+                <th> R$ {{ total }}</th>
+            </tr>
+
+        </tfoot>
+    </table>
+</body>
+
+</html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">

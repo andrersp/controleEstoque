@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="66.145836mm"
+   height="26.608038mm"
+   viewBox="0 0 66.145841 26.608037"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="addPedido.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.6818181"
+     inkscape:cx="97.157668"
+     inkscape:cy="41.571659"
+     inkscape:document-units="cm"
+     inkscape:current-layer="g1479"
+     showgrid="false"
+     units="mm"
+     inkscape:window-width="1920"
+     inkscape:window-height="1004"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-60.894619,-34.395712)">
+    <g
+       id="g857"
+       transform="matrix(0.22748943,0,0,0.22748943,67.202206,44.928892)"
+       style="fill:#00ff00">
+      <g
+         id="g1479"
+         transform="matrix(3.5714289,0,0,3.5714289,81.682305,-172.4826)"
+         style="fill:#ffffff">
+        <g
+           id="g822"
+           transform="matrix(1.1253519,0,0,1.1253519,-1.262598,-3.5017974)"
+           style="fill:#ffffff">
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.06755447px;line-height:1.25;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.42668957"
+             x="-25.750265"
+             y="48.898197"
+             id="text839"
+             inkscape:export-filename="/Files/Python/Novo/Images/addNovo.png"
+             inkscape:export-xdpi="95.999992"
+             inkscape:export-ydpi="95.999992"><tspan
+               sodipodi:role="line"
+               id="tspan837"
+               x="-25.750265"
+               y="48.898197"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:17.06755447px;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;stroke-width:0.42668957">INCLUIR</tspan></text>
+          <text
+             id="text843"
+             y="61.490425"
+             x="-25.245726"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.51086807px;line-height:1.25;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.31277269"
+             xml:space="preserve"
+             inkscape:export-filename="/Files/Python/Novo/Images/addNovo.png"
+             inkscape:export-xdpi="95.999992"
+             inkscape:export-ydpi="95.999992"><tspan
+               style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.51086807px;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;stroke-width:0.31277269"
+               y="61.490425"
+               x="-25.245726"
+               id="tspan841"
+               sodipodi:role="line">NO PEDIDO</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

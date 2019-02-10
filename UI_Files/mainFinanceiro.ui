@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ct_MainFinanceiro</class>
+ <widget class="QFrame" name="ct_MainFinanceiro">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">border:none</string>
+  </property>
+  <widget class="QFrame" name="frameMainFinanceiro">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>600</height>
+    </rect>
+   </property>
+   <widget class="QFrame" name="fr_TituloFinanceiro">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border: none</string>
+    </property>
+    <widget class="QLabel" name="lb_tituloFinanceiro">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>15</y>
+       <width>271</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>DejaVu Sans</family>
+       <pointsize>18</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #FFF</string>
+     </property>
+     <property name="text">
+      <string>FINANCEIRO</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QFrame" name="ct_financeiro">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>100</y>
+      <width>1000</width>
+      <height>500</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #FFF;
+border: none</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
+   <widget class="QFrame" name="fr_menuFinanceiro">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>1000</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:#E1DFE0;
+border: none;
+border-bottom: 2px solid #069;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="bt_MovCaixa">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>2</y>
+       <width>170</width>
+       <height>36</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial [Mono]</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+background: #40A286 ;
+border: none;
+color: #FFF;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+margin-top: 7px;
+}
+QPushButton:hover {
+background: #7AB32E;
+margin-top: 0;
+}
+QPushButton:disabled {
+background: #7AB32E;
+margin-top: 0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>MOVIMENTO DE CAIXA</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../../RSP/Images/icon/tag-new.png</normaloff>../../RSP/Images/icon/tag-new.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="shortcut">
+      <string>F7</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_AReceber">
+     <property name="geometry">
+      <rect>
+       <x>185</x>
+       <y>2</y>
+       <width>170</width>
+       <height>36</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial [Mono]</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+background: #40A286 ;
+border: none;
+color: #FFF;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+margin-top: 7px;
+}
+QPushButton:hover {
+background: #7AB32E;
+margin-top: 0;
+}
+QPushButton:disabled {
+background: #7AB32E;
+margin-top: 0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>CONTAS A RECEBER</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../../RSP/Images/icon/tag-new.png</normaloff>../../RSP/Images/icon/tag-new.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="shortcut">
+      <string>F7</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_APagar">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>365</x>
+       <y>2</y>
+       <width>170</width>
+       <height>36</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial [Mono]</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+background: #40A286 ;
+border: none;
+color: #FFF;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+margin-top: 7px;
+}
+QPushButton:hover {
+background: #7AB32E;
+margin-top: 0;
+}
+QPushButton:disabled {
+background: #7AB32E;
+margin-top: 0;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>CONTAS A PAGAR</string>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../../RSP/Images/icon/tag-new.png</normaloff>../../RSP/Images/icon/tag-new.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+     <property name="shortcut">
+      <string>F7</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </widget>
+   <zorder>ct_financeiro</zorder>
+   <zorder>fr_TituloFinanceiro</zorder>
+   <zorder>fr_menuFinanceiro</zorder>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
