@@ -152,6 +152,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         self.tb_parcelasVenda.setColumnWidth(2, 60)
         self.tb_parcelasVenda.setColumnWidth(3, 80)
         self.tb_parcelasVenda.setColumnWidth(4, 90)
+        """ teste """
 
         """ Definindo funcões widgets"""
         # Return Press Busca Id Produto
