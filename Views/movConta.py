@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'movConta.ui',
 # licensing of 'movConta.ui' applies.
 #
-# Created: Sat Feb  9 22:19:14 2019
+# Created: Sun Feb 10 21:01:54 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -200,7 +200,6 @@ class Ui_ct_movimento(object):
 "     margin: 0.5px;\n"
 "    border-radius: 3px\n"
 " }")
-        self.pr_receita.setProperty("value", 0)
         self.pr_receita.setObjectName("pr_receita")
         self.lb_FormVenda_20 = QtWidgets.QLabel(self.fr_Receita)
         self.lb_FormVenda_20.setGeometry(QtCore.QRect(10, 5, 150, 20))
@@ -311,26 +310,6 @@ class Ui_ct_movimento(object):
         self.fr_Despesa.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.fr_Despesa.setFrameShadow(QtWidgets.QFrame.Raised)
         self.fr_Despesa.setObjectName("fr_Despesa")
-        self.pr_despesa = QtWidgets.QProgressBar(self.fr_Despesa)
-        self.pr_despesa.setGeometry(QtCore.QRect(10, 65, 450, 30))
-        self.pr_despesa.setStyleSheet("QProgressBar {\n"
-"     border: 2px solid grey;\n"
-"     border-radius: 5px;\n"
-"    text-align: center;\n"
-"    font: 14px \"Tahoma\";\n"
-"    font-weight: bold;\n"
-"    color: #000;\n"
-"    background: #FFF \n"
-"\n"
-" }\n"
-" QProgressBar::chunk {\n"
-"     background: rgb(251, 90, 84, 60%);\n"
-"     width: 8px;\n"
-"     margin: 0.5px;\n"
-"    border-radius: 3px\n"
-" }")
-        self.pr_despesa.setProperty("value", 0)
-        self.pr_despesa.setObjectName("pr_despesa")
         self.lb_FormVenda_24 = QtWidgets.QLabel(self.fr_Despesa)
         self.lb_FormVenda_24.setGeometry(QtCore.QRect(10, 5, 150, 20))
         self.lb_FormVenda_24.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -429,6 +408,25 @@ class Ui_ct_movimento(object):
 "}")
         self.lb_inicioDespesa.setText("")
         self.lb_inicioDespesa.setObjectName("lb_inicioDespesa")
+        self.pr_despesa = QtWidgets.QProgressBar(self.fr_Despesa)
+        self.pr_despesa.setGeometry(QtCore.QRect(10, 65, 450, 30))
+        self.pr_despesa.setStyleSheet("QProgressBar {\n"
+"     border: 2px solid grey;\n"
+"     border-radius: 5px;\n"
+"    text-align: center;\n"
+"    font: 14px \"Tahoma\";\n"
+"    font-weight: bold;\n"
+"    color: #000;\n"
+"    background: #FFF \n"
+"\n"
+" }\n"
+" QProgressBar::chunk {\n"
+"     background: rgb(251, 90, 84, 60%);\n"
+"     width: 8px;\n"
+"     margin: 0.5px;\n"
+"    border-radius: 3px\n"
+" }")
+        self.pr_despesa.setObjectName("pr_despesa")
         self.tb_receita = QtWidgets.QTableWidget(self.fr_movimento)
         self.tb_receita.setGeometry(QtCore.QRect(20, 200, 470, 200))
         self.tb_receita.setStyleSheet("QTableView{\n"
@@ -539,7 +537,6 @@ class Ui_ct_movimento(object):
         self.label_3.setText(QtWidgets.QApplication.translate("ct_movimento", "R$", None, -1))
         self.label_8.setText(QtWidgets.QApplication.translate("ct_movimento", "R$", None, -1))
         self.label_2.setText(QtWidgets.QApplication.translate("ct_movimento", "à", None, -1))
-        self.pr_despesa.setFormat(QtWidgets.QApplication.translate("ct_movimento", "%p%", None, -1))
         self.lb_FormVenda_24.setText(QtWidgets.QApplication.translate("ct_movimento", "TOTAL DE DESPESAS", None, -1))
         self.label_6.setText(QtWidgets.QApplication.translate("ct_movimento", "R$", None, -1))
         self.label_10.setText(QtWidgets.QApplication.translate("ct_movimento", "R$", None, -1))

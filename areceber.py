@@ -113,6 +113,3 @@ class MainAReceber(Ui_ct_AReceber):
 
             INSERI.cadContaReceber()
             self.tabelaAReceber()
-            self.buscaReceita()
-            self.buscaDespesa()
-            self.calculoMovimento()

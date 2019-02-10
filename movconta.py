@@ -116,7 +116,7 @@ class MainMovimentoConta(Ui_ct_movimento):
                 self.pr_despesa.setFormat("%.02f%%" % (valor))
                 # Max e valor
                 self.pr_despesa.setMaximum(busca.totaAPagar)
-                self.pr_receita.setValue(busca.totalPago)
+                self.pr_despesa.setValue(busca.totalPago)
             self.detalheDespesa()
         pass
 
