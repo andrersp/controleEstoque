@@ -911,7 +911,7 @@ background-color: #5C9BBC
       </size>
      </property>
     </widget>
-    <widget class="QLineEdit" name="tx_ObsItemPedido">
+    <widget class="QLineEdit" name="tx_ObsItem">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -2190,7 +2190,7 @@ border: none
   <tabstop>tx_QntdItem</tabstop>
   <tabstop>tx_ValorUnitarioItem</tabstop>
   <tabstop>tx_ValorTotalItem</tabstop>
-  <tabstop>tx_ObsItemPedido</tabstop>
+  <tabstop>tx_ObsItem</tabstop>
   <tabstop>tx_Desconto</tabstop>
   <tabstop>tx_Frete</tabstop>
   <tabstop>dt_Emissao</tabstop>

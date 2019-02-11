@@ -130,7 +130,7 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         self.tx_EstoqueMaximoProduto.setValidator(validar)
         self.tx_EstoqueMinimoProduto.setValidator(validar)
         self.tx_MinimoAtacado.setValidator(validar)
-        validarValor = QtGui.QDoubleValidator(0.50, 9999.99, 3, self)
+        validarValor = QtGui.QDoubleValidator(0.50, 999.99, 2, self)
         validarValor.setNotation(QtGui.QDoubleValidator.StandardNotation)
         validarValor.setDecimals(2)
         # validarValor.setRange(000.50, 999.99, 2)

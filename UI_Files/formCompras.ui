@@ -205,7 +205,7 @@ background-color: #40a286
      </property>
     </widget>
    </widget>
-   <widget class="QLineEdit" name="tx_FornecedorCompra">
+   <widget class="QLineEdit" name="tx_NomeFantasia">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -255,7 +255,7 @@ border: 1px solid #1E87F0;
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
     </property>
-    <widget class="QLineEdit" name="tx_CodCompra">
+    <widget class="QLineEdit" name="tx_Cod">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -437,18 +437,19 @@ border: none;
      <property name="styleSheet">
       <string notr="true">QPushButton {
 background-color: #7AB32E;
-border-radius: 2px
- }
-QPushButton:disabled{
-background-color: #CACACA;
-border-radius: 5px
+color: #FFF
  }
 QPushButton:hover{
 background-color: #40a286
-}</string>
+}
+QPushButton:disabled{
+background-color: #CACACA;
+
+ }
+</string>
      </property>
      <property name="text">
-      <string/>
+      <string>RECEBER</string>
      </property>
      <property name="iconSize">
       <size>
@@ -561,7 +562,7 @@ color: #A2A2A2;
      <string>CÓD. FORNEC.</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_CodFornecedorCompra">
+   <widget class="QLineEdit" name="tx_Id">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -840,7 +841,7 @@ background-color: #5C9BBC
       </size>
      </property>
     </widget>
-    <widget class="QLineEdit" name="tx_ObsItemCompra">
+    <widget class="QLineEdit" name="tx_ObsItem">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -975,7 +976,7 @@ color: #A2A2A2;
      <string>TELEFONE</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_TelefoneFornecedorCompra">
+   <widget class="QLineEdit" name="tx_Telefone">
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -2044,7 +2045,7 @@ QTableView QAbstractItemView {
       </property>
      </column>
     </widget>
-    <widget class="QLineEdit" name="tx_ValorPago">
+    <widget class="QLineEdit" name="tx_valorRecebido">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -2108,15 +2109,15 @@ border: none
   </widget>
  </widget>
  <tabstops>
-  <tabstop>tx_CodCompra</tabstop>
-  <tabstop>tx_CodFornecedorCompra</tabstop>
-  <tabstop>tx_FornecedorCompra</tabstop>
-  <tabstop>tx_TelefoneFornecedorCompra</tabstop>
+  <tabstop>tx_Cod</tabstop>
+  <tabstop>tx_Id</tabstop>
+  <tabstop>tx_NomeFantasia</tabstop>
+  <tabstop>tx_Telefone</tabstop>
   <tabstop>tx_IdBuscaItem</tabstop>
   <tabstop>tx_BuscaItem</tabstop>
   <tabstop>tx_QntdItem</tabstop>
   <tabstop>tx_ValorUnitarioItem</tabstop>
-  <tabstop>tx_ObsItemCompra</tabstop>
+  <tabstop>tx_ObsItem</tabstop>
   <tabstop>dt_Emissao</tabstop>
   <tabstop>dt_Prazo</tabstop>
   <tabstop>tx_ValorTotalItem</tabstop>

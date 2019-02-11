@@ -96,56 +96,57 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
     def FormCompras(self):
         self.DesativaBotaoCompras()
         self.LimpaFrame(self.ct_containerCompras)
-        super(MainCompras, self).setFormCompra(self.ct_containerCompras)
+        super(MainCompras, self).setFormCompras(self.ct_containerCompras)
         self.fr_FormCompra.show()
 
         # Setando Datas
-        self.dt_EmissaoCompra.setDate(QtCore.QDate.currentDate())
-        self.dt_PrazoEntrega.setDate(QtCore.QDate.currentDate().addDays(2))
-        self.dt_EntregaCompra.setDate(QtCore.QDate.currentDate())
-        self.dt_VencimentoVenda.setDate(QtCore.QDate.currentDate())
+        self.dt_Emissao.setDate(QtCore.QDate.currentDate())
+        self.dt_Prazo.setDate(QtCore.QDate.currentDate().addDays(2))
+        self.dt_Entrega.setDate(QtCore.QDate.currentDate())
+        self.dt_Vencimento.setDate(QtCore.QDate.currentDate())
 
         # Icone Botoes
-        self.IconeBotaoMenu(self.bt_SalvarCompra,
+        self.IconeBotaoMenu(self.bt_Salvar,
                             self.resourcepath('Images/salvar.png'))
-        self.IconeBotaoMenu(self.bt_CancelarCompra,
+        self.IconeBotaoMenu(self.bt_Voltar,
                             self.resourcepath('Images/cancelar.png'))
-        self.IconeBotaoMenu(self.bt_ImprimirCompra,
+        self.IconeBotaoMenu(self.bt_Imprimir,
                             self.resourcepath('Images/gtk-print.png'))
-        self.IconeBotaoForm(
-            self.bt_ReceberProduto, self.resourcepath('Images/Entregar.svg'))
-        self.IconeBotaoForm(self.bt_IncluirItemCompra,
+        self.IconeBotaoMenu(
+            self.bt_Entregar, self.resourcepath('Images/ico_entrega.png'))
+
+        self.IconeBotaoForm(self.bt_IncluirItem,
                             self.resourcepath('Images/addPedido.svg'))
 
-        self.IconeBotaoMenu(self.bt_GerarParcelaCompra,
+        self.IconeBotaoMenu(self.bt_GerarParcela,
                             self.resourcepath('Images/ico_conta.png'))
 
         # Setando Foco no Cliente id TX
-        self.tx_CodFornecedorCompra.setFocus()
+        self.tx_Id.setFocus()
 
         # Checando se existe ID válido
         self.IdCheckCompra()
 
         # Tamanho das Colunas Tabela Itens
         # Tamanho das Colunas Tabela Itens
-        self.tb_ItensCompra.blockSignals(True)
-        self.tb_ItensCompra.setColumnHidden(0, True)
-        self.tb_ItensCompra.setColumnHidden(7, True)
-        self.tb_ItensCompra.resizeRowsToContents()
-        self.tb_ItensCompra.setColumnWidth(1, 165)
-        self.tb_ItensCompra.setColumnWidth(2, 150)
-        self.tb_ItensCompra.setColumnWidth(3, 75)
-        self.tb_ItensCompra.setColumnWidth(4, 75)
-        self.tb_ItensCompra.setColumnWidth(5, 75)
-        self.tb_ItensCompra.setColumnWidth(6, 45)
+        self.tb_Itens.blockSignals(True)
+        self.tb_Itens.setColumnHidden(0, True)
+        self.tb_Itens.setColumnHidden(7, True)
+        self.tb_Itens.resizeRowsToContents()
+        self.tb_Itens.setColumnWidth(1, 165)
+        self.tb_Itens.setColumnWidth(2, 150)
+        self.tb_Itens.setColumnWidth(3, 75)
+        self.tb_Itens.setColumnWidth(4, 75)
+        self.tb_Itens.setColumnWidth(5, 75)
+        self.tb_Itens.setColumnWidth(6, 45)
 
         # Tamanho tabela parcelas
-        self.tb_parcelasVenda.blockSignals(True)
-        self.tb_parcelasVenda.setColumnHidden(0, True)
-        self.tb_parcelasVenda.setColumnWidth(1, 90)
-        self.tb_parcelasVenda.setColumnWidth(2, 55)
-        self.tb_parcelasVenda.setColumnWidth(3, 65)
-        self.tb_parcelasVenda.setColumnWidth(4, 70)
+        self.tb_Parcelas.blockSignals(True)
+        self.tb_Parcelas.setColumnHidden(0, True)
+        self.tb_Parcelas.setColumnWidth(1, 90)
+        self.tb_Parcelas.setColumnWidth(2, 55)
+        self.tb_Parcelas.setColumnWidth(3, 65)
+        self.tb_Parcelas.setColumnWidth(4, 70)
 
         """ Definindo funcões widgets"""
         # Return Press Busca Id Produto
@@ -163,27 +164,27 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         self.tx_BuscaItem.returnPressed.connect(self.BuscaProdutoNomeCompra)
 
         # Return Press Busca Id Cliente
-        self.tx_CodFornecedorCompra.returnPressed.connect(
+        self.tx_Id.returnPressed.connect(
             self.BuscaFornecedorId)
 
         # Campo Busca por nome e Autocompletar Cliente
-        self.tx_FornecedorCompra.setCompleter(self.completer)
-        self.tx_FornecedorCompra.textEdited.connect(self.autocompleFornecedor)
-        self.tx_FornecedorCompra.returnPressed.connect(
+        self.tx_NomeFantasia.setCompleter(self.completer)
+        self.tx_NomeFantasia.textEdited.connect(self.autocompleFornecedor)
+        self.tx_NomeFantasia.returnPressed.connect(
             self.BuscaFornecedorNome)
 
         # Setando Validadot Int nos campos
         validaInt = QtGui.QIntValidator(0, 9999)
         # self.tx_QntdItem.setValidator(validaInt)
         self.tx_IdBuscaItem.setValidator(validaInt)
-        self.tx_CodFornecedorCompra.setValidator(validaInt)
+        self.tx_Id.setValidator(validaInt)
         # Setando Validador float nos campos
         validarValor = QtGui.QDoubleValidator()
         validarValor.setNotation(QtGui.QDoubleValidator.StandardNotation)
         validarValor.setRange(0, 9999.00, 2)
         self.tx_Desconto.setValidator(validarValor)
         self.tx_Frete.setValidator(validarValor)
-        self.tx_ValorPago.setValidator(validarValor)
+        self.tx_valorRecebido.setValidator(validarValor)
 
         # Calculo total produto por qtde item
         self.tx_QntdItem.returnPressed.connect(self.TotalItemCompra)
@@ -191,46 +192,42 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
         # Focando campos Obs apos valor do Item
         self.tx_ValorUnitarioItem.returnPressed.connect(
-            self.tx_ObsItemCompra.setFocus)
+            self.tx_ObsItem.setFocus)
 
         # calculando com desconto
-        self.tx_Desconto.returnPressed.connect(self.TotalFinalCompra)
+        self.tx_Desconto.returnPressed.connect(self.TotalFinal)
         self.tx_Desconto.returnPressed.connect(self.tx_Frete.setFocus)
         self.tx_Desconto.returnPressed.connect(self.tx_Frete.selectAll)
 
         # calculando com frete
-        self.tx_Frete.returnPressed.connect(self.TotalFinalCompra)
-        self.tx_Frete.returnPressed.connect(self.tx_ValorPago.setFocus)
-        self.tx_Frete.returnPressed.connect(self.tx_ValorPago.selectAll)
+        self.tx_Frete.returnPressed.connect(self.TotalFinal)
+        self.tx_Frete.returnPressed.connect(self.tx_valorRecebido.setFocus)
+        self.tx_Frete.returnPressed.connect(self.tx_valorRecebido.selectAll)
 
         # Calculo Valor Pendente
-        self.tx_ValorPago.returnPressed.connect(self.TotalFinalCompra)
-
-        # Validar valor Recebido
-        self.tx_ValorPago.textEdited.connect(self.validarRecebimentoCompra)
-
-        # Pagar
+        self.tx_valorRecebido.returnPressed.connect(self.TotalFinal)
 
         # Entregar
-        self.bt_ReceberProduto.clicked.connect(self.ReceberProduto)
+        self.bt_Entregar.clicked.connect(self.ReceberProduto)
 
         # Add Item Tabela
-        self.tx_ObsItemCompra.returnPressed.connect(self.ValidaFormAddCompra)
-        self.bt_IncluirItemCompra.clicked.connect(self.ValidaFormAddCompra)
+        self.tx_ObsItem.returnPressed.connect(self.ValidaFormAdd)
+        self.bt_IncluirItem.clicked.connect(self.ValidaFormAdd)
 
         # Botao Salvar
-        self.bt_SalvarCompra.clicked.connect(self.CadCompra)
+        self.bt_Salvar.clicked.connect(self.CadCompra)
         # Botao Cancelar
-        self.bt_CancelarCompra.clicked.connect(self.janelaCompras)
+        self.bt_Voltar.clicked.connect(self.janelaCompras)
 
         # Gerar Parcelas
-        self.bt_GerarParcelaCompra.clicked.connect(self.gerarParcela)
+        self.bt_GerarParcela.clicked.connect(partial(self.gerarParcela,
+                                                     "Pagar"))
 
     # checando campo Id se é Edicao ou Nova Venda
     def IdCheckCompra(self):
-        if not self.tx_CodCompra.text():
+        if not self.tx_Cod.text():
             busca = CrudCompras()
-            self.tx_CodCompra.setText(str(busca.lastIdCompra()))
+            self.tx_Cod.setText(str(busca.lastIdCompra()))
             # setando dataAtual campo entrega e emissão
 
     # Autocomplete Produtos
@@ -267,7 +264,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
     # AutoComplete Cliente
     def autocompleFornecedor(self):
-        fornecedor = self.tx_FornecedorCompra.text()
+        fornecedor = self.tx_NomeFantasia.text()
         busca = CrudFornecedor()
         busca.ListaFornecedorTabela(fornecedor)
         lista = busca.NomeFantasia
@@ -276,26 +273,26 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
     # Busca cliente por nome
     def BuscaFornecedorNome(self):
-        cliente = self.tx_FornecedorCompra.text()
+        cliente = self.tx_NomeFantasia.text()
         busca = CrudFornecedor()
         busca.ListaFornecedorTabela(cliente)
-        self.tx_CodFornecedorCompra.setText(str(busca.idFornecedor[0]))
+        self.tx_Id.setText(str(busca.idFornecedor[0]))
         self.BuscaFornecedorId()
 
     # Busca cliente por ID
     def BuscaFornecedorId(self):
-        id = int(self.tx_CodFornecedorCompra.text())
+        id = int(self.tx_Id.text())
         busca = CrudFornecedor()
         busca.SelectFornecedorId(id)
         if busca.NomeFantasia:
-            self.tx_FornecedorCompra.setText(busca.NomeFantasia)
-            self.tx_TelefoneFornecedorCompra.setText(busca.telefone)
+            self.tx_NomeFantasia.setText(busca.NomeFantasia)
+            self.tx_Telefone.setText(busca.telefone)
             self.tx_IdBuscaItem.setFocus()
         else:
-            self.tx_FornecedorCompra.setText(
+            self.tx_NomeFantasia.setText(
                 "Cliente não encontrado".decode("utf8"))
-            self.tx_CodFornecedorCompra.clear()
-            self.tx_CodFornecedorCompra.setFocus()
+            self.tx_Id.clear()
+            self.tx_Id.setFocus()
 
     # Calculo ValorTotalItem
     def TotalItemCompra(self):
@@ -314,92 +311,18 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
                 format(valorUni, ".2f"))
             self.tx_ValorUnitarioItem.setFocus()
             self.tx_ValorUnitarioItem.selectAll()
-            self.bt_IncluirItemCompra.setEnabled(True)
-
-    def TotalFinalCompra(self):
-        total = 0
-
-        if not int(self.tb_ItensCompra.rowCount()) == 0 and self.tb_ItensCompra.item(0, 5).text():
-            for row in range(self.tb_ItensCompra.rowCount()):
-                total = float(self.tb_ItensCompra.item(row, 5).text()) + total
-        self.lb_SubTotalCompra.setText(format(total, ".2f"))
-        self.tx_TotalFinal.setText(format(total, ".2f"))
-        self.lb_ValorPendente.setText(format(total, ".2f"))
-
-        if self.tx_Desconto.text():
-            desconto = self.tx_Desconto.text().replace(',', '.')
-            TotalFinal = float(total) - float(desconto)
-            self.tx_TotalFinal.setText(format(TotalFinal, ".2f"))
-            self.tx_Desconto.setText(
-                format(float(desconto), ".2f"))
-            self.lb_ValorPendente.setText(format(TotalFinal, ".2f"))
-
-        if self.tx_Frete.text():
-            frete = self.tx_Frete.text().replace(',', '.')
-            TotalFinal = float(
-                total) - float(self.tx_Desconto.text()) + float(frete)
-            self.tx_Frete.setText(format(float(frete), ".2f"))
-            self.tx_TotalFinal.setText(format(TotalFinal, ".2f"))
-            self.lb_ValorPendente.setText(format(TotalFinal, ".2f"))
-
-        if self.tx_ValorPago.text():
-            recebido = self.tx_ValorPago.text().replace(",", ".")
-            TotalFinal = float(self.tx_TotalFinal.text()) - float(recebido)
-            self.tx_ValorPago.setText(
-                format(float(recebido), ".2f"))
-            self.lb_ValorPendente.setText(format(TotalFinal, ".2f"))
-
-    def ValidaFormAddCompra(self):
-        if not self.tx_CodFornecedorCompra.text():
-            self.tx_CodFornecedorCompra.setFocus()
-        elif not self.tx_IdBuscaItem.text():
-            self.tx_IdBuscaItem.setFocus()
-        elif not self.tx_BuscaItem.text():
-            self.tx_BuscaItem.setFocus()
-        elif not self.tx_QntdItem.text():
-            self.tx_QntdItem.setFocus()
-        elif not self.tx_FornecedorCompra.text():
-            self.tx_FornecedorCompra.setFocus()
-        else:
-            self.AddItemTabelaCompra()
-
-    # Adiciona Item a tabela
-    def AddItemTabelaCompra(self):
-        row = self.tb_ItensCompra.rowCount()
-        self.tb_ItensCompra.insertRow(row)
-        self.conteudoTabela(self.tb_ItensCompra, row, 0,
-                            self.tx_IdBuscaItem.text())
-        self.conteudoTabelaLeft(self.tb_ItensCompra, row, 1,
-                                self.tx_BuscaItem.text())
-        self.conteudoTabelaLeft(self.tb_ItensCompra, row, 2,
-                                self.tx_ObsItemCompra.text())
-
-        self.conteudoTabela(self.tb_ItensCompra, row, 3,
-                            self.tx_QntdItem.text())
-        self.conteudoTabela(self.tb_ItensCompra, row, 4,
-                            self.tx_ValorUnitarioItem.text())
-        self.conteudoTabela(self.tb_ItensCompra, row, 5,
-                            self.tx_ValorTotalItem.text())
-        self.botaoRemoveItem(self.tb_ItensCompra, row, 6,
-                             partial(self.RemoveLInhaCompra, row), "#005099")
-
-        self.conteudoTabela(self.tb_ItensCompra, row, 7, str(
-            QtCore.QDateTime.toMSecsSinceEpoch(QtCore.QDateTime.currentDateTime())))
-
-        self.TotalFinalCompra()
-        self.LimpaCampoAddProdutoCompra()
-        self.bt_GerarParcelaCompra.setEnabled(True)
+            self.bt_IncluirItem.setEnabled(True)
 
     # Removendo item da tabela e banco de dados se ouver
     def RemoveLInhaCompra(self, linha):
         REMOVE = CrudCompras()
-        REMOVE.idItemTabela = self.tb_ItensCompra.item(linha, 7).text()
+        REMOVE.idItemTabela = self.tb_Itens.item(linha, 7).text()
         REMOVE.DelItem()
-        self.tb_ItensCompra.removeRow(linha)
-        for row in range(self.tb_ItensCompra.rowCount()):
-            self.botaoRemoveItem(self.tb_ItensCompra, row, 6,
+        self.tb_Itens.removeRow(linha)
+        for row in range(self.tb_Itens.rowCount()):
+            self.botaoRemoveItem(self.tb_Itens, row, 6,
                                  partial(self.RemoveLInhaCompra, row), "#005099")
-        self.TotalFinalCompra()
+        self.TotalFinal()
 
     # Desativando Botões
     def DesativaBotaoCompras(self):
@@ -412,22 +335,16 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         self.tx_BuscaCompras.setEnabled(True)
         self.bt_BuscaCompras.setEnabled(True)
 
-    def LimpaCampoAddProdutoCompra(self):
-        for filho in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
-            filho.clear()
-        self.bt_IncluirItemCompra.setDisabled(True)
-        self.tx_IdBuscaItem.setFocus()
-
         # Salvar Venda
     def CadCompra(self):
-        if not int(self.tb_ItensCompra.rowCount()) < 1:
+        if not int(self.tb_Itens.rowCount()) < 1:
             INSERI = CrudCompras()
-            INSERI.idCompra = self.tx_CodCompra.text()
-            INSERI.idFornecedor = self.tx_CodFornecedorCompra.text()
+            INSERI.idCompra = self.tx_Cod.text()
+            INSERI.idFornecedor = self.tx_Id.text()
             INSERI.dataEmissao = QtCore.QDate.toString(
-                self.dt_EmissaoCompra.date(), 'yyyy-MM-dd')
+                self.dt_Emissao.date(), 'yyyy-MM-dd')
             INSERI.prazoEntrega = QtCore.QDate.toString(
-                self.dt_PrazoEntrega.date(), 'yyyy-MM-dd')
+                self.dt_Prazo.date(), 'yyyy-MM-dd')
             INSERI.desconto = self.tx_Desconto.text()
             INSERI.frete = self.tx_Frete.text()
             INSERI.valorTotal = self.tx_TotalFinal.text()
@@ -444,18 +361,18 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
     def CadItemCompra(self):
         INSERI = CrudCompras()
         i = 0
-        while i < self.tb_ItensCompra.rowCount():
-            INSERI.idItem = self.tb_ItensCompra.item(i, 0).text()
-            INSERI.idCompra = self.tx_CodCompra.text()
-            INSERI.idItemTabela = self.tb_ItensCompra.item(i, 7).text()
-            INSERI.qtde = self.tb_ItensCompra.item(i, 3).text()
-            INSERI.valorItem = self.tb_ItensCompra.item(i, 4).text()
-            INSERI.totalItem = self.tb_ItensCompra.item(i, 5).text()
-            INSERI.obsItem = self.tb_ItensCompra.item(i, 2).text()
+        while i < self.tb_Itens.rowCount():
+            INSERI.idItem = self.tb_Itens.item(i, 0).text()
+            INSERI.idCompra = self.tx_Cod.text()
+            INSERI.idItemTabela = self.tb_Itens.item(i, 7).text()
+            INSERI.qtde = self.tb_Itens.item(i, 3).text()
+            INSERI.valorItem = self.tb_Itens.item(i, 4).text()
+            INSERI.totalItem = self.tb_Itens.item(i, 5).text()
+            INSERI.obsItem = self.tb_Itens.item(i, 2).text()
             INSERI.CadItensCompra()
             i += 1
         self.CadContaCompra()
-        self.SelectCompraId(self.tx_CodCompra.text())
+        self.SelectCompraId(self.tx_Cod.text())
 
         pass
 
@@ -463,42 +380,33 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
     def CadContaCompra(self):
         INSERI = CrudAPagar()
 
-        if self.tb_parcelasVenda.rowCount() > 0:
-            for i in range(self.tb_parcelasVenda.rowCount()):
+        if self.tb_Parcelas.rowCount() > 0:
+            for i in range(self.tb_Parcelas.rowCount()):
                 try:
-                    self.tb_parcelasVenda.item(i, 0).text()
-                    INSERI.idConta = self.tb_parcelasVenda.item(i, 0).text()
+                    self.tb_Parcelas.item(i, 0).text()
+                    INSERI.idConta = self.tb_Parcelas.item(i, 0).text()
                 except:
                     INSERI.idConta = ''
-                INSERI.idCompra = self.tx_CodCompra.text()
-                INSERI.idFornecedor = self.tx_CodFornecedorCompra.text()
+                INSERI.idCompra = self.tx_Cod.text()
+                INSERI.idFornecedor = self.tx_Id.text()
                 INSERI.descricao = """Pedido de Compra {}. Parcela {} de {} """.format(
-                    self.tx_CodCompra.text(), i + 1, self.tb_parcelasVenda.rowCount())
+                    self.tx_Cod.text(), i + 1, self.tb_Parcelas.rowCount())
                 INSERI.obs = ""
                 INSERI.categoria = 1
                 INSERI.dataVencimento = QtCore.QDate.toString(
-                    self.tb_parcelasVenda.cellWidget(i, 1).date(), "yyyy-MM-dd")
-                INSERI.valor = self.tb_parcelasVenda.item(i, 2).text()
-                INSERI.formaPagamento = self.cb_FormaPagamentoVenda.currentIndex()
+                    self.tb_Parcelas.cellWidget(i, 1).date(), "yyyy-MM-dd")
+                INSERI.valor = self.tb_Parcelas.item(i, 2).text()
+                INSERI.formaPagamento = self.cb_FormaPagamento.currentIndex()
                 INSERI.cadContaPagar()
 
-    # Validar valor Recebido
-    def validarRecebimentoCompra(self):
-        if not self.tx_ValorPago.text():
-            valorRecebido = float(self.tx_ValorPago.text().replace(',', '.'))
-            valorPendente = float(
-                self.lb_ValorPendente.text().replace(',', '.'))
-            if valorRecebido > valorPendente:
-                self.tx_ValorPago.setText(format(valorPendente, '.2f'))
-
-    # Pagando Compra
+    # Pagando Parcela Compra
     def Pagar(self, id):
-        # print(self.tb_parcelasVenda.item(id, 0).text())
+        # print(self.tb_Parcelas.item(id, 0).text())
 
-        if self.tb_parcelasVenda.cellWidget(id, 3).text():
+        if self.tb_Parcelas.cellWidget(id, 3).text():
             INSERI = CrudAPagar()
-            INSERI.idConta = self.tb_parcelasVenda.item(id, 0).text()
-            INSERI.valorPago = self.tb_parcelasVenda.cellWidget(
+            INSERI.idConta = self.tb_Parcelas.item(id, 0).text()
+            INSERI.valorPago = self.tb_Parcelas.cellWidget(
                 id, 3).text().replace(",", ".")
 
             INSERI.dataPagamento = QtCore.QDate.toString(
@@ -507,26 +415,26 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             INSERI.cadContaPagar()
             self.ParcelasAPagar()
 
-    # Entregando Compra DB
+    # Recebendo Produtos DB
     def ReceberProduto(self):
         INSERI = CrudCompras()
         INSERI.dataEntrega = QtCore.QDate.toString(
-            self.dt_EntregaCompra.date(), "yyyy-MM-dd")
-        INSERI.idCompra = self.tx_CodCompra.text()
+            self.dt_Entrega.date(), "yyyy-MM-dd")
+        INSERI.idCompra = self.tx_Cod.text()
         INSERI.ReceberProduto()
         self.EntradaEstoque()
-        self.SelectCompraId(self.tx_CodCompra.text())
+        self.SelectCompraId(self.tx_Cod.text())
 
     # Dando Entrada no Estoque
     def EntradaEstoque(self):
         INSERI = CrudProdutos()
         i = 0
-        while i < self.tb_ItensCompra.rowCount():
-            INSERI.idProduto = self.tb_ItensCompra.item(i, 0).text()
-            INSERI.idRelacao = self.tb_ItensCompra.item(i, 7).text()
-            INSERI.valorCompra = self.tb_ItensCompra.item(i, 4).text()
-            INSERI.qtdeProduto = self.tb_ItensCompra.item(i, 3).text()
-            INSERI.obsProduto = self.tb_ItensCompra.item(i, 2).text()
+        while i < self.tb_Itens.rowCount():
+            INSERI.idProduto = self.tb_Itens.item(i, 0).text()
+            INSERI.idRelacao = self.tb_Itens.item(i, 7).text()
+            INSERI.valorCompra = self.tb_Itens.item(i, 4).text()
+            INSERI.qtdeProduto = self.tb_Itens.item(i, 3).text()
+            INSERI.obsProduto = self.tb_Itens.item(i, 2).text()
             INSERI.data = QtCore.QDate.toString(
                 QtCore.QDate.currentDate(), 'yyyy-MM-dd')
 
@@ -537,23 +445,23 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
     def SelectCompraId(self, id):
         busca = CrudCompras()
         self.FormCompras()
-        self.tx_CodCompra.setText(str(id))
+        self.tx_Cod.setText(str(id))
         busca.SelectCompraId(id)
 
-        self.tx_CodFornecedorCompra.setText(str(busca.idFornecedor))
+        self.tx_Id.setText(str(busca.idFornecedor))
         self.BuscaFornecedorId()
         self.tx_Desconto.setText(str(busca.desconto))
         self.tx_Frete.setText(str(busca.frete))
-        self.dt_PrazoEntrega.setDate(busca.prazoEntrega)
+        self.dt_Prazo.setDate(busca.prazoEntrega)
         if busca.valorRecebido:
-            self.tx_ValorPago.setText(str(busca.valorRecebido))
+            self.tx_valorRecebido.setText(str(busca.valorRecebido))
         if busca.statusPagamento == 2:
-            self.bt_GerarParcelaCompra.setEnabled(True)
+            self.bt_GerarParcela.setEnabled(True)
         if busca.statusEntrega == 2:
-            self.bt_ReceberProduto.setEnabled(True)
+            self.bt_Entregar.setEnabled(True)
 
         if busca.statusPagamento == 1 or busca.statusEntrega == 1:
-            self.tb_parcelasVenda.setColumnHidden(6, True)
+            self.tb_Parcelas.setColumnHidden(6, True)
 
             for item in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
                 item.setReadOnly(True)
@@ -561,56 +469,53 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         i = 0
         while i < len(busca.itemDescricao):
 
-            self.tb_ItensCompra.insertRow(i)
-            self.conteudoTabela(self.tb_ItensCompra, i, 0,
+            self.tb_Itens.insertRow(i)
+            self.conteudoTabela(self.tb_Itens, i, 0,
                                 str(busca.idItem[i]))
-            self.conteudoTabelaLeft(self.tb_ItensCompra, i, 1,
+            self.conteudoTabelaLeft(self.tb_Itens, i, 1,
                                     busca.itemDescricao[i])
-            self.conteudoTabelaLeft(self.tb_ItensCompra, i, 2,
+            self.conteudoTabelaLeft(self.tb_Itens, i, 2,
                                     str(busca.obsItem[i]))
-            self.conteudoTabela(self.tb_ItensCompra, i, 3,
+            self.conteudoTabela(self.tb_Itens, i, 3,
                                 str(busca.qtde[i]))
-            self.conteudoTabela(self.tb_ItensCompra, i, 4,
+            self.conteudoTabela(self.tb_Itens, i, 4,
                                 str(busca.valorItem[i]))
-            self.conteudoTabela(self.tb_ItensCompra, i, 5,
+            self.conteudoTabela(self.tb_Itens, i, 5,
                                 str(busca.totalItem[i]))
-            self.botaoRemoveItem(self.tb_ItensCompra, i, 6,
+            self.botaoRemoveItem(self.tb_Itens, i, 6,
                                  partial(self.RemoveLInhaCompra, i), "#005099")
-            self.conteudoTabela(self.tb_ItensCompra, i, 7,
+            self.conteudoTabela(self.tb_Itens, i, 7,
                                 str(busca.idItemTabela[i]))
-            self.TotalFinalCompra()
-            self.tx_ValorPago.returnPressed.connect(self.Pagar)
+            self.TotalFinal()
+            self.tx_valorRecebido.returnPressed.connect(self.Pagar)
 
             i += 1
-        self.bt_ImprimirCompra.setEnabled(True)
+        self.bt_Imprimir.setEnabled(True)
         self.ParcelasAPagar()
 
         pass
+    # Populando tabela Parcelas
 
     def ParcelasAPagar(self):
-        while self.tb_parcelasVenda.rowCount() > 0:
-            self.tb_parcelasVenda.removeRow(0)
+        while self.tb_Parcelas.rowCount() > 0:
+            self.tb_Parcelas.removeRow(0)
 
         busca = CrudAPagar()
-        busca.idCompra = self.tx_CodCompra.text()
+        busca.idCompra = self.tx_Cod.text()
         busca.selectAPagarId()
 
         if busca.dataVencimento:
-            self.bt_GerarParcelaCompra.setDisabled(True)
+            self.bt_GerarParcela.setDisabled(True)
 
         for i in range(len(busca.dataVencimento)):
-            self.tb_parcelasVenda.insertRow(i)
-            self.conteudoTabela(self.tb_parcelasVenda, i,
+            self.tb_Parcelas.insertRow(i)
+            self.conteudoTabela(self.tb_Parcelas, i,
                                 0, str(busca.idConta[i]))
-            self.dt_tabela(self.tb_parcelasVenda, i,
+            self.dt_tabela(self.tb_Parcelas, i,
                            1, busca.dataVencimento[i], busca.status[i])
-            self.conteudoTabela(self.tb_parcelasVenda, i,
+            self.conteudoTabela(self.tb_Parcelas, i,
                                 2, str(busca.valor[i]))
-            self.tx_tabelaReceber(self.tb_parcelasVenda, i, 3, busca.status[
+            self.tx_tabelaReceber(self.tb_Parcelas, i, 3, busca.status[
                                   i], str(busca.valor[i] - busca.valorPago[i]))
-            self.botaoReceberParcela(self.tb_parcelasVenda, i, 4,
+            self.botaoReceberParcela(self.tb_Parcelas, i, 4,
                                      partial(self.Pagar, i), "Pagar", busca.status[i])
-
-
-# telefone = ("22997069161")
-# print("({0:.2}) ").format(telefone)

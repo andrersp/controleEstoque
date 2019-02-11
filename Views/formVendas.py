@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'formVendas.ui',
 # licensing of 'formVendas.ui' applies.
 #
-# Created: Mon Feb 11 00:16:10 2019
+# Created: Mon Feb 11 12:25:23 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -489,10 +489,10 @@ class Ui_ct_FormVenda(object):
         self.bt_IncluirItem.setText("")
         self.bt_IncluirItem.setIconSize(QtCore.QSize(75, 35))
         self.bt_IncluirItem.setObjectName("bt_IncluirItem")
-        self.tx_ObsItemPedido = QtWidgets.QLineEdit(self.fr_addProduto)
-        self.tx_ObsItemPedido.setGeometry(QtCore.QRect(0, 40, 500, 30))
-        self.tx_ObsItemPedido.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_ObsItemPedido.setStyleSheet("QLineEdit{\n"
+        self.tx_ObsItem = QtWidgets.QLineEdit(self.fr_addProduto)
+        self.tx_ObsItem.setGeometry(QtCore.QRect(0, 40, 500, 30))
+        self.tx_ObsItem.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tx_ObsItem.setStyleSheet("QLineEdit{\n"
 "background: #1E87F0;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -502,10 +502,10 @@ class Ui_ct_FormVenda(object):
 "}\n"
 "\n"
 "")
-        self.tx_ObsItemPedido.setText("")
-        self.tx_ObsItemPedido.setAlignment(QtCore.Qt.AlignCenter)
-        self.tx_ObsItemPedido.setReadOnly(False)
-        self.tx_ObsItemPedido.setObjectName("tx_ObsItemPedido")
+        self.tx_ObsItem.setText("")
+        self.tx_ObsItem.setAlignment(QtCore.Qt.AlignCenter)
+        self.tx_ObsItem.setReadOnly(False)
+        self.tx_ObsItem.setObjectName("tx_ObsItem")
         self.tx_IdBuscaItem = QtWidgets.QLineEdit(self.fr_addProduto)
         self.tx_IdBuscaItem.setGeometry(QtCore.QRect(0, 0, 40, 40))
         self.tx_IdBuscaItem.setFocusPolicy(QtCore.Qt.WheelFocus)
@@ -1072,8 +1072,8 @@ class Ui_ct_FormVenda(object):
         ct_FormVenda.setTabOrder(self.tx_BuscaItem, self.tx_QntdItem)
         ct_FormVenda.setTabOrder(self.tx_QntdItem, self.tx_ValorUnitarioItem)
         ct_FormVenda.setTabOrder(self.tx_ValorUnitarioItem, self.tx_ValorTotalItem)
-        ct_FormVenda.setTabOrder(self.tx_ValorTotalItem, self.tx_ObsItemPedido)
-        ct_FormVenda.setTabOrder(self.tx_ObsItemPedido, self.tx_Desconto)
+        ct_FormVenda.setTabOrder(self.tx_ValorTotalItem, self.tx_ObsItem)
+        ct_FormVenda.setTabOrder(self.tx_ObsItem, self.tx_Desconto)
         ct_FormVenda.setTabOrder(self.tx_Desconto, self.tx_Frete)
         ct_FormVenda.setTabOrder(self.tx_Frete, self.dt_Emissao)
         ct_FormVenda.setTabOrder(self.dt_Emissao, self.dt_Prazo)
@@ -1109,7 +1109,7 @@ class Ui_ct_FormVenda(object):
         self.tx_ValorUnitarioItem.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormVenda", "0,00", None, -1))
         self.lb_FormVenda_7.setText(QtWidgets.QApplication.translate("ct_FormVenda", "TOTAL (R$)", None, -1))
         self.tx_ValorTotalItem.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormVenda", "0,00", None, -1))
-        self.tx_ObsItemPedido.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormVenda", "OBSERVAÇÃO", None, -1))
+        self.tx_ObsItem.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormVenda", "OBSERVAÇÃO", None, -1))
         self.tx_IdBuscaItem.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormVenda", "CÓD", None, -1))
         self.tx_QntdItem.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormVenda", "QTDE.", None, -1))
         self.lb_FormVenda_5.setText(QtWidgets.QApplication.translate("ct_FormVenda", "TELEFONE", None, -1))
