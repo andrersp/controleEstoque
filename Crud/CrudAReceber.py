@@ -89,6 +89,7 @@ class CrudAReceber(object):
         except mysql.connector.Error as err:
             print(err)
 
+    # Update no status caso o valor recebido seja igual ou maior que o devedor
     def updateStatus(self):
         conecta = Conexao()
         c = conecta.conecta.cursor()
@@ -111,6 +112,7 @@ class CrudAReceber(object):
 
         return self.idStatus
 
+    # Busca parcelas por ID da Venda
     def selectAReceberId(self):
         conecta = Conexao()
         c = conecta.conecta.cursor()

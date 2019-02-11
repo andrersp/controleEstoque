@@ -66,7 +66,7 @@ color: #A2A2A2;
      <string notr="true">background:#E1DFE0;
 border: none;</string>
     </property>
-    <widget class="QPushButton" name="bt_CancelarCompra">
+    <widget class="QPushButton" name="bt_Voltar">
      <property name="geometry">
       <rect>
        <x>870</x>
@@ -102,7 +102,7 @@ background-color: #40a286
 }</string>
      </property>
      <property name="text">
-      <string>CANCELAR</string>
+      <string>VOLTAR</string>
      </property>
      <property name="iconSize">
       <size>
@@ -111,7 +111,7 @@ background-color: #40a286
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="bt_SalvarCompra">
+    <widget class="QPushButton" name="bt_Salvar">
      <property name="geometry">
       <rect>
        <x>610</x>
@@ -156,7 +156,7 @@ background-color: #40a286
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="bt_ImprimirCompra">
+    <widget class="QPushButton" name="bt_Imprimir">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -291,7 +291,7 @@ color: #FFF
       <string/>
      </property>
     </widget>
-    <widget class="QDateEdit" name="dt_EmissaoCompra">
+    <widget class="QDateEdit" name="dt_Emissao">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -352,7 +352,7 @@ border: none;
       <string>DATA EMISSÃO</string>
      </property>
     </widget>
-    <widget class="QDateEdit" name="dt_PrazoEntrega">
+    <widget class="QDateEdit" name="dt_Prazo">
      <property name="geometry">
       <rect>
        <x>300</x>
@@ -413,7 +413,7 @@ border: none;
       <string>PRAZO ENTREGA</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="bt_ReceberProduto">
+    <widget class="QPushButton" name="bt_Entregar">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -479,7 +479,7 @@ border: none;
       <string>DATA ENTREGA</string>
      </property>
     </widget>
-    <widget class="QDateEdit" name="dt_EntregaCompra">
+    <widget class="QDateEdit" name="dt_Entrega">
      <property name="geometry">
       <rect>
        <x>480</x>
@@ -801,7 +801,7 @@ color: red;
       <string>0,00</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="bt_IncluirItemCompra">
+    <widget class="QPushButton" name="bt_IncluirItem">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -1006,7 +1006,7 @@ border: 1px solid red;
      <string>(00) 00000-00</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tb_ItensCompra">
+   <widget class="QTableWidget" name="tb_Itens">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -1118,7 +1118,7 @@ margin: 0 2px 0 0;
      <property name="font">
       <font>
        <family>Segoe UI</family>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -1143,7 +1143,7 @@ margin: 0 2px 0 0;
      <property name="font">
       <font>
        <family>Segoe UI</family>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -1168,7 +1168,7 @@ margin: 0 2px 0 0;
      <property name="font">
       <font>
        <family>Segoe UI</family>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -1193,7 +1193,7 @@ margin: 0 2px 0 0;
      <property name="font">
       <font>
        <family>Segoe UI</family>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -1218,7 +1218,7 @@ margin: 0 2px 0 0;
      <property name="font">
       <font>
        <family>Segoe UI</family>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -1243,13 +1243,22 @@ margin: 0 2px 0 0;
      <property name="font">
       <font>
        <family>Segoe UI</family>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
      <property name="textAlignment">
       <set>AlignCenter</set>
+     </property>
+     <property name="foreground">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>80</red>
+        <green>79</green>
+        <blue>79</blue>
+       </color>
+      </brush>
      </property>
     </column>
     <column>
@@ -1398,7 +1407,7 @@ border: none
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="lb_SubTotalCompra">
+    <widget class="QLabel" name="lb_SubTotal">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -1473,7 +1482,7 @@ border: none
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QPushButton" name="bt_GerarParcelaCompra">
+    <widget class="QPushButton" name="bt_GerarParcela">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -1562,7 +1571,7 @@ border: none
       <string>0.00</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="cb_FormaPagamentoVenda_2">
+    <widget class="QComboBox" name="cb_FormaPagamento">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -1617,11 +1626,6 @@ font-weight: bold;
      </property>
      <item>
       <property name="text">
-       <string/>
-      </property>
-     </item>
-     <item>
-      <property name="text">
        <string>DINHEIRO</string>
       </property>
      </item>
@@ -1659,7 +1663,7 @@ border: none
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QComboBox" name="cb_ParcelamentoVenda_2">
+    <widget class="QComboBox" name="cb_QtdeParcela">
      <property name="geometry">
       <rect>
        <x>180</x>
@@ -1712,11 +1716,6 @@ font-weight: bold;
 }
 </string>
      </property>
-     <item>
-      <property name="text">
-       <string/>
-      </property>
-     </item>
      <item>
       <property name="text">
        <string>À VISTA</string>
@@ -1766,7 +1765,7 @@ border: none
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QDateEdit" name="dt_VencimentoVenda_2">
+    <widget class="QDateEdit" name="dt_Vencimento">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -1909,7 +1908,7 @@ border: none
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QTableWidget" name="tb_parcelasVenda_2">
+    <widget class="QTableWidget" name="tb_Parcelas">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -2118,10 +2117,10 @@ border: none
   <tabstop>tx_QntdItem</tabstop>
   <tabstop>tx_ValorUnitarioItem</tabstop>
   <tabstop>tx_ObsItemCompra</tabstop>
-  <tabstop>dt_EmissaoCompra</tabstop>
-  <tabstop>dt_PrazoEntrega</tabstop>
+  <tabstop>dt_Emissao</tabstop>
+  <tabstop>dt_Prazo</tabstop>
   <tabstop>tx_ValorTotalItem</tabstop>
-  <tabstop>tb_ItensCompra</tabstop>
+  <tabstop>tb_Itens</tabstop>
  </tabstops>
  <resources/>
  <connections/>

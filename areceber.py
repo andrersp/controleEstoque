@@ -89,10 +89,11 @@ class MainAReceber(Ui_ct_AReceber):
             self.conteudoTabela(self.tb_AReceber, i, 5,
                                 "R$ "+str(busca.valor[i]))
 
-            self.tx_tabelaReceber(self.tb_AReceber, i, 6, busca.idStatus[i], str(
-                busca.valor[i]))
+            self.tx_tabelaReceber(self.tb_AReceber, i, 6, busca.idStatus[i],
+                                  str(busca.valor[i]))
             self.botaoReceberParcela(
-                self.tb_AReceber, i, 7, partial(self.ReceberParcela, i), "Receber",  busca.idStatus[i])
+                self.tb_AReceber, i, 7, partial(self.ReceberParcela, i),
+                "Receber",  busca.idStatus[i])
 
     # Recebendo pagamento DB
     def ReceberParcela(self, id):
@@ -106,10 +107,5 @@ class MainAReceber(Ui_ct_AReceber):
 
             INSERI.dataRecebimento = QtCore.QDate.toString(
                 QtCore.QDate.currentDate(), "yyyy-MM-dd")
-            # if float(self.tb_AReceber.cellWidget(id, 3).text().replace(",", ".")) < float(self.tb_AReceber.item(id, 2).text().replace(",", ".")):
-            #     INSERI.status = 2
-            # else:
-            #     INSERI.status = 1
-
             INSERI.cadContaReceber()
             self.tabelaAReceber()

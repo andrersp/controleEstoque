@@ -554,7 +554,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
         if busca.statusPagamento == 1 or busca.statusEntrega == 1:
             self.tb_parcelasVenda.setColumnHidden(6, True)
-            self.bt_SalvarCompra.setDisabled(True)
+
             for item in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
                 item.setReadOnly(True)
 

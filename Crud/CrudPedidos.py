@@ -213,30 +213,6 @@ class CrudPedidos(object):
             print(err)
         pass
 
-    # Cadastro de valor recebido
-    def ReceberConta(self):
-        conecta = Conexao()
-        c = conecta.conecta.cursor()
-
-        try:
-            c.execute(
-                """ INSERT INTO contasRecebidas VALUES ('{}', '{}', '{}', '{}') 
-                """.format('', self.idPedido, self.dataPagamento, self.valorRecebido))
-
-            c.execute(""" SELECT valorPendente from pedidos WHERE id = '{}' """
-                      .format(self.idPedido))
-            row = c.fetchone()
-            if row[0] == 0:
-                c.execute(
-                    """ UPDATE pedidos SET statusPagamento = 1 
-                    WHERE id = '{}' """.format(self.idPedido))
-            conecta.conecta.commit()
-            c.close()
-        except mysql.connector.Error as err:
-            print(err)
-
-    # Entregar Pedido
-
     def Entregar(self):
         conecta = Conexao()
         c = conecta.conecta.cursor()

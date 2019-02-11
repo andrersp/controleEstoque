@@ -66,7 +66,7 @@ color: #A2A2A2;
      <string notr="true">background:#E1DFE0;
 border: none;</string>
     </property>
-    <widget class="QPushButton" name="bt_CancelarVenda">
+    <widget class="QPushButton" name="bt_Voltar">
      <property name="geometry">
       <rect>
        <x>870</x>
@@ -102,10 +102,10 @@ background-color: #40a286
 }</string>
      </property>
      <property name="text">
-      <string>CANCELAR</string>
+      <string>VOLTAR</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="bt_SalvarVenda">
+    <widget class="QPushButton" name="bt_Salvar">
      <property name="geometry">
       <rect>
        <x>610</x>
@@ -144,7 +144,7 @@ background-color: #40a286
       <string>SALVAR</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="bt_ImprimirVenda">
+    <widget class="QPushButton" name="bt_Imprimir">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -191,7 +191,7 @@ background-color: #40a286
      </property>
     </widget>
    </widget>
-   <widget class="QLineEdit" name="tx_ClienteVenda">
+   <widget class="QLineEdit" name="tx_NomeFantasia">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -241,7 +241,7 @@ border: 1px solid #1E87F0;
     <property name="frameShadow">
      <enum>QFrame::Plain</enum>
     </property>
-    <widget class="QLineEdit" name="tx_CodPedido">
+    <widget class="QLineEdit" name="tx_Cod">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -277,7 +277,7 @@ color: #FFF
       <string/>
      </property>
     </widget>
-    <widget class="QDateEdit" name="dt_EmissaoPedido">
+    <widget class="QDateEdit" name="dt_Emissao">
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -363,7 +363,7 @@ border: none;
       <string>DATA EMISSÃO</string>
      </property>
     </widget>
-    <widget class="QDateEdit" name="dt_PrazoEntrega">
+    <widget class="QDateEdit" name="dt_Prazo">
      <property name="geometry">
       <rect>
        <x>300</x>
@@ -450,9 +450,6 @@ border: none;
      </property>
     </widget>
     <widget class="QPushButton" name="bt_Entregar">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
      <property name="geometry">
       <rect>
        <x>820</x>
@@ -481,17 +478,16 @@ border: none;
      <property name="styleSheet">
       <string notr="true">QPushButton {
 background-color: #7AB32E;
-background-position: center;
-background-repeat: no-repeat;
-border: none;
+color: #FFF
  }
+QPushButton:hover{
+background-color: #40a286
+}
 QPushButton:disabled{
 background-color: #CACACA;
 
  }
-QPushButton:hover{
-background-color: #40a286
-}</string>
+</string>
      </property>
      <property name="text">
       <string>ENTREGAR</string>
@@ -525,7 +521,7 @@ border: none;
       <string>DATA ENTREGA</string>
      </property>
     </widget>
-    <widget class="QDateEdit" name="dt_EntregaPedido">
+    <widget class="QDateEdit" name="dt_Entrega">
      <property name="geometry">
       <rect>
        <x>480</x>
@@ -632,7 +628,7 @@ color: #A2A2A2;
      <string>CÓD. CLIENTE</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_CodClienteVenda">
+   <widget class="QLineEdit" name="tx_Id">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -875,7 +871,7 @@ color: red;
       <string>0,00</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="bt_IncluirItemPedido">
+    <widget class="QPushButton" name="bt_IncluirItem">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -1050,7 +1046,7 @@ color: #A2A2A2;
      <string>TELEFONE</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_TelefoneClienteVenda">
+   <widget class="QLineEdit" name="tx_Telefone">
     <property name="geometry">
      <rect>
       <x>510</x>
@@ -1335,6 +1331,15 @@ margin: 0 2px 0 0;
      <property name="textAlignment">
       <set>AlignCenter</set>
      </property>
+     <property name="foreground">
+      <brush brushstyle="SolidPattern">
+       <color alpha="255">
+        <red>80</red>
+        <green>79</green>
+        <blue>79</blue>
+       </color>
+      </brush>
+     </property>
     </column>
     <column>
      <property name="text">
@@ -1485,7 +1490,7 @@ border: none
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="lb_SubTotalVenda">
+    <widget class="QLabel" name="lb_SubTotal">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -1560,7 +1565,7 @@ border: none
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QPushButton" name="bt_GerarParcelaVenda">
+    <widget class="QPushButton" name="bt_GerarParcela">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -1649,7 +1654,7 @@ border: none
       <string>0.00</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="cb_FormaPagamentoVenda">
+    <widget class="QComboBox" name="cb_FormaPagamento">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -1702,21 +1707,6 @@ font-weight: bold;
 }
 </string>
      </property>
-     <item>
-      <property name="text">
-       <string/>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>DINHEIRO</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>CARTÂO</string>
-      </property>
-     </item>
     </widget>
     <widget class="QLabel" name="lb_FormVenda_15">
      <property name="geometry">
@@ -1746,7 +1736,7 @@ border: none
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QComboBox" name="cb_ParcelamentoVenda">
+    <widget class="QComboBox" name="cb_QtdeParcela">
      <property name="geometry">
       <rect>
        <x>180</x>
@@ -1799,11 +1789,6 @@ font-weight: bold;
 }
 </string>
      </property>
-     <item>
-      <property name="text">
-       <string/>
-      </property>
-     </item>
      <item>
       <property name="text">
        <string>À VISTA</string>
@@ -1853,7 +1838,7 @@ border: none
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QDateEdit" name="dt_VencimentoVenda">
+    <widget class="QDateEdit" name="dt_Vencimento">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -1996,7 +1981,7 @@ border: none
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QTableWidget" name="tb_parcelasVenda">
+    <widget class="QTableWidget" name="tb_Parcelas">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -2196,10 +2181,10 @@ border: none
   </widget>
  </widget>
  <tabstops>
-  <tabstop>tx_CodPedido</tabstop>
-  <tabstop>tx_CodClienteVenda</tabstop>
-  <tabstop>tx_ClienteVenda</tabstop>
-  <tabstop>tx_TelefoneClienteVenda</tabstop>
+  <tabstop>tx_Cod</tabstop>
+  <tabstop>tx_Id</tabstop>
+  <tabstop>tx_NomeFantasia</tabstop>
+  <tabstop>tx_Telefone</tabstop>
   <tabstop>tx_IdBuscaItem</tabstop>
   <tabstop>tx_BuscaItem</tabstop>
   <tabstop>tx_QntdItem</tabstop>
@@ -2208,15 +2193,15 @@ border: none
   <tabstop>tx_ObsItemPedido</tabstop>
   <tabstop>tx_Desconto</tabstop>
   <tabstop>tx_Frete</tabstop>
-  <tabstop>dt_EmissaoPedido</tabstop>
-  <tabstop>dt_PrazoEntrega</tabstop>
+  <tabstop>dt_Emissao</tabstop>
+  <tabstop>dt_Prazo</tabstop>
   <tabstop>tb_Itens</tabstop>
   <tabstop>tx_TotalFinal</tabstop>
-  <tabstop>dt_EntregaPedido</tabstop>
-  <tabstop>cb_FormaPagamentoVenda</tabstop>
-  <tabstop>cb_ParcelamentoVenda</tabstop>
-  <tabstop>dt_VencimentoVenda</tabstop>
-  <tabstop>tb_parcelasVenda</tabstop>
+  <tabstop>dt_Entrega</tabstop>
+  <tabstop>cb_FormaPagamento</tabstop>
+  <tabstop>cb_QtdeParcela</tabstop>
+  <tabstop>dt_Vencimento</tabstop>
+  <tabstop>tb_Parcelas</tabstop>
   <tabstop>tx_valorRecebido</tabstop>
  </tabstops>
  <resources/>
