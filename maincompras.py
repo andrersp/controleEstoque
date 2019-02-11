@@ -8,9 +8,10 @@ from Crud.CrudFornecedor import CrudFornecedor
 from Crud.CrudAPagar import CrudAPagar
 from functools import partial
 from Funcoes.data import DataAtual
+from Funcoes.comercial import Comercial
 
 
-class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
+class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual, Comercial):
 
     def maincompras(self, frame):
         super(MainCompras, self).setMainCompras(frame)
@@ -99,11 +100,9 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         super(MainCompras, self).setFormCompras(self.ct_containerCompras)
         self.fr_FormCompra.show()
 
+        """ Chamanda de funções localizadas no arquivo funcoes.py na pasta Funcoes """
         # Setando Datas
-        self.dt_Emissao.setDate(QtCore.QDate.currentDate())
-        self.dt_Prazo.setDate(QtCore.QDate.currentDate().addDays(2))
-        self.dt_Entrega.setDate(QtCore.QDate.currentDate())
-        self.dt_Vencimento.setDate(QtCore.QDate.currentDate())
+        self.setDatas()
 
         # Setando Validação
         self.validaCampos()
@@ -111,21 +110,15 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         # Definindo acao de calculo de frete e desconto
         self.acaoCalculo()
 
-        # Icone Botoes
-        self.IconeBotaoMenu(self.bt_Salvar,
-                            self.resourcepath('Images/salvar.png'))
-        self.IconeBotaoMenu(self.bt_Voltar,
-                            self.resourcepath('Images/cancelar.png'))
-        self.IconeBotaoMenu(self.bt_Imprimir,
-                            self.resourcepath('Images/gtk-print.png'))
-        self.IconeBotaoMenu(
-            self.bt_Entregar, self.resourcepath('Images/ico_entrega.png'))
+        # setando Icone Botoes
+        self.setIcones()
 
-        self.IconeBotaoForm(self.bt_IncluirItem,
-                            self.resourcepath('Images/addPedido.svg'))
+        # Setando tamanho das tabelas
+        self.tamanhoTabelas()
 
-        self.IconeBotaoMenu(self.bt_GerarParcela,
-                            self.resourcepath('Images/ico_conta.png'))
+        # setando autocompleye
+        self.setAutocomplete()
+        """ Fim das chamandas """
 
         # Setando Foco no Cliente id TX
         self.tx_Id.setFocus()
@@ -133,40 +126,12 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         # Checando se existe ID válido
         self.IdCheckCompra()
 
-        # Tamanho das Colunas Tabela Itens
-        # Tamanho das Colunas Tabela Itens
-        self.tb_Itens.blockSignals(True)
-        self.tb_Itens.setColumnHidden(0, True)
-        self.tb_Itens.setColumnHidden(7, True)
-        self.tb_Itens.resizeRowsToContents()
-        self.tb_Itens.setColumnWidth(1, 165)
-        self.tb_Itens.setColumnWidth(2, 150)
-        self.tb_Itens.setColumnWidth(3, 75)
-        self.tb_Itens.setColumnWidth(4, 75)
-        self.tb_Itens.setColumnWidth(5, 75)
-        self.tb_Itens.setColumnWidth(6, 45)
-
-        # Tamanho tabela parcelas
-        self.tb_Parcelas.blockSignals(True)
-        self.tb_Parcelas.setColumnHidden(0, True)
-        self.tb_Parcelas.setColumnWidth(1, 90)
-        self.tb_Parcelas.setColumnWidth(2, 55)
-        self.tb_Parcelas.setColumnWidth(3, 65)
-        self.tb_Parcelas.setColumnWidth(4, 70)
-
         """ Definindo funcões widgets"""
         # Return Press Busca Id Produto
         self.tx_IdBuscaItem.returnPressed.connect(self.BuscaProdutoIdCompra)
 
-        # Campo Busca por nome e Autocompletar Produto
-        self.completer = QtWidgets.QCompleter(self)
-        self.completer.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
-        self.completer.setCompletionMode(
-            QtWidgets.QCompleter.PopupCompletion)
-        self.model = QtCore.QStringListModel(self)
-        self.completer.setModel(self.model)
-        self.tx_BuscaItem.setCompleter(self.completer)
-        self.tx_BuscaItem.textEdited.connect(self.autocomplete)
+        # Autocompletando on text edit
+        self.tx_BuscaItem.textEdited.connect(self.autocompleteProduto)
         self.tx_BuscaItem.returnPressed.connect(self.BuscaProdutoNomeCompra)
 
         # Return Press Busca Id Cliente
@@ -174,7 +139,6 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             self.BuscaFornecedorId)
 
         # Campo Busca por nome e Autocompletar Cliente
-        self.tx_NomeFantasia.setCompleter(self.completer)
         self.tx_NomeFantasia.textEdited.connect(self.autocompleFornecedor)
         self.tx_NomeFantasia.returnPressed.connect(
             self.BuscaFornecedorNome)
@@ -200,8 +164,9 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         self.bt_Voltar.clicked.connect(self.janelaCompras)
 
         # Gerar Parcelas
-        self.bt_GerarParcela.clicked.connect(partial(self.gerarParcela,
-                                                     "Pagar"))
+        self.bt_GerarParcela.clicked.connect(
+            partial(self.gerarParcela,
+                    "Pagar"))
 
     # checando campo Id se é Edicao ou Nova Venda
     def IdCheckCompra(self):
@@ -209,16 +174,6 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             busca = CrudCompras()
             self.tx_Cod.setText(str(busca.lastIdCompra()))
             # setando dataAtual campo entrega e emissão
-
-    # Autocomplete Produtos
-
-    def autocomplete(self):
-        produto = self.tx_BuscaItem.text()
-        busca = CrudProdutos()
-        busca.ListaProdutoTabela(produto)
-        lista = busca.descricaoProduto
-        if produto:
-            self.model.setStringList(lista)
 
     # Busca Produto por nome
     def BuscaProdutoNomeCompra(self):

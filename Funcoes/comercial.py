@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from PySide2 import QtGui, QtCore, QtWidgets
 from functools import partial
+from Crud.CrudProdutos import CrudProdutos
 
 
 class Comercial(object):
@@ -18,6 +19,56 @@ class Comercial(object):
         validarValor.setDecimals(2)
         self.tx_Desconto.setValidator(validarValor)
         self.tx_Frete.setValidator(validarValor)
+
+    # Setando Datas Padrão
+    def setDatas(self):
+        self.dt_Emissao.setDate(QtCore.QDate.currentDate())
+        self.dt_Prazo.setDate(QtCore.QDate.currentDate().addDays(2))
+        self.dt_Entrega.setDate(QtCore.QDate.currentDate())
+        self.dt_Vencimento.setDate(QtCore.QDate.currentDate())
+
+    # Setando Icone dos Botoes
+    def setIcones(self):
+        # Icone Botoes
+        self.IconeBotaoMenu(self.bt_Salvar,
+                            self.resourcepath('Images/salvar.png'))
+
+        self.IconeBotaoMenu(self.bt_Voltar,
+                            self.resourcepath('Images/cancelar.png'))
+
+        self.IconeBotaoMenu(
+            self.bt_Entregar, self.resourcepath('Images/ico_entrega.png'))
+
+        self.IconeBotaoMenu(self.bt_Imprimir,
+                            self.resourcepath('Images/gtk-print.png'))
+
+        self.IconeBotaoMenu(self.bt_GerarParcela,
+                            self.resourcepath('Images/ico_conta.png'))
+
+        self.IconeBotaoForm(self.bt_IncluirItem,
+                            self.resourcepath('Images/addPedido.svg'))
+
+    # Definindo Tamanho das tabelas
+    def tamanhoTabelas(self):
+        # Tamanho das Colunas Tabela Itens
+        self.tb_Itens.blockSignals(True)
+        self.tb_Itens.setColumnHidden(0, True)
+        self.tb_Itens.setColumnHidden(7, True)
+        self.tb_Itens.resizeRowsToContents()
+        self.tb_Itens.setColumnWidth(1, 165)
+        self.tb_Itens.setColumnWidth(2, 150)
+        self.tb_Itens.setColumnWidth(3, 75)
+        self.tb_Itens.setColumnWidth(4, 75)
+        self.tb_Itens.setColumnWidth(5, 75)
+        self.tb_Itens.setColumnWidth(6, 45)
+
+        # Tamanho tabela parcelas
+        self.tb_Parcelas.blockSignals(True)
+        self.tb_Parcelas.setColumnHidden(0, True)
+        self.tb_Parcelas.setColumnWidth(1, 90)
+        self.tb_Parcelas.setColumnWidth(2, 60)
+        self.tb_Parcelas.setColumnWidth(3, 80)
+        self.tb_Parcelas.setColumnWidth(4, 90)
 
     def acaoCalculo(self):
         # calculando com desconto
@@ -142,3 +193,23 @@ class Comercial(object):
         valorPendente = float(self.lb_ValorPendente.text().replace(',', '.'))
         if valorRecebido > valorPendente:
             self.tx_ValorPago.setText(format(valorPendente, '.2f'))
+
+    # Setando auto complete
+    def setAutocomplete(self):
+        # Setando Auto complete
+        self.completer = QtWidgets.QCompleter(self)
+        self.completer.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
+        self.completer.setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
+        self.model = QtCore.QStringListModel(self)
+        self.completer.setModel(self.model)
+        self.tx_BuscaItem.setCompleter(self.completer)
+        self.tx_NomeFantasia.setCompleter(self.completer)
+
+    # AutoComplete Produtos
+    def autocompleteProduto(self):
+        produto = self.tx_BuscaItem.text()
+        busca = CrudProdutos()
+        busca.ListaProdutoTabela(produto)
+        lista = busca.descricaoProduto
+        if produto:
+            self.model.setStringList(lista)
