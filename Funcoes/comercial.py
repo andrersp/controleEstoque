@@ -6,6 +6,30 @@ from functools import partial
 class Comercial(object):
     """ Funcoes das Telas de Venda e Compra """
 
+    def validaCampos(self):
+        # Setando Validadot Int nos campos
+        validaInt = QtGui.QIntValidator(0, 9999)
+        self.tx_QntdItem.setValidator(validaInt)
+        self.tx_IdBuscaItem.setValidator(validaInt)
+        self.tx_Id.setValidator(validaInt)
+        # Setando Validador float nos campos
+        validarValor = QtGui.QDoubleValidator(0.00, 999.99, 2)
+        validarValor.setNotation(QtGui.QDoubleValidator.StandardNotation)
+        validarValor.setDecimals(2)
+        self.tx_Desconto.setValidator(validarValor)
+        self.tx_Frete.setValidator(validarValor)
+
+    def acaoCalculo(self):
+        # calculando com desconto
+        self.tx_Desconto.returnPressed.connect(self.TotalFinal)
+        self.tx_Desconto.returnPressed.connect(self.tx_Frete.setFocus)
+        self.tx_Desconto.returnPressed.connect(self.tx_Frete.selectAll)
+
+        # calculando com frete
+        self.tx_Frete.returnPressed.connect(self.TotalFinal)
+        self.tx_Frete.returnPressed.connect(self.tx_valorRecebido.setFocus)
+        self.tx_Frete.returnPressed.connect(self.tx_valorRecebido.selectAll)
+
     def ValidaFormAdd(self):
         if not self.tx_Id.text():
             self.tx_Id.setFocus()
