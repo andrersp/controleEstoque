@@ -21,11 +21,12 @@ from Crud.CrudEmpresa import CrudEmpresa
 import os
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 import random
+from Funcoes.comercial import Comercial
 
 
 class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos, Funcao,
            MainVendas, MainClientes, MainCompras, MainFinanceiro,
-           MainFornecedor, MainConfig):
+           MainFornecedor, MainConfig, Comercial):
 
     def __init__(self, parent=None):
         super(Main, self).__init__(parent)
