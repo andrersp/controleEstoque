@@ -24,6 +24,7 @@ class CrudFornecedor(object):
         self.cidade = cidade
         self.estado = estado
     # Buscanado ultimo ID
+    """" nada """
 
     def LasIdFornecedor(self):
         conecta = Conexao()
