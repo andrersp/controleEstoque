@@ -108,6 +108,12 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         self.dt_Entrega.setDate(QtCore.QDate.currentDate())
         self.dt_Vencimento.setDate(QtCore.QDate.currentDate())
 
+        # Setando Validação
+        self.validaCampos()
+
+        # Definindo acao de calculo de frete e desconto
+        self.acaoCalculo()
+
         # Icone Botoes
         self.IconeBotaoMenu(self.bt_Salvar,
                             self.resourcepath('Images/salvar.png'))
@@ -176,34 +182,8 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         self.tx_NomeFantasia.textEdited.connect(self.autocompleCliente)
         self.tx_NomeFantasia.returnPressed.connect(self.BuscaClienteNome)
 
-        # Setando Validadot Int nos campos
-        validaInt = QtGui.QIntValidator(0, 9999)
-        self.tx_QntdItem.setValidator(validaInt)
-        self.tx_IdBuscaItem.setValidator(validaInt)
-        self.tx_Id.setValidator(validaInt)
-        # Setando Validador float nos campos
-        validarValor = QtGui.QDoubleValidator(0.00, 999.99, 2)
-        validarValor.setNotation(QtGui.QDoubleValidator.StandardNotation)
-        validarValor.setDecimals(2)
-        self.tx_Desconto.setValidator(validarValor)
-        self.tx_Frete.setValidator(validarValor)
-        # self.tx_ValorPago.setValidator(validarValor)
-
         # Calculo total produto por qtde item
         self.tx_QntdItem.returnPressed.connect(self.TotalItem)
-
-        # calculando com desconto
-        self.tx_Desconto.returnPressed.connect(self.TotalFinal)
-        self.tx_Desconto.returnPressed.connect(self.tx_Frete.setFocus)
-        self.tx_Desconto.returnPressed.connect(self.tx_Frete.selectAll)
-
-        # calculando com frete
-        self.tx_Frete.returnPressed.connect(self.TotalFinal)
-        # self.tx_Frete.returnPressed.connect(self.tx_ValorPago.setFocus)
-        # self.tx_Frete.returnPressed.connect(self.tx_ValorPago.selectAll)
-
-        # Calculo Valor Pendente
-        # self.tx_ValorPago.returnPressed.connect(self.TotalFinal)
 
         # Receber
         self.bt_GerarParcela.clicked.connect(

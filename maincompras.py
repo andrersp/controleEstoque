@@ -105,6 +105,12 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         self.dt_Entrega.setDate(QtCore.QDate.currentDate())
         self.dt_Vencimento.setDate(QtCore.QDate.currentDate())
 
+        # Setando Validação
+        self.validaCampos()
+
+        # Definindo acao de calculo de frete e desconto
+        self.acaoCalculo()
+
         # Icone Botoes
         self.IconeBotaoMenu(self.bt_Salvar,
                             self.resourcepath('Images/salvar.png'))
@@ -173,19 +179,6 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         self.tx_NomeFantasia.returnPressed.connect(
             self.BuscaFornecedorNome)
 
-        # Setando Validadot Int nos campos
-        validaInt = QtGui.QIntValidator(0, 9999)
-        # self.tx_QntdItem.setValidator(validaInt)
-        self.tx_IdBuscaItem.setValidator(validaInt)
-        self.tx_Id.setValidator(validaInt)
-        # Setando Validador float nos campos
-        validarValor = QtGui.QDoubleValidator()
-        validarValor.setNotation(QtGui.QDoubleValidator.StandardNotation)
-        validarValor.setRange(0, 9999.00, 2)
-        self.tx_Desconto.setValidator(validarValor)
-        self.tx_Frete.setValidator(validarValor)
-        self.tx_valorRecebido.setValidator(validarValor)
-
         # Calculo total produto por qtde item
         self.tx_QntdItem.returnPressed.connect(self.TotalItemCompra)
         self.tx_ValorUnitarioItem.returnPressed.connect(self.TotalItemCompra)
@@ -193,19 +186,6 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         # Focando campos Obs apos valor do Item
         self.tx_ValorUnitarioItem.returnPressed.connect(
             self.tx_ObsItem.setFocus)
-
-        # calculando com desconto
-        self.tx_Desconto.returnPressed.connect(self.TotalFinal)
-        self.tx_Desconto.returnPressed.connect(self.tx_Frete.setFocus)
-        self.tx_Desconto.returnPressed.connect(self.tx_Frete.selectAll)
-
-        # calculando com frete
-        self.tx_Frete.returnPressed.connect(self.TotalFinal)
-        self.tx_Frete.returnPressed.connect(self.tx_valorRecebido.setFocus)
-        self.tx_Frete.returnPressed.connect(self.tx_valorRecebido.selectAll)
-
-        # Calculo Valor Pendente
-        self.tx_valorRecebido.returnPressed.connect(self.TotalFinal)
 
         # Entregar
         self.bt_Entregar.clicked.connect(self.ReceberProduto)
