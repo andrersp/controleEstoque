@@ -104,7 +104,8 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         super(MainVendas, self).setFormVendas(self.ct_containerVendas)
         self.fr_FormVenda.show()
 
-        """ Chamanda de funções localizadas no arquivo funcoes.py na pasta Comercial """
+        """ Chamanda de funções localizadas no arquivo comercial.py na pasta 
+        Funcoes """
         # Setando Datas
         self.setDatas()
 
@@ -130,9 +131,13 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         # Autocomplete Produto
         self.tx_BuscaItem.textEdited.connect(self.autocompleteProduto)
 
+        # Add Item Tabela
+        self.tx_ObsItem.returnPressed.connect(self.ValidaFormAdd)
+        self.bt_IncluirItem.clicked.connect(self.ValidaFormAdd)
         """ Fim chamandas comercial.py """
 
-        """ Chamanda de funções localizadas no arquivo clientes.py na pasta Funcoes """
+        """ Chamanda de funções localizadas no arquivo clientes.py na 
+        pasta Funcoes """
         # Campo Busca por nome e Autocompletar Cliente
         self.tx_NomeFantasia.textEdited.connect(self.autocompleCliente)
         self.tx_NomeFantasia.returnPressed.connect(
@@ -141,8 +146,12 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         # Return Press Busca Id Cliente
         self.tx_Id.returnPressed.connect(
             partial(self.BuscaClienteId, self.tx_IdBuscaItem))
-
         """ Fim Chamadas clientes.py"""
+
+        """ Chamanda de funções localizadas no arquivo FormaPagamento.py na pasta Funcoes """
+        # Populando combobox Forma de Pagamento
+        self.CboxFPagamento(self.cb_FormaPagamento)
+        """ Fim Chamanda FormaPagamento.py  """
 
         # Setando Foco no Cliente id TX
         self.tx_Id.setFocus()
@@ -163,10 +172,6 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         # Entregar
         self.bt_Entregar.clicked.connect(self.Entregar)
-
-        # Add Item Tabela
-        self.tx_ObsItem.returnPressed.connect(self.ValidaFormAdd)
-        self.bt_IncluirItem.clicked.connect(self.ValidaFormAdd)
 
         # Botao Salvar
         self.bt_Salvar.clicked.connect(self.CadVenda)

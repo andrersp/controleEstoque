@@ -27,12 +27,15 @@ from Funcoes.comercial import Comercial
 from Funcoes.financeiro import Financeiro
 from Funcoes.Fornecedor import Fornecedor
 from Funcoes.Clientes import Clientes
+from Funcoes.FormaPagamento import FormaPagamento
+from Funcoes.categoriaAPagar import CategoriaAPagar
+from Funcoes.categoriaAReceber import CategoriaAReceber
 
 
 class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos, 
            Funcao, MainVendas, MainClientes, MainCompras, MainFinanceiro,
            MainFornecedor, MainConfig, Financeiro, Comercial, Fornecedor, 
-           Clientes):
+           Clientes, FormaPagamento, CategoriaAPagar, CategoriaAReceber):
 
     def __init__(self, parent=None):
         super(Main, self).__init__(parent)

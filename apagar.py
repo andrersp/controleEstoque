@@ -85,7 +85,20 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         """ Chamanda de funções localizadas no arquivo financeiro.py na pasta Funcoes """
         # Autocomplete
         self.setAutocompleteFinanceiro()
+
+        # Data Vencimento e Pagamento com data Atual
+        self.setDataVencPgto()
         """ Fim Chamanda financeiro.py  """
+
+        """ Chamanda de funções localizadas no arquivo FormaPagamento.py na pasta Funcoes """
+        # Populando combobox Forma de Pagamento
+        self.CboxFPagamento(self.cb_formaPagamento)
+        """ Fim Chamanda FormaPagamento.py  """
+
+        """ Chamanda de funções localizadas no arquivo categoriaAPagar.py na pasta Funcoes """
+        # Populando combobox Forma de Pagamento
+        self.cboxCatAPagar(self.cb_categoria)
+        """ Fim Chamanda categoriaAPagar.py  """
 
         """ Chamanda de funções localizadas no arquivo fornecedor.py na pasta Funcoes """
         # Campo Busca por nome e Autocompletar Fornecedor

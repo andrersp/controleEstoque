@@ -11,6 +11,11 @@ class Financeiro(object):
         self.dt_Inicio.setDate(self.primeiroDiaMes())
         self.dt_Fim.setDate(self.ultimoDiaMes())
         pass
+    # Setando Data Vencimento e data Pagamento
+
+    def setDataVencPgto(self):
+        self.dt_Vencimento.setDate(QtCore.QDate.currentDate())
+        self.dt_dataPagamento.setDate(QtCore.QDate.currentDate())
 
     def setIconFinanceiro(self):
         # Icone dos botoes

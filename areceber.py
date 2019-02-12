@@ -100,7 +100,20 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         """ Chamanda de funções localizadas no arquivo financeiro.py na pasta Funcoes """
         # Autocomplete
         self.setAutocompleteFinanceiro()
+
+        # Data Vencimento e Pagamento com data Atual
+        self.setDataVencPgto()
         """ Fim Chamanda financeiro.py  """
+
+        """ Chamanda de funções localizadas no arquivo FormaPagamento.py na pasta Funcoes """
+        # Autocomplete
+        self.CboxFPagamento(self.cb_formaPagamento)
+        """ Fim Chamanda FormaPagamento.py  """
+
+        """ Chamanda de funções localizadas no arquivo categoriaAReceber.py na pasta Funcoes """
+        # Populando combobox Forma de Pagamento
+        self.cboxCatAReceber(self.cb_categoria)
+        """ Fim Chamanda categoriaAPagar.py  """
 
         """ Chamanda de funções localizadas no arquivo clientes.py na pasta Funcoes """
         # Campo Busca por nome e Autocompletar Cliente
@@ -114,6 +127,10 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
 
         """ Fim Chamadas """
 
+        # Botao Salvar
+        self.bt_Salvar.clicked.connect(self.cadConta)
+
+        # Botao Voltar
         self.bt_Voltar.clicked.connect(self.JanelaAReceber)
         pass
 
@@ -144,3 +161,6 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
             INSERI.cadContaReceber()
             self.tabelaAReceber()
         pass
+
+    def cadConta(self):
+        print(self.cb_formaPagamento.currentData())

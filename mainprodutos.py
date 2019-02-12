@@ -235,8 +235,7 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         busca = CrudProdutos()
 
         if self.cb_CategoriaProduto.count() > 0:
-            id = self.cb_CategoriaProduto.itemData(
-                index, QtCore.Qt.UserRole)
+            id = self.cb_CategoriaProduto.currentData()
             busca.idCategoria = id
         busca.listaMarca()
         i = 0
@@ -355,10 +354,8 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
             imagem.save(buf, 'PNG')
             INSERI.imagemProduto = str(data.toBase64(), encoding='utf8')
 
-        INSERI.idCategoria = self.cb_CategoriaProduto.itemData(
-            self.cb_CategoriaProduto.currentIndex(), QtCore.Qt.UserRole)
-        INSERI.idMarca = self.cb_MarcaProduto.itemData(
-            self.cb_MarcaProduto.currentIndex(), QtCore.Qt.UserRole)[0]
+        INSERI.idCategoria = self.cb_CategoriaProduto.currentData()
+        INSERI.idMarca = self.cb_MarcaProduto.currentData()
         INSERI.estoqueMinimo = self.tx_EstoqueMinimoProduto.text()
         INSERI.estoqueMaximo = self.tx_EstoqueMaximoProduto.text()
         INSERI.obsProduto = self.tx_ObsProduto.text()

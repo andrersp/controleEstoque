@@ -573,41 +573,6 @@ border-bottom: 4px solid #277298;</string>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLineEdit" name="tx_juros">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>60</y>
-       <width>125</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::WheelFocus</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit{
-background: #FFF;
-border: none;
-font-family: &quot;Arial&quot;;
-font-size: 14px;
-font-weight: bold;
-color: rgb(80,79,79)
-}
-QLineEdit:Focus {
-border: 1px solid red;
-}</string>
-     </property>
-     <property name="text">
-      <string>0.00</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="placeholderText">
-      <string>R$ 0.00</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="lb_FormVenda_14">
      <property name="geometry">
       <rect>
@@ -701,31 +666,6 @@ border: none;
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLabel" name="lb_FormVenda_25">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>60</y>
-       <width>130</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial&quot;;
-font-weight: bold;
-color: #277298;
-border: none
-}</string>
-     </property>
-     <property name="text">
-      <string>JUROS</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
     <widget class="QLabel" name="lb_FormVenda_22">
      <property name="geometry">
       <rect>
@@ -776,71 +716,11 @@ border: none
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QLineEdit" name="tx_desconto">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>100</y>
-       <width>125</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::WheelFocus</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit{
-background: #FFF;
-border: none;
-font-family: &quot;Arial&quot;;
-font-size: 14px;
-font-weight: bold;
-color: rgb(80,79,79)
-}
-QLineEdit:Focus {
-border: 1px solid red;
-}</string>
-     </property>
-     <property name="text">
-      <string>0.00</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-     <property name="placeholderText">
-      <string>R$ 0.00</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lb_FormVenda_26">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>100</y>
-       <width>130</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial&quot;;
-font-weight: bold;
-color: #277298;
-border: none
-}</string>
-     </property>
-     <property name="text">
-      <string>DESCONTO</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
     <widget class="QLineEdit" name="tx_valorPago">
      <property name="geometry">
       <rect>
        <x>160</x>
-       <y>180</y>
+       <y>100</y>
        <width>125</width>
        <height>30</height>
       </rect>
@@ -875,7 +755,7 @@ border: 1px solid red;
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>140</y>
+       <y>60</y>
        <width>130</width>
        <height>30</height>
       </rect>
@@ -900,7 +780,7 @@ border: none
      <property name="geometry">
       <rect>
        <x>160</x>
-       <y>140</y>
+       <y>60</y>
        <width>150</width>
        <height>30</height>
       </rect>
@@ -937,7 +817,7 @@ QComboBox::down-arrow {
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>180</y>
+       <y>100</y>
        <width>130</width>
        <height>30</height>
       </rect>
@@ -965,7 +845,7 @@ border: none
      <property name="geometry">
       <rect>
        <x>160</x>
-       <y>220</y>
+       <y>140</y>
        <width>125</width>
        <height>30</height>
       </rect>

@@ -67,6 +67,7 @@ class CrudAReceber(object):
         except mysql.connector.Error as err:
             print(err)
 
+    # Cadastro Conta a Receber
     def cadContaReceber(self):
         conecta = Conexao()
         c = conecta.conecta.cursor()

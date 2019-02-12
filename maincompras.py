@@ -99,6 +99,12 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         super(MainCompras, self).setFormCompras(self.ct_containerCompras)
         self.fr_FormCompra.show()
 
+        # Setando Foco no Cliente id TX
+        self.tx_Id.setFocus()
+
+        # Checando se existe ID válido
+        self.IdCheckCompra()
+
         """ Chamanda de funções localizadas no arquivo comercial.py na pasta Funcoes """
         # Setando Datas
         self.setDatas()
@@ -126,21 +132,10 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         # Auto COmplete Produto
         self.tx_BuscaItem.textEdited.connect(self.autocompleteProduto)
 
+        # Add Item Tabela
+        self.tx_ObsItem.returnPressed.connect(self.ValidaFormAdd)
+        self.bt_IncluirItem.clicked.connect(self.ValidaFormAdd)
         """ Fim das chamandas comercial.py"""
-
-        # Setando Foco no Cliente id TX
-        self.tx_Id.setFocus()
-
-        # Checando se existe ID válido
-        self.IdCheckCompra()
-
-        """ Definindo funcões widgets"""
-
-        # Return Press Busca Id Produto
-        self.tx_IdBuscaItem.returnPressed.connect(self.BuscaProdutoIdCompra)
-
-        # Busca Produto por nome
-        self.tx_BuscaItem.returnPressed.connect(self.BuscaProdutoNomeCompra)
 
         """ Chamanda de funções localizadas no arquivo fornecedor.py na pasta Funcoes """
         # Campo Busca por nome e Autocompletar Fornecedor
@@ -151,8 +146,18 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         # Return Press Busca Id Fornecedor
         self.tx_Id.returnPressed.connect(
             partial(self.BuscaFornecedorId, self.tx_IdBuscaItem))
-
         """ Fim chamada fornecedor.py """
+
+        """ Chamanda de funções localizadas no arquivo FormaPagamento.py na pasta Funcoes """
+        # Populando combobox Forma de Pagamento
+        self.CboxFPagamento(self.cb_FormaPagamento)
+        """ Fim Chamanda FormaPagamento.py  """
+
+        # Return Press Busca Id Produto
+        self.tx_IdBuscaItem.returnPressed.connect(self.BuscaProdutoIdCompra)
+
+        # Busca Produto por nome
+        self.tx_BuscaItem.returnPressed.connect(self.BuscaProdutoNomeCompra)
 
         # Calculo total produto por qtde item
         self.tx_QntdItem.returnPressed.connect(self.TotalItemCompra)
@@ -164,10 +169,6 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
         # Entregar
         self.bt_Entregar.clicked.connect(self.ReceberProduto)
-
-        # Add Item Tabela
-        self.tx_ObsItem.returnPressed.connect(self.ValidaFormAdd)
-        self.bt_IncluirItem.clicked.connect(self.ValidaFormAdd)
 
         # Botao Salvar
         self.bt_Salvar.clicked.connect(self.CadCompra)
