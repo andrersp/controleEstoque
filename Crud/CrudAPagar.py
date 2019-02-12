@@ -112,6 +112,7 @@ class CrudAPagar(object):
         # print(self.status)
         return self.status
 
+    # Seleciona conta pelo código de Compra
     def selectAPagarId(self):
         conecta = Conexao()
         c = conecta.conecta.cursor()
