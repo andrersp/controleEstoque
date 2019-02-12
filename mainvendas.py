@@ -104,7 +104,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         super(MainVendas, self).setFormVendas(self.ct_containerVendas)
         self.fr_FormVenda.show()
 
-        """ Chamanda de funções localizadas no arquivo funcoes.py na pasta Funcoes """
+        """ Chamanda de funções localizadas no arquivo funcoes.py na pasta Comercial """
         # Setando Datas
         self.setDatas()
 
@@ -122,7 +122,27 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         # Setando autocomplete
         self.setAutocomplete()
-        """ Fim das chamandas """
+
+        # Botao Gerar Parcela
+        self.bt_GerarParcela.clicked.connect(
+            partial(self.gerarParcela, "Receber"))
+
+        # Autocomplete Produto
+        self.tx_BuscaItem.textEdited.connect(self.autocompleteProduto)
+
+        """ Fim chamandas comercial.py """
+
+        """ Chamanda de funções localizadas no arquivo clientes.py na pasta Funcoes """
+        # Campo Busca por nome e Autocompletar Cliente
+        self.tx_NomeFantasia.textEdited.connect(self.autocompleCliente)
+        self.tx_NomeFantasia.returnPressed.connect(
+            partial(self.BuscaClienteNome, self.tx_IdBuscaItem))
+
+        # Return Press Busca Id Cliente
+        self.tx_Id.returnPressed.connect(
+            partial(self.BuscaClienteId, self.tx_IdBuscaItem))
+
+        """ Fim Chamadas clientes.py"""
 
         # Setando Foco no Cliente id TX
         self.tx_Id.setFocus()
@@ -134,27 +154,12 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         # Return Press Busca Id Produto
         self.tx_IdBuscaItem.returnPressed.connect(self.BuscaProdutoId)
-        # Autocompletando on text edit
-        self.tx_BuscaItem.textEdited.connect(self.autocompleteProduto)
+
+        # Busca Produto por Nome
         self.tx_BuscaItem.returnPressed.connect(self.BuscaProdutoNome)
-
-        """ Chamanda de funções localizadas no arquivo clientes.py na pasta Funcoes """
-        # Campo Busca por nome e Autocompletar Cliente
-        self.tx_NomeFantasia.textEdited.connect(self.autocompleCliente)
-        self.tx_NomeFantasia.returnPressed.connect(
-            partial(self.BuscaClienteNome, self.tx_IdBuscaItem))
-
-        # Return Press Busca Id Cliente
-        self.tx_Id.returnPressed.connect(
-            partial(self.BuscaClienteId, self.tx_IdBuscaItem))
-        """ Fim Chamadas  clientes.py"""
 
         # Calculo total produto por qtde item
         self.tx_QntdItem.returnPressed.connect(self.TotalItem)
-
-        # Botao Gerar Parcela
-        self.bt_GerarParcela.clicked.connect(
-            partial(self.gerarParcela, "Receber"))
 
         # Entregar
         self.bt_Entregar.clicked.connect(self.Entregar)
@@ -165,6 +170,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         # Botao Salvar
         self.bt_Salvar.clicked.connect(self.CadVenda)
+
         # Botao Cancelar
         self.bt_Voltar.clicked.connect(self.janelaVendas)
 
@@ -260,7 +266,6 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             INSERI.valorPendente = self.lb_ValorPendente.text()
             INSERI.CadVenda()
             self.CadItemVenda()
-
         pass
 
     # Cadastrando Itens referente ao pedido
@@ -349,7 +354,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         busca.SelectVendaID(id)
 
         self.tx_Id.setText(str(busca.idCliente))
-        self.BuscaClienteId()
+        self.BuscaClienteId(self.tx_IdBuscaItem)
         self.tx_Desconto.setText(str(busca.desconto))
         self.tx_Frete.setText(str(busca.frete))
         self.dt_Prazo.setDate(busca.prazoEntrega)

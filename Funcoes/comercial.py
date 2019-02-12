@@ -215,3 +215,11 @@ class Comercial(object):
         lista = busca.descricaoProduto
         if produto:
             self.model.setStringList(lista)
+
+    # Busca Produto por nome
+    def BuscaProdutoNome(self):
+        produto = self.tx_BuscaItem.text()
+        busca = CrudProdutos()
+        busca.ListaProdutoTabela(produto)
+        self.tx_IdBuscaItem.setText(str(busca.idProduto[0]))
+        self.BuscaProdutoId()

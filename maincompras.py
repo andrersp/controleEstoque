@@ -117,7 +117,16 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
         # setando autocompleye
         self.setAutocomplete()
-        """ Fim das chamandas """
+
+        # Gerar Parcelas
+        self.bt_GerarParcela.clicked.connect(
+            partial(self.gerarParcela,
+                    "Pagar"))
+
+        # Auto COmplete Produto
+        self.tx_BuscaItem.textEdited.connect(self.autocompleteProduto)
+
+        """ Fim das chamandas comercial.py"""
 
         # Setando Foco no Cliente id TX
         self.tx_Id.setFocus()
@@ -126,13 +135,14 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         self.IdCheckCompra()
 
         """ Definindo funcões widgets"""
+
         # Return Press Busca Id Produto
         self.tx_IdBuscaItem.returnPressed.connect(self.BuscaProdutoIdCompra)
 
-        # Autocompletando on text edit
-        self.tx_BuscaItem.textEdited.connect(self.autocompleteProduto)
+        # Busca Produto por nome
         self.tx_BuscaItem.returnPressed.connect(self.BuscaProdutoNomeCompra)
 
+        """ Chamanda de funções localizadas no arquivo fornecedor.py na pasta Funcoes """
         # Campo Busca por nome e Autocompletar Fornecedor
         self.tx_NomeFantasia.textEdited.connect(self.autocompleFornecedor)
         self.tx_NomeFantasia.returnPressed.connect(
@@ -141,6 +151,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         # Return Press Busca Id Fornecedor
         self.tx_Id.returnPressed.connect(
             partial(self.BuscaFornecedorId, self.tx_IdBuscaItem))
+
+        """ Fim chamada fornecedor.py """
 
         # Calculo total produto por qtde item
         self.tx_QntdItem.returnPressed.connect(self.TotalItemCompra)
@@ -159,15 +171,12 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
         # Botao Salvar
         self.bt_Salvar.clicked.connect(self.CadCompra)
+
         # Botao Cancelar
         self.bt_Voltar.clicked.connect(self.janelaCompras)
 
-        # Gerar Parcelas
-        self.bt_GerarParcela.clicked.connect(
-            partial(self.gerarParcela,
-                    "Pagar"))
-
     # checando campo Id se é Edicao ou Nova Venda
+
     def IdCheckCompra(self):
         if not self.tx_Cod.text():
             busca = CrudCompras()
@@ -354,7 +363,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         busca.SelectCompraId(id)
 
         self.tx_Id.setText(str(busca.idFornecedor))
-        self.BuscaFornecedorId()
+        self.BuscaFornecedorId(self.tx_IdBuscaItem)
         self.tx_Desconto.setText(str(busca.desconto))
         self.tx_Frete.setText(str(busca.frete))
         self.dt_Prazo.setDate(busca.prazoEntrega)
