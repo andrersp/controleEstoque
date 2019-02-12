@@ -11,28 +11,16 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         super(MainAReceber, self).setAReceber(frame)
         self.fr_AReceber.show()
 
+        """ Chamanda de funções localizadas no arquivo financeiro.py na pasta Funcoes """
         # Icone dos botoes
-        self.IconeBotaoMenu(self.bt_Busca,
-                            self.resourcepath('Images/search.png'))
-        self.IconeBotaoMenu(self.bt_Print,
-                            self.resourcepath('Images/gtk-print.png'))
-        self.IconeBotaoForm(self.bt_AddConta,
-                            self.resourcepath('Images/addConta.svg'))
+        self.setIconFinanceiro()
 
         # Setando Data Padrão
-        self.dt_Inicio.setDate(self.primeiroDiaMes())
-        self.dt_Fim.setDate(self.ultimoDiaMes())
+        self.setDataFinanceiro()
 
         # Tamanho da Tabela
-        self.tb_AReceber.blockSignals(True)
-        self.tb_AReceber.setColumnHidden(0, True)
-        self.tb_AReceber.setColumnWidth(1, 10)
-        self.tb_AReceber.setColumnWidth(2, 270)
-        self.tb_AReceber.setColumnWidth(3, 260)
-        self.tb_AReceber.setColumnWidth(4, 120)
-        self.tb_AReceber.setColumnWidth(5, 107)
-        self.tb_AReceber.setColumnWidth(6, 107)
-        self.tb_AReceber.setColumnWidth(7, 40)
+        self.tamanhoTabelaFinanceiro(self.fr_AReceber)
+        """ Fim das chamandas """
 
         # Chamando funcao popular checkBox
         self.listaStatus()
@@ -95,8 +83,51 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
             self.tx_tabelaReceber(self.tb_AReceber, i, 6, busca.idStatus[i],
                                   str(busca.valor[i]))
             self.botaoReceberParcela(
-                self.tb_AReceber, i, 7, partial(self.ReceberParcela, i),
+                self.tb_AReceber, i, 7, partial(
+                    self.BuscaContaAReceber, busca.idConta[i]),
                 "Receber",  busca.idStatus[i])
+
+    # Cadastro e Edição conta a receber
+
+    def formAReceber(self):
+        self.LimpaFrame(self.fr_AReceber)
+        super(MainAReceber, self).setFormAReceber(self.fr_AReceber)
+        self.fr_FormReceber.show()
+
+        # Checado ID
+        self.idCheckAReceber()
+
+        """ Chamanda de funções localizadas no arquivo financeiro.py na pasta Funcoes """
+        # Autocomplete
+        self.setAutocompleteFinanceiro()
+        """ Fim Chamanda financeiro.py  """
+
+        """ Chamanda de funções localizadas no arquivo clientes.py na pasta Funcoes """
+        # Campo Busca por nome e Autocompletar Cliente
+        self.tx_NomeFantasia.textEdited.connect(self.autocompleCliente)
+        self.tx_NomeFantasia.returnPressed.connect(
+            partial(self.BuscaClienteNome, self.tx_descricao))
+
+        # Return Press Busca Id Cliente
+        self.tx_Id.returnPressed.connect(
+            partial(self.BuscaClienteId, self.tx_descricao))
+
+        """ Fim Chamadas """
+
+        self.bt_Voltar.clicked.connect(self.JanelaAReceber)
+        pass
+
+    # checando campo Id se é Edicao ou Nova Venda
+    def idCheckAReceber(self):
+        if not self.tx_Cod.text():
+            busca = CrudAReceber()
+            self.tx_Cod.setText(str(busca.lastIdAReceber()))
+        pass
+
+    def BuscaContaAReceber(self, id):
+        self.formAReceber()
+        self.tx_Cod.setText(str(id))
+        pass
 
     # Recebendo pagamento DB
     def ReceberParcela(self, id):
@@ -113,11 +144,3 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
             INSERI.cadContaReceber()
             self.tabelaAReceber()
         pass
-
-    # Cadastro e Edição conta a receber
-    def formAReceber(self):
-        self.LimpaFrame(self.fr_AReceber)
-        super(MainAReceber, self).setFormAReceber(self.fr_AReceber)
-        self.fr_FormReceber.show()
-
-        self.bt_Voltar.clicked.connect(self.JanelaAReceber)

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'formAPagar.ui',
 # licensing of 'formAPagar.ui' applies.
 #
-# Created: Tue Feb 12 02:13:26 2019
+# Created: Tue Feb 12 10:40:20 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,10 +31,10 @@ class Ui_ct_FormPagar(object):
 "border-bottom: 2px solid #A2A2A2\n"
 "}")
         self.lb_FormProdutos.setObjectName("lb_FormProdutos")
-        self.tx_Id = QtWidgets.QLineEdit(self.fr_FormPagar)
-        self.tx_Id.setEnabled(False)
-        self.tx_Id.setGeometry(QtCore.QRect(20, 10, 50, 30))
-        self.tx_Id.setStyleSheet("QLineEdit{\n"
+        self.tx_Cod = QtWidgets.QLineEdit(self.fr_FormPagar)
+        self.tx_Cod.setEnabled(False)
+        self.tx_Cod.setGeometry(QtCore.QRect(20, 10, 50, 30))
+        self.tx_Cod.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
 "border: 1px solid #A2A2A2;\n"
 "color: #000;\n"
@@ -43,9 +43,9 @@ class Ui_ct_FormPagar(object):
 "font-weight: bold;\n"
 "\n"
 "}")
-        self.tx_Id.setText("")
-        self.tx_Id.setAlignment(QtCore.Qt.AlignCenter)
-        self.tx_Id.setObjectName("tx_Id")
+        self.tx_Cod.setText("")
+        self.tx_Cod.setAlignment(QtCore.Qt.AlignCenter)
+        self.tx_Cod.setObjectName("tx_Cod")
         self.lb_FormCompra_5 = QtWidgets.QLabel(self.fr_FormPagar)
         self.lb_FormCompra_5.setGeometry(QtCore.QRect(510, 60, 110, 20))
         self.lb_FormCompra_5.setStyleSheet("QLabel{\n"
@@ -55,10 +55,10 @@ class Ui_ct_FormPagar(object):
 "color: #A2A2A2;\n"
 "}")
         self.lb_FormCompra_5.setObjectName("lb_FormCompra_5")
-        self.tx_Id_2 = QtWidgets.QLineEdit(self.fr_FormPagar)
-        self.tx_Id_2.setGeometry(QtCore.QRect(20, 80, 100, 30))
-        self.tx_Id_2.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_Id_2.setStyleSheet("QLineEdit{\n"
+        self.tx_Id = QtWidgets.QLineEdit(self.fr_FormPagar)
+        self.tx_Id.setGeometry(QtCore.QRect(20, 80, 100, 30))
+        self.tx_Id.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tx_Id.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -68,8 +68,8 @@ class Ui_ct_FormPagar(object):
 "QLineEdit:Focus {\n"
 "border: 1px solid red;\n"
 "}")
-        self.tx_Id_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.tx_Id_2.setObjectName("tx_Id_2")
+        self.tx_Id.setAlignment(QtCore.Qt.AlignCenter)
+        self.tx_Id.setObjectName("tx_Id")
         self.lb_FormCompra_2 = QtWidgets.QLabel(self.fr_FormPagar)
         self.lb_FormCompra_2.setGeometry(QtCore.QRect(140, 60, 120, 20))
         self.lb_FormCompra_2.setStyleSheet("QLabel{\n"
@@ -662,14 +662,14 @@ class Ui_ct_FormPagar(object):
         self.bt_Imprimir.setIconSize(QtCore.QSize(75, 35))
         self.bt_Imprimir.setObjectName("bt_Imprimir")
 
-        self.tradFormAPagar(ct_FormPagar)
+        self.tradsetFormAPagar(ct_FormPagar)
         QtCore.QMetaObject.connectSlotsByName(ct_FormPagar)
 
-    def tradFormAPagar(self, ct_FormPagar):
+    def tradsetFormAPagar(self, ct_FormPagar):
         ct_FormPagar.setWindowTitle(QtWidgets.QApplication.translate("ct_FormPagar", "Frame", None, -1))
         self.lb_FormProdutos.setText(QtWidgets.QApplication.translate("ct_FormPagar", "CADASTRO CONTA A PAGAR", None, -1))
         self.lb_FormCompra_5.setText(QtWidgets.QApplication.translate("ct_FormPagar", "TELEFONE", None, -1))
-        self.tx_Id_2.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormPagar", "0", None, -1))
+        self.tx_Id.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormPagar", "0", None, -1))
         self.lb_FormCompra_2.setText(QtWidgets.QApplication.translate("ct_FormPagar", "FORNECEDOR", None, -1))
         self.tx_NomeFantasia.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormPagar", "NOME FANTASIA ", None, -1))
         self.lb_FormCompra_3.setText(QtWidgets.QApplication.translate("ct_FormPagar", "CÓD. FORNEC.", None, -1))

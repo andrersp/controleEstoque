@@ -8,10 +8,9 @@ from Crud.CrudFornecedor import CrudFornecedor
 from Crud.CrudAPagar import CrudAPagar
 from functools import partial
 from Funcoes.data import DataAtual
-from Funcoes.comercial import Comercial
 
 
-class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual, Comercial):
+class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
     def maincompras(self, frame):
         super(MainCompras, self).setMainCompras(frame)
@@ -100,7 +99,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual, Comercial):
         super(MainCompras, self).setFormCompras(self.ct_containerCompras)
         self.fr_FormCompra.show()
 
-        """ Chamanda de funções localizadas no arquivo funcoes.py na pasta Funcoes """
+        """ Chamanda de funções localizadas no arquivo comercial.py na pasta Funcoes """
         # Setando Datas
         self.setDatas()
 
@@ -134,14 +133,14 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual, Comercial):
         self.tx_BuscaItem.textEdited.connect(self.autocompleteProduto)
         self.tx_BuscaItem.returnPressed.connect(self.BuscaProdutoNomeCompra)
 
-        # Return Press Busca Id Cliente
-        self.tx_Id.returnPressed.connect(
-            self.BuscaFornecedorId)
-
-        # Campo Busca por nome e Autocompletar Cliente
+        # Campo Busca por nome e Autocompletar Fornecedor
         self.tx_NomeFantasia.textEdited.connect(self.autocompleFornecedor)
         self.tx_NomeFantasia.returnPressed.connect(
-            self.BuscaFornecedorNome)
+            partial(self.BuscaFornecedorNome, self.tx_IdBuscaItem))
+
+        # Return Press Busca Id Fornecedor
+        self.tx_Id.returnPressed.connect(
+            partial(self.BuscaFornecedorId, self.tx_IdBuscaItem))
 
         # Calculo total produto por qtde item
         self.tx_QntdItem.returnPressed.connect(self.TotalItemCompra)
@@ -196,40 +195,10 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual, Comercial):
             self.tx_BuscaItem.setText("Produto não encontrado")
             self.tx_IdBuscaItem.clear()
             self.tx_IdBuscaItem.setFocus()
-
-    # AutoComplete Cliente
-    def autocompleFornecedor(self):
-        fornecedor = self.tx_NomeFantasia.text()
-        busca = CrudFornecedor()
-        busca.ListaFornecedorTabela(fornecedor)
-        lista = busca.NomeFantasia
-        if fornecedor:
-            self.model.setStringList(lista)
-
-    # Busca cliente por nome
-    def BuscaFornecedorNome(self):
-        cliente = self.tx_NomeFantasia.text()
-        busca = CrudFornecedor()
-        busca.ListaFornecedorTabela(cliente)
-        self.tx_Id.setText(str(busca.idFornecedor[0]))
-        self.BuscaFornecedorId()
-
-    # Busca cliente por ID
-    def BuscaFornecedorId(self):
-        id = int(self.tx_Id.text())
-        busca = CrudFornecedor()
-        busca.SelectFornecedorId(id)
-        if busca.NomeFantasia:
-            self.tx_NomeFantasia.setText(busca.NomeFantasia)
-            self.tx_Telefone.setText(busca.telefone)
-            self.tx_IdBuscaItem.setFocus()
-        else:
-            self.tx_NomeFantasia.setText(
-                "Cliente não encontrado".decode("utf8"))
-            self.tx_Id.clear()
-            self.tx_Id.setFocus()
+        pass
 
     # Calculo ValorTotalItem
+
     def TotalItemCompra(self):
         id = self.tx_IdBuscaItem.text()
         busca = CrudProdutos()

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'formAReceber.ui',
 # licensing of 'formAReceber.ui' applies.
 #
-# Created: Tue Feb 12 01:58:56 2019
+# Created: Tue Feb 12 11:14:45 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,10 +31,10 @@ class Ui_ct_FormReceber(object):
 "border-bottom: 2px solid #A2A2A2\n"
 "}")
         self.lb_FormProdutos.setObjectName("lb_FormProdutos")
-        self.tx_Id = QtWidgets.QLineEdit(self.fr_FormReceber)
-        self.tx_Id.setEnabled(False)
-        self.tx_Id.setGeometry(QtCore.QRect(20, 10, 50, 30))
-        self.tx_Id.setStyleSheet("QLineEdit{\n"
+        self.tx_Cod = QtWidgets.QLineEdit(self.fr_FormReceber)
+        self.tx_Cod.setEnabled(False)
+        self.tx_Cod.setGeometry(QtCore.QRect(20, 10, 50, 30))
+        self.tx_Cod.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
 "border: 1px solid #A2A2A2;\n"
 "color: #000;\n"
@@ -43,9 +43,9 @@ class Ui_ct_FormReceber(object):
 "font-weight: bold;\n"
 "\n"
 "}")
-        self.tx_Id.setText("")
-        self.tx_Id.setAlignment(QtCore.Qt.AlignCenter)
-        self.tx_Id.setObjectName("tx_Id")
+        self.tx_Cod.setText("")
+        self.tx_Cod.setAlignment(QtCore.Qt.AlignCenter)
+        self.tx_Cod.setObjectName("tx_Cod")
         self.lb_FormCompra_5 = QtWidgets.QLabel(self.fr_FormReceber)
         self.lb_FormCompra_5.setGeometry(QtCore.QRect(510, 60, 110, 20))
         self.lb_FormCompra_5.setStyleSheet("QLabel{\n"
@@ -55,10 +55,10 @@ class Ui_ct_FormReceber(object):
 "color: #A2A2A2;\n"
 "}")
         self.lb_FormCompra_5.setObjectName("lb_FormCompra_5")
-        self.tx_Id_2 = QtWidgets.QLineEdit(self.fr_FormReceber)
-        self.tx_Id_2.setGeometry(QtCore.QRect(20, 80, 100, 30))
-        self.tx_Id_2.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_Id_2.setStyleSheet("QLineEdit{\n"
+        self.tx_Id = QtWidgets.QLineEdit(self.fr_FormReceber)
+        self.tx_Id.setGeometry(QtCore.QRect(20, 80, 100, 30))
+        self.tx_Id.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tx_Id.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -68,8 +68,8 @@ class Ui_ct_FormReceber(object):
 "QLineEdit:Focus {\n"
 "border: 1px solid red;\n"
 "}")
-        self.tx_Id_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.tx_Id_2.setObjectName("tx_Id_2")
+        self.tx_Id.setAlignment(QtCore.Qt.AlignCenter)
+        self.tx_Id.setObjectName("tx_Id")
         self.lb_FormCompra_2 = QtWidgets.QLabel(self.fr_FormReceber)
         self.lb_FormCompra_2.setGeometry(QtCore.QRect(140, 60, 120, 20))
         self.lb_FormCompra_2.setStyleSheet("QLabel{\n"
@@ -669,10 +669,10 @@ class Ui_ct_FormReceber(object):
         ct_FormReceber.setWindowTitle(QtWidgets.QApplication.translate("ct_FormReceber", "Frame", None, -1))
         self.lb_FormProdutos.setText(QtWidgets.QApplication.translate("ct_FormReceber", "CADASTRO CONTA A RECEBER", None, -1))
         self.lb_FormCompra_5.setText(QtWidgets.QApplication.translate("ct_FormReceber", "TELEFONE", None, -1))
-        self.tx_Id_2.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormReceber", "0", None, -1))
+        self.tx_Id.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormReceber", "0", None, -1))
         self.lb_FormCompra_2.setText(QtWidgets.QApplication.translate("ct_FormReceber", "CLIENTE", None, -1))
         self.tx_NomeFantasia.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormReceber", "NOME CLIENTE", None, -1))
-        self.lb_FormCompra_3.setText(QtWidgets.QApplication.translate("ct_FormReceber", "CÓD. FORNEC.", None, -1))
+        self.lb_FormCompra_3.setText(QtWidgets.QApplication.translate("ct_FormReceber", "CÓD. CLIENTE", None, -1))
         self.tx_Telefone.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormReceber", "(00) 00000-00", None, -1))
         self.tx_descricao.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormReceber", "DESCRIçÃO ", None, -1))
         self.lb_FormCompra_4.setText(QtWidgets.QApplication.translate("ct_FormReceber", "DESCRIÇÃO", None, -1))

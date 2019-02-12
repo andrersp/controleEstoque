@@ -54,7 +54,7 @@ border-bottom: 2px solid #A2A2A2
      <string>CADASTRO CONTA A RECEBER</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_Id">
+   <widget class="QLineEdit" name="tx_Cod">
     <property name="enabled">
      <bool>false</bool>
     </property>
@@ -105,7 +105,7 @@ color: #A2A2A2;
      <string>TELEFONE</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_Id_2">
+   <widget class="QLineEdit" name="tx_Id">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -1273,9 +1273,9 @@ background-color: #40a286
    </widget>
    <zorder>bt_CancelAddCatergoria</zorder>
    <zorder>lb_FormProdutos</zorder>
-   <zorder>tx_Id</zorder>
+   <zorder>tx_Cod</zorder>
    <zorder>lb_FormCompra_5</zorder>
-   <zorder>tx_Id_2</zorder>
+   <zorder>tx_Id</zorder>
    <zorder>lb_FormCompra_2</zorder>
    <zorder>tx_NomeFantasia</zorder>
    <zorder>lb_FormCompra_3</zorder>

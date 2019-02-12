@@ -11,28 +11,16 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         super(MainAPagar, self).setAPagar(frame)
         self.fr_Apagar.show()
 
+        """ Chamanda de funções localizadas no arquivo financeiro.py na pasta Funcoes """
         # Icone dos botoes
-        self.IconeBotaoMenu(self.bt_Busca,
-                            self.resourcepath('Images/search.png'))
-        self.IconeBotaoMenu(self.bt_Print,
-                            self.resourcepath('Images/gtk-print.png'))
-        self.IconeBotaoForm(self.bt_AddConta,
-                            self.resourcepath('Images/addConta.svg'))
+        self.setIconFinanceiro()
 
-        # Setando Data Padrão
-        self.dt_Inicio.setDate(self.primeiroDiaMes())
-        self.dt_Fim.setDate(self.ultimoDiaMes())
+        # Setando Datas
+        self.setDataFinanceiro()
 
         # Tamanho da Tabela
-        self.tb_APagar.blockSignals(True)
-        self.tb_APagar.setColumnHidden(0, True)
-        self.tb_APagar.setColumnWidth(1, 10)
-        self.tb_APagar.setColumnWidth(2, 270)
-        self.tb_APagar.setColumnWidth(3, 260)
-        self.tb_APagar.setColumnWidth(4, 120)
-        self.tb_APagar.setColumnWidth(5, 107)
-        self.tb_APagar.setColumnWidth(6, 107)
-        self.tb_APagar.setColumnWidth(7, 40)
+        self.tamanhoTabelaFinanceiro(self.fr_Apagar)
+        """ Fim Chamanda financeiro.py  """
 
         # Chamando funcao popular checkBox
         self.listaStatus()
@@ -83,7 +71,47 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
             self.tx_tabelaReceber(self.tb_APagar, i, 6, busca.status[i], str(
                 busca.valor[i]))
             self.botaoReceberParcela(
-                self.tb_APagar, i, 7, partial(self.PagarParcela, i), "Pagar",  busca.status[i])
+                self.tb_APagar, i, 7, partial(self.BuscaContaAPagar, busca.idConta[i]), "Pagar",  '2')
+
+    # Cadastro e Edição conta a pagar
+    def formAPagar(self):
+        self.LimpaFrame(self.fr_Apagar)
+        super(MainAPagar, self).setFormAPagar(self.fr_Apagar)
+        self.fr_FormPagar.show()
+
+        # Checado ID
+        self.idCheckAPagar()
+
+        """ Chamanda de funções localizadas no arquivo financeiro.py na pasta Funcoes """
+        # Autocomplete
+        self.setAutocompleteFinanceiro()
+        """ Fim Chamanda financeiro.py  """
+
+        """ Chamanda de funções localizadas no arquivo fornecedor.py na pasta Funcoes """
+        # Campo Busca por nome e Autocompletar Fornecedor
+        self.tx_NomeFantasia.textEdited.connect(self.autocompleFornecedor)
+        self.tx_NomeFantasia.returnPressed.connect(
+            partial(self.BuscaFornecedorNome, self.tx_descricao))
+
+        # Return Press Busca Id Fornecedor
+        self.tx_Id.returnPressed.connect(
+            partial(self.BuscaFornecedorId, self.tx_descricao))
+
+        """ Fim Chamadas """
+
+        self.bt_Voltar.clicked.connect(self.JanelaAPagar)
+
+    # checando campo Id se é Edicao ou Nova Venda
+    def idCheckAPagar(self):
+        if not self.tx_Cod.text():
+            busca = CrudAPagar()
+            self.tx_Cod.setText(str(busca.lastIdAPagar()))
+        pass
+
+    # Editar / Cadastrar conta a Pagar
+    def BuscaContaAPagar(self, id):
+        self.formAPagar()
+        self.tx_Cod.setText(str(id))
 
     # Pagando Compra
     def PagarParcela(self, id):
@@ -91,7 +119,7 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
         if self.tb_APagar.cellWidget(id, 6).text():
             INSERI = CrudAPagar()
-            INSERI.idConta = self.tb_APagar.item(id, 0).text()
+            INSERI.idConta = id
             INSERI.valorPago = self.tb_APagar.cellWidget(
                 id, 6).text().replace(",", ".")
 
@@ -100,11 +128,3 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
             INSERI.cadContaPagar()
             self.tabelaAPagar()
-
-    # Cadastro e Edição conta a pagar
-    def formAPagar(self):
-        self.LimpaFrame(self.fr_Apagar)
-        super(MainAPagar, self).setFormAPagar(self.fr_Apagar)
-        self.fr_FormPagar.show()
-
-        self.bt_Voltar.clicked.connect(self.JanelaAPagar)

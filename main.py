@@ -22,10 +22,17 @@ import os
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 import random
 
+#
+from Funcoes.comercial import Comercial
+from Funcoes.financeiro import Financeiro
+from Funcoes.Fornecedor import Fornecedor
+from Funcoes.Clientes import Clientes
 
-class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos, Funcao,
-           MainVendas, MainClientes, MainCompras, MainFinanceiro,
-           MainFornecedor, MainConfig):
+
+class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos, 
+           Funcao, MainVendas, MainClientes, MainCompras, MainFinanceiro,
+           MainFornecedor, MainConfig, Financeiro, Comercial, Fornecedor, 
+           Clientes):
 
     def __init__(self, parent=None):
         super(Main, self).__init__(parent)
