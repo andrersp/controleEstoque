@@ -353,7 +353,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual, Comercial):
     def Entregar(self):
         INSERI = CrudPedidos()
         INSERI.dataEntrega = QtCore.QDate.toString(
-            self.dt_EntregaPedido.date(), "yyyy-MM-dd")
+            self.dt_Entrega.date(), "yyyy-MM-dd")
         INSERI.idPedido = self.tx_Cod.text()
         INSERI.Entregar()
         self.SaidaEstoque()
@@ -365,11 +365,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual, Comercial):
         i = 0
         while i < self.tb_Itens.rowCount():
             INSERI.idProduto = self.tb_Itens.item(i, 0).text()
-            INSERI.idRelacao = self.tb_Itens.item(i, 7).text()
             INSERI.qtdeProduto = self.tb_Itens.item(i, 3).text()
-            INSERI.data = QtCore.QDate.toString(
-                QtCore.QDate.currentDate(), 'yyyy-MM-dd')
-
             INSERI.SaidaProduto()
             i += 1
 
@@ -391,9 +387,8 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual, Comercial):
             self.bt_GerarParcela.setEnabled(True)
         if busca.statusEntrega == 2:
             self.bt_Entregar.setEnabled(True)
-        if busca.statusPagamento == 1 or busca.statusEntrega == 1:
+        if busca.statusEntrega == 1:
             self.tb_Itens.setColumnHidden(6, True)
-
             for item in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
                 item.setReadOnly(True)
 
@@ -436,6 +431,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual, Comercial):
 
         if busca.dataVencimento:
             self.bt_GerarParcela.setDisabled(True)
+            self.tb_Itens.setColumnHidden(6, True)
 
         for i in range(len(busca.dataVencimento)):
             self.tb_Parcelas.insertRow(i)
@@ -449,8 +445,6 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual, Comercial):
                                   i], str(busca.valor[i] - busca.valorRecebido[i]))
             self.botaoReceberParcela(self.tb_Parcelas, i, 4,
                                      partial(self.Receber, i), "Receber", busca.idStatus[i])
-
-        # self.bt_GerarParcela.setDisabled(True)
 
     def imprimirVenda(self):
         self.documento = QWebEngineView()

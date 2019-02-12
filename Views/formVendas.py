@@ -258,6 +258,7 @@ class Ui_ct_FormVenda(object):
 "}")
         self.lb_FormVenda_22.setObjectName("lb_FormVenda_22")
         self.bt_Entregar = QtWidgets.QPushButton(self.fr_topoPedido)
+        self.bt_Entregar.setEnabled(False)
         self.bt_Entregar.setGeometry(QtCore.QRect(820, 5, 120, 30))
         font = QtGui.QFont()
         font.setFamily("Tahoma")

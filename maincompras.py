@@ -367,7 +367,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual, Comercial):
         while i < self.tb_Itens.rowCount():
             INSERI.idProduto = self.tb_Itens.item(i, 0).text()
             INSERI.idRelacao = self.tb_Itens.item(i, 7).text()
-            INSERI.valorCompra = self.tb_Itens.item(i, 4).text()
+            INSERI.valorCompra = self.tb_Itens.item(
+                i, 4).text().replace(",", ".")
             INSERI.qtdeProduto = self.tb_Itens.item(i, 3).text()
             INSERI.obsProduto = self.tb_Itens.item(i, 2).text()
             INSERI.data = QtCore.QDate.toString(
@@ -395,8 +396,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual, Comercial):
         if busca.statusEntrega == 2:
             self.bt_Entregar.setEnabled(True)
 
-        if busca.statusPagamento == 1 or busca.statusEntrega == 1:
-            self.tb_Parcelas.setColumnHidden(6, True)
+        if busca.statusEntrega == 1:
+            self.tb_Itens.setColumnHidden(6, True)
 
             for item in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
                 item.setReadOnly(True)
@@ -429,8 +430,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual, Comercial):
         self.ParcelasAPagar()
 
         pass
-    # Populando tabela Parcelas
 
+    # Populando tabela Parcelas
     def ParcelasAPagar(self):
         while self.tb_Parcelas.rowCount() > 0:
             self.tb_Parcelas.removeRow(0)
@@ -441,6 +442,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual, Comercial):
 
         if busca.dataVencimento:
             self.bt_GerarParcela.setDisabled(True)
+            self.tb_Itens.setColumnHidden(6, True)
 
         for i in range(len(busca.dataVencimento)):
             self.tb_Parcelas.insertRow(i)

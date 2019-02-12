@@ -249,9 +249,6 @@ class CrudCompras(object):
         c = conecta.conecta.cursor()
 
         try:
-            c.execute(
-                """DELETE FROM entrada_produto WHERE idRelacao ='{}'"""
-                .format(self.idItemTabela))
             c.execute("""DELETE FROM relacao_compra WHERE id_relacao = '{}' """
                       .format(self.idItemTabela))
             conecta.conecta.commit()

@@ -450,6 +450,9 @@ border: none;
      </property>
     </widget>
     <widget class="QPushButton" name="bt_Entregar">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>820</x>

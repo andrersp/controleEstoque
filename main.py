@@ -44,8 +44,6 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos, Funcao,
                         QtGui.QBrush(bg.scaled(1000, 700, QtCore.Qt.KeepAspectRatio)))
         self.setPalette(palete)
 
-        bg1 = QtGui.QPixmap()
-
         # Icone dos botoes Topo
         self.IconeBotaoTopo(self.bt_Home, self.resourcepath(
             'Images/home.png'))  # HOme
