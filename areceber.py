@@ -3,9 +3,10 @@ from PySide2 import QtCore, QtGui, QtWidgets
 from Views.aReceber import Ui_ct_AReceber
 from Crud.CrudAReceber import CrudAReceber
 from functools import partial
+from Views.formAReceber import Ui_ct_FormReceber
 
 
-class MainAReceber(Ui_ct_AReceber):
+class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
     def mainAReceber(self, frame):
         super(MainAReceber, self).setAReceber(frame)
         self.fr_AReceber.show()
@@ -42,8 +43,10 @@ class MainAReceber(Ui_ct_AReceber):
         # Funcao chamada botoes
         self.bt_Busca.clicked.connect(self.tabelaAReceber)
 
-    # Populando check Box
+        # Abrindo form cadastrar
+        self.bt_AddConta.clicked.connect(self.formAReceber)
 
+    # Populando check Box
     def listaStatus(self):
         busca = CrudAReceber()
         busca.listaStatus()
@@ -109,3 +112,12 @@ class MainAReceber(Ui_ct_AReceber):
                 QtCore.QDate.currentDate(), "yyyy-MM-dd")
             INSERI.cadContaReceber()
             self.tabelaAReceber()
+        pass
+
+    # Cadastro e Edição conta a receber
+    def formAReceber(self):
+        self.LimpaFrame(self.fr_AReceber)
+        super(MainAReceber, self).setFormAReceber(self.fr_AReceber)
+        self.fr_FormReceber.show()
+
+        self.bt_Voltar.clicked.connect(self.JanelaAReceber)

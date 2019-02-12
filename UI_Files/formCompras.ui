@@ -382,7 +382,32 @@ color: rgb(80,79,79)
  }
 QDateEdit::down-arrow {
      image: url(Images/down.png);
- }</string>
+ }
+QCalendarWidget QAbstractItemView:enabled 
+  {
+border: none;
+  	font-size:13px;  
+  	color: #000;  
+  	background-color: #F1F1F1;  
+  	selection-background-color: rgb(64, 64, 64); 
+  	selection-color: rgb(0, 255, 0); 
+  }
+QCalendarWidget QToolButton {
+	border: none;
+  	color: #000
+  }
+
+ QCalendarWidget QMenu {
+  	width: 150px;
+  	left: 20px;
+  	color: white;
+  	font-size: 18px;
+  	background-color: rgb(100, 100, 100);
+  }
+QCalendarWidget QWidget#qt_calendar_navigationbar
+{ 
+border: none;
+}</string>
      </property>
      <property name="displayFormat">
       <string>dd/MM/yyyy</string>

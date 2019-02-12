@@ -1,0 +1,1302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ct_FormReceber</class>
+ <widget class="QFrame" name="ct_FormReceber">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Frame</string>
+  </property>
+  <widget class="QFrame" name="fr_FormReceber">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>500</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: #FFF;
+border: none</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QLabel" name="lb_FormProdutos">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>10</y>
+      <width>880</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 14px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+
+border-bottom: 2px solid #A2A2A2
+}</string>
+    </property>
+    <property name="text">
+     <string>CADASTRO CONTA A RECEBER</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_Id">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>50</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border: 1px solid #A2A2A2;
+color: #000;
+font-size: 14px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormCompra_5">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>60</y>
+      <width>110</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 13px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #A2A2A2;
+}</string>
+    </property>
+    <property name="text">
+     <string>TELEFONE</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_Id_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>80</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>0</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormCompra_2">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>60</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 13px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #A2A2A2;
+}</string>
+    </property>
+    <property name="text">
+     <string>CLIENTE</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_NomeFantasia">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>80</y>
+      <width>350</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="placeholderText">
+     <string>NOME CLIENTE</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormCompra_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>100</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 13px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #A2A2A2;
+}</string>
+    </property>
+    <property name="text">
+     <string>CÓD. CLIENTE</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_Telefone">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>80</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>(00) 00000-00</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_descricao">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>140</y>
+      <width>600</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="cursorPosition">
+     <number>0</number>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
+    <property name="readOnly">
+     <bool>false</bool>
+    </property>
+    <property name="placeholderText">
+     <string>DESCRIçÃO </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormCompra_4">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>120</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 13px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #A2A2A2;
+}</string>
+    </property>
+    <property name="text">
+     <string>DESCRIÇÃO</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormCompra_6">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>180</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 13px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #A2A2A2;
+}</string>
+    </property>
+    <property name="text">
+     <string>CATEGORIA</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb_categoria">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>200</y>
+      <width>180</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QComboBox:Focus {
+border: 1px solid red;
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(Images/down.png);
+ }
+</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_AddCategoriaProduto">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>200</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+background: #7AB32E;
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_CancelAddCatergoria">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>200</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Cancelar&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+background: #FAB32E;
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="dt_Vencimento">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>200</y>
+      <width>120</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QDateEdit {
+background: #CFCFCF;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 16px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+ QDateEdit::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QDateEdit::down-arrow {
+     image: url(Images/down.png);
+ }
+
+QCalendarWidget QAbstractItemView:enabled 
+  {
+border: none;
+  	font-size:13px;  
+  	color: #000;  
+  	background-color: #F1F1F1;  
+  	selection-background-color: rgb(64, 64, 64); 
+  	selection-color: rgb(0, 255, 0); 
+  }
+QCalendarWidget QToolButton {
+	border: none;
+  	color: #000
+  }
+
+ QCalendarWidget QMenu {
+  	width: 150px;
+  	left: 20px;
+  	color: white;
+  	font-size: 18px;
+  	background-color: rgb(100, 100, 100);
+  }
+QCalendarWidget QWidget#qt_calendar_navigationbar
+{ 
+border: none;
+}</string>
+    </property>
+    <property name="displayFormat">
+     <string>dd/MM/yyyy</string>
+    </property>
+    <property name="calendarPopup">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormCompra_7">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>180</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 13px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #A2A2A2;
+}</string>
+    </property>
+    <property name="text">
+     <string>VENCIMENTO</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="tx_Obs">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>260</y>
+      <width>600</width>
+      <height>160</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTextEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QTextEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormCompra_8">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>240</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 13px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #A2A2A2;
+}</string>
+    </property>
+    <property name="text">
+     <string>OBSERVAÇÕES</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="fr_financeiroCompra">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>60</y>
+      <width>340</width>
+      <height>360</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #F1F1F1;
+border-top: 4px solid #277298;
+border-bottom: 4px solid #277298;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QLineEdit" name="tx_juros">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>60</y>
+       <width>125</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::WheelFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+background: #FFF;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 14px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+     </property>
+     <property name="text">
+      <string>0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="placeholderText">
+      <string>R$ 0.00</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_14">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>130</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #277298;
+border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>DATA PAGAMENTO</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="dt_dataPagamento">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>20</y>
+       <width>150</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QDateEdit {
+background: #FFF;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 14px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+ QDateEdit::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QDateEdit::down-arrow {
+     image: url(Images/down.png);
+ }
+
+QCalendarWidget QAbstractItemView:enabled 
+  {
+border: none;
+  	font-size:13px;  
+  	color: #000;  
+  	background-color: #F1F1F1;  
+  	selection-background-color: rgb(64, 64, 64); 
+  	selection-color: rgb(0, 255, 0); 
+  }
+QCalendarWidget QToolButton {
+	border: none;
+  	color: #000
+  }
+
+ QCalendarWidget QMenu {
+  	width: 150px;
+  	left: 20px;
+  	color: white;
+  	font-size: 18px;
+  	background-color: rgb(100, 100, 100);
+  }
+QCalendarWidget QWidget#qt_calendar_navigationbar
+{ 
+border: none;
+}</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="displayFormat">
+      <string>dd/MM/yyyy</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_25">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>130</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #277298;
+border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>JUROS</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_22">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>320</y>
+       <width>130</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 13px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #277298;
+border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>VALOR PENDENTE</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_ValorPendente">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>320</y>
+       <width>125</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 20px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #277298;
+border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="tx_desconto">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>100</y>
+       <width>125</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::WheelFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+background: #FFF;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 14px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+     </property>
+     <property name="text">
+      <string>0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="placeholderText">
+      <string>R$ 0.00</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_26">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>130</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #277298;
+border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>DESCONTO</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="tx_valorPago">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>180</y>
+       <width>125</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::WheelFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit{
+background: #FFF;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 14px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+     </property>
+     <property name="text">
+      <string>0.00</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="placeholderText">
+      <string>R$ 0.00</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_27">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>140</y>
+       <width>130</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #277298;
+border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>FORMA PAGAMENTO</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cb_formaPagamento">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>140</y>
+       <width>150</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QComboBox{
+background: #FFF;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 16px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+QComboBox:Focus {
+border: 1px solid red;
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(Images/down.png);
+ }
+</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_28">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>180</y>
+       <width>130</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #277298;
+border: none
+}</string>
+     </property>
+     <property name="text">
+      <string>VALOR PAGO</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_receber">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>220</y>
+       <width>125</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Tahoma</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #7AB32E;
+color: #FFF;
+border: none;
+border-radius: 2px
+ }
+QPushButton:hover{
+background-color: #40a286
+}</string>
+     </property>
+     <property name="text">
+      <string>RECEBER</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>75</width>
+       <height>35</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="lb_FormCompra_9">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>180</y>
+      <width>100</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 13px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #A2A2A2;
+}</string>
+    </property>
+    <property name="text">
+     <string>VALOR</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_valor">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>200</y>
+      <width>100</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::WheelFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 20px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
+    <property name="placeholderText">
+     <string>R$ 0,00</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="cb_repetir">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>200</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QComboBox{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QComboBox:Focus {
+border: 1px solid red;
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(Images/down.png);
+ }
+</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lb_FormCompra_10">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>180</y>
+      <width>110</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{
+font-size: 13px;
+font-family: &quot;Arial&quot;;
+font-weight: bold;
+color: #A2A2A2;
+}</string>
+    </property>
+    <property name="text">
+     <string>REPETIR</string>
+    </property>
+   </widget>
+   <widget class="QFrame" name="fr_BotoesFormCompra">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>470</y>
+      <width>1000</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:#E1DFE0;
+border: none;</string>
+    </property>
+    <widget class="QPushButton" name="bt_Voltar">
+     <property name="geometry">
+      <rect>
+       <x>870</x>
+       <y>0</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Tahoma</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #1E87F0;
+color: #FFF
+}
+QPushButton:hover{
+background-color: #40a286
+}</string>
+     </property>
+     <property name="text">
+      <string>VOLTAR</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>75</width>
+       <height>35</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_Salvar">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>0</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Tahoma</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #7AB32E;
+color: #FFF
+ }
+QPushButton:hover{
+background-color: #40a286
+}</string>
+     </property>
+     <property name="text">
+      <string>SALVAR</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>75</width>
+       <height>35</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_Imprimir">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>740</x>
+       <y>0</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Tahoma</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #5C9BBC;
+color: #FFF
+ }
+QPushButton:hover{
+background-color: #40a286
+}</string>
+     </property>
+     <property name="text">
+      <string>IMPRIMIR</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>75</width>
+       <height>35</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <zorder>bt_CancelAddCatergoria</zorder>
+   <zorder>lb_FormProdutos</zorder>
+   <zorder>tx_Id</zorder>
+   <zorder>lb_FormCompra_5</zorder>
+   <zorder>tx_Id_2</zorder>
+   <zorder>lb_FormCompra_2</zorder>
+   <zorder>tx_NomeFantasia</zorder>
+   <zorder>lb_FormCompra_3</zorder>
+   <zorder>tx_Telefone</zorder>
+   <zorder>tx_descricao</zorder>
+   <zorder>lb_FormCompra_4</zorder>
+   <zorder>lb_FormCompra_6</zorder>
+   <zorder>cb_categoria</zorder>
+   <zorder>bt_AddCategoriaProduto</zorder>
+   <zorder>dt_Vencimento</zorder>
+   <zorder>lb_FormCompra_7</zorder>
+   <zorder>tx_Obs</zorder>
+   <zorder>lb_FormCompra_8</zorder>
+   <zorder>fr_financeiroCompra</zorder>
+   <zorder>lb_FormCompra_9</zorder>
+   <zorder>tx_valor</zorder>
+   <zorder>cb_repetir</zorder>
+   <zorder>lb_FormCompra_10</zorder>
+   <zorder>fr_BotoesFormCompra</zorder>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

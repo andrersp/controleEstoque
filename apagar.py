@@ -3,9 +3,10 @@ from PySide2 import QtCore, QtGui, QtWidgets
 from Views.APagar import Ui_ct_APagar
 from Crud.CrudAPagar import CrudAPagar
 from functools import partial
+from Views.formAPagar import Ui_ct_FormPagar
 
 
-class MainAPagar(Ui_ct_APagar):
+class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
     def mainAPagar(self, frame):
         super(MainAPagar, self).setAPagar(frame)
         self.fr_Apagar.show()
@@ -42,8 +43,10 @@ class MainAPagar(Ui_ct_APagar):
         # Funcao chamada botoes
         self.bt_Busca.clicked.connect(self.tabelaAPagar)
 
-    # Populando tabela a Pagar
+        # Abrindo form cadastrar
+        self.bt_AddConta.clicked.connect(self.formAPagar)
 
+    # Populando tabela a Pagar
     def tabelaAPagar(self):
         busca = CrudAPagar()
         dataInicio = QtCore.QDate.toString(
@@ -97,3 +100,11 @@ class MainAPagar(Ui_ct_APagar):
 
             INSERI.cadContaPagar()
             self.tabelaAPagar()
+
+    # Cadastro e Edição conta a pagar
+    def formAPagar(self):
+        self.LimpaFrame(self.fr_Apagar)
+        super(MainAPagar, self).setFormAPagar(self.fr_Apagar)
+        self.fr_FormPagar.show()
+
+        self.bt_Voltar.clicked.connect(self.JanelaAPagar)

@@ -232,3 +232,22 @@ class CrudAReceber(object):
 # # data = ("10-01-2018")
 # # print datetime.date.strftime(datetime.datetime.strptime(data,
 # # "%d-%m-%Y"), "%Y-%m-%d")
+
+# conecta = Conexao()
+# c = conecta.conecta.cursor()
+
+# try:
+#     c.execute(""" SELECT clientes.nome
+#     FROM clientes WHERE nome LIKE '%{}%'
+#     UNION ALL
+#     SELECT fornecedor.nomeFantasia
+#     FROM fornecedor WHERE nomeFantasia LIKE '%{}%'
+#     """.format('Sandra', 'Sandra'))
+#     row = c.fetchall()
+#     nome = []
+#     for lista in row:
+#         nome.append(lista[0])
+# except mysql.connector.Error as err:
+#     print(err)
+
+# print(nome)
