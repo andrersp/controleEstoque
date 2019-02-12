@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 10/02/2019 às 16:43
+-- Tempo de geração: 12/02/2019 às 21:08
 -- Versão do servidor: 10.1.37-MariaDB-3
 -- Versão do PHP: 7.0.31-1
 
@@ -24,22 +24,6 @@ DELIMITER $$
 --
 -- Procedimentos
 --
-CREATE DEFINER=`andre`@`localhost` PROCEDURE `SP_AtualizaEstoque` (IN `id_prod` INT, IN `qtde_comprada` INT, IN `valor_unit` DECIMAL(9,2))  BEGIN 
-declare contador int(11);
-SELECT count(*) into contador FROM produto WHERE produto.id = id_prod;
-IF contador > 0 THEN
-UPDATE produto SET qtde=qtde + qtde_comprada, valor_compra=valor_unit WHERE produto.id = id_prod;
-END IF;
-END$$
-
-CREATE DEFINER=`andre`@`localhost` PROCEDURE `SP_RetiraEstoque` (IN `id_prod` INT, IN `qtde_saida` INT)  BEGIN 
-DECLARE contador int(11);
-SELECT count(*) into contador FROM produto WHERE produto.id = id_prod;
-IF contador > 0 THEN
-UPDATE produto SET qtde=qtde + qtde_saida WHERE produto.id = id_prod;
-END IF;
-END$$
-
 CREATE DEFINER=`andre`@`localhost` PROCEDURE `SP_ValorPago` (IN `id_comp` INT, IN `valorPag` DECIMAL(9,2))  BEGIN
 DECLARE contador int(11);
 DECLARE VPendente decimal(9,2);
@@ -89,7 +73,8 @@ CREATE TABLE `categoriaAPagar` (
 
 INSERT INTO `categoriaAPagar` (`id`, `categoria`) VALUES
 (1, 'COMPRA'),
-(2, 'MANUTENÇÃO');
+(2, 'MANUTENÇÃO'),
+(3, 'LUZ');
 
 -- --------------------------------------------------------
 
@@ -186,6 +171,24 @@ CREATE TABLE `compras` (
   `categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Fazendo dump de dados para tabela `compras`
+--
+
+INSERT INTO `compras` (`id`, `fornecedorId`, `dataEmissao`, `prazoEntrega`, `dataEntrega`, `desconto`, `frete`, `valorTotal`, `valorPago`, `valorPendente`, `statusEntrega`, `statusPagamento`, `categoria`) VALUES
+(1, 2, '2019-02-10', '2019-02-12', '2019-02-10', '0.00', '0.00', '392.40', '148.10', '244.30', 1, 2, 1),
+(2, 1, '2019-02-10', '2019-02-12', '2019-02-10', '0.00', '0.00', '34.50', '0.00', '34.50', 1, 2, 1),
+(3, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '21.80', '21.80', '0.00', 1, 1, 1),
+(4, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '345.00', '172.50', '172.50', 1, 2, 1),
+(5, 2, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '21.80', '10.90', '10.90', 1, 2, 1),
+(6, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '4.00', '2.00', '2.00', 1, 2, 1),
+(7, 2, '2019-02-11', '2019-02-13', '2019-02-11', '5.00', '10.00', '26.80', '26.80', '0.00', 1, 1, 1),
+(8, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '10.00', '0.00', '10.00', 1, 2, 1),
+(9, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '175.00', '0.00', '175.00', 1, 2, 1),
+(10, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '5.90', '0.00', '5.90', 1, 2, 1),
+(11, 1, '2019-02-12', '2019-02-14', '0000-00-00', '0.00', '0.00', '21.80', '0.00', '21.80', 2, 2, 1),
+(12, 1, '2019-02-12', '2019-02-14', '2019-02-12', '0.00', '0.00', '147.50', '0.00', '147.50', 1, 2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -208,6 +211,27 @@ CREATE TABLE `contasAPagar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Fazendo dump de dados para tabela `contasAPagar`
+--
+
+INSERT INTO `contasAPagar` (`id`, `IdCompra`, `idFornecedor`, `descricao`, `obs`, `categoria`, `vencimento`, `valor`, `formapagamento`, `recebido`, `valorPago`, `status`) VALUES
+(1, 1, 2, 'Pedido de Compra 1. Parcela 1 de 4 ', '', 1, '2019-02-10', '98.10', 2, '2019-02-10', '98.10', 1),
+(2, 1, 2, 'Pedido de Compra 1. Parcela 2 de 4 ', '', 1, '2019-03-10', '98.10', 2, '0000-00-00', '0.00', 2),
+(3, 1, 2, 'Pedido de Compra 1. Parcela 3 de 4 ', '', 1, '2019-04-10', '98.10', 2, '0000-00-00', '0.00', 2),
+(4, 1, 2, 'Pedido de Compra 1. Parcela 4 de 4 ', '', 1, '2019-05-10', '98.10', 2, '0000-00-00', '0.00', 2),
+(5, 3, 1, 'Pedido de Compra 3. Parcela 1 de 2 ', '', 1, '2019-02-11', '10.90', 0, '2019-02-11', '10.90', 1),
+(6, 3, 1, 'Pedido de Compra 3. Parcela 2 de 2 ', '', 1, '2019-03-11', '10.90', 0, '2019-02-11', '10.90', 1),
+(7, 4, 1, 'Pedido de Compra 4. Parcela 1 de 2 ', '', 1, '2019-02-11', '172.50', 0, '2019-02-11', '172.50', 1),
+(8, 4, 1, 'Pedido de Compra 4. Parcela 2 de 2 ', '', 1, '2019-03-11', '172.50', 0, '0000-00-00', '0.00', 2),
+(9, 5, 2, 'Pedido de Compra 5. Parcela 1 de 2 ', '', 1, '2019-02-11', '10.90', 1, '2019-02-11', '10.90', 1),
+(10, 5, 2, 'Pedido de Compra 5. Parcela 2 de 2 ', '', 1, '2019-03-11', '10.90', 1, '0000-00-00', '0.00', 2),
+(11, 6, 1, 'Pedido de Compra 6. Parcela 1 de 2 ', '', 1, '2019-02-11', '2.00', 0, '2019-02-11', '2.00', 1),
+(12, 6, 1, 'Pedido de Compra 6. Parcela 2 de 2 ', '', 1, '2019-03-11', '2.00', 0, '0000-00-00', '0.00', 2),
+(13, 7, 2, 'Pedido de Compra 7. Parcela 1 de 1 ', '', 1, '2019-02-11', '26.80', 1, '2019-02-11', '26.80', 1),
+(14, 12, 1, 'Pedido de Compra 12. Parcela 1 de 2 ', '', 1, '2019-02-12', '73.75', 0, '0000-00-00', '0.00', 2),
+(15, 12, 1, 'Pedido de Compra 12. Parcela 2 de 2 ', '', 1, '2019-03-12', '73.75', 0, '0000-00-00', '0.00', 2);
+
+--
 -- Gatilhos `contasAPagar`
 --
 DELIMITER $$
@@ -225,7 +249,7 @@ DELIMITER ;
 
 CREATE TABLE `contasAReceber` (
   `id` int(11) NOT NULL,
-  `IdVenda` int(11) NOT NULL,
+  `IdVenda` int(11) NOT NULL DEFAULT '0',
   `idCliente` int(11) NOT NULL,
   `descricao` varchar(80) NOT NULL,
   `obs` varchar(120) NOT NULL,
@@ -243,9 +267,25 @@ CREATE TABLE `contasAReceber` (
 --
 
 INSERT INTO `contasAReceber` (`id`, `IdVenda`, `idCliente`, `descricao`, `obs`, `categoria`, `vencimento`, `valor`, `formapagamento`, `recebido`, `valorRecebido`, `status`) VALUES
-(1, 1, 1, 'Pedido de Venda 1. Parcela 1 de 3 ', '', 1, '2019-02-10', '50.00', 1, '0000-00-00', '0.00', 2),
+(1, 1, 1, 'Pedido de Venda 1. Parcela 1 de 3 ', '', 1, '2019-02-10', '50.00', 1, '2019-02-10', '50.00', 1),
 (2, 1, 1, 'Pedido de Venda 1. Parcela 2 de 3 ', '', 1, '2019-03-10', '50.00', 1, '0000-00-00', '0.00', 2),
-(3, 1, 1, 'Pedido de Venda 1. Parcela 3 de 3 ', '', 1, '2019-04-10', '50.00', 1, '0000-00-00', '0.00', 2);
+(3, 1, 1, 'Pedido de Venda 1. Parcela 3 de 3 ', '', 1, '2019-04-10', '50.00', 1, '0000-00-00', '0.00', 2),
+(4, 2, 1, 'Pedido de Venda 2. Parcela 1 de 3 ', '', 1, '2019-02-10', '33.33', 1, '2019-02-10', '33.33', 1),
+(5, 2, 1, 'Pedido de Venda 2. Parcela 2 de 3 ', '', 1, '2019-03-10', '33.33', 1, '2019-02-10', '33.33', 1),
+(6, 2, 1, 'Pedido de Venda 2. Parcela 3 de 3 ', '', 1, '2019-04-10', '33.33', 1, '2019-02-10', '33.33', 1),
+(7, 3, 3, 'Pedido de Venda 3. Parcela 1 de 2 ', '', 1, '2019-02-11', '50.00', -1, '2019-02-11', '50.00', 1),
+(8, 3, 3, 'Pedido de Venda 3. Parcela 2 de 2 ', '', 1, '2019-03-11', '50.00', -1, '0000-00-00', '0.00', 2),
+(9, 5, 1, 'Pedido de Venda 5. Parcela 1 de 2 ', '', 1, '2019-02-11', '25.00', -1, '2019-02-12', '25.00', 1),
+(10, 5, 1, 'Pedido de Venda 5. Parcela 2 de 2 ', '', 1, '2019-03-11', '25.00', -1, '0000-00-00', '0.00', 2),
+(11, 6, 2, 'Pedido de Venda 6. Parcela 1 de 2 ', '', 1, '2019-02-11', '25.00', -1, '2019-02-11', '25.00', 1),
+(12, 6, 2, 'Pedido de Venda 6. Parcela 2 de 2 ', '', 1, '2019-03-11', '25.00', -1, '2019-02-11', '25.00', 1),
+(13, 7, 2, 'Pedido de Venda 7. Parcela 1 de 2 ', '', 1, '2019-02-11', '25.00', -1, '2019-02-11', '25.00', 1),
+(14, 7, 2, 'Pedido de Venda 7. Parcela 2 de 2 ', '', 1, '2019-03-11', '25.00', -1, '2019-02-11', '25.00', 1),
+(15, 8, 2, 'Pedido de Venda 8. Parcela 1 de 1 ', '', 1, '2019-02-11', '50.00', -1, '0000-00-00', '0.00', 2),
+(16, 9, 2, 'Pedido de Venda 9. Parcela 1 de 1 ', '', 1, '2019-02-11', '50.00', -1, '0000-00-00', '0.00', 2),
+(17, 10, 2, 'Pedido de Venda 10. Parcela 1 de 1 ', '', 1, '2019-02-11', '50.00', -1, '2019-02-11', '50.00', 1),
+(18, 15, 2, 'Pedido de Venda 15. Parcela 1 de 1 ', '', 1, '2019-02-12', '50.00', -1, '2019-02-12', '50.00', 1),
+(19, 16, 1, 'Pedido de Venda 16. Parcela 1 de 1 ', '', 1, '2019-02-12', '1100.00', 0, '0000-00-00', '0.00', 2);
 
 --
 -- Gatilhos `contasAReceber`
@@ -294,50 +334,22 @@ INSERT INTO `empresa` (`id`, `nomeFantasia`, `razaoSocial`, `cnpj`, `inscEstadua
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `entrada_produto`
+-- Estrutura para tabela `formaPagamento`
 --
 
-CREATE TABLE `entrada_produto` (
-  `idRelacao` varchar(25) NOT NULL,
-  `id_produto` int(11) DEFAULT NULL,
-  `qtde` int(11) DEFAULT NULL,
-  `valor_compra` decimal(9,2) DEFAULT '0.00',
-  `data_entrada` date DEFAULT NULL,
-  `obs` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Gatilhos `entrada_produto`
---
-DELIMITER $$
-CREATE TRIGGER `TRG_EntradaProduto_AD` AFTER DELETE ON `entrada_produto` FOR EACH ROW BEGIN
-CALL SP_AtualizaEstoque (old.id_produto, old.qtde * -1, old.valor_compra);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `TRG_EntradaProduto_AI` AFTER INSERT ON `entrada_produto` FOR EACH ROW BEGIN
-CALL SP_AtualizaEstoque (new.id_produto, new.qtde, new.valor_compra);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `TRG_EntradaProduto_AU` AFTER UPDATE ON `entrada_produto` FOR EACH ROW BEGIN
-CALL SP_AtualizaEstoque (new.id_produto, new.qtde - old.qtde, new.valor_compra);
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `formadepagamento`
---
-
-CREATE TABLE `formadepagamento` (
+CREATE TABLE `formaPagamento` (
   `id` int(11) NOT NULL,
   `categoria` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Fazendo dump de dados para tabela `formaPagamento`
+--
+
+INSERT INTO `formaPagamento` (`id`, `categoria`) VALUES
+(1, 'DINHEIRO'),
+(2, 'CHEQUE'),
+(3, 'CARTÃO');
 
 -- --------------------------------------------------------
 
@@ -390,7 +402,8 @@ CREATE TABLE `marcaproduto` (
 
 INSERT INTO `marcaproduto` (`id`, `categoria`, `marca`) VALUES
 (1, 1, 'MEOCOLOR'),
-(2, 1, 'live');
+(2, 1, 'live'),
+(3, 2, 'propria');
 
 -- --------------------------------------------------------
 
@@ -419,7 +432,22 @@ CREATE TABLE `pedidos` (
 --
 
 INSERT INTO `pedidos` (`id`, `clienteId`, `dataEmissao`, `prazoEntrega`, `dataEntrega`, `desconto`, `frete`, `valorTotal`, `valorRecebido`, `valorPendente`, `statusEntrega`, `statusPagamento`, `categoria`) VALUES
-(1, 1, '2019-02-10', '2019-02-12', '0000-00-00', '10.00', '0.00', '150.00', '0.00', '150.00', 2, 2, 1);
+(1, 1, '2019-02-10', '2019-02-12', '2019-02-10', '10.00', '0.00', '150.00', '50.00', '100.00', 1, 2, 1),
+(2, 1, '2019-02-10', '2019-02-12', '2019-02-10', '0.00', '0.00', '100.00', '99.99', '0.01', 1, 1, 1),
+(3, 3, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '100.00', '50.00', '50.00', 1, 2, 1),
+(4, 2, '2019-02-11', '2019-02-13', '0000-00-00', '0.00', '0.00', '50.00', '0.00', '50.00', 2, 2, 1),
+(5, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '50.00', '25.00', '25.00', 1, 2, 1),
+(6, 2, '2019-02-11', '2019-02-13', '0000-00-00', '0.00', '0.00', '50.00', '50.00', '0.00', 2, 1, 1),
+(7, 2, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '50.00', '50.00', '0.00', 1, 1, 1),
+(8, 2, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '50.00', '0.00', '50.00', 1, 2, 1),
+(9, 2, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '50.00', '0.00', '50.00', 1, 2, 1),
+(10, 2, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '50.00', '50.00', '0.00', 1, 1, 1),
+(11, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '400.00', '0.00', '400.00', 1, 2, 1),
+(12, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '500.00', '0.00', '500.00', 1, 2, 1),
+(13, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '400.00', '0.00', '400.00', 1, 2, 1),
+(14, 1, '2019-02-11', '2019-02-13', '2019-02-11', '0.00', '0.00', '500.00', '0.00', '500.00', 1, 2, 1),
+(15, 2, '2019-02-12', '2019-02-14', '2019-02-12', '0.00', '0.00', '50.00', '50.00', '0.00', 1, 1, 1),
+(16, 1, '2019-02-12', '2019-02-14', '2019-02-12', '0.00', '0.00', '1100.00', '0.00', '1100.00', 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -448,8 +476,9 @@ CREATE TABLE `produto` (
 --
 
 INSERT INTO `produto` (`id`, `descricao`, `imagem`, `categoria`, `marca`, `estoque_minimo`, `estoque_maximo`, `qtde`, `valor_compra`, `valor_unitario`, `valor_atacado`, `qtde_atacado`, `obs`) VALUES
-(1, 'CANECA CERAMICA BRANCA ', '', 1, 1, 5, 36, 33, '6.90', '25.00', '20.00', 5, ''),
-(2, 'CANECA CERAMICA INTERIOR E ALÇA PRETA', '', 1, 2, 5, 36, 0, '10.90', '25.00', '20.00', 5, '');
+(1, 'CANECA CERAMICA BRANCA ', '', 1, 1, 5, 36, 48, '5.90', '25.00', '20.00', 5, ''),
+(2, 'CANECA CERAMICA INTERIOR E ALÇA PRETA', '', 1, 2, 5, 36, 32, '10.90', '25.00', '20.00', 5, ''),
+(3, 'SEI LA', '', 2, 3, 2, 2, 0, '5.00', '10.00', '15.00', 5, '');
 
 -- --------------------------------------------------------
 
@@ -466,6 +495,24 @@ CREATE TABLE `relacao_compra` (
   `total` decimal(9,2) NOT NULL DEFAULT '0.00',
   `obs` varchar(120) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Fazendo dump de dados para tabela `relacao_compra`
+--
+
+INSERT INTO `relacao_compra` (`id_relacao`, `cod_compra`, `produto`, `qntde`, `valor`, `total`, `obs`) VALUES
+('1549831732326', 1, 2, 36, '10.90', '392.40', ''),
+('1549849192102', 2, 1, 5, '6.90', '34.50', ''),
+('1549894765058', 3, 2, 2, '10.90', '21.80', ''),
+('1549895333863', 4, 1, 50, '6.90', '345.00', ''),
+('1549896049229', 5, 2, 2, '10.90', '21.80', 'aa'),
+('1549899421356', 6, 2, 2, '2.00', '4.00', ''),
+('1549902774168', 7, 2, 2, '10.90', '21.80', ''),
+('1549926237318', 8, 1, 2, '5.00', '10.00', ''),
+('1549926284783', 9, 1, 25, '7.00', '175.00', ''),
+('1549926305128', 10, 1, 1, '5.90', '5.90', ''),
+('1550009731114', 11, 2, 2, '10.90', '21.80', ''),
+('1550010811572', 12, 1, 25, '5.90', '147.50', '');
 
 -- --------------------------------------------------------
 
@@ -488,42 +535,23 @@ CREATE TABLE `relacao_pedido` (
 --
 
 INSERT INTO `relacao_pedido` (`id_relacao`, `cod_pedido`, `produto`, `qntde`, `valor`, `total`, `obs`) VALUES
-('1549809849789', 1, 1, 8, '20.00', '160.00', '');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `saida_produto`
---
-
-CREATE TABLE `saida_produto` (
-  `idRelacao` varchar(25) NOT NULL,
-  `id_produto` int(11) DEFAULT NULL,
-  `qtde` int(11) DEFAULT NULL,
-  `data_saida` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Gatilhos `saida_produto`
---
-DELIMITER $$
-CREATE TRIGGER `TRG_ SaidaProduto _AD` AFTER DELETE ON `saida_produto` FOR EACH ROW BEGIN
-CALL SP_RetiraEstoque (old.id_produto, old.qtde);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `TRG_ SaidaProduto _AU` AFTER UPDATE ON `saida_produto` FOR EACH ROW BEGIN
-CALL SP_RetiraEstoque (new.id_produto, old.qtde - new.qtde);
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `TRG_SaidaProduto_AI` AFTER INSERT ON `saida_produto` FOR EACH ROW BEGIN
-CALL SP_RetiraEstoque (new.id_produto, new.qtde * -1);
-END
-$$
-DELIMITER ;
+('1549809849789', 1, 1, 8, '20.00', '160.00', ''),
+('1549849212670', 2, 1, 5, '20.00', '100.00', ''),
+('1549852509710', 3, 2, 2, '25.00', '50.00', ''),
+('1549852754152', 3, 1, 2, '25.00', '50.00', ''),
+('1549895284183', 4, 2, 2, '25.00', '50.00', ''),
+('1549895307246', 5, 2, 2, '25.00', '50.00', ''),
+('1549899402909', 6, 2, 2, '25.00', '50.00', ''),
+('1549905606885', 7, 2, 2, '25.00', '50.00', ''),
+('1549906366636', 8, 2, 2, '25.00', '50.00', ''),
+('1549906539548', 9, 2, 2, '25.00', '50.00', ''),
+('1549906735286', 10, 2, 2, '25.00', '50.00', ''),
+('1549917635906', 11, 1, 20, '20.00', '400.00', ''),
+('1549917733083', 12, 1, 25, '20.00', '500.00', ''),
+('1549917757491', 13, 2, 20, '20.00', '400.00', ''),
+('1549917799965', 14, 1, 25, '20.00', '500.00', ''),
+('1549979964863', 15, 2, 2, '25.00', '50.00', ''),
+('1550011058374', 16, 1, 55, '20.00', '1100.00', '');
 
 -- --------------------------------------------------------
 
@@ -678,15 +706,9 @@ ALTER TABLE `empresa`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `entrada_produto`
+-- Índices de tabela `formaPagamento`
 --
-ALTER TABLE `entrada_produto`
-  ADD PRIMARY KEY (`idRelacao`);
-
---
--- Índices de tabela `formadepagamento`
---
-ALTER TABLE `formadepagamento`
+ALTER TABLE `formaPagamento`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -726,12 +748,6 @@ ALTER TABLE `relacao_pedido`
   ADD PRIMARY KEY (`id_relacao`);
 
 --
--- Índices de tabela `saida_produto`
---
-ALTER TABLE `saida_produto`
-  ADD PRIMARY KEY (`idRelacao`);
-
---
 -- Índices de tabela `status_entrega`
 --
 ALTER TABLE `status_entrega`
@@ -763,7 +779,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `categoriaAPagar`
 --
 ALTER TABLE `categoriaAPagar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de tabela `categoriaAReceber`
 --
@@ -783,27 +799,27 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de tabela `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de tabela `contasAPagar`
 --
 ALTER TABLE `contasAPagar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de tabela `contasAReceber`
 --
 ALTER TABLE `contasAReceber`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de tabela `empresa`
 --
 ALTER TABLE `empresa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT de tabela `formadepagamento`
+-- AUTO_INCREMENT de tabela `formaPagamento`
 --
-ALTER TABLE `formadepagamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `formaPagamento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de tabela `fornecedor`
 --
@@ -813,17 +829,17 @@ ALTER TABLE `fornecedor`
 -- AUTO_INCREMENT de tabela `marcaproduto`
 --
 ALTER TABLE `marcaproduto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de tabela `produto`
 --
 ALTER TABLE `produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de tabela `status_entrega`
 --
