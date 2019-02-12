@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2 import QtCore, QtWidgets
 from Views.mainCompras import Ui_ct_MainCompras
 from Views.formCompras import Ui_ct_FormCompra
 from Crud.CrudCompras import CrudCompras

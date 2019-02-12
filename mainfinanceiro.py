@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtCore, QtGui, QtWidgets
 from Views.mainFinanceiro import Ui_ct_MainFinanceiro
 from movconta import MainMovimentoConta
 from areceber import MainAReceber

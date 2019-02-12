@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtGui, QtCore, QtWidgets
 from Crud.CrudClientes import CrudClientes
 
 

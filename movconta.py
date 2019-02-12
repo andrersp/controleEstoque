@@ -1,5 +1,5 @@
 # -*- codind: utf-8 -*-
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2 import QtCore
 from Views.movConta import Ui_ct_movimento
 from Crud.CrudMovCaixa import CrudMovCaixa
 

@@ -790,9 +790,16 @@ border: none
 background: #FFF;
 border: none;
 font-family: &quot;Arial&quot;;
-font-size: 16px;
+font-size: 14px;
 font-weight: bold;
 color: rgb(80,79,79)
+
+}
+QCombobox:on {
+color: #000;
+font: 10px &quot;Arial&quot; ;
+text-transform: uppercase;
+font-weight: bold;
 }
 QComboBox:Focus {
 border: 1px solid red;
@@ -801,15 +808,25 @@ border: 1px solid red;
      subcontrol-origin: padding;
      subcontrol-position: top right;
      width: 25px;
+
      border-left-width: 1px;
      border-left-color: darkgray;
      border-left-style: solid; /* just a single line */
      border-top-right-radius: 3px; /* same radius as the QComboBox */
      border-bottom-right-radius: 3px;
+
  }
 QComboBox::down-arrow {
-     image: url(Images/down.png);
+     image: url(down.png);
  }
+QComboBox QAbstractItemView {
+    border: 1px solid darkgray;
+    selection-background-color: #40a286;
+color: #000;
+font: 10px &quot;Arial&quot; ;
+text-transform: uppercase;
+font-weight: bold;
+}
 </string>
      </property>
     </widget>

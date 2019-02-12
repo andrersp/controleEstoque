@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtCore, QtGui, QtWidgets, QtPrintSupport
+from PySide2 import QtCore
 from PySide2.QtWebEngineWidgets import QWebEngineView
 from functools import partial
 from Views.mainFornecedor import Ui_ct_MainFornecedor

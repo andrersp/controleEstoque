@@ -1,5 +1,5 @@
 # -*- codind: utf-8 -*-
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2 import QtCore
 from Views.aReceber import Ui_ct_AReceber
 from Crud.CrudAReceber import CrudAReceber
 from functools import partial
@@ -103,6 +103,9 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
 
         # Data Vencimento e Pagamento com data Atual
         self.setDataVencPgto()
+
+        # Setando Icones Salvar, Voltar e Imprimir
+        self.setIconFormFinanceiro()
         """ Fim Chamanda financeiro.py  """
 
         """ Chamanda de funções localizadas no arquivo FormaPagamento.py na pasta Funcoes """

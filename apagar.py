@@ -1,5 +1,5 @@
 # -*- codind: utf-8 -*-
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2 import QtCore
 from Views.APagar import Ui_ct_APagar
 from Crud.CrudAPagar import CrudAPagar
 from functools import partial
@@ -88,6 +88,9 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
         # Data Vencimento e Pagamento com data Atual
         self.setDataVencPgto()
+
+        # Setando Icones Salvar, Voltar e Imprimir
+        self.setIconFormFinanceiro()
         """ Fim Chamanda financeiro.py  """
 
         """ Chamanda de funções localizadas no arquivo FormaPagamento.py na pasta Funcoes """

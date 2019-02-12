@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2 import QtCore, QtWidgets
 from PySide2.QtWebEngineWidgets import QWebEngineView
 from Views.mainVendas import Ui_ct_MainVendas
 from Views.formVendas import Ui_ct_FormVenda

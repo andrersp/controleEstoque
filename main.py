@@ -32,9 +32,9 @@ from Funcoes.categoriaAPagar import CategoriaAPagar
 from Funcoes.categoriaAReceber import CategoriaAReceber
 
 
-class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos, 
+class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
            Funcao, MainVendas, MainClientes, MainCompras, MainFinanceiro,
-           MainFornecedor, MainConfig, Financeiro, Comercial, Fornecedor, 
+           MainFornecedor, MainConfig, Financeiro, Comercial, Fornecedor,
            Clientes, FormaPagamento, CategoriaAPagar, CategoriaAReceber):
 
     def __init__(self, parent=None):

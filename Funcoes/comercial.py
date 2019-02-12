@@ -2,8 +2,6 @@
 from PySide2 import QtGui, QtCore, QtWidgets
 from functools import partial
 from Crud.CrudProdutos import CrudProdutos
-from Crud.CrudClientes import CrudClientes
-from Crud.CrudFornecedor import CrudFornecedor
 
 
 class Comercial(object):

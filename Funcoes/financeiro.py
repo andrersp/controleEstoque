@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtGui, QtCore, QtWidgets
+from PySide2 import QtCore, QtWidgets
 from functools import partial
 # from Crud.CrudProdutos import CrudProdutos
 
@@ -11,8 +11,8 @@ class Financeiro(object):
         self.dt_Inicio.setDate(self.primeiroDiaMes())
         self.dt_Fim.setDate(self.ultimoDiaMes())
         pass
-    # Setando Data Vencimento e data Pagamento
 
+    # Setando Data Vencimento e data Pagamento
     def setDataVencPgto(self):
         self.dt_Vencimento.setDate(QtCore.QDate.currentDate())
         self.dt_dataPagamento.setDate(QtCore.QDate.currentDate())
@@ -25,7 +25,18 @@ class Financeiro(object):
                             self.resourcepath('Images/gtk-print.png'))
         self.IconeBotaoForm(self.bt_AddConta,
                             self.resourcepath('Images/addConta.svg'))
+
         pass
+
+    def setIconFormFinanceiro(self):
+        self.IconeBotaoMenu(self.bt_Salvar,
+                            self.resourcepath('Images/salvar.png'))
+
+        self.IconeBotaoMenu(self.bt_Voltar,
+                            self.resourcepath('Images/cancelar.png'))
+
+        self.IconeBotaoMenu(self.bt_Imprimir,
+                            self.resourcepath('Images/gtk-print.png'))
 
     def tamanhoTabelaFinanceiro(self, frame):
         for tabela in frame.findChildren(QtWidgets.QTableWidget):
