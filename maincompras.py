@@ -310,7 +310,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
                 INSERI.dataVencimento = QtCore.QDate.toString(
                     self.tb_Parcelas.cellWidget(i, 1).date(), "yyyy-MM-dd")
                 INSERI.valor = self.tb_Parcelas.item(i, 2).text()
-                INSERI.formaPagamento = self.cb_FormaPagamento.currentIndex()
+                INSERI.formaPagamento = self.cb_FormaPagamento.currentData()
                 INSERI.cadContaPagar()
 
     # Pagando Parcela Compra
@@ -322,11 +322,11 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             INSERI.idConta = self.tb_Parcelas.item(id, 0).text()
             INSERI.valorPago = self.tb_Parcelas.cellWidget(
                 id, 3).text().replace(",", ".")
-
+            INSERI.formaPagamento = self.cb_FormaPagamento.currentData()
             INSERI.dataPagamento = QtCore.QDate.toString(
                 QtCore.QDate.currentDate(), "yyyy-MM-dd")
 
-            INSERI.cadContaPagar()
+            INSERI.PagarConta()
             self.ParcelasAPagar()
 
     # Recebendo Produtos DB

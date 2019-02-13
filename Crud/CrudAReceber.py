@@ -75,19 +75,18 @@ class CrudAReceber(object):
 
         try:
             c.execute(""" INSERT INTO contasAReceber (id, idVenda, idCliente,
-              descricao, obs, categoria, vencimento, valor, formapagamento)
-              VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')
-              ON DUPLICATE KEY UPDATE idVenda='{}', idCliente='{}'
+              descricao, obs, categoria, vencimento, valor )
+              VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')
+              ON DUPLICATE KEY UPDATE idVenda='{}', idCliente='{}',
               descricao='{}', obs='{}', categoria='{}', vencimento='{}',
-              valor='{}', formapagamento='{}' """
+              valor='{}' """
                       .format(self.idConta, self.idVenda, self.idCliente,
                               self.descricao, self.obs, self.categoria,
                               self.dataVencimento, self.valor,
-                              self.formaPagamento,
                               self.idVenda, self.idCliente,
                               self.descricao, self.obs, self.categoria,
                               self.dataVencimento, self.valor,
-                              self.formaPagamento
+
                               ))
             conecta.conecta.commit()
             c.close()
@@ -101,9 +100,10 @@ class CrudAReceber(object):
         c = conecta.conecta.cursor()
 
         try:
-            c.execute(""" UPDATE  contasAReceber SET recebido='{}', 
+            c.execute(""" UPDATE  contasAReceber SET formapagamento='{}',
+            recebido='{}', 
             valorRecebido=valorRecebido + '{}', status='{}' WHERE id='{}' """
-                      .format(self.dataRecebimento, self.valorRecebido,
+                      .format(self.formaPagamento, self.dataRecebimento, self.valorRecebido,
                               self.updateStatus(), self.idConta))
             conecta.conecta.commit()
             c.close()

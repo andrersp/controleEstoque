@@ -326,6 +326,9 @@ color: #A2A2A2;
     </property>
    </widget>
    <widget class="QComboBox" name="cb_categoria">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -413,7 +416,7 @@ background-color: #40a286
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{
-background: #FAB32E;
+background: #7AB32E;
 color: #FFF
 }
 QPushButton:hover{
@@ -429,7 +432,7 @@ background-color: #40a286
      <rect>
       <x>250</x>
       <y>200</y>
-      <width>120</width>
+      <width>180</width>
       <height>30</height>
      </rect>
     </property>
@@ -516,7 +519,7 @@ color: #A2A2A2;
       <x>20</x>
       <y>260</y>
       <width>600</width>
-      <height>160</height>
+      <height>100</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -930,9 +933,9 @@ color: #A2A2A2;
    <widget class="QLineEdit" name="tx_valor">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>450</x>
       <y>200</y>
-      <width>100</width>
+      <width>170</width>
       <height>30</height>
      </rect>
     </property>
@@ -962,9 +965,9 @@ border: 1px solid red;
    <widget class="QComboBox" name="cb_repetir">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>200</y>
-      <width>110</width>
+      <x>20</x>
+      <y>390</y>
+      <width>180</width>
       <height>30</height>
      </rect>
     </property>
@@ -998,8 +1001,8 @@ QComboBox::down-arrow {
    <widget class="QLabel" name="lb_FormCompra_10">
     <property name="geometry">
      <rect>
-      <x>510</x>
-      <y>180</y>
+      <x>20</x>
+      <y>370</y>
       <width>110</width>
       <height>20</height>
      </rect>
@@ -1168,7 +1171,57 @@ background-color: #40a286
      </property>
     </widget>
    </widget>
-   <zorder>bt_CancelAddCatergoria</zorder>
+   <widget class="QLabel" name="lb_obsRepetir">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>390</y>
+      <width>410</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">   QLabel 
+{
+font-family: &quot;Arial&quot;;
+color: #a3a3a3;
+ font-size: 12px;
+text-align: center
+   
+
+}</string>
+    </property>
+    <property name="text">
+     <string>Utilize esta opção caso esta conta for se repetir nos próximos meses,  
+para efetuar os lançamentos futuros</string>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="tx_addCategoria">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>200</y>
+      <width>180</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+background: #CFCFCF;
+border-radius: 2px;
+color: #000;
+font: 13px &quot;Arial&quot; ;
+text-transform: uppercase;
+}
+QLineEdit:Focus {
+border: 1px solid red;
+}</string>
+    </property>
+   </widget>
+   <zorder>tx_addCategoria</zorder>
    <zorder>lb_FormProdutos</zorder>
    <zorder>tx_Cod</zorder>
    <zorder>lb_FormCompra_5</zorder>
@@ -1181,7 +1234,6 @@ background-color: #40a286
    <zorder>lb_FormCompra_4</zorder>
    <zorder>lb_FormCompra_6</zorder>
    <zorder>cb_categoria</zorder>
-   <zorder>bt_AddCategoriaProduto</zorder>
    <zorder>dt_Vencimento</zorder>
    <zorder>lb_FormCompra_7</zorder>
    <zorder>tx_Obs</zorder>
@@ -1192,6 +1244,9 @@ background-color: #40a286
    <zorder>cb_repetir</zorder>
    <zorder>lb_FormCompra_10</zorder>
    <zorder>fr_BotoesFormCompra</zorder>
+   <zorder>lb_obsRepetir</zorder>
+   <zorder>bt_CancelAddCatergoria</zorder>
+   <zorder>bt_AddCategoriaProduto</zorder>
   </widget>
  </widget>
  <resources/>

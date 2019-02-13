@@ -292,6 +292,6 @@ class Ui_ct_APagar(object):
         self.tb_APagar.horizontalHeaderItem(5).setText(
             QtWidgets.QApplication.translate("ct_APagar", "VALOR", None, -1))
         self.tb_APagar.horizontalHeaderItem(6).setText(
-            QtWidgets.QApplication.translate("ct_APagar", "SALDO", None, -1))
+            QtWidgets.QApplication.translate("ct_APagar", "PENDENTE", None, -1))
         self.tb_APagar.horizontalHeaderItem(7).setText(
             QtWidgets.QApplication.translate("ct_APagar", "PAGAR", None, -1))

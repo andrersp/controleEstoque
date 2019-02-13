@@ -433,7 +433,7 @@ color: #FFF;
     <widget class="QLabel" name="lb_entradaPendente">
      <property name="geometry">
       <rect>
-       <x>155</x>
+       <x>165</x>
        <y>30</y>
        <width>100</width>
        <height>25</height>
@@ -455,7 +455,7 @@ color: #FFF;
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>140</x>
        <y>35</y>
        <width>25</width>
        <height>20</height>
@@ -480,7 +480,7 @@ color: #FFF;
     <widget class="Line" name="line">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>130</x>
        <y>30</y>
        <width>2</width>
        <height>30</height>
@@ -665,7 +665,7 @@ color: #FFF;
     <widget class="Line" name="line_3">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>130</x>
        <y>30</y>
        <width>2</width>
        <height>30</height>
@@ -681,7 +681,7 @@ color: #FFF;
     <widget class="QLabel" name="lb_despesaAPagar">
      <property name="geometry">
       <rect>
-       <x>155</x>
+       <x>165</x>
        <y>30</y>
        <width>100</width>
        <height>25</height>
@@ -703,7 +703,7 @@ color: #FFF;
     <widget class="QLabel" name="label_10">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>140</x>
        <y>35</y>
        <width>25</width>
        <height>20</height>

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'formAReceber.ui',
 # licensing of 'formAReceber.ui' applies.
 #
-# Created: Tue Feb 12 23:31:21 2019
+# Created: Wed Feb 13 14:11:39 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -208,7 +208,7 @@ class Ui_ct_FormReceber(object):
         font.setBold(True)
         self.bt_CancelAddCatergoria.setFont(font)
         self.bt_CancelAddCatergoria.setStyleSheet("QPushButton{\n"
-"background: #FAB32E;\n"
+"background: #7AB32E;\n"
 "color: #FFF\n"
 "}\n"
 "QPushButton:hover{\n"
@@ -217,7 +217,7 @@ class Ui_ct_FormReceber(object):
         self.bt_CancelAddCatergoria.setText("")
         self.bt_CancelAddCatergoria.setObjectName("bt_CancelAddCatergoria")
         self.dt_Vencimento = QtWidgets.QDateEdit(self.fr_FormReceber)
-        self.dt_Vencimento.setGeometry(QtCore.QRect(250, 200, 120, 30))
+        self.dt_Vencimento.setGeometry(QtCore.QRect(250, 200, 180, 30))
         self.dt_Vencimento.setStyleSheet("QDateEdit {\n"
 "background: #CFCFCF;\n"
 "border: none;\n"
@@ -268,7 +268,7 @@ class Ui_ct_FormReceber(object):
         self.dt_Vencimento.setCalendarPopup(True)
         self.dt_Vencimento.setObjectName("dt_Vencimento")
         self.lb_FormCompra_7 = QtWidgets.QLabel(self.fr_FormReceber)
-        self.lb_FormCompra_7.setGeometry(QtCore.QRect(250, 180, 120, 20))
+        self.lb_FormCompra_7.setGeometry(QtCore.QRect(250, 180, 150, 20))
         self.lb_FormCompra_7.setStyleSheet("QLabel{\n"
 "font-size: 13px;\n"
 "font-family: \"Arial\";\n"
@@ -277,7 +277,7 @@ class Ui_ct_FormReceber(object):
 "}")
         self.lb_FormCompra_7.setObjectName("lb_FormCompra_7")
         self.tx_Obs = QtWidgets.QTextEdit(self.fr_FormReceber)
-        self.tx_Obs.setGeometry(QtCore.QRect(20, 260, 600, 160))
+        self.tx_Obs.setGeometry(QtCore.QRect(20, 260, 600, 100))
         self.tx_Obs.setStyleSheet("QTextEdit{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
@@ -498,7 +498,7 @@ class Ui_ct_FormReceber(object):
         self.bt_receber.setIconSize(QtCore.QSize(75, 35))
         self.bt_receber.setObjectName("bt_receber")
         self.lb_FormCompra_9 = QtWidgets.QLabel(self.fr_FormReceber)
-        self.lb_FormCompra_9.setGeometry(QtCore.QRect(390, 180, 100, 20))
+        self.lb_FormCompra_9.setGeometry(QtCore.QRect(450, 180, 100, 20))
         self.lb_FormCompra_9.setStyleSheet("QLabel{\n"
 "font-size: 13px;\n"
 "font-family: \"Arial\";\n"
@@ -507,7 +507,7 @@ class Ui_ct_FormReceber(object):
 "}")
         self.lb_FormCompra_9.setObjectName("lb_FormCompra_9")
         self.tx_valor = QtWidgets.QLineEdit(self.fr_FormReceber)
-        self.tx_valor.setGeometry(QtCore.QRect(390, 200, 100, 30))
+        self.tx_valor.setGeometry(QtCore.QRect(450, 200, 170, 30))
         self.tx_valor.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_valor.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -523,7 +523,7 @@ class Ui_ct_FormReceber(object):
         self.tx_valor.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.tx_valor.setObjectName("tx_valor")
         self.cb_repetir = QtWidgets.QComboBox(self.fr_FormReceber)
-        self.cb_repetir.setGeometry(QtCore.QRect(510, 200, 110, 30))
+        self.cb_repetir.setGeometry(QtCore.QRect(20, 390, 180, 30))
         self.cb_repetir.setStyleSheet("QComboBox{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
@@ -549,15 +549,15 @@ class Ui_ct_FormReceber(object):
 " }\n"
 "")
         self.cb_repetir.setObjectName("cb_repetir")
-        self.lb_FormCompra_10 = QtWidgets.QLabel(self.fr_FormReceber)
-        self.lb_FormCompra_10.setGeometry(QtCore.QRect(510, 180, 110, 20))
-        self.lb_FormCompra_10.setStyleSheet("QLabel{\n"
+        self.lb_Repetir = QtWidgets.QLabel(self.fr_FormReceber)
+        self.lb_Repetir.setGeometry(QtCore.QRect(20, 370, 110, 20))
+        self.lb_Repetir.setStyleSheet("QLabel{\n"
 "font-size: 13px;\n"
 "font-family: \"Arial\";\n"
 "font-weight: bold;\n"
 "color: #A2A2A2;\n"
 "}")
-        self.lb_FormCompra_10.setObjectName("lb_FormCompra_10")
+        self.lb_Repetir.setObjectName("lb_Repetir")
         self.fr_BotoesFormCompra = QtWidgets.QFrame(self.fr_FormReceber)
         self.fr_BotoesFormCompra.setGeometry(QtCore.QRect(0, 470, 1000, 30))
         self.fr_BotoesFormCompra.setStyleSheet("background:#E1DFE0;\n"
@@ -624,6 +624,32 @@ class Ui_ct_FormReceber(object):
 "}")
         self.bt_Imprimir.setIconSize(QtCore.QSize(75, 35))
         self.bt_Imprimir.setObjectName("bt_Imprimir")
+        self.lb_obsRepetir = QtWidgets.QLabel(self.fr_FormReceber)
+        self.lb_obsRepetir.setGeometry(QtCore.QRect(210, 390, 410, 30))
+        self.lb_obsRepetir.setStyleSheet("   QLabel \n"
+"{\n"
+"font-family: \"Arial\";\n"
+"color: #a3a3a3;\n"
+" font-size: 12px;\n"
+"text-align: center\n"
+"   \n"
+"\n"
+"}")
+        self.lb_obsRepetir.setMargin(0)
+        self.lb_obsRepetir.setObjectName("lb_obsRepetir")
+        self.tx_addCategoria = QtWidgets.QLineEdit(self.fr_FormReceber)
+        self.tx_addCategoria.setGeometry(QtCore.QRect(20, 200, 180, 30))
+        self.tx_addCategoria.setStyleSheet("QLineEdit{\n"
+"background: #CFCFCF;\n"
+"border-radius: 2px;\n"
+"color: #000;\n"
+"font: 13px \"Arial\" ;\n"
+"text-transform: uppercase;\n"
+"}\n"
+"QLineEdit:Focus {\n"
+"border: 1px solid red;\n"
+"}")
+        self.tx_addCategoria.setObjectName("tx_addCategoria")
 
         self.tradFormAReceber(ct_FormReceber)
         QtCore.QMetaObject.connectSlotsByName(ct_FormReceber)
@@ -655,8 +681,10 @@ class Ui_ct_FormReceber(object):
         self.bt_receber.setText(QtWidgets.QApplication.translate("ct_FormReceber", "RECEBER", None, -1))
         self.lb_FormCompra_9.setText(QtWidgets.QApplication.translate("ct_FormReceber", "VALOR", None, -1))
         self.tx_valor.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormReceber", "R$ 0,00", None, -1))
-        self.lb_FormCompra_10.setText(QtWidgets.QApplication.translate("ct_FormReceber", "REPETIR", None, -1))
+        self.lb_Repetir.setText(QtWidgets.QApplication.translate("ct_FormReceber", "REPETIR", None, -1))
         self.bt_Voltar.setText(QtWidgets.QApplication.translate("ct_FormReceber", "VOLTAR", None, -1))
         self.bt_Salvar.setText(QtWidgets.QApplication.translate("ct_FormReceber", "SALVAR", None, -1))
         self.bt_Imprimir.setText(QtWidgets.QApplication.translate("ct_FormReceber", "IMPRIMIR", None, -1))
+        self.lb_obsRepetir.setText(QtWidgets.QApplication.translate("ct_FormReceber", "Utilize esta opção caso esta conta for se repetir nos próximos meses,  \n"
+"para efetuar os lançamentos futuros", None, -1))
 

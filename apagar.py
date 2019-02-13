@@ -4,6 +4,7 @@ from Views.APagar import Ui_ct_APagar
 from Crud.CrudAPagar import CrudAPagar
 from functools import partial
 from Views.formAPagar import Ui_ct_FormPagar
+from Crud.CrudCategoriaAPagar import CrudCatAPagar
 
 
 class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
@@ -68,8 +69,8 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
             self.conteudoTabela(self.tb_APagar, i, 5,
                                 "R$ "+str(busca.valor[i]))
 
-            self.tx_tabelaReceber(self.tb_APagar, i, 6, busca.status[i], str(
-                busca.valor[i]))
+            self.conteudoTabela(self.tb_APagar, i, 6,
+                                "R$ "+str(busca.valorPendente[i]))
             self.botaoReceberParcela(
                 self.tb_APagar, i, 7, partial(self.BuscaContaAPagar, busca.idConta[i]), "Pagar",  '2')
 
@@ -91,6 +92,23 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
         # Setando Icones Salvar, Voltar e Imprimir
         self.setIconFormFinanceiro()
+
+        # Pupulando combobox Repetir
+        self.cboxRepedir(self.cb_repetir)
+
+        # Botao Add Categoria
+        self.bt_AddCategoriaProduto.clicked.connect(
+            self.AddCategoriaFinanceiro)
+
+        # Botao Cancela add Categoria
+        self.bt_CancelAddCatergoria.clicked.connect(
+            partial(self.CalcelAddFinanceiro, self.bt_CancelAddCatergoria,
+                    self.bt_AddCategoriaProduto, self.tx_addCategoria,
+                    self.cb_categoria))
+
+        # Validador Campos Float
+        self.ValidaInputFloat(self.tx_valor)
+        self.ValidaInputFloat(self.tx_valorPago)
         """ Fim Chamanda financeiro.py  """
 
         """ Chamanda de funções localizadas no arquivo FormaPagamento.py na pasta Funcoes """
@@ -101,7 +119,7 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         """ Chamanda de funções localizadas no arquivo categoriaAPagar.py na pasta Funcoes """
         # Populando combobox Forma de Pagamento
         self.cboxCatAPagar(self.cb_categoria)
-        """ Fim Chamanda categoriaAPagar.py  """
+        """ Fim Chamanda categoriaAPagar.py """
 
         """ Chamanda de funções localizadas no arquivo fornecedor.py na pasta Funcoes """
         # Campo Busca por nome e Autocompletar Fornecedor
@@ -115,6 +133,19 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
         """ Fim Chamadas """
 
+        # Adicionando Nova Categoria
+        self.tx_addCategoria.returnPressed.connect(self.CadCategoriraPagar)
+
+        # Foco campos ID Cliente
+        self.tx_Id.setFocus()
+
+        # Botao Pagar
+        self.bt_receber.clicked.connect(self.PagarParcela)
+
+        # Botao Salvar
+        self.bt_Salvar.clicked.connect(self.validaCadPagar)
+
+        # Botao Voltar
         self.bt_Voltar.clicked.connect(self.JanelaAPagar)
 
     # checando campo Id se é Edicao ou Nova Venda
@@ -124,10 +155,35 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
             self.tx_Cod.setText(str(busca.lastIdAPagar()))
         pass
 
-    # Editar / Cadastrar conta a Pagar
+    # Buscando Conta a Pagar através de ID recebido da Tabela
     def BuscaContaAPagar(self, id):
         self.formAPagar()
-        self.tx_Cod.setText(str(id))
+        busca = CrudAPagar()
+        busca.idConta = id
+        busca.selectContaId()
+        self.tx_Cod.setText(str(busca.idConta))
+        self.tx_Id.setText(str(busca.idFornecedor))
+        self.BuscaFornecedorId(self.tx_descricao)
+        self.tx_descricao.setText(busca.descricao)
+        self.cb_categoria.setCurrentIndex(
+            self.cb_categoria.findData(busca.categoria))
+        self.dt_Vencimento.setDate(busca.dataVencimento)
+        self.tx_valor.setText(str(busca.valor))
+        self.tx_Obs.setPlainText(busca.obs)
+        if busca.dataPagamento:
+            self.dt_dataPagamento.setDate(busca.dataPagamento)
+        self.cb_formaPagamento.setCurrentIndex(
+            self.cb_formaPagamento.findData(busca.formaPagamento))
+        self.tx_valorPago.setText(str(busca.valorPendente))
+        self.lb_ValorPendente.setText(str(busca.valorPendente))
+
+        if busca.idStatus == 1:
+            self.bt_receber.setDisabled(True)
+            self.desabilitaLineEdit(self.fr_FormPagar)
+        self.cb_repetir.setHidden(True)
+        self.lb_Repetir.setHidden(True)
+        self.lb_obsRepetir.setHidden(True)
+        pass
 
     # Pagando Compra
     def PagarParcela(self, id):
@@ -144,3 +200,63 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
             INSERI.cadContaPagar()
             self.tabelaAPagar()
+
+    # Recebendo pagamento DB
+    def PagarParcela(self, id):
+
+        if not self.tx_valorPago.text():
+            self.tx_valorPago.setFocus()
+        elif not self.cb_formaPagamento.currentData():
+            self.cb_formaPagamento.setFocus()
+        else:
+            INSERI = CrudAPagar()
+            INSERI.idConta = self.tx_Cod.text()
+            INSERI.formaPagamento = self.cb_formaPagamento.currentData()
+            INSERI.valorPago = self.tx_valorPago.text().replace(",", ".")
+            INSERI.dataPagamento = QtCore.QDate.toString(
+                QtCore.QDate.currentDate(), "yyyy-MM-dd")
+            INSERI.PagarConta()
+            self.BuscaContaAPagar(self.tx_Cod.text())
+
+        pass
+
+    # Validando campos a pagar
+    def validaCadPagar(self):
+        if not self.tx_Id.text():
+            self.tx_Id.setFocus()
+        elif not self.tx_descricao.text():
+            self.tx_descricao.setFocus()
+        elif not self.tx_valor.text():
+            self.tx_valor.setFocus()
+        else:
+            self.cadContaPagar()
+
+    def cadContaPagar(self):
+        repetir = int(self.cb_repetir.currentData())
+        for i in range(repetir):
+            id = int(self.tx_Cod.text()) + i
+            INSERI = CrudAPagar()
+            INSERI.idConta = id
+            INSERI.idFornecedor = self.tx_Id.text()
+            INSERI.descricao = self.tx_descricao.text()
+            INSERI.categoria = self.cb_categoria.currentData()
+            INSERI.dataVencimento = QtCore.QDate.toString(QtCore.QDate.addMonths(
+                self.dt_Vencimento.date(), i), "yyyy-MM-dd")
+            INSERI.valor = self.tx_valor.text()
+            INSERI.obs = self.tx_Obs.toPlainText()
+            INSERI.cadContaPagar()
+        self.BuscaContaAPagar(self.tx_Cod.text())
+
+    # Cadastro Categoria a Pagar
+    def CadCategoriraPagar(self):
+        INSERI = CrudCatAPagar()
+        id = INSERI.lastIdCatAPagar()
+        categoria = self.tx_addCategoria.text().upper()
+        INSERI.idCatAPagar = id
+        INSERI.descCatAPagar = categoria
+        INSERI.cadCatAPagar()
+        self.cb_categoria.addItem(categoria, str(id))
+        self.cb_categoria.setCurrentIndex(self.cb_categoria.findData(str(id)))
+        self.CalcelAddFinanceiro(self.bt_CancelAddCatergoria,
+                                 self.bt_AddCategoriaProduto, self.tx_addCategoria,
+                                 self.cb_categoria)

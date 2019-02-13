@@ -4,6 +4,7 @@ from Views.aReceber import Ui_ct_AReceber
 from Crud.CrudAReceber import CrudAReceber
 from functools import partial
 from Views.formAReceber import Ui_ct_FormReceber
+from Crud.CrudCategoriaAReceber import CrudCatAReceber
 
 
 class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
@@ -88,7 +89,6 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
                 "Receber",  2)
 
     # Cadastro e Edição conta a receber
-
     def formAReceber(self):
         self.LimpaFrame(self.fr_AReceber)
         super(MainAReceber, self).setFormAReceber(self.fr_AReceber)
@@ -106,6 +106,23 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
 
         # Setando Icones Salvar, Voltar e Imprimir
         self.setIconFormFinanceiro()
+
+        # Pupulando combobox Repetir
+        self.cboxRepedir(self.cb_repetir)
+
+        # Botao Add Categoria
+        self.bt_AddCategoriaProduto.clicked.connect(
+            self.AddCategoriaFinanceiro)
+
+        # Botao Cancela add Categoria
+        self.bt_CancelAddCatergoria.clicked.connect(
+            partial(self.CalcelAddFinanceiro, self.bt_CancelAddCatergoria,
+                    self.bt_AddCategoriaProduto, self.tx_addCategoria,
+                    self.cb_categoria))
+
+        # Validador Campos Float
+        self.ValidaInputFloat(self.tx_valor)
+        self.ValidaInputFloat(self.tx_valorPago)
         """ Fim Chamanda financeiro.py  """
 
         """ Chamanda de funções localizadas no arquivo FormaPagamento.py na pasta Funcoes """
@@ -129,12 +146,17 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
             partial(self.BuscaClienteId, self.tx_descricao))
 
         """ Fim Chamadas """
+        # Adicionando Nova Categoria
+        self.tx_addCategoria.returnPressed.connect(self.CadCategoriraReceber)
+
+        # Foco campos ID Cliente
+        self.tx_Id.setFocus()
 
         # Botao Receber
         self.bt_receber.clicked.connect(self.ReceberParcela)
 
         # Botao Salvar
-        self.bt_Salvar.clicked.connect(self.cadConta)
+        self.bt_Salvar.clicked.connect(self.validaCadReceber)
 
         # Botao Voltar
         self.bt_Voltar.clicked.connect(self.JanelaAReceber)
@@ -147,6 +169,7 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
             self.tx_Cod.setText(str(busca.lastIdAReceber()))
         pass
 
+    # Buscando Conta a Receber através de ID recebido da Tabela
     def BuscaContaAReceber(self, id):
         self.formAReceber()
         busca = CrudAReceber()
@@ -171,23 +194,67 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         if busca.idStatus == 1:
             self.bt_receber.setDisabled(True)
             self.desabilitaLineEdit(self.fr_FormReceber)
-
+        self.cb_repetir.setHidden(True)
+        self.lb_Repetir.setHidden(True)
+        self.lb_obsRepetir.setHidden(True)
         pass
 
     # Recebendo pagamento DB
     def ReceberParcela(self, id):
         # print(self.tb_AReceber.item(id, 0).text())
 
-        if self.tx_valorPago:
+        if not self.tx_valorPago.text():
+            self.tx_valorPago.setFocus()
+        elif not self.cb_formaPagamento.currentData():
+            self.cb_formaPagamento.setFocus()
+        else:
             INSERI = CrudAReceber()
             INSERI.idConta = self.tx_Cod.text()
             INSERI.valorRecebido = self.tx_valorPago.text().replace(",", ".")
-
+            INSERI.formaPagamento = self.cb_formaPagamento.currentData()
             INSERI.dataRecebimento = QtCore.QDate.toString(
                 QtCore.QDate.currentDate(), "yyyy-MM-dd")
             INSERI.ReceberConta()
             self.BuscaContaAReceber(self.tx_Cod.text())
         pass
 
-    def cadConta(self):
-        print(self.cb_formaPagamento.currentData())
+    def validaCadReceber(self):
+        if not self.tx_Id.text():
+            self.tx_Id.setFocus()
+        elif not self.tx_descricao.text():
+            self.tx_descricao.setFocus()
+        elif not self.tx_valor.text():
+            self.tx_valor.setFocus()
+        else:
+            self.cadContaReceber()
+
+    # Cadastro contaa Receber
+    def cadContaReceber(self):
+        repetir = int(self.cb_repetir.currentData())
+        for i in range(repetir):
+            id = int(self.tx_Cod.text()) + i
+            INSERI = CrudAReceber()
+            INSERI.idConta = id
+            INSERI.idCliente = self.tx_Id.text()
+            INSERI.descricao = self.tx_descricao.text()
+            INSERI.categoria = self.cb_categoria.currentData()
+            INSERI.dataVencimento = QtCore.QDate.toString(QtCore.QDate.addMonths(
+                self.dt_Vencimento.date(), i), "yyyy-MM-dd")
+            INSERI.valor = self.tx_valor.text()
+            INSERI.obs = self.tx_Obs.toPlainText()
+            INSERI.cadContaReceber()
+        self.BuscaContaAReceber(self.tx_Cod.text())
+
+    # Cadastro Categoria a Receber
+    def CadCategoriraReceber(self):
+        INSERI = CrudCatAReceber()
+        id = INSERI.lastIdCatAReceber()
+        categoria = self.tx_addCategoria.text().upper()
+        INSERI.idCatAReceber = id
+        INSERI.descCatAReceber = categoria
+        INSERI.cadCatAReceber()
+        self.cb_categoria.addItem(categoria, str(id))
+        self.cb_categoria.setCurrentIndex(self.cb_categoria.findData(str(id)))
+        self.CalcelAddFinanceiro(self.bt_CancelAddCatergoria,
+                                 self.bt_AddCategoriaProduto, self.tx_addCategoria,
+                                 self.cb_categoria)

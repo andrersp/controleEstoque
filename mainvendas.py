@@ -313,7 +313,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
                 INSERI.dataVencimento = QtCore.QDate.toString(
                     self.tb_Parcelas.cellWidget(i, 1).date(), "yyyy-MM-dd")
                 INSERI.valor = self.tb_Parcelas.item(i, 2).text()
-                INSERI.formaPagamento = self.cb_FormaPagamento.currentIndex()
+                INSERI.formaPagamento = self.cb_FormaPagamento.currentData()
                 INSERI.cadContaReceber()
 
     # Recebendo parcela Venda
@@ -325,7 +325,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             INSERI.idConta = self.tb_Parcelas.item(id, 0).text()
             INSERI.valorRecebido = self.tb_Parcelas.cellWidget(
                 id, 3).text().replace(",", ".")
-
+            INSERI.formaPagamento = self.cb_FormaPagamento.currentData()
             INSERI.dataRecebimento = QtCore.QDate.toString(
                 QtCore.QDate.currentDate(), "yyyy-MM-dd")
             INSERI.ReceberConta()

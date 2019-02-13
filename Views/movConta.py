@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'movConta.ui',
 # licensing of 'movConta.ui' applies.
 #
-# Created: Sun Feb 10 21:01:54 2019
+# Created: Wed Feb 13 14:00:19 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -237,7 +237,7 @@ class Ui_ct_movimento(object):
         self.lb_entradaRecebido.setText("")
         self.lb_entradaRecebido.setObjectName("lb_entradaRecebido")
         self.lb_entradaPendente = QtWidgets.QLabel(self.fr_Receita)
-        self.lb_entradaPendente.setGeometry(QtCore.QRect(155, 30, 100, 25))
+        self.lb_entradaPendente.setGeometry(QtCore.QRect(165, 30, 100, 25))
         self.lb_entradaPendente.setStyleSheet("background: none;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -248,7 +248,7 @@ class Ui_ct_movimento(object):
         self.lb_entradaPendente.setText("")
         self.lb_entradaPendente.setObjectName("lb_entradaPendente")
         self.label_8 = QtWidgets.QLabel(self.fr_Receita)
-        self.label_8.setGeometry(QtCore.QRect(130, 35, 25, 20))
+        self.label_8.setGeometry(QtCore.QRect(140, 35, 25, 20))
         self.label_8.setStyleSheet("background: none;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -259,7 +259,7 @@ class Ui_ct_movimento(object):
         self.label_8.setAlignment(QtCore.Qt.AlignBottom|QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft)
         self.label_8.setObjectName("label_8")
         self.line = QtWidgets.QFrame(self.fr_Receita)
-        self.line.setGeometry(QtCore.QRect(120, 30, 2, 30))
+        self.line.setGeometry(QtCore.QRect(130, 30, 2, 30))
         self.line.setStyleSheet("background: #FFF")
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
@@ -346,13 +346,13 @@ class Ui_ct_movimento(object):
         self.lb_despesaPaga.setText("")
         self.lb_despesaPaga.setObjectName("lb_despesaPaga")
         self.line_3 = QtWidgets.QFrame(self.fr_Despesa)
-        self.line_3.setGeometry(QtCore.QRect(120, 30, 2, 30))
+        self.line_3.setGeometry(QtCore.QRect(130, 30, 2, 30))
         self.line_3.setStyleSheet("background: #FFF")
         self.line_3.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_3.setObjectName("line_3")
         self.lb_despesaAPagar = QtWidgets.QLabel(self.fr_Despesa)
-        self.lb_despesaAPagar.setGeometry(QtCore.QRect(155, 30, 100, 25))
+        self.lb_despesaAPagar.setGeometry(QtCore.QRect(165, 30, 100, 25))
         self.lb_despesaAPagar.setStyleSheet("background: none;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -363,7 +363,7 @@ class Ui_ct_movimento(object):
         self.lb_despesaAPagar.setText("")
         self.lb_despesaAPagar.setObjectName("lb_despesaAPagar")
         self.label_10 = QtWidgets.QLabel(self.fr_Despesa)
-        self.label_10.setGeometry(QtCore.QRect(130, 35, 25, 20))
+        self.label_10.setGeometry(QtCore.QRect(140, 35, 25, 20))
         self.label_10.setStyleSheet("background: none;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"

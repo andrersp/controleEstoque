@@ -11,7 +11,7 @@ class CrudAPagar(object):
                  categoria="", dataVencimento="", valor="", formaPagamento="",
                  dataPagamento="", valorPago="", status="",
                  dataInicio="", dataFim="", totalDespesa="", totalAPagar="",
-                 fornecedor="", nomeStatus="", telefone=""):
+                 fornecedor="", nomeStatus="", telefone="", valorPendente=""):
         self.idConta = idConta
         self.idFornecedor = idFornecedor
         self.idCompra = idCompra
@@ -30,6 +30,7 @@ class CrudAPagar(object):
         self.fornecedor = fornecedor
         self.nomeStatus = nomeStatus
         self.telefone = telefone
+        self.valorPendente = valorPendente
 
     def lastIdAPagar(self):
         conecta = Conexao()
@@ -67,23 +68,43 @@ class CrudAPagar(object):
         except mysql.connector.Error as err:
             print(err)
 
+    # Cadstar conta a Pagar
     def cadContaPagar(self):
         conecta = Conexao()
         c = conecta.conecta.cursor()
 
         try:
             c.execute(""" INSERT INTO contasAPagar (id, idCompra, idFornecedor,
-              descricao, obs, categoria, vencimento, valor, formapagamento)
-              VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')
-              ON DUPLICATE KEY UPDATE 
-              recebido='{}', valorPago= valorPago + '{}', status='{}'"""
+              descricao, obs, categoria, vencimento, valor )
+              VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')
+              ON DUPLICATE KEY UPDATE idCompra='{}', idFornecedor='{}',
+              descricao='{}', obs='{}', categoria='{}', vencimento='{}',
+              valor='{}' """
                       .format(self.idConta, self.idCompra, self.idFornecedor,
                               self.descricao, self.obs, self.categoria,
-                              self.dataVencimento, self.valor, self.formaPagamento,
-                              self.dataPagamento, self.valorPago,
-                              self.updateStatusPgto()
-                              ))
+                              self.dataVencimento, self.valor,
+                              self.idCompra, self.idFornecedor,
+                              self.descricao, self.obs, self.categoria,
+                              self.dataVencimento, self.valor,
 
+                              ))
+            conecta.conecta.commit()
+            c.close()
+
+        except mysql.connector.Error as err:
+            print(err)
+
+    # Pagar conta
+    def PagarConta(self):
+        conecta = Conexao()
+        c = conecta.conecta.cursor()
+
+        try:
+            c.execute(""" UPDATE  contasAPagar SET formapagamento='{}',
+            recebido='{}', 
+            valorPago=valorPago + '{}', status='{}' WHERE id='{}' """
+                      .format(self.formaPagamento, self.dataPagamento, self.valorPago,
+                              self.updateStatusPgto(), self.idConta))
             conecta.conecta.commit()
             c.close()
         except mysql.connector.Error as err:
@@ -163,6 +184,7 @@ class CrudAPagar(object):
             self.fornecedor = []
             self.telefone = []
             self.nomeStatus = []
+            self.valorPendente = []
 
             row = c.fetchall()
 
@@ -172,27 +194,41 @@ class CrudAPagar(object):
                     self.descricao.append(lista[3])
                     self.dataVencimento.append(
                         datetime.date.strftime(lista[6], "%d-%m-%Y"))
-                    self.valor.append(lista[7] - lista[10])
+                    self.valor.append(lista[7])
                     self.status.append(lista[11])
                     self.fornecedor.append(lista[12])
                     self.telefone.append(lista[13])
                     self.nomeStatus.append(lista[14])
+                    self.valorPendente.append(lista[7] - lista[10])
         except mysql.connector.Error as err:
             print(err)
 
+    # Selecionar conta a Pagar por id da conta
+    def selectContaId(self):
+        conecta = Conexao()
+        c = conecta.conecta.cursor()
 
-# busca = CrudAPagar()
-# busca.dataInicio = '2019-02-01'
-# busca.dataFim = '2019-02-28'
-# busca.status = 2
-# busca.listaAPagar()
-# print(busca.fornecedor)
-# print(busca.categoria)
-# print(busca.movimentoTotalDespesa()[0])
-# if busca.movimentoTotalDespesa()[0] > 0.01:
-#     print(busca.movimentoTotalDespesa())
+        try:
+            c.execute(
+                """ SELECT * FROM contasAPagar
+                WHERE id = '{}' """
+                .format(self.idConta))
+            row = c.fetchone()
 
-# print(busca.totalAPagar)
-# data = ("10-01-2018")
-# print datetime.date.strftime(datetime.datetime.strptime(data,
-# "%d-%m-%Y"), "%Y-%m-%d")
+            if row:
+                self.idConta = row[0]
+                self.idCompra = row[1]
+                self.idFornecedor = row[2]
+                self.descricao = row[3]
+                self.obs = row[4]
+                self.categoria = row[5]
+                self.dataVencimento = row[6]
+                self.valor = row[7]
+                self.formaPagamento = row[8]
+                self.dataPagamento = row[9]
+                self.valorPago = row[10]
+                self.idStatus = row[11]
+                self.valorPendente = row[7] - row[10]
+
+        except mysql.connector.Error as err:
+            print(err)

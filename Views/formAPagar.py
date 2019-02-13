@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'formAPagar.ui',
 # licensing of 'formAPagar.ui' applies.
 #
-# Created: Tue Feb 12 23:31:14 2019
+# Created: Wed Feb 13 14:12:11 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -156,6 +156,7 @@ class Ui_ct_FormPagar(object):
 "}")
         self.lb_FormCompra_6.setObjectName("lb_FormCompra_6")
         self.cb_categoria = QtWidgets.QComboBox(self.fr_FormPagar)
+        self.cb_categoria.setEnabled(True)
         self.cb_categoria.setGeometry(QtCore.QRect(20, 200, 180, 30))
         self.cb_categoria.setStyleSheet("QComboBox{\n"
 "background: #CFCFCF;\n"
@@ -208,7 +209,7 @@ class Ui_ct_FormPagar(object):
         font.setBold(True)
         self.bt_CancelAddCatergoria.setFont(font)
         self.bt_CancelAddCatergoria.setStyleSheet("QPushButton{\n"
-"background: #FAB32E;\n"
+"background: #7AB32E;\n"
 "color: #FFF\n"
 "}\n"
 "QPushButton:hover{\n"
@@ -217,7 +218,7 @@ class Ui_ct_FormPagar(object):
         self.bt_CancelAddCatergoria.setText("")
         self.bt_CancelAddCatergoria.setObjectName("bt_CancelAddCatergoria")
         self.dt_Vencimento = QtWidgets.QDateEdit(self.fr_FormPagar)
-        self.dt_Vencimento.setGeometry(QtCore.QRect(250, 200, 120, 30))
+        self.dt_Vencimento.setGeometry(QtCore.QRect(250, 200, 180, 30))
         self.dt_Vencimento.setStyleSheet("QDateEdit {\n"
 "background: #CFCFCF;\n"
 "border: none;\n"
@@ -277,7 +278,7 @@ class Ui_ct_FormPagar(object):
 "}")
         self.lb_FormCompra_7.setObjectName("lb_FormCompra_7")
         self.tx_Obs = QtWidgets.QTextEdit(self.fr_FormPagar)
-        self.tx_Obs.setGeometry(QtCore.QRect(20, 260, 600, 160))
+        self.tx_Obs.setGeometry(QtCore.QRect(20, 260, 600, 100))
         self.tx_Obs.setStyleSheet("QTextEdit{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
@@ -507,7 +508,7 @@ class Ui_ct_FormPagar(object):
 "}")
         self.lb_FormCompra_9.setObjectName("lb_FormCompra_9")
         self.tx_valor = QtWidgets.QLineEdit(self.fr_FormPagar)
-        self.tx_valor.setGeometry(QtCore.QRect(390, 200, 100, 30))
+        self.tx_valor.setGeometry(QtCore.QRect(450, 200, 170, 30))
         self.tx_valor.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_valor.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
@@ -523,7 +524,7 @@ class Ui_ct_FormPagar(object):
         self.tx_valor.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.tx_valor.setObjectName("tx_valor")
         self.cb_repetir = QtWidgets.QComboBox(self.fr_FormPagar)
-        self.cb_repetir.setGeometry(QtCore.QRect(510, 200, 110, 30))
+        self.cb_repetir.setGeometry(QtCore.QRect(20, 390, 180, 30))
         self.cb_repetir.setStyleSheet("QComboBox{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
@@ -550,7 +551,7 @@ class Ui_ct_FormPagar(object):
 "")
         self.cb_repetir.setObjectName("cb_repetir")
         self.lb_FormCompra_10 = QtWidgets.QLabel(self.fr_FormPagar)
-        self.lb_FormCompra_10.setGeometry(QtCore.QRect(510, 180, 110, 20))
+        self.lb_FormCompra_10.setGeometry(QtCore.QRect(20, 370, 110, 20))
         self.lb_FormCompra_10.setStyleSheet("QLabel{\n"
 "font-size: 13px;\n"
 "font-family: \"Arial\";\n"
@@ -624,6 +625,32 @@ class Ui_ct_FormPagar(object):
 "}")
         self.bt_Imprimir.setIconSize(QtCore.QSize(75, 35))
         self.bt_Imprimir.setObjectName("bt_Imprimir")
+        self.lb_obsRepetir = QtWidgets.QLabel(self.fr_FormPagar)
+        self.lb_obsRepetir.setGeometry(QtCore.QRect(210, 390, 410, 30))
+        self.lb_obsRepetir.setStyleSheet("   QLabel \n"
+"{\n"
+"font-family: \"Arial\";\n"
+"color: #a3a3a3;\n"
+" font-size: 12px;\n"
+"text-align: center\n"
+"   \n"
+"\n"
+"}")
+        self.lb_obsRepetir.setMargin(0)
+        self.lb_obsRepetir.setObjectName("lb_obsRepetir")
+        self.tx_addCategoria = QtWidgets.QLineEdit(self.fr_FormPagar)
+        self.tx_addCategoria.setGeometry(QtCore.QRect(20, 200, 180, 30))
+        self.tx_addCategoria.setStyleSheet("QLineEdit{\n"
+"background: #CFCFCF;\n"
+"border-radius: 2px;\n"
+"color: #000;\n"
+"font: 13px \"Arial\" ;\n"
+"text-transform: uppercase;\n"
+"}\n"
+"QLineEdit:Focus {\n"
+"border: 1px solid red;\n"
+"}")
+        self.tx_addCategoria.setObjectName("tx_addCategoria")
 
         self.tradFormAPagar(ct_FormPagar)
         QtCore.QMetaObject.connectSlotsByName(ct_FormPagar)
@@ -659,4 +686,6 @@ class Ui_ct_FormPagar(object):
         self.bt_Voltar.setText(QtWidgets.QApplication.translate("ct_FormPagar", "VOLTAR", None, -1))
         self.bt_Salvar.setText(QtWidgets.QApplication.translate("ct_FormPagar", "SALVAR", None, -1))
         self.bt_Imprimir.setText(QtWidgets.QApplication.translate("ct_FormPagar", "IMPRIMIR", None, -1))
+        self.lb_obsRepetir.setText(QtWidgets.QApplication.translate("ct_FormPagar", "Utilize esta opção caso esta conta for se repetir nos próximos meses,  \n"
+"para efetuar os lançamentos futuros", None, -1))
 
