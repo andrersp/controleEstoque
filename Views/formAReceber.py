@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'formAReceber.ui',
 # licensing of 'formAReceber.ui' applies.
 #
-# Created: Tue Feb 12 11:14:45 2019
+# Created: Tue Feb 12 23:31:21 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -306,22 +306,6 @@ class Ui_ct_FormReceber(object):
         self.fr_financeiroCompra.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.fr_financeiroCompra.setFrameShadow(QtWidgets.QFrame.Raised)
         self.fr_financeiroCompra.setObjectName("fr_financeiroCompra")
-        self.tx_juros = QtWidgets.QLineEdit(self.fr_financeiroCompra)
-        self.tx_juros.setGeometry(QtCore.QRect(160, 60, 125, 30))
-        self.tx_juros.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_juros.setStyleSheet("QLineEdit{\n"
-"background: #FFF;\n"
-"border: none;\n"
-"font-family: \"Arial\";\n"
-"font-size: 14px;\n"
-"font-weight: bold;\n"
-"color: rgb(80,79,79)\n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_juros.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.tx_juros.setObjectName("tx_juros")
         self.lb_FormVenda_14 = QtWidgets.QLabel(self.fr_financeiroCompra)
         self.lb_FormVenda_14.setGeometry(QtCore.QRect(20, 20, 130, 30))
         self.lb_FormVenda_14.setStyleSheet("QLabel{\n"
@@ -385,17 +369,6 @@ class Ui_ct_FormReceber(object):
         self.dt_dataPagamento.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.dt_dataPagamento.setCalendarPopup(True)
         self.dt_dataPagamento.setObjectName("dt_dataPagamento")
-        self.lb_FormVenda_25 = QtWidgets.QLabel(self.fr_financeiroCompra)
-        self.lb_FormVenda_25.setGeometry(QtCore.QRect(20, 60, 130, 30))
-        self.lb_FormVenda_25.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial\";\n"
-"font-weight: bold;\n"
-"color: #277298;\n"
-"border: none\n"
-"}")
-        self.lb_FormVenda_25.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.lb_FormVenda_25.setObjectName("lb_FormVenda_25")
         self.lb_FormVenda_22 = QtWidgets.QLabel(self.fr_financeiroCompra)
         self.lb_FormVenda_22.setGeometry(QtCore.QRect(20, 320, 130, 30))
         self.lb_FormVenda_22.setStyleSheet("QLabel{\n"
@@ -418,35 +391,8 @@ class Ui_ct_FormReceber(object):
 "}")
         self.lb_ValorPendente.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.lb_ValorPendente.setObjectName("lb_ValorPendente")
-        self.tx_desconto = QtWidgets.QLineEdit(self.fr_financeiroCompra)
-        self.tx_desconto.setGeometry(QtCore.QRect(160, 100, 125, 30))
-        self.tx_desconto.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_desconto.setStyleSheet("QLineEdit{\n"
-"background: #FFF;\n"
-"border: none;\n"
-"font-family: \"Arial\";\n"
-"font-size: 14px;\n"
-"font-weight: bold;\n"
-"color: rgb(80,79,79)\n"
-"}\n"
-"QLineEdit:Focus {\n"
-"border: 1px solid red;\n"
-"}")
-        self.tx_desconto.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.tx_desconto.setObjectName("tx_desconto")
-        self.lb_FormVenda_26 = QtWidgets.QLabel(self.fr_financeiroCompra)
-        self.lb_FormVenda_26.setGeometry(QtCore.QRect(20, 100, 130, 30))
-        self.lb_FormVenda_26.setStyleSheet("QLabel{\n"
-"font-size: 12px;\n"
-"font-family: \"Arial\";\n"
-"font-weight: bold;\n"
-"color: #277298;\n"
-"border: none\n"
-"}")
-        self.lb_FormVenda_26.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.lb_FormVenda_26.setObjectName("lb_FormVenda_26")
         self.tx_valorPago = QtWidgets.QLineEdit(self.fr_financeiroCompra)
-        self.tx_valorPago.setGeometry(QtCore.QRect(160, 180, 125, 30))
+        self.tx_valorPago.setGeometry(QtCore.QRect(160, 100, 125, 30))
         self.tx_valorPago.setFocusPolicy(QtCore.Qt.WheelFocus)
         self.tx_valorPago.setStyleSheet("QLineEdit{\n"
 "background: #FFF;\n"
@@ -462,7 +408,7 @@ class Ui_ct_FormReceber(object):
         self.tx_valorPago.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.tx_valorPago.setObjectName("tx_valorPago")
         self.lb_FormVenda_27 = QtWidgets.QLabel(self.fr_financeiroCompra)
-        self.lb_FormVenda_27.setGeometry(QtCore.QRect(20, 140, 130, 30))
+        self.lb_FormVenda_27.setGeometry(QtCore.QRect(20, 60, 130, 30))
         self.lb_FormVenda_27.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial\";\n"
@@ -473,14 +419,21 @@ class Ui_ct_FormReceber(object):
         self.lb_FormVenda_27.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.lb_FormVenda_27.setObjectName("lb_FormVenda_27")
         self.cb_formaPagamento = QtWidgets.QComboBox(self.fr_financeiroCompra)
-        self.cb_formaPagamento.setGeometry(QtCore.QRect(160, 140, 150, 30))
+        self.cb_formaPagamento.setGeometry(QtCore.QRect(160, 60, 150, 30))
         self.cb_formaPagamento.setStyleSheet("QComboBox{\n"
 "background: #FFF;\n"
 "border: none;\n"
 "font-family: \"Arial\";\n"
-"font-size: 16px;\n"
+"font-size: 14px;\n"
 "font-weight: bold;\n"
 "color: rgb(80,79,79)\n"
+"\n"
+"}\n"
+"QCombobox:on {\n"
+"color: #000;\n"
+"font: 10px \"Arial\" ;\n"
+"text-transform: uppercase;\n"
+"font-weight: bold;\n"
 "}\n"
 "QComboBox:Focus {\n"
 "border: 1px solid red;\n"
@@ -489,19 +442,29 @@ class Ui_ct_FormReceber(object):
 "     subcontrol-origin: padding;\n"
 "     subcontrol-position: top right;\n"
 "     width: 25px;\n"
+"\n"
 "     border-left-width: 1px;\n"
 "     border-left-color: darkgray;\n"
 "     border-left-style: solid; /* just a single line */\n"
 "     border-top-right-radius: 3px; /* same radius as the QComboBox */\n"
 "     border-bottom-right-radius: 3px;\n"
+"\n"
 " }\n"
 "QComboBox::down-arrow {\n"
-"     image: url(Images/down.png);\n"
+"     image: url(down.png);\n"
 " }\n"
+"QComboBox QAbstractItemView {\n"
+"    border: 1px solid darkgray;\n"
+"    selection-background-color: #40a286;\n"
+"color: #000;\n"
+"font: 10px \"Arial\" ;\n"
+"text-transform: uppercase;\n"
+"font-weight: bold;\n"
+"}\n"
 "")
         self.cb_formaPagamento.setObjectName("cb_formaPagamento")
         self.lb_FormVenda_28 = QtWidgets.QLabel(self.fr_financeiroCompra)
-        self.lb_FormVenda_28.setGeometry(QtCore.QRect(20, 180, 130, 30))
+        self.lb_FormVenda_28.setGeometry(QtCore.QRect(20, 100, 130, 30))
         self.lb_FormVenda_28.setStyleSheet("QLabel{\n"
 "font-size: 12px;\n"
 "font-family: \"Arial\";\n"
@@ -513,7 +476,7 @@ class Ui_ct_FormReceber(object):
         self.lb_FormVenda_28.setObjectName("lb_FormVenda_28")
         self.bt_receber = QtWidgets.QPushButton(self.fr_financeiroCompra)
         self.bt_receber.setEnabled(True)
-        self.bt_receber.setGeometry(QtCore.QRect(160, 220, 125, 30))
+        self.bt_receber.setGeometry(QtCore.QRect(160, 140, 125, 30))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(10)
@@ -681,16 +644,10 @@ class Ui_ct_FormReceber(object):
         self.dt_Vencimento.setDisplayFormat(QtWidgets.QApplication.translate("ct_FormReceber", "dd/MM/yyyy", None, -1))
         self.lb_FormCompra_7.setText(QtWidgets.QApplication.translate("ct_FormReceber", "VENCIMENTO", None, -1))
         self.lb_FormCompra_8.setText(QtWidgets.QApplication.translate("ct_FormReceber", "OBSERVAÇÕES", None, -1))
-        self.tx_juros.setText(QtWidgets.QApplication.translate("ct_FormReceber", "0.00", None, -1))
-        self.tx_juros.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormReceber", "R$ 0.00", None, -1))
         self.lb_FormVenda_14.setText(QtWidgets.QApplication.translate("ct_FormReceber", "DATA PAGAMENTO", None, -1))
         self.dt_dataPagamento.setDisplayFormat(QtWidgets.QApplication.translate("ct_FormReceber", "dd/MM/yyyy", None, -1))
-        self.lb_FormVenda_25.setText(QtWidgets.QApplication.translate("ct_FormReceber", "JUROS", None, -1))
         self.lb_FormVenda_22.setText(QtWidgets.QApplication.translate("ct_FormReceber", "VALOR PENDENTE", None, -1))
         self.lb_ValorPendente.setText(QtWidgets.QApplication.translate("ct_FormReceber", "0.00", None, -1))
-        self.tx_desconto.setText(QtWidgets.QApplication.translate("ct_FormReceber", "0.00", None, -1))
-        self.tx_desconto.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormReceber", "R$ 0.00", None, -1))
-        self.lb_FormVenda_26.setText(QtWidgets.QApplication.translate("ct_FormReceber", "DESCONTO", None, -1))
         self.tx_valorPago.setText(QtWidgets.QApplication.translate("ct_FormReceber", "0.00", None, -1))
         self.tx_valorPago.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormReceber", "R$ 0.00", None, -1))
         self.lb_FormVenda_27.setText(QtWidgets.QApplication.translate("ct_FormReceber", "FORMA PAGAMENTO", None, -1))

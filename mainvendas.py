@@ -208,8 +208,8 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             self.tx_QntdItem.setFocus()
         else:
             self.tx_BuscaItem.setText("Produto não encontrado")
-            self.tx_BuscaItem.clear()
-            self.tx_BuscaItem.setFocus()
+            self.tx_IdBuscaItem.clear()
+            self.tx_IdBuscaItem.setFocus()
 
     # Calculo ValorTotalItem
     def TotalItem(self):
@@ -328,7 +328,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
             INSERI.dataRecebimento = QtCore.QDate.toString(
                 QtCore.QDate.currentDate(), "yyyy-MM-dd")
-            INSERI.cadContaReceber()
+            INSERI.ReceberConta()
             self.ParcelasAReceber()
 
     # Entregando Produtos DB
@@ -424,7 +424,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             self.conteudoTabela(self.tb_Parcelas, i,
                                 2, str(busca.valor[i]))
             self.tx_tabelaReceber(self.tb_Parcelas, i, 3, busca.idStatus[
-                                  i], str(busca.valor[i] - busca.valorRecebido[i]))
+                                  i], str(busca.valorPendente[i]))
             self.botaoReceberParcela(self.tb_Parcelas, i, 4,
                                      partial(self.Receber, i), "Receber", busca.idStatus[i])
 

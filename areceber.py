@@ -80,12 +80,12 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
             self.conteudoTabela(self.tb_AReceber, i, 5,
                                 "R$ "+str(busca.valor[i]))
 
-            self.tx_tabelaReceber(self.tb_AReceber, i, 6, busca.idStatus[i],
-                                  str(busca.valor[i]))
+            self.conteudoTabela(self.tb_AReceber, i, 6,
+                                "R$ "+str(busca.valorPendente[i]))
             self.botaoReceberParcela(
                 self.tb_AReceber, i, 7, partial(
                     self.BuscaContaAReceber, busca.idConta[i]),
-                "Receber",  busca.idStatus[i])
+                "Receber",  2)
 
     # Cadastro e Edição conta a receber
 
@@ -130,6 +130,9 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
 
         """ Fim Chamadas """
 
+        # Botao Receber
+        self.bt_receber.clicked.connect(self.ReceberParcela)
+
         # Botao Salvar
         self.bt_Salvar.clicked.connect(self.cadConta)
 
@@ -146,23 +149,44 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
 
     def BuscaContaAReceber(self, id):
         self.formAReceber()
-        self.tx_Cod.setText(str(id))
+        busca = CrudAReceber()
+        busca.idConta = id
+        busca.selectContaId()
+        self.tx_Cod.setText(str(busca.idConta))
+        self.tx_Id.setText(str(busca.idCliente))
+        self.BuscaClienteId(self.tx_descricao)
+        self.tx_descricao.setText(busca.descricao)
+        self.cb_categoria.setCurrentIndex(
+            self.cb_categoria.findData(busca.categoria))
+        self.dt_Vencimento.setDate(busca.dataVencimento)
+        self.tx_valor.setText(str(busca.valor))
+        self.tx_Obs.setPlainText(busca.obs)
+        if busca.dataRecebimento:
+            self.dt_dataPagamento.setDate(busca.dataRecebimento)
+        self.cb_formaPagamento.setCurrentIndex(
+            self.cb_formaPagamento.findData(busca.formaPagamento))
+        self.tx_valorPago.setText(str(busca.valorPendente))
+        self.lb_ValorPendente.setText(str(busca.valorPendente))
+
+        if busca.idStatus == 1:
+            self.bt_receber.setDisabled(True)
+            self.desabilitaLineEdit(self.fr_FormReceber)
+
         pass
 
     # Recebendo pagamento DB
     def ReceberParcela(self, id):
         # print(self.tb_AReceber.item(id, 0).text())
 
-        if self.tb_AReceber.cellWidget(id, 6).text():
+        if self.tx_valorPago:
             INSERI = CrudAReceber()
-            INSERI.idConta = self.tb_AReceber.item(id, 0).text()
-            INSERI.valorRecebido = self.tb_AReceber.cellWidget(
-                id, 6).text().replace(",", ".")
+            INSERI.idConta = self.tx_Cod.text()
+            INSERI.valorRecebido = self.tx_valorPago.text().replace(",", ".")
 
             INSERI.dataRecebimento = QtCore.QDate.toString(
                 QtCore.QDate.currentDate(), "yyyy-MM-dd")
-            INSERI.cadContaReceber()
-            self.tabelaAReceber()
+            INSERI.ReceberConta()
+            self.BuscaContaAReceber(self.tx_Cod.text())
         pass
 
     def cadConta(self):

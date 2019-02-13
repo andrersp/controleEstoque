@@ -10,7 +10,7 @@ class CrudAReceber(object):
                  categoria="", dataVencimento="", valor="", formaPagamento="",
                  dataRecebimento="", valorRecebido="", idStatus="", dataInicio="",
                  dataFim="", totalReceita="", totalAReceber="", categoriaID="",
-                 cliente="", telefoneCliente="", status=""):
+                 cliente="", telefoneCliente="", status="", valorPendente=""):
         self.idConta = idConta
         self.idCliente = idCliente
         self.idVenda = idVenda
@@ -30,6 +30,7 @@ class CrudAReceber(object):
         self.cliente = cliente
         self.telefoneCliente = telefoneCliente
         self.status = status
+        self.valorPendente = valorPendente
 
     def lastIdAReceber(self):
         conecta = Conexao()
@@ -76,13 +77,17 @@ class CrudAReceber(object):
             c.execute(""" INSERT INTO contasAReceber (id, idVenda, idCliente,
               descricao, obs, categoria, vencimento, valor, formapagamento)
               VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')
-              ON DUPLICATE KEY UPDATE
-              recebido='{}', valorRecebido= valorRecebido + '{}', status='{}'"""
+              ON DUPLICATE KEY UPDATE idVenda='{}', idCliente='{}'
+              descricao='{}', obs='{}', categoria='{}', vencimento='{}',
+              valor='{}', formapagamento='{}' """
                       .format(self.idConta, self.idVenda, self.idCliente,
                               self.descricao, self.obs, self.categoria,
-                              self.dataVencimento, self.valor, self.formaPagamento,
-                              self.dataRecebimento, self.valorRecebido,
-                              self.updateStatus()
+                              self.dataVencimento, self.valor,
+                              self.formaPagamento,
+                              self.idVenda, self.idCliente,
+                              self.descricao, self.obs, self.categoria,
+                              self.dataVencimento, self.valor,
+                              self.formaPagamento
                               ))
             conecta.conecta.commit()
             c.close()
@@ -90,7 +95,23 @@ class CrudAReceber(object):
         except mysql.connector.Error as err:
             print(err)
 
+    # Receber conta
+    def ReceberConta(self):
+        conecta = Conexao()
+        c = conecta.conecta.cursor()
+
+        try:
+            c.execute(""" UPDATE  contasAReceber SET recebido='{}', 
+            valorRecebido=valorRecebido + '{}', status='{}' WHERE id='{}' """
+                      .format(self.dataRecebimento, self.valorRecebido,
+                              self.updateStatus(), self.idConta))
+            conecta.conecta.commit()
+            c.close()
+        except mysql.connector.Error as err:
+            print(err)
+
     # Update no status caso o valor recebido seja igual ou maior que o devedor
+
     def updateStatus(self):
         conecta = Conexao()
         c = conecta.conecta.cursor()
@@ -136,6 +157,7 @@ class CrudAReceber(object):
             self.dataRecebimento = []
             self.valorRecebido = []
             self.idStatus = []
+            self.valorPendente = []
 
             for lista in row:
                 self.idConta.append(lista[0])
@@ -150,11 +172,12 @@ class CrudAReceber(object):
                 self.dataRecebimento.append(lista[9])
                 self.valorRecebido.append(lista[10])
                 self.idStatus.append(lista[11])
+                self.valorPendente.append(lista[7] - lista[10])
 
         except mysql.connector.Error as err:
             print(err)
-    # Tabela contas a Receber
 
+    # Tabela contas a Receber
     def listaAReceber(self):
         conecta = Conexao()
         c = conecta.conecta.cursor()
@@ -186,6 +209,7 @@ class CrudAReceber(object):
             self.cliente = []
             self.telefoneCliente = []
             self.status = []
+            self.valorPendente = []
             row = c.fetchall()
 
             if row:
@@ -194,18 +218,50 @@ class CrudAReceber(object):
                     self.descricao.append(lista[3])
                     self.dataVencimento.append(
                         datetime.date.strftime(lista[6], "%d-%m-%Y"))
-                    self.valor.append(lista[7] - lista[10])
+                    self.valor.append(lista[7])
                     self.idStatus.append(lista[11])
                     self.cliente.append(lista[12])
                     self.telefoneCliente.append(lista[13])
                     self.status.append(lista[15])
+                    self.valorPendente.append(lista[7] - lista[10])
+        except mysql.connector.Error as err:
+            print(err)
+
+    # Selecionar conta a Receber por id da conta
+    def selectContaId(self):
+        conecta = Conexao()
+        c = conecta.conecta.cursor()
+
+        try:
+            c.execute(
+                """ SELECT * FROM contasAReceber
+                WHERE id = '{}' """
+                .format(self.idConta))
+            row = c.fetchone()
+
+            if row:
+                self.idConta = row[0]
+                self.idVenda = row[1]
+                self.idCliente = row[2]
+                self.descricao = row[3]
+                self.obs = row[4]
+                self.categoria = row[5]
+                self.dataVencimento = row[6]
+                self.valor = row[7]
+                self.formaPagamento = row[8]
+                self.dataRecebimento = row[9]
+                self.valorRecebido = row[10]
+                self.idStatus = row[11]
+                self.valorPendente = row[7] - row[10]
+
         except mysql.connector.Error as err:
             print(err)
 
 
 # busca = CrudAReceber()
-# busca.listaStatus()
-# print(busca.status)
+# busca.idConta = 3
+# busca.selectContaId()
+# print(busca.valorPendente)
 # busca.dataInicio = '2019-02-01'
 # busca.dataFim = '2019-03-28'
 # busca.idStatus = 2

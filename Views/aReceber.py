@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'aReceber.ui',
 # licensing of 'aReceber.ui' applies.
 #
-# Created: Sat Feb  9 22:51:00 2019
+# Created: Wed Feb 13 01:28:41 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -207,7 +207,6 @@ class Ui_ct_AReceber(object):
             QtWidgets.QAbstractItemView.NoSelection)
         self.tb_AReceber.setSelectionBehavior(
             QtWidgets.QAbstractItemView.SelectRows)
-        self.tb_AReceber.setTextElideMode(QtCore.Qt.ElideMiddle)
         self.tb_AReceber.setShowGrid(False)
         self.tb_AReceber.setCornerButtonEnabled(False)
         self.tb_AReceber.setRowCount(0)
@@ -219,8 +218,28 @@ class Ui_ct_AReceber(object):
         item = QtWidgets.QTableWidgetItem()
         self.tb_AReceber.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        brush = QtGui.QBrush(QtGui.QColor(80, 79, 79))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        item.setForeground(brush)
         self.tb_AReceber.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        font.setBold(True)
+        font.setWeight(75)
+        item.setFont(font)
+        brush = QtGui.QBrush(QtGui.QColor(80, 79, 79))
+        brush.setStyle(QtCore.Qt.SolidPattern)
+        item.setForeground(brush)
         self.tb_AReceber.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tb_AReceber.setHorizontalHeaderItem(4, item)
@@ -271,6 +290,6 @@ class Ui_ct_AReceber(object):
         self.tb_AReceber.horizontalHeaderItem(5).setText(
             QtWidgets.QApplication.translate("ct_AReceber", "VALOR", None, -1))
         self.tb_AReceber.horizontalHeaderItem(6).setText(
-            QtWidgets.QApplication.translate("ct_AReceber", "SALDO", None, -1))
+            QtWidgets.QApplication.translate("ct_AReceber", "PENDENTE", None, -1))
         self.tb_AReceber.horizontalHeaderItem(7).setText(
             QtWidgets.QApplication.translate("ct_AReceber", "RECEBER", None, -1))

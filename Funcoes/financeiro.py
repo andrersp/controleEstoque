@@ -60,3 +60,7 @@ class Financeiro(object):
         self.model = QtCore.QStringListModel(self)
         self.completer.setModel(self.model)
         self.tx_NomeFantasia.setCompleter(self.completer)
+
+    def desabilitaLineEdit(self, frame):
+        for filho in frame.findChildren(QtWidgets.QLineEdit):
+            filho.setReadOnly(True)
