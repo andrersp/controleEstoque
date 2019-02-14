@@ -499,7 +499,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                            "     border-bottom-right-radius: 3px;\n"
                            " }\n"
                            "QDateEdit::down-arrow {\n"
-                           "     image: url(down.png);\n"
+                           "     image: url("+self.resourcepath('Images/down.png')+");\n"
                            " }\n"
                            "QCalendarWidget QAbstractItemView:enabled \n"
                            "  {\n"

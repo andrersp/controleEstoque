@@ -206,7 +206,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url(Images/down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }</string>
      </property>
      <property name="displayFormat">
@@ -267,7 +267,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url(Images/down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }</string>
      </property>
      <property name="displayFormat">

@@ -68,7 +68,7 @@ class Ui_ct_APagar(object):
                                      "     border-bottom-right-radius: 3px;\n"
                                      " }\n"
                                      "QDateEdit::down-arrow {\n"
-                                     "     image: url(Images/down.png);\n"
+                                     "     image: url("+self.resourcepath('Images/down.png')+");\n"
                                      " }")
         self.dt_Inicio.setCalendarPopup(True)
         self.dt_Inicio.setObjectName("dt_Inicio")
@@ -114,7 +114,7 @@ class Ui_ct_APagar(object):
                                   "     border-bottom-right-radius: 3px;\n"
                                   " }\n"
                                   "QDateEdit::down-arrow {\n"
-                                  "     image: url(Images/down.png);\n"
+                                  "     image: url("+self.resourcepath('Images/down.png')+");\n"
                                   " }")
         self.dt_Fim.setCalendarPopup(True)
         self.dt_Fim.setObjectName("dt_Fim")
@@ -150,7 +150,7 @@ class Ui_ct_APagar(object):
                                        "     border-bottom-right-radius: 3px;\n"
                                        " }\n"
                                        "QComboBox::down-arrow {\n"
-                                       "     image: url(Images/down.png);\n"
+                                       "     image: url("+self.resourcepath('Images/down.png')+");\n"
                                        " }\n"
                                        "")
         self.cb_Situacao.setObjectName("cb_Situacao")

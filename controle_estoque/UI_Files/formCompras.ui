@@ -320,7 +320,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url(Images/down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }</string>
      </property>
      <property name="displayFormat">
@@ -381,7 +381,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url(Images/down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }
 QCalendarWidget QAbstractItemView:enabled 
   {
@@ -534,7 +534,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url(Images/down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }</string>
      </property>
      <property name="displayFormat">
@@ -1638,7 +1638,7 @@ border: 1px solid red;
 
  }
 QComboBox::down-arrow {
-     image: url(down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }
 QComboBox QAbstractItemView {
     border: 1px solid darkgray;
@@ -1730,7 +1730,7 @@ border: 1px solid red;
 
  }
 QComboBox::down-arrow {
-     image: url(down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }
 QComboBox QAbstractItemView {
     border: 1px solid darkgray;
@@ -1820,7 +1820,7 @@ font-weight: bold
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url(down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }
 QCalendarWidget QAbstractItemView:enabled 
   {

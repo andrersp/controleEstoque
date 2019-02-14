@@ -137,7 +137,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url(down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }
 QCalendarWidget QAbstractItemView:enabled 
   {
@@ -258,7 +258,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url(down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }
 QCalendarWidget QAbstractItemView:enabled 
   {

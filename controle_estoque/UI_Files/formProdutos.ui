@@ -206,7 +206,7 @@ border: 1px solid red;
      border-bottom-right-radius: 3px;
  }
 QComboBox::down-arrow {
-     image: url(Images/down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }
 </string>
     </property>
@@ -298,7 +298,7 @@ border: 1px solid red;
      border-bottom-right-radius: 3px;
  }
 QComboBox::down-arrow {
-     image: url(Images/down.png);
+     image: url("+self.resourcepath('Images/down.png')+");
  }
 </string>
     </property>

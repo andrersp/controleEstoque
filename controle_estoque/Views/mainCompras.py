@@ -102,7 +102,7 @@ class Ui_ct_MainCompras(object):
                                            "     border-bottom-right-radius: 3px;\n"
                                            " }\n"
                                            "QDateEdit::down-arrow {\n"
-                                           "     image: url(Images/down.png);\n"
+                                           "     image: url("+self.resourcepath('Images/down.png')+");\n"
                                            " }")
         self.dt_InicioCompra.setCalendarPopup(True)
         self.dt_InicioCompra.setObjectName("dt_InicioCompra")
@@ -137,7 +137,7 @@ class Ui_ct_MainCompras(object):
                                         "     border-bottom-right-radius: 3px;\n"
                                         " }\n"
                                         "QDateEdit::down-arrow {\n"
-                                        "     image: url(Images/down.png);\n"
+                                        "     image: url("+self.resourcepath('Images/down.png')+");\n"
                                         " }")
         self.dt_FimCompra.setCalendarPopup(True)
         self.dt_FimCompra.setObjectName("dt_FimCompra")
