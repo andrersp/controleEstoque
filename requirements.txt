@@ -1,3 +1,4 @@
 PySide2
-mysql
+mysql-connector
 jinja2
+pycep_correios

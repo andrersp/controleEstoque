@@ -43,5 +43,13 @@ class Funcao(object):
                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         botao.setIcon(icon)
         botao.setIconSize(QtCore.QSize(80, 35))
+    
+    # Mascara Telefone
+    def TelefoneMask(self, telefone):
+        if len(telefone) == 11:
+            self.tx_Telefone.setInputMask("(00) 00000-0000")
+        else:
+            self.tx_Telefone.setInputMask("(00) 0000-0000")
+        pass
 
     

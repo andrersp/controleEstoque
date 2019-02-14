@@ -352,7 +352,7 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
             data = QtCore.QByteArray()
             buf = QtCore.QBuffer(data)
             imagem.save(buf, 'PNG')
-            INSERI.imagemProduto = str(data.toBase64(), encoding='utf8')
+            INSERI.imagemProduto = str(data.toBase64())[2:-1]
 
         INSERI.idCategoria = self.cb_CategoriaProduto.currentData()
         INSERI.idMarca = self.cb_MarcaProduto.currentData()

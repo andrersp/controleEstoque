@@ -123,6 +123,10 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         # Validador Campos Float
         self.ValidaInputFloat(self.tx_valor)
         self.ValidaInputFloat(self.tx_valorPago)
+
+        #valida Campo Int
+        self.ValidaInputInt(self.tx_Id)
+        
         """ Fim Chamanda financeiro.py  """
 
         """ Chamanda de funções localizadas no arquivo FormaPagamento.py na pasta Funcoes """

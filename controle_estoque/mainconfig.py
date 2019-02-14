@@ -198,7 +198,8 @@ class MainConfig(Ui_ct_MainConfig):
             data = QtCore.QByteArray()
             buf = QtCore.QBuffer(data)
             image.save(buf, 'PNG')
-            INSERI.logo = str(data.toBase64(), encoding='utf8')
+            logo = str(data.toBase64())[2:-1]
+            INSERI.logo = logo
 
         INSERI.CadEmpresa()
         self.lb_NomeFantasia.setText(self.tx_Titulo.text())

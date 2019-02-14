@@ -27,6 +27,7 @@ class Fornecedor(object):
         busca.SelectFornecedorId(id)
         if busca.NomeFantasia:
             self.tx_NomeFantasia.setText(busca.NomeFantasia)
+            self.TelefoneMask(busca.telefone)
             self.tx_Telefone.setText(busca.telefone)
             campoFoco.setFocus()
         else:
