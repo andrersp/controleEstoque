@@ -1,2 +1,2 @@
 # controleEstoque
-Controle de Estoque PyQt5
+Controle de Estoque PySide2
