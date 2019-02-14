@@ -107,3 +107,13 @@ class Financeiro(object):
         validarValor.setNotation(QtGui.QDoubleValidator.StandardNotation)
         validarValor.setDecimals(2)
         campo.setValidator(validarValor)
+
+    # def TelefoneMask(self, campo, telefone):
+    #     if len(telefone) == 11:
+    #         campo.setInputMask("(00) 00000-0000")
+    #     else:
+    #         campo.setInputMask("(00) 0000-0000")
+    #     pass
+
+
+print(len("00000000000"))
