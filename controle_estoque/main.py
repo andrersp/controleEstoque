@@ -7,7 +7,6 @@ import mysql.connector
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 
 # from PySide2.QtWebEngineWidgets import QWebEnginePage
-# from Views.DialogConfig import Ui_Dialog
 from Crud.conexao import Conexao
 from Crud.CrudEmpresa import CrudEmpresa
 from Funcoes.categoriaAPagar import CategoriaAPagar
