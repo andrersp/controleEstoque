@@ -1,35 +1,34 @@
 # -*- coding: utf-8 -*-
-
-import sys
-import mysql.connector
-from Crud.conexao import Conexao
-# from Views.DialogConfig import Ui_Dialog
-from PySide2 import QtCore, QtGui, QtWidgets, QtPrintSupport
-# from PySide2.QtWebEngineWidgets import QWebEnginePage
-from Views.main import Ui_MainWindow
-from home import MainHome
-from Funcoes.data import DataAtual
-from mainprodutos import MainProdutos
-from mainvendas import MainVendas
-from mainclientes import MainClientes
-from maincompras import MainCompras
-from mainfinanceiro import MainFinanceiro
-from mainfornecedor import MainFornecedor
-from mainconfig import MainConfig
-from Funcoes.Funcoes import Funcao
-from Crud.CrudEmpresa import CrudEmpresa
 import os
-from jinja2 import Environment, PackageLoader, FileSystemLoader
+import sys
 import random
 
+import mysql.connector
+from jinja2 import Environment, PackageLoader, FileSystemLoader
 
-from Funcoes.comercial import Comercial
-from Funcoes.financeiro import Financeiro
-from Funcoes.Fornecedor import Fornecedor
-from Funcoes.Clientes import Clientes
-from Funcoes.FormaPagamento import FormaPagamento
+# from PySide2.QtWebEngineWidgets import QWebEnginePage
+# from Views.DialogConfig import Ui_Dialog
+from Crud.conexao import Conexao
+from Crud.CrudEmpresa import CrudEmpresa
 from Funcoes.categoriaAPagar import CategoriaAPagar
 from Funcoes.categoriaAReceber import CategoriaAReceber
+from Funcoes.Clientes import Clientes
+from Funcoes.comercial import Comercial
+from Funcoes.data import DataAtual
+from Funcoes.financeiro import Financeiro
+from Funcoes.FormaPagamento import FormaPagamento
+from Funcoes.Fornecedor import Fornecedor
+from Funcoes.Funcoes import Funcao
+from home import MainHome
+from mainclientes import MainClientes
+from maincompras import MainCompras
+from mainconfig import MainConfig
+from mainfinanceiro import MainFinanceiro
+from mainfornecedor import MainFornecedor
+from mainprodutos import MainProdutos
+from mainvendas import MainVendas
+from PySide2 import QtCore, QtGui, QtWidgets, QtPrintSupport
+from Views.main import Ui_MainWindow
 
 
 class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,

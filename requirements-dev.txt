@@ -1,0 +1,8 @@
+-r requirements.txt
+ipdb
+ipython
+pre-commit
+pytest
+tox
+twine
+wheel
