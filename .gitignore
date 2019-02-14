@@ -66,3 +66,7 @@ target/
 .env
 .venv
 .idea
+
+# Workspace Vscode
+.vscode
+Software.code-workspace
