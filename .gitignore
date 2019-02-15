@@ -70,3 +70,4 @@ target/
 # Workspace Vscode
 .vscode
 Software.code-workspace
+*.html
