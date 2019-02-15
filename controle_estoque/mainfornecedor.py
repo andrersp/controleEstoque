@@ -64,7 +64,7 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
                                         lista.NomeFantasia[i],
                                         lista.RazaoSocial[i])
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 3,
-                                        lista.telefone[i], "")
+                                        self.formatoNumTelefone(lista.telefone[i]), "")
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 4,
                                         lista.email[i], "")
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 5,

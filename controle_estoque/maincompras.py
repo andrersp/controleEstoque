@@ -73,7 +73,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
             self.TabelaNomeTelefone(
                 self.tb_Compras, i, 2, busca.NomeFantasia[i],
-                busca.telefoneCliente[i])
+                self.formatoNumTelefone(busca.telefoneCliente[i]))
             self.TabelaEntrega(self.tb_Compras, i, 3,
                                busca.dataEmissao[i],
                                self.StatusEntrega(busca.idStatusEntrega[i]), "")
@@ -374,10 +374,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             self.bt_GerarParcela.setEnabled(True)
         if busca.statusEntrega == 2:
             self.bt_Entregar.setEnabled(True)
-
         if busca.statusEntrega == 1:
             self.tb_Itens.setColumnHidden(6, True)
-
             for item in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
                 item.setReadOnly(True)
 
@@ -422,6 +420,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         if busca.dataVencimento:
             self.bt_GerarParcela.setDisabled(True)
             self.tb_Itens.setColumnHidden(6, True)
+            for item in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
+                item.setDisabled(True)
 
         for i in range(len(busca.dataVencimento)):
             self.tb_Parcelas.insertRow(i)

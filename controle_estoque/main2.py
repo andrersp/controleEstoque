@@ -38,13 +38,19 @@ class ProgramaImpressor(QtWidgets.QDialog):
 
         self.btnimprimir.clicked.connect(self.imprimir)
 
-    def previaImpressao(self, arg):
+    def previaImpressao(self):
         self.printer = QtPrintSupport.QPrinter()
-        self.dialogo = QtPrintSupport.QPrintDialog(self.printer)
+        self.printer.setOutputFormat(QtPrintSupport.QPrinter.PdfFormat)
+        self.printer.setOutputFileName('/home/andre/print.pdf')
+        painter = QtGui.QPainter()
+        painter.begin(self.printer)
+        self.documento.drawContents(painter, QtCore.QRectF(1,1,0,10))
+        painter.end()
+        
+        
+    def handerpaint(self, print):
+        self.documento.render(QtGui.QPainter(print))
 
-        # self.dialogo.paintRequested.connect(self.documento.print_)
-        if self.dialogo.exec_() == True:
-            self.documento.page().print(self.printer, self.okPrinter)
 
     def resourcepath(self, relative_path):
         base_path = getattr(sys, '_MEIPASS', os.path.dirname(
@@ -52,7 +58,7 @@ class ProgramaImpressor(QtWidgets.QDialog):
         return os.path.join(base_path, relative_path)
 
     def imprimir(self):
-        self.documento = QWebEngineView()
+        self.documento = QtGui.QTextDocument()
 
         headertable = ["Cod", "Nome Fantasia", "Telefone", "Email", "Site"]
         buscaFornecedor = CrudFornecedor()
@@ -69,10 +75,11 @@ class ProgramaImpressor(QtWidgets.QDialog):
             emailFornecedor=buscaFornecedor.email
 
         )
-
-        self.documento.load(QtCore.QUrl("file:///" +
-                                        self.resourcepath("report.html")))
-        self.documento.loadFinished['bool'].connect(self.previaImpressao)
+        self.documento.setHtml(html)
+        self.previaImpressao()
+        # self.documento.load(QtCore.QUrl("file:///" +
+        #                                 self.resourcepath("report.html")))
+        # self.documento.loadFinished['bool'].connect(self.previaImpressao)
 
         # document.print_(self.PrintTab)
 

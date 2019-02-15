@@ -536,7 +536,7 @@ class Ui_ct_FormFornecedor(object):
         self.lb_FormFornecedor_3.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "CNPJ", None, -1))
         self.lb_FormFornecedor_4.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "IE", None, -1))
         self.lb_FormFornecedor_5.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "TELEFONE ", None, -1))
-        self.tx_Telefone.setInputMask(QtWidgets.QApplication.translate("ct_FormFornecedor", "(00) 0000-0000", None, -1))
+        self.tx_Telefone.setInputMask(QtWidgets.QApplication.translate("ct_FormFornecedor", "(00) 0000-00000", None, -1))
         self.tx_Telefone.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "() -", None, -1))
         self.tx_Obs.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormFornecedor", "Observação", None, -1))
         self.lb_FormFornecedor_7.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "OBSERVAÇÃO", None, -1))

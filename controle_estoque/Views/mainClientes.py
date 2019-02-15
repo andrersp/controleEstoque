@@ -224,9 +224,9 @@ class Ui_ct_MainClientes(object):
         item = self.tb_Clientes.horizontalHeaderItem(2)
         item.setText(_translate("ct_MainClientes", "NOME"))
         item = self.tb_Clientes.horizontalHeaderItem(3)
-        item.setText(_translate("ct_MainClientes", "EMAIL"))
-        item = self.tb_Clientes.horizontalHeaderItem(4)
         item.setText(_translate("ct_MainClientes", "TELEFONE"))
+        item = self.tb_Clientes.horizontalHeaderItem(4)
+        item.setText(_translate("ct_MainClientes", "E-MAIL"))
         item = self.tb_Clientes.horizontalHeaderItem(5)
         item.setText(_translate("ct_MainClientes", "EDITAR"))
         self.lb_tituloClientes.setText(

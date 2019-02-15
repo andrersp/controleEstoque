@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from PySide2 import QtGui, QtCore, QtWidgets
 from functools import partial
+import re
 
 
 class Funcao(object):
@@ -51,5 +52,18 @@ class Funcao(object):
         else:
             self.tx_Telefone.setInputMask("(00) 0000-0000")
         pass
-
     
+    #Formatando numero de telefone as tabelas
+    def formatoNumTelefone(self, telefone):
+        telefone = re.sub('[^0-9]+', '', telefone)
+        if len(telefone) == 11:
+            formato = re.sub('(\d{2})(\d{5})(\d{4})', r'(\1) \2-\3', telefone)
+        elif len(telefone) == 10:
+            formato = re.sub('(\d{2})(\d{4})(\d{4})', r'(\1) \2-\3', telefone)
+        else:
+            formato = ""
+        
+        return formato
+
+
+

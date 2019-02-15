@@ -67,7 +67,8 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 2,
                                         lista.nomeCliente[i], lista.apelidoCliente[i])
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 3,
-                                        lista.celularCliente[i], lista.telefoneCliente[i])
+                                        self.formatoNumTelefone(lista.celularCliente[i]), 
+                                        self.formatoNumTelefone(lista.telefoneCliente[i]))
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 4,
                                         lista.emailCliente[i], "")
                 # Sinal click tabela
