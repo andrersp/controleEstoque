@@ -2,6 +2,7 @@
 import os
 import sys
 import random
+import webbrowser
 
 import mysql.connector
 from jinja2 import Environment, PackageLoader, FileSystemLoader
@@ -558,12 +559,8 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
     # Imprimindo
     def previaImpressao(self, arg):
-        self.printer = QtPrintSupport.QPrinter()
-        self.dialogo = QtPrintSupport.QPrintDialog(self.printer)
-
-        # self.dialogo.paintRequested.connect(self.documento.print_)
-        if self.dialogo.exec_() == True:
-            self.documento.print(self.printer, self.okPrinter)
+        self.documento.page().printToPdf('teste.pdf')
+        webbrowser.open_new('teste.pdf')
 
     def okPrinter(self, sucess):
         pass

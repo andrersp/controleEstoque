@@ -2,56 +2,95 @@
 {% extends "topo.html" %}
 
 {% block body %}
-{{ titulo }} {{idPedido}}
-<table class='TableRelat' >
-		<thead >
+<div id="cliente">
+	<span><b>Cliente:</b></span>
+	<span>Endereço:</span>
+	<class class="box">
+		<span>Cep:</span>
+		<span>E-mail</span>
+		<span>CPF/CNPJ: </span>
+	</class>
+	<class class="box">
+		<span></span>
+		<span></span>
+		<span>Cidade:</span>
+		<span>Telefone:</span>
+		<span>RG/Insc. Estadual</span>
+	</class>
+	<class class="box">
+		<span> </span>
+		<span> </span>
+		<span>Bairro:</span>
+		<span>Estado:</span>
+		<span>Celula:</span>
+	</class>
+
+
+
+</div>
+
+<table class='TableRelat'>
+	<caption>Itens</caption>
+	<thead>
 		<tr>
-			{% for row in headertable %}
-			<th> {{ row }}</th>
-			{% endfor %}
+			<th>Produto</th>
+			<th>Observação</th>
+			<th style="width:80px; text-align: center;">Qtde.</th>
+			<th style="width:80px; text-align: center">$ Unitário</th>
+			<th style="width:80px; text-align: center">$ Total</th>
 		</tr>
-		</thead>
-		<tbody>
-		{% for i in range(nomeCliente | length)  %}
+	</thead>
+	<tbody>
+		{% for i in range(descProduto | length)  %}
 		<tr>
 			<td>
-				{{codcliente[i]}}
+				{{descProduto[i]}}
 			</td>
 			<td>
-				{{ nomeCliente[i] }}
+				{{ observacao[i] }}
 			</td>
-			<td>
-				{{ telefoneFornecedor[i]}}
+			<td style="text-align: center">
+				{{ quantidade[i] }}
 			</td>
-			<td>
-				{{ emailFornecedor[i]}}
-				
+			<td style="text-align: center">
+				R$ {{ valUnit[i]}}
 			</td>
-				
+			<td style="text-align: center">
+				R$ {{ valTotalItens[i]}}
+			</td>
+
 		</tr>
-		</tbody>
-		{% endfor %}
-		<tfoot>
-			<tr>
-				<th colspan="4">Sub-Total:</th>
-				<th></th>
-			</tr>
-			<tr>
-				<th colspan="4">Frete:</th>
-				<th></th>
-			</tr>
-			<tr>
-				<th colspan="4">Desconto:</th>
-				<th></th>
-			</tr>
-			<tr>
-				<th colspan="4">Total:</th>
-				<th></th>
-			</tr>
-			
-		</tfoot>
-	</table>
-	
+	</tbody>
+	{% endfor %}
+	<tfoot>
+		<tr>
+			<th colspan="4">Sub-Total:</th>
+			<th> R$ {{ subtotal }}</th>
+		</tr>
+		<tr>
+			<th colspan="4">Frete:</th>
+			<th> R$ {{ frete }}</th>
+		</tr>
+		<tr>
+			<th colspan="4">Desconto:</th>
+			<th>R$ {{ desconto }}</th>
+		</tr>
+		<tr>
+			<th colspan="4">Total:</th>
+			<th style="text-align: center; font-weight: bold; font-size: 14px"> R$ {{total}} </th>
+		</tr>
+
+	</tfoot>
+</table>
+
+<class class="status">
+	<span>{{ titulo }} <b>{{idPedido}}</b></span>
+	<span>Data Emissão: <b>{{ dataEmissao }}</b></span>
+	<span>Prazo Entrega: <b>{{ prazoEntrega }} </b></span>
+	<span>Data Entrega: <b>{{ dataEntrega }}</b></span>
+	<span>Financeiro: <b>{{ statusFinanceiro }}</b></span>
+	<span>Entrega: <b>{{ statusEntrega }}</b></span>
+</class>
 
 
 {% endblock %}

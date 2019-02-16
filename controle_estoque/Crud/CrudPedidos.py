@@ -109,9 +109,12 @@ class CrudPedidos(object):
         conecta = Conexao()
         c = conecta.conecta.cursor()
         try:
-            c.execute(""" SELECT pedidos.*, clientes.nome, clientes.celular 
+            c.execute(""" SELECT pedidos.*, clientes.nome, clientes.celular,
+                status_entrega.status_entrega
                 FROM pedidos 
-                INNER JOIN clientes ON pedidos.clienteId = clientes.id 
+                INNER JOIN clientes ON pedidos.clienteId = clientes.id
+                INNER JOIN status_entrega ON 
+                pedidos.statusEntrega = status_entrega.id 
                 WHERE pedidos.id = '{}' 
              """.format(id))
             row = c.fetchone()
@@ -128,6 +131,7 @@ class CrudPedidos(object):
                 self.valorPendente = row[9]
                 self.statusEntrega = row[10]
                 self.statusPagamento = row[11]
+                self.idStatusEntrega = row[12]
 
             self.idItemTabela = []
             self.idItem = []

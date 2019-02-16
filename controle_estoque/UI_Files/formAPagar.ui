@@ -359,7 +359,7 @@ border: 1px solid red;
      border-bottom-right-radius: 3px;
  }
 QComboBox::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }
 </string>
     </property>
@@ -456,7 +456,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }
 
 QCalendarWidget QAbstractItemView:enabled 
@@ -630,7 +630,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }
 
 QCalendarWidget QAbstractItemView:enabled 
@@ -820,7 +820,7 @@ border: 1px solid red;
 
  }
 QComboBox::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }
 QComboBox QAbstractItemView {
     border: 1px solid darkgray;
@@ -993,12 +993,12 @@ border: 1px solid red;
      border-bottom-right-radius: 3px;
  }
 QComboBox::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }
 </string>
     </property>
    </widget>
-   <widget class="QLabel" name="lb_FormCompra_10">
+   <widget class="QLabel" name="lb_Repetir">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -1242,7 +1242,7 @@ border: 1px solid red;
    <zorder>lb_FormCompra_9</zorder>
    <zorder>tx_valor</zorder>
    <zorder>cb_repetir</zorder>
-   <zorder>lb_FormCompra_10</zorder>
+   <zorder>lb_Repetir</zorder>
    <zorder>fr_BotoesFormCompra</zorder>
    <zorder>lb_obsRepetir</zorder>
    <zorder>bt_CancelAddCatergoria</zorder>

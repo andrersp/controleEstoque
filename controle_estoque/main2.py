@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 from PySide2 import QtCore, QtGui, QtWidgets, QtPrintSupport
 from PySide2.QtWebEngineWidgets import QWebEngineView
+import webbrowser
 
 from Crud.CrudFornecedor import CrudFornecedor
 from Crud.CrudEmpresa import CrudEmpresa
 import os
 from jinja2 import Environment, PackageLoader, FileSystemLoader
+from Funcoes.Funcoes import Funcao
 
 
-class ProgramaImpressor(QtWidgets.QDialog):
+class ProgramaImpressor(QtWidgets.QDialog, Funcao):
 
     def __init__(self, parent=None):
         super(ProgramaImpressor, self).__init__(parent)
@@ -39,13 +41,8 @@ class ProgramaImpressor(QtWidgets.QDialog):
         self.btnimprimir.clicked.connect(self.imprimir)
 
     def previaImpressao(self):
-        self.printer = QtPrintSupport.QPrinter()
-        self.printer.setOutputFormat(QtPrintSupport.QPrinter.PdfFormat)
-        self.printer.setOutputFileName('/home/andre/print.pdf')
-        painter = QtGui.QPainter()
-        painter.begin(self.printer)
-        self.documento.drawContents(painter, QtCore.QRectF(1,1,0,10))
-        painter.end()
+        self.documento.page().printToPdf('teste.pdf')
+        webbrowser.open_new('teste.pdf')
         
         
     def handerpaint(self, print):
@@ -58,7 +55,7 @@ class ProgramaImpressor(QtWidgets.QDialog):
         return os.path.join(base_path, relative_path)
 
     def imprimir(self):
-        self.documento = QtGui.QTextDocument()
+        self.documento = QWebEngineView()
 
         headertable = ["Cod", "Nome Fantasia", "Telefone", "Email", "Site"]
         buscaFornecedor = CrudFornecedor()
@@ -69,17 +66,15 @@ class ProgramaImpressor(QtWidgets.QDialog):
             titulo="pedidos",
             headertable=headertable,
             codcliente=buscaFornecedor.idFornecedor,
-            nomeFornecedor=buscaFornecedor.RazaoSocial,
+            nomeFornecedor=buscaFornecedor.NomeFantasia,
             telefoneFornecedor=buscaFornecedor.telefone,
             siteFornecedor=buscaFornecedor.site,
             emailFornecedor=buscaFornecedor.email
 
         )
-        self.documento.setHtml(html)
-        self.previaImpressao()
-        # self.documento.load(QtCore.QUrl("file:///" +
-        #                                 self.resourcepath("report.html")))
-        # self.documento.loadFinished['bool'].connect(self.previaImpressao)
+        self.documento.load(QtCore.QUrl("file:///" +
+                                        self.resourcepath("report.html")))
+        self.documento.loadFinished['bool'].connect(self.previaImpressao)
 
         # document.print_(self.PrintTab)
 
@@ -92,7 +87,7 @@ class ProgramaImpressor(QtWidgets.QDialog):
         busca = CrudEmpresa()
         busca.idEmpresa = 1
         busca.SelectEmpresaId()
-        base = {'logo': busca.logo,
+        base = {'logo': str(busca.logo, encoding="utf-8"),
                 'nomeFantasia': busca.NomeFantasia,
                 'razaoSocial': busca.RazaoSocial,
                 'cnpj': busca.cnpj,

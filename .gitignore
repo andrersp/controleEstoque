@@ -71,3 +71,7 @@ target/
 .vscode
 Software.code-workspace
 *.html
+*.pdf
+
+# File Teste
+main2.py

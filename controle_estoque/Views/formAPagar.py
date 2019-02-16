@@ -550,15 +550,15 @@ class Ui_ct_FormPagar(object):
 " }\n"
 "")
         self.cb_repetir.setObjectName("cb_repetir")
-        self.lb_FormCompra_10 = QtWidgets.QLabel(self.fr_FormPagar)
-        self.lb_FormCompra_10.setGeometry(QtCore.QRect(20, 370, 110, 20))
-        self.lb_FormCompra_10.setStyleSheet("QLabel{\n"
+        self.lb_Repetir = QtWidgets.QLabel(self.fr_FormPagar)
+        self.lb_Repetir.setGeometry(QtCore.QRect(20, 370, 110, 20))
+        self.lb_Repetir.setStyleSheet("QLabel{\n"
 "font-size: 13px;\n"
 "font-family: \"Arial\";\n"
 "font-weight: bold;\n"
 "color: #A2A2A2;\n"
 "}")
-        self.lb_FormCompra_10.setObjectName("lb_FormCompra_10")
+        self.lb_Repetir.setObjectName("lb_Repetir")
         self.fr_BotoesFormCompra = QtWidgets.QFrame(self.fr_FormPagar)
         self.fr_BotoesFormCompra.setGeometry(QtCore.QRect(0, 470, 1000, 30))
         self.fr_BotoesFormCompra.setStyleSheet("background:#E1DFE0;\n"
@@ -682,7 +682,7 @@ class Ui_ct_FormPagar(object):
         self.bt_receber.setText(QtWidgets.QApplication.translate("ct_FormPagar", "PAGAR", None, -1))
         self.lb_FormCompra_9.setText(QtWidgets.QApplication.translate("ct_FormPagar", "VALOR", None, -1))
         self.tx_valor.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormPagar", "R$ 0,00", None, -1))
-        self.lb_FormCompra_10.setText(QtWidgets.QApplication.translate("ct_FormPagar", "REPETIR", None, -1))
+        self.lb_Repetir.setText(QtWidgets.QApplication.translate("ct_FormPagar", "REPETIR", None, -1))
         self.bt_Voltar.setText(QtWidgets.QApplication.translate("ct_FormPagar", "VOLTAR", None, -1))
         self.bt_Salvar.setText(QtWidgets.QApplication.translate("ct_FormPagar", "SALVAR", None, -1))
         self.bt_Imprimir.setText(QtWidgets.QApplication.translate("ct_FormPagar", "IMPRIMIR", None, -1))

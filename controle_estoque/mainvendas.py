@@ -436,14 +436,48 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         headertable = ["Produto", "Obs. ", "Qnte.", "$ Unitário", "$ Total"]
         buscaFornecedor = CrudClientes()
         buscaFornecedor.ListaClientesTabela('')
+        produto = []
+        qtde = []
+        obs = []
+        valorUnitario = []
+        totalItem = []
+        for i in range(self.tb_Itens.rowCount()):
+            produto.append(self.tb_Itens.item(i, 1).text())
+            obs.append(self.tb_Itens.item(i, 2).text())
+            qtde.append(self.tb_Itens.item(i, 3).text())
+            valorUnitario.append(self.tb_Itens.item(i, 4).text())
+            totalItem.append(self.tb_Itens.item(i, 5).text())
+        
+
+        # Consulta Venda Banco de Dados
+        busca = CrudPedidos()
+        self.tx_Cod.setText(self.tx_Cod.text())
+        busca.SelectVendaID(id)
+    
+        print(produto)
         html = self.renderTemplate(
             "venda.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="Pedido Nº:",
             idPedido=self.tx_Cod.text(),
+            dataEmissao = QtCore.QDate.toString(self.dt_Emissao.date(), 
+                                                "dd-MM-yyyy"),
+            prazoEntrega= QtCore.QDate.toString(self.dt_Prazo.date(), 
+                                                "dd-MM-yyyy"),
+            dataEntrega=QtCore.QDate.toString(self.dt_Entrega.date(), 
+                                                "dd-MM-yyyy"),
+            statusEntrega=busca.idStatusEntrega,
+            statusFinanceiro=busca.statusPagamento,
             headertable=headertable,
-            codcliente=buscaFornecedor.idCliente,
-            nomeCliente=buscaFornecedor.nomeCliente,
+            descProduto=produto,
+            observacao = obs,
+            quantidade=qtde,
+            valUnit=valorUnitario,
+            valTotalItens = totalItem,
+            subtotal = self.lb_SubTotal.text(),
+            frete = self.tx_Frete.text(),
+            desconto = self.tx_Desconto.text(),
+            total = self.tx_TotalFinal.text(),
             telefoneFornecedor=buscaFornecedor.celularCliente,
             emailFornecedor=buscaFornecedor.emailCliente
         )

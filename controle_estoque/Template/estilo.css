@@ -14,29 +14,28 @@ body {
    font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
    width: 100%;
    height: 100%;
-   margin: 0;
-   padding: 0
+   margin: 0 auto;
+   padding: 0;
+   text-align: center;
 
 }
 #topo {
 	width: 100%;
 	height: 90px;
 	position: relative;
-	margin: 0;
-	padding: 0;
+	margin: 0 auto;
 	border: none;
 	text-align: center;
-	margin: 0 0 10px 0;
+	
 	
 }
 #topo img {
 	float: left;
-	margin: 10px 0 10px 0;
-	padding: 0;
+	margin: 10px 0 0 5px;
 	border: none;
 }
 #topo p {
-	margin: 0;
+	margin: 0 5px 0 0;
 	padding: 0;
 	float: right;
 	border: none;
@@ -75,28 +74,85 @@ table.TableRelat thead {
 table.TableRelat th, td {
   padding: 5px 10px;
   text-align: left;
-}
+  font: 12px "Tahoma";
+  }
 
-table.TableRelat tbody tr:nth-child(even) {
-  background: WhiteSmoke;
-}
+  /* table.TableRelat td:nth-child(even) {background: #FFF} */
+  /* table.TableRelat tbody tr:nth-child(even) {background: #EEE}
+
+table.TableRelat tbody tr:nth-child(odd) {
+  background: rgb(202, 197, 197);
+} */
 
 table.TableRelat tbody tr td:nth-child(2) {
   text-align:left;
 }
 
-table.TableRelat tbody tr td:nth-child(3),
-tbody tr td:nth-child(4) {
-  text-align: left;
-  font-family: monospace;
+table.TableRelat tbody tr td:nth-child(5) {
+  font-weight: bold
 }
 
 table.TableRelat tfoot {
   background: SeaGreen;
-  color: white;
-  text-align: right;
+  color: white;  
+  text-transform: uppercase;
+  }
+
+table.TableRelat tfoot th {
+  font: 11px "Tahoma";
+  text-align: right
+
 }
 
 table.TableRelat tfoot tr th:last-child {
-  font-family: monospace;
+  font: 12px "Tahoma";
+  text-align: center;
+  font-weight: bold
+}
+
+#cliente {
+  width: 100%;
+  height: 60px;
+  padding: 5px 5px 10px 5px;
+  font: 12px "Tahoma";
+  
+}
+
+#cliente span {
+  display: block;
+  text-align: left;
+  text-transform: uppercase
+}
+.status {
+  width: 100%;
+  height: 70px;
+  text-align: left;
+  margin: 0 0 5px 0;
+  float: left;
+ 
+  }
+.status span {
+  /* float: left; */
+  font: 10px "Tahoma";
+  text-transform: uppercase;
+  /* width: 200px */
+  margin: 0 12px 0 0 ;
+  display: block
+}
+.status b {
+  font: 11px "Tahoma";
+  text-transform: uppercase;
+  text-align: left
+ 
+}
+
+.box {
+  width: 33%;
+  height: 100%;
+  float: left;
+}
+.box span {
+  display: block;
+  text-align: left;
+
 }
