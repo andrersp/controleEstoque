@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
+import re
+from functools import partial
+
+
 from PySide2 import QtCore
 from PySide2.QtWebEngineWidgets import QWebEngineView
+
+from pycep_correios import consultar_cep
+from pycep_correios.excecoes import ExcecaoPyCEPCorreios
+
 from Views.mainClientes import Ui_ct_MainClientes
 from Views.formClientes import Ui_ct_FormClientes
 from Crud.CrudClientes import CrudClientes
-from functools import partial
-import re
-from pycep_correios import consultar_cep
-from pycep_correios.excecoes import ExcecaoPyCEPCorreios
-# cep = pycep_correios.consultar_cep('28015160')
-# # print(cep)
 
 
 class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
@@ -67,7 +69,8 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 2,
                                         lista.nomeCliente[i], lista.apelidoCliente[i])
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 3,
-                                        self.formatoNumTelefone(lista.celularCliente[i]), 
+                                        self.formatoNumTelefone(
+                                            lista.celularCliente[i]),
                                         self.formatoNumTelefone(lista.telefoneCliente[i]))
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 4,
                                         lista.emailCliente[i], "")

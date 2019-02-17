@@ -4,10 +4,12 @@ import sys
 import random
 import webbrowser
 
+
+from PySide2 import QtCore, QtGui, QtWidgets
 import mysql.connector
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 
-# from PySide2.QtWebEngineWidgets import QWebEnginePage
+
 from Crud.conexao import Conexao
 from Crud.CrudEmpresa import CrudEmpresa
 from Funcoes.categoriaAPagar import CategoriaAPagar
@@ -27,7 +29,6 @@ from mainfinanceiro import MainFinanceiro
 from mainfornecedor import MainFornecedor
 from mainprodutos import MainProdutos
 from mainvendas import MainVendas
-from PySide2 import QtCore, QtGui, QtWidgets, QtPrintSupport
 from Views.main import Ui_MainWindow
 
 
@@ -47,7 +48,6 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         self.main_home(self.ct_conteudo)
 
         bg = QtGui.QPixmap(self.resourcepath('Images/bg.png'))
-
         palete = QtGui.QPalette()
         palete.setBrush(QtGui.QPalette.Background,
                         QtGui.QBrush(bg.scaled(1000, 700, QtCore.Qt.KeepAspectRatio)))

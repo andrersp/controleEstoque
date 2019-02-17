@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
+from functools import partial
+
+
 from PySide2 import QtCore, QtWidgets
 from PySide2.QtWebEngineWidgets import QWebEngineView
+
+
 from Views.mainVendas import Ui_ct_MainVendas
 from Views.formVendas import Ui_ct_FormVenda
-from functools import partial
+
+
 from Crud.CrudPedidos import CrudPedidos
 from Crud.CrudProdutos import CrudProdutos
 from Crud.CrudClientes import CrudClientes

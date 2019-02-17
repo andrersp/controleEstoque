@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtCore, QtGui, QtWidgets
-from Views.mainConfig import Ui_ct_MainConfig
 import configparser
 import os
 import sys
 import re
-import mysql.connector
-from Crud.CrudEmpresa import CrudEmpresa
 import base64
+
+
+from PySide2 import QtCore, QtGui, QtWidgets
+from Views.mainConfig import Ui_ct_MainConfig
+import mysql.connector
+
+
+from Crud.CrudEmpresa import CrudEmpresa
 
 
 class MainConfig(Ui_ct_MainConfig):

@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
+from functools import partial
+import re
+
+
 from PySide2 import QtCore
 from PySide2.QtWebEngineWidgets import QWebEngineView
-from functools import partial
+from jinja2 import Environment, PackageLoader, FileSystemLoader
+
+
 from Views.mainFornecedor import Ui_ct_MainFornecedor
 from Views.formFornecedor import Ui_ct_FormFornecedor
 from Crud.CrudFornecedor import CrudFornecedor
 from Crud.CrudEmpresa import CrudEmpresa
-import re
-from jinja2 import Environment, PackageLoader, FileSystemLoader
 
 
 class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):

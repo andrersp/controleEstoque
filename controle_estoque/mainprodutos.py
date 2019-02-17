@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
+from functools import partial
+
+
 from PySide2 import QtCore, QtGui, QtWidgets
 from PySide2.QtWebEngineWidgets import QWebEngineView
+
+
 from Views.mainProdutos import Ui_ct_MainProdutos
 from Views.formProdutos import Ui_ct_FormProdutos
 from Crud.CrudProdutos import CrudProdutos
-from functools import partial
-import os
 
 
 class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):

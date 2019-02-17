@@ -1,8 +1,12 @@
 # -*- codind: utf-8 -*-
+from functools import partial
+
+
 from PySide2 import QtCore
+
+
 from Views.APagar import Ui_ct_APagar
 from Crud.CrudAPagar import CrudAPagar
-from functools import partial
 from Views.formAPagar import Ui_ct_FormPagar
 from Crud.CrudCategoriaAPagar import CrudCatAPagar
 
@@ -110,7 +114,7 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         self.ValidaInputFloat(self.tx_valor)
         self.ValidaInputFloat(self.tx_valorPago)
 
-         #valida Campo Int
+        # valida Campo Int
         self.ValidaInputInt(self.tx_Id)
         """ Fim Chamanda financeiro.py  """
 

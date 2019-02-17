@@ -1,8 +1,12 @@
 # -*- codind: utf-8 -*-
+from functools import partial
+
+
 from PySide2 import QtCore
+
+
 from Views.aReceber import Ui_ct_AReceber
 from Crud.CrudAReceber import CrudAReceber
-from functools import partial
 from Views.formAReceber import Ui_ct_FormReceber
 from Crud.CrudCategoriaAReceber import CrudCatAReceber
 
@@ -124,9 +128,9 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         self.ValidaInputFloat(self.tx_valor)
         self.ValidaInputFloat(self.tx_valorPago)
 
-        #valida Campo Int
+        # valida Campo Int
         self.ValidaInputInt(self.tx_Id)
-        
+
         """ Fim Chamanda financeiro.py  """
 
         """ Chamanda de funções localizadas no arquivo FormaPagamento.py na pasta Funcoes """
