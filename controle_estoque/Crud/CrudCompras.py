@@ -110,9 +110,13 @@ class CrudCompras(object):
         conecta = Conexao()
         c = conecta.conecta.cursor()
         try:
-            c.execute(""" SELECT compras.*, fornecedor.nomeFantasia, fornecedor.telefone 
+            c.execute(""" SELECT compras.*,  status_entrega.status_entrega,
+                status_pagamento.status_pagamento
                 FROM compras 
-                INNER JOIN fornecedor ON compras.fornecedorId = fornecedor.id 
+                INNER JOIN status_entrega ON 
+                compras.statusEntrega = status_entrega.id 
+                INNER JOIN status_pagamento ON 
+                compras.statusPagamento = status_pagamento.id 
                 WHERE compras.id = '{}'
              """.format(id))
             row = c.fetchone()
@@ -129,6 +133,8 @@ class CrudCompras(object):
                 self.valorPendente = row[9]
                 self.statusEntrega = row[10]
                 self.statusPagamento = row[11]
+                self.idStatusEntrega = row[13]
+                self.idStatusPagamento = row[14]
 
             self.idItemTabela = []
             self.idItem = []

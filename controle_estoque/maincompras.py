@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from PySide2 import QtCore, QtWidgets
+from PySide2.QtWebEngineWidgets import QWebEngineView
 from Views.mainCompras import Ui_ct_MainCompras
 from Views.formCompras import Ui_ct_FormCompra
 from Crud.CrudCompras import CrudCompras
@@ -153,6 +154,9 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         self.CboxFPagamento(self.cb_FormaPagamento)
         """ Fim Chamanda FormaPagamento.py  """
 
+        # Adicionando numero parcelas
+        self.cboxParcelas(self.cb_QtdeParcela)
+
         # Return Press Busca Id Produto
         self.tx_IdBuscaItem.returnPressed.connect(self.BuscaProdutoIdCompra)
 
@@ -175,6 +179,9 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
         # Botao Cancelar
         self.bt_Voltar.clicked.connect(self.janelaCompras)
+
+        #Bota Imprimir
+        self.bt_Imprimir.clicked.connect(self.imprimirCompra)
 
     # checando campo Id se é Edicao ou Nova Venda
 
@@ -422,16 +429,101 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             self.tb_Itens.setColumnHidden(6, True)
             for item in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
                 item.setDisabled(True)
+            self.bt_Salvar.setDisabled(True)
 
         for i in range(len(busca.dataVencimento)):
             self.tb_Parcelas.insertRow(i)
             self.conteudoTabela(self.tb_Parcelas, i,
                                 0, str(busca.idConta[i]))
             self.dt_tabela(self.tb_Parcelas, i,
-                           1, busca.dataVencimento[i], busca.status[i])
+                           1, busca.dataVencimento[i], busca.idStatus[i])
             self.conteudoTabela(self.tb_Parcelas, i,
                                 2, str(busca.valor[i]))
-            self.tx_tabelaReceber(self.tb_Parcelas, i, 3, busca.status[
+            self.tx_tabelaReceber(self.tb_Parcelas, i, 3, busca.idStatus[
                                   i], str(busca.valor[i] - busca.valorPago[i]))
             self.botaoReceberParcela(self.tb_Parcelas, i, 4,
-                                     partial(self.Pagar, i), "Pagar", busca.status[i])
+                                     partial(self.Pagar, i), "Pagar", busca.idStatus[i])
+            self.cb_QtdeParcela.setCurrentIndex(
+                self.cb_QtdeParcela.findData(len(busca.dataVencimento)))
+            self.cb_FormaPagamento.setCurrentIndex(self.cb_FormaPagamento.findData(
+                busca.formaPagamento[0]))
+
+
+    def imprimirCompra(self):
+        self.documento = QWebEngineView()
+
+        headertable = ["Produto", "Obs. ", "Qnte.", "$ Unitário", "$ Total"]
+        produto = []
+        qtde = []
+        obs = []
+        valorUnitario = []
+        totalItem = []
+        for i in range(self.tb_Itens.rowCount()):
+            produto.append(self.tb_Itens.item(i, 1).text())
+            obs.append(self.tb_Itens.item(i, 2).text())
+            qtde.append(self.tb_Itens.item(i, 3).text())
+            valorUnitario.append(self.tb_Itens.item(i, 4).text())
+            totalItem.append(self.tb_Itens.item(i, 5).text())
+        
+
+        # Consulta Venda Banco de Dados
+        busca = CrudCompras()
+        id = self.tx_Cod.text()
+        busca.SelectCompraId(id)
+
+        # Consulta Cliente banco de dados
+        cliente = CrudFornecedor()
+        cliente.SelectFornecedorId(self.tx_Id.text())
+
+        # Consulta Financeiro banco de dados
+        financeiro= CrudAPagar()
+        financeiro.idCompra = id
+        financeiro.selectAPagarId()
+    
+        html = self.renderTemplate(
+            "venda.html",
+            estilo=self.resourcepath('Template/estilo.css'),
+            titulo="Pedido de Compra Nº:",
+            idPedido=self.tx_Cod.text(),
+            cliente = cliente.NomeFantasia,
+            endCliente= [cliente.endereco, cliente.numero],
+            cepCliente = cliente.cep,
+            emailEcliente = cliente.email,
+            cpfCliente = cliente.cnpj,
+            cidadeCliente = cliente.cidade,
+            telefoneCliente = self.formatoNumTelefone(cliente.telefone),
+            rgCliente = cliente.inscEstadual,
+            bairroCliente = cliente.bairro,
+            estadoCliente = cliente.estado,
+            celularCliente = "",
+            dataEmissao = QtCore.QDate.toString(self.dt_Emissao.date(), 
+                                                "dd-MM-yyyy"),
+            prazoEntrega= QtCore.QDate.toString(self.dt_Prazo.date(), 
+                                                "dd-MM-yyyy"),
+            dataEntrega=QtCore.QDate.toString(self.dt_Entrega.date(), 
+                                                "dd-MM-yyyy"),
+            statusEntrega=[busca.statusEntrega, busca.idStatusEntrega],
+            statusFinanceiro=busca.idStatusPagamento,
+            headertable=headertable,
+            descProduto=produto,
+            observacao = obs,
+            quantidade=qtde,
+            valUnit=valorUnitario,
+            valTotalItens = totalItem,
+            subtotal = self.lb_SubTotal.text(),
+            frete = self.tx_Frete.text(),
+            desconto = self.tx_Desconto.text(),
+            total = self.tx_TotalFinal.text(),
+            formaPagamento = self.cb_FormaPagamento.currentText(),
+            condicao = self.cb_QtdeParcela.currentText(),
+            descParcela = financeiro.descricao,
+            vencimentoparcela = financeiro.dataVencimento,
+            valorParcela = financeiro.valor,
+            situacao= financeiro.status,
+            formaPagamentoParcela= financeiro.fPagamento
+            
+        )
+
+        self.documento.load(QtCore.QUrl("file:///" +
+                                        self.resourcepath("report.html")))
+        # self.documento.loadFinished['bool'].connect(self.previaImpressao)

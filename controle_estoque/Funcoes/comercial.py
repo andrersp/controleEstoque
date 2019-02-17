@@ -167,9 +167,9 @@ class Comercial(object):
 
     # Gerando parcelas Venda e Compra
     def gerarParcela(self, acao):
-        numParcela = self.cb_QtdeParcela.currentIndex()
+        numParcela = int(self.cb_QtdeParcela.currentData())
         valorTotal = self.tx_TotalFinal.text()
-        valor_parcela = float(valorTotal) / int(numParcela)
+        valor_parcela = float(valorTotal) / numParcela
 
         while self.tb_Parcelas.rowCount() > 0:
             self.tb_Parcelas.removeRow(0)

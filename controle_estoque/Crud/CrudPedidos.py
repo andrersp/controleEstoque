@@ -9,7 +9,7 @@ class CrudPedidos(object):
     def __init__(self, idPedido="", idCliente="", dataEmissao="",
                  prazoEntrega="", dataEntrega="",
                  desconto="", frete="", valorTotal="", valorRecebido="",
-                 valorPendente="", idStatusEntrega="", IdStatusPagamento="",
+                 valorPendente="", idStatusEntrega="", idStatusPagamento="",
                  statusEntrega="", statusPagamento="",
                  idItem="", idItemTabela="", qtde="", valorItem="",
                  totalItem="", obsItem="", nomeCliente="",
@@ -27,7 +27,7 @@ class CrudPedidos(object):
         self.valorPendente = valorPendente
         self.statusEntrega = statusEntrega
         self.idStatusEntrega = idStatusEntrega
-        self.IdStatusPagamento = IdStatusPagamento
+        self.idStatusPagamento = idStatusPagamento
         self.statusPagamento = statusPagamento
         self.idItem = idItem
         self.idItemTabela = idItemTabela
@@ -109,12 +109,13 @@ class CrudPedidos(object):
         conecta = Conexao()
         c = conecta.conecta.cursor()
         try:
-            c.execute(""" SELECT pedidos.*, clientes.nome, clientes.celular,
-                status_entrega.status_entrega
+            c.execute(""" SELECT pedidos.*, status_entrega.status_entrega,
+                status_pagamento.status_pagamento
                 FROM pedidos 
-                INNER JOIN clientes ON pedidos.clienteId = clientes.id
                 INNER JOIN status_entrega ON 
                 pedidos.statusEntrega = status_entrega.id 
+                INNER JOIN status_pagamento ON 
+                pedidos.statusPagamento = status_pagamento.id 
                 WHERE pedidos.id = '{}' 
              """.format(id))
             row = c.fetchone()
@@ -131,7 +132,8 @@ class CrudPedidos(object):
                 self.valorPendente = row[9]
                 self.statusEntrega = row[10]
                 self.statusPagamento = row[11]
-                self.idStatusEntrega = row[12]
+                self.idStatusEntrega = row[13]
+                self.idStatusPagamento = row[14]
 
             self.idItemTabela = []
             self.idItem = []

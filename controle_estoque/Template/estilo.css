@@ -66,7 +66,7 @@ table.TableRelat caption {
 }
 
 table.TableRelat thead {
-  background: SteelBlue;
+  background: #40a286;
   color: white;
   text-align: left;
 }
@@ -78,11 +78,11 @@ table.TableRelat th, td {
   }
 
   /* table.TableRelat td:nth-child(even) {background: #FFF} */
-  /* table.TableRelat tbody tr:nth-child(even) {background: #EEE}
+table.TableRelat tbody td {
+  border-bottom: 1px solid #CCC
+}
 
-table.TableRelat tbody tr:nth-child(odd) {
-  background: rgb(202, 197, 197);
-} */
+
 
 table.TableRelat tbody tr td:nth-child(2) {
   text-align:left;
@@ -93,9 +93,10 @@ table.TableRelat tbody tr td:nth-child(5) {
 }
 
 table.TableRelat tfoot {
-  background: SeaGreen;
+  background: #7AB32E;
   color: white;  
   text-transform: uppercase;
+  border: none;
   }
 
 table.TableRelat tfoot th {
@@ -110,24 +111,23 @@ table.TableRelat tfoot tr th:last-child {
   font-weight: bold
 }
 
-#cliente {
+#dadoscliente {
   width: 100%;
-  height: 60px;
+  height: 80px;
   padding: 5px 5px 10px 5px;
-  font: 12px "Tahoma";
-  
-}
+  font: 11px "Tahoma";
+  }
 
-#cliente span {
+#dadoscliente span {
   display: block;
   text-align: left;
   text-transform: uppercase
 }
 .status {
   width: 100%;
-  height: 70px;
+  height: 20px;
   text-align: left;
-  margin: 0 0 5px 0;
+  margin: 0 5px;
   float: left;
  
   }
@@ -136,23 +136,81 @@ table.TableRelat tfoot tr th:last-child {
   font: 10px "Tahoma";
   text-transform: uppercase;
   /* width: 200px */
-  margin: 0 12px 0 0 ;
-  display: block
+   margin: 0 12px 0 0 ;
+  /* display: block */
+  font-weight: bold
 }
 .status b {
-  font: 11px "Tahoma";
+  font: 10px "Tahoma";
   text-transform: uppercase;
   text-align: left
  
 }
-
 .box {
   width: 33%;
-  height: 100%;
+  height: auto;
   float: left;
+  /* background: red */
 }
 .box span {
   display: block;
   text-align: left;
 
+}
+
+/* Tabela Financeiro */
+table.financeiro {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  width: 100%
+}
+
+table.financeiro caption {
+  text-align: left;
+  color: silver;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 5px;
+  font-size: 14px;
+}
+
+table.financeiro thead {
+  background: #40a286;
+  color: white;
+  text-align: left;
+}
+
+table.financeiro th, td {
+  padding: 5px 10px;
+  text-align: left;
+  font: 12px "Tahoma";
+  }
+
+  /* table.financeiro td:nth-child(even) {background: #FFF} */
+table.financeiro tbody td {
+  border-bottom: 1px solid #CCC
+}
+
+
+
+table.financeiro tbody tr td:nth-child(2) {
+  text-align:left;
+}
+
+
+table.financeiro tfoot {
+  background: #7AB32E;
+  color: white;  
+  text-transform: uppercase;
+  }
+
+table.financeiro tfoot th {
+  font: 11px "Tahoma";
+  text-align: right
+
+}
+
+table.financeiro tfoot tr th:last-child {
+  font: 12px "Tahoma";
+  text-align: center;
+  font-weight: bold
 }

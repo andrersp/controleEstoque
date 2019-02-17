@@ -10,7 +10,8 @@ class CrudAReceber(object):
                  categoria="", dataVencimento="", valor="", formaPagamento="",
                  dataRecebimento="", valorRecebido="", idStatus="", dataInicio="",
                  dataFim="", totalReceita="", totalAReceber="", categoriaID="",
-                 cliente="", telefoneCliente="", status="", valorPendente=""):
+                 cliente="", telefoneCliente="", status="", valorPendente="",
+                 fPagamento=""):
         self.idConta = idConta
         self.idCliente = idCliente
         self.idVenda = idVenda
@@ -31,6 +32,7 @@ class CrudAReceber(object):
         self.telefoneCliente = telefoneCliente
         self.status = status
         self.valorPendente = valorPendente
+        self.fPagamento = fPagamento
 
     def lastIdAReceber(self):
         conecta = Conexao()
@@ -75,17 +77,17 @@ class CrudAReceber(object):
 
         try:
             c.execute(""" INSERT INTO contasAReceber (id, idVenda, idCliente,
-              descricao, obs, categoria, vencimento, valor )
-              VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')
+              descricao, obs, categoria, vencimento, valor, formapagamento )
+              VALUES ('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')
               ON DUPLICATE KEY UPDATE idVenda='{}', idCliente='{}',
               descricao='{}', obs='{}', categoria='{}', vencimento='{}',
-              valor='{}' """
+              valor='{}', formapagamento='{}' """
                       .format(self.idConta, self.idVenda, self.idCliente,
                               self.descricao, self.obs, self.categoria,
                               self.dataVencimento, self.valor,
-                              self.idVenda, self.idCliente,
+                              self.formaPagamento, self.idVenda, self.idCliente,
                               self.descricao, self.obs, self.categoria,
-                              self.dataVencimento, self.valor,
+                              self.dataVencimento, self.valor, self.formaPagamento
 
                               ))
             conecta.conecta.commit()
@@ -141,7 +143,14 @@ class CrudAReceber(object):
 
         try:
             c.execute(
-                """ SELECT * FROM contasAReceber WHERE idVenda = '{}' """
+                """ SELECT contasAReceber.*, status_pagamento.status_pagamento,
+                 formaPagamento.categoria
+                FROM contasAReceber
+                INNER JOIN status_pagamento ON 
+                contasAReceber.status = status_pagamento.id
+                INNER JOIN formaPagamento ON 
+                contasAReceber.formapagamento = formaPagamento.id
+                 WHERE contasAReceber.idVenda = '{}' """
                 .format(self.idVenda))
             row = c.fetchall()
 
@@ -158,6 +167,8 @@ class CrudAReceber(object):
             self.valorRecebido = []
             self.idStatus = []
             self.valorPendente = []
+            self.status = []
+            self.fPagamento = []
 
             for lista in row:
                 self.idConta.append(lista[0])
@@ -173,6 +184,8 @@ class CrudAReceber(object):
                 self.valorRecebido.append(lista[10])
                 self.idStatus.append(lista[11])
                 self.valorPendente.append(lista[7] - lista[10])
+                self.status.append(lista[12])
+                self.fPagamento.append(lista[13])
 
         except mysql.connector.Error as err:
             print(err)

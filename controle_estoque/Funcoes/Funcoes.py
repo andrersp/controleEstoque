@@ -44,7 +44,7 @@ class Funcao(object):
                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         botao.setIcon(icon)
         botao.setIconSize(QtCore.QSize(80, 35))
-    
+
     # Mascara Telefone
     def TelefoneMask(self, telefone):
         if len(telefone) == 11:
@@ -52,8 +52,8 @@ class Funcao(object):
         else:
             self.tx_Telefone.setInputMask("(00) 0000-0000")
         pass
-    
-    #Formatando numero de telefone as tabelas
+
+    # Formatando numero de telefone as tabelas
     def formatoNumTelefone(self, telefone):
         telefone = re.sub('[^0-9]+', '', telefone)
         if len(telefone) == 11:
@@ -62,8 +62,12 @@ class Funcao(object):
             formato = re.sub('(\d{2})(\d{4})(\d{4})', r'(\1) \2-\3', telefone)
         else:
             formato = ""
-        
+
         return formato
 
-
-
+    # Cbox Numero Parcelas
+    def cboxParcelas(self, cbox):
+        cbox.clear()
+        cbox.addItem("À Vista", str(1))
+        for i in range(2, 13):
+            cbox.addItem("{} Vezes".format(i), i)

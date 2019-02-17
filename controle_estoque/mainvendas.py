@@ -161,6 +161,9 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         """ Definindo funcões widgets"""
 
+        # Adicionando numero parcelas
+        self.cboxParcelas(self.cb_QtdeParcela)
+
         # Return Press Busca Id Produto
         self.tx_IdBuscaItem.returnPressed.connect(self.BuscaProdutoId)
 
@@ -181,6 +184,8 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         # Botao Imprimir
         self.bt_Imprimir.clicked.connect(self.imprimirVenda)
+    
+    
 
     # checando campo Id se é Edicao ou Nova Venda
     def IdCheckPedido(self):
@@ -365,8 +370,6 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         self.dt_Prazo.setDate(busca.prazoEntrega)
         if busca.valorRecebido:
             self.tx_valorRecebido.setText(str(busca.valorRecebido))
-        if busca.statusPagamento == 2:
-            self.bt_GerarParcela.setEnabled(True)
         if busca.statusEntrega == 2:
             self.bt_Entregar.setEnabled(True)
         if busca.statusEntrega == 1:
@@ -410,8 +413,10 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         busca = CrudAReceber()
         busca.idVenda = self.tx_Cod.text()
         busca.selectAReceberId()
+        
 
         if busca.dataVencimento:
+            self.bt_Salvar.setDisabled(True)
             self.bt_GerarParcela.setDisabled(True)
             self.tb_Itens.setColumnHidden(6, True)
             for item in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
@@ -429,13 +434,17 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
                                   i], str(busca.valorPendente[i]))
             self.botaoReceberParcela(self.tb_Parcelas, i, 4,
                                      partial(self.Receber, i), "Receber", busca.idStatus[i])
+        
+        self.cb_QtdeParcela.setCurrentIndex(
+            self.cb_QtdeParcela.findData(len(busca.dataVencimento)))
+        self.cb_FormaPagamento.setCurrentIndex(self.cb_FormaPagamento.findData(
+            busca.formaPagamento[0]
+        ))
 
     def imprimirVenda(self):
         self.documento = QWebEngineView()
 
         headertable = ["Produto", "Obs. ", "Qnte.", "$ Unitário", "$ Total"]
-        buscaFornecedor = CrudClientes()
-        buscaFornecedor.ListaClientesTabela('')
         produto = []
         qtde = []
         obs = []
@@ -451,23 +460,42 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         # Consulta Venda Banco de Dados
         busca = CrudPedidos()
-        self.tx_Cod.setText(self.tx_Cod.text())
+        id = self.tx_Cod.text()
         busca.SelectVendaID(id)
+
+        # Consulta Cliente banco de dados
+        cliente = CrudClientes()
+        cliente.SelectClienteID(self.tx_Id.text())
+
+        # Consulta Financeiro banco de dados
+        financeiro= CrudAReceber()
+        financeiro.idVenda = id
+        financeiro.selectAReceberId()
     
-        print(produto)
         html = self.renderTemplate(
             "venda.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="Pedido Nº:",
             idPedido=self.tx_Cod.text(),
+            cliente = cliente.nomeCliente,
+            endCliente= [cliente.enderecoCliente, cliente.numCliente],
+            cepCliente = cliente.cepCliente,
+            emailEcliente = cliente.emailCliente,
+            cpfCliente = cliente.cpfCliente,
+            cidadeCliente = cliente.cidadeCliente,
+            telefoneCliente = self.formatoNumTelefone(cliente.telefoneCliente),
+            rgCliente = cliente.rgCliente,
+            bairroCliente = cliente.bairroCliente,
+            estadoCliente = cliente.estadoCliente,
+            celularCliente = self.formatoNumTelefone(cliente.celularCliente),
             dataEmissao = QtCore.QDate.toString(self.dt_Emissao.date(), 
                                                 "dd-MM-yyyy"),
             prazoEntrega= QtCore.QDate.toString(self.dt_Prazo.date(), 
                                                 "dd-MM-yyyy"),
             dataEntrega=QtCore.QDate.toString(self.dt_Entrega.date(), 
                                                 "dd-MM-yyyy"),
-            statusEntrega=busca.idStatusEntrega,
-            statusFinanceiro=busca.statusPagamento,
+            statusEntrega=[busca.statusEntrega, busca.idStatusEntrega],
+            statusFinanceiro=busca.idStatusPagamento,
             headertable=headertable,
             descProduto=produto,
             observacao = obs,
@@ -478,10 +506,16 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             frete = self.tx_Frete.text(),
             desconto = self.tx_Desconto.text(),
             total = self.tx_TotalFinal.text(),
-            telefoneFornecedor=buscaFornecedor.celularCliente,
-            emailFornecedor=buscaFornecedor.emailCliente
+            formaPagamento = self.cb_FormaPagamento.currentText(),
+            condicao = self.cb_QtdeParcela.currentText(),
+            descParcela = financeiro.descricao,
+            vencimentoparcela = financeiro.dataVencimento,
+            valorParcela = financeiro.valor,
+            situacao= financeiro.status,
+            formaPagamentoParcela= financeiro.fPagamento
+            
         )
 
         self.documento.load(QtCore.QUrl("file:///" +
                                         self.resourcepath("report.html")))
-        self.documento.loadFinished['bool'].connect(self.previaImpressao)
+        # self.documento.loadFinished['bool'].connect(self.previaImpressao)
