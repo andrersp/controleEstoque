@@ -1,5 +1,5 @@
 # -*- codind: utf-8 -*-
-from PySide2 import QtCore
+from PySide2.QtCore import QDate
 from Views.movConta import Ui_ct_movimento
 from Crud.CrudMovCaixa import CrudMovCaixa
 
@@ -34,9 +34,9 @@ class MainMovimentoConta(Ui_ct_movimento):
         self.Despesa()
 
     def Entrada(self):
-        dataInicio = QtCore.QDate.toString(
+        dataInicio = QDate.toString(
             self.dt_inicio.date(), "yyyy-MM-dd")
-        dataFim = QtCore.QDate.toString(
+        dataFim = QDate.toString(
             self.dt_fim.date(), "yyyy-MM-dd")
 
         busca = CrudMovCaixa()
@@ -45,13 +45,13 @@ class MainMovimentoConta(Ui_ct_movimento):
         busca.movEntrada()
 
         # Setando a data referente a busca
-        self.lb_inicioMovimento.setText(QtCore.QDate.toString(
+        self.lb_inicioMovimento.setText(QDate.toString(
             self.dt_inicio.date(), "dd-MM-yyyy"))
-        self.lb_fimMovimento.setText(QtCore.QDate.toString(
+        self.lb_fimMovimento.setText(QDate.toString(
             self.dt_fim.date(), "dd-MM-yyyy"))
-        self.lb_inicioDespesa.setText(QtCore.QDate.toString(
+        self.lb_inicioDespesa.setText(QDate.toString(
             self.dt_inicio.date(), "dd-MM-yyyy"))
-        self.lb_fimDespesa.setText(QtCore.QDate.toString(
+        self.lb_fimDespesa.setText(QDate.toString(
             self.dt_fim.date(), "dd-MM-yyyy"))
 
         if busca.totaAReceber > 0.01:
@@ -70,9 +70,9 @@ class MainMovimentoConta(Ui_ct_movimento):
         pass
 
     def detalheEntrada(self):
-        dataInicio = QtCore.QDate.toString(
+        dataInicio = QDate.toString(
             self.dt_inicio.date(), "yyyy-MM-dd")
-        dataFim = QtCore.QDate.toString(
+        dataFim = QDate.toString(
             self.dt_fim.date(), "yyyy-MM-dd")
 
         busca = CrudMovCaixa()
@@ -95,9 +95,9 @@ class MainMovimentoConta(Ui_ct_movimento):
         pass
 
     def Despesa(self):
-        dataInicio = QtCore.QDate.toString(
+        dataInicio = QDate.toString(
             self.dt_inicio.date(), "yyyy-MM-dd")
-        dataFim = QtCore.QDate.toString(
+        dataFim = QDate.toString(
             self.dt_fim.date(), "yyyy-MM-dd")
 
         busca = CrudMovCaixa()
@@ -121,9 +121,9 @@ class MainMovimentoConta(Ui_ct_movimento):
         pass
 
     def detalheDespesa(self):
-        dataInicio = QtCore.QDate.toString(
+        dataInicio = QDate.toString(
             self.dt_inicio.date(), "yyyy-MM-dd")
-        dataFim = QtCore.QDate.toString(
+        dataFim = QDate.toString(
             self.dt_fim.date(), "yyyy-MM-dd")
 
         busca = CrudMovCaixa()

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from functools import partial
 
-
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2.QtCore import Qt, QByteArray, QUrl, QBuffer
+from PySide2.QtGui import QIntValidator, QDoubleValidator, QPixmap
+from PySide2.QtWidgets import QFileDialog
 from PySide2.QtWebEngineWidgets import QWebEngineView
 
 
@@ -120,21 +121,21 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
                             self.resourcepath('Images/edit-delete.png'))
         self.IconeBotaoMenu(self.bt_CancelAddCatergoria,
                             self.resourcepath('Images/edit-delete.png'))
-        self.lb_qtdeMin.setPixmap(QtGui.QPixmap(
+        self.lb_qtdeMin.setPixmap(QPixmap(
             self.resourcepath('Images/warnig.svg')))
-        self.label_2.setPixmap(QtGui.QPixmap(
+        self.label_2.setPixmap(QPixmap(
             self.resourcepath('Images/CodBarra.png')))
 
         # Checando se existe ID válido
         self.IdCheckProduto()
 
         # Validar campos Inteiros
-        validar = QtGui.QIntValidator(1, 999, self)
+        validar = QIntValidator(1, 999, self)
         self.tx_EstoqueMaximoProduto.setValidator(validar)
         self.tx_EstoqueMinimoProduto.setValidator(validar)
         self.tx_MinimoAtacado.setValidator(validar)
-        validarValor = QtGui.QDoubleValidator(0.50, 999.99, 2, self)
-        validarValor.setNotation(QtGui.QDoubleValidator.StandardNotation)
+        validarValor = QDoubleValidator(0.50, 999.99, 2, self)
+        validarValor.setNotation(QDoubleValidator.StandardNotation)
         validarValor.setDecimals(2)
         # validarValor.setRange(000.50, 999.99, 2)
         self.tx_ValorCompraProduto.setValidator(validarValor)
@@ -197,14 +198,14 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
 
     # upload Imagem
     def UploadImagem(self):
-        Dialog = QtWidgets.QFileDialog()
-        Dialog.setOption(QtWidgets.QFileDialog.DontUseNativeDialog, True)
+        Dialog = QFileDialog()
+        Dialog.setOption(QFileDialog.DontUseNativeDialog, True)
 
         fname = Dialog.getOpenFileName(
             self, "Selecionar Imagem", "", "Image files (*.jpg *.png)")[0]
 
-        self.lb_FotoProduto.setPixmap(QtGui.QPixmap(fname).scaledToWidth(
-            150, QtCore.Qt.TransformationMode(QtCore.Qt.FastTransformation)))
+        self.lb_FotoProduto.setPixmap(QPixmap(fname).scaledToWidth(
+            150, Qt.TransformationMode(Qt.FastTransformation)))
         # self.lb_FotoProduto.setScaledContents(True)
         self.bt_AddImagem.setHidden(True)
         self.bt_DelImagem.setVisible(True)
@@ -351,9 +352,9 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         INSERI.idProduto = self.tx_idProduto.text()
         INSERI.descricaoProduto = self.tx_DescricaoProduto.text().upper()
         if self.lb_FotoProduto.pixmap():
-            imagem = QtGui.QPixmap(self.lb_FotoProduto.pixmap())
-            data = QtCore.QByteArray()
-            buf = QtCore.QBuffer(data)
+            imagem = QPixmap(self.lb_FotoProduto.pixmap())
+            data = QByteArray()
+            buf = QBuffer(data)
             imagem.save(buf, 'PNG')
             INSERI.imagemProduto = str(data.toBase64())[2:-1]
 
@@ -379,11 +380,11 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         busca.SelectProdutoId(id)
         self.tx_DescricaoProduto.setText(busca.descricaoProduto)
         if busca.imagemProduto:
-            pixmap = QtGui.QPixmap()
+            pixmap = QPixmap()
             pixmap.loadFromData(
-                QtCore.QByteArray.fromBase64(busca.imagemProduto))
+                QByteArray.fromBase64(busca.imagemProduto))
             self.lb_FotoProduto.setPixmap(pixmap.scaledToWidth(
-                150, QtCore.Qt.TransformationMode(QtCore.Qt.FastTransformation)))
+                150, Qt.TransformationMode(Qt.FastTransformation)))
             # self.lb_FotoProduto.setScaledContents(True)
             self.bt_AddImagem.setHidden(True)
             self.bt_DelImagem.setVisible(True)
@@ -422,6 +423,6 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
 
         )
 
-        self.documento.load(QtCore.QUrl("file:///" +
-                                        self.resourcepath("report.html")))
+        self.documento.load(QUrl("file:///" +
+                                 self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)

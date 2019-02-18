@@ -2,7 +2,7 @@
 from functools import partial
 
 
-from PySide2 import QtCore
+from PySide2.QtCore import QDate, Qt
 
 
 from Views.aReceber import Ui_ct_AReceber
@@ -54,14 +54,14 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
     # Populando tabela de contas a receber
     def tabelaAReceber(self):
         busca = CrudAReceber()
-        dataInicio = QtCore.QDate.toString(
+        dataInicio = QDate.toString(
             self.dt_Inicio.date(), "yyyy-MM-dd")
-        dataFim = QtCore.QDate.toString(
+        dataFim = QDate.toString(
             self.dt_Fim.date(), "yyyy-MM-dd")
         busca.dataInicio = dataInicio
         busca.dataFim = dataFim
         busca.idStatus = self.cb_Situacao.itemData(
-            self.cb_Situacao.currentIndex(), QtCore.Qt.UserRole)
+            self.cb_Situacao.currentIndex(), Qt.UserRole)
         busca.listaAReceber()
         while self.tb_AReceber.rowCount() > 0:
             self.tb_AReceber.removeRow(0)
@@ -220,8 +220,8 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
             INSERI.idConta = self.tx_Cod.text()
             INSERI.valorRecebido = self.tx_valorPago.text().replace(",", ".")
             INSERI.formaPagamento = self.cb_formaPagamento.currentData()
-            INSERI.dataRecebimento = QtCore.QDate.toString(
-                QtCore.QDate.currentDate(), "yyyy-MM-dd")
+            INSERI.dataRecebimento = QDate.toString(
+                QDate.currentDate(), "yyyy-MM-dd")
             INSERI.ReceberConta()
             self.BuscaContaAReceber(self.tx_Cod.text())
         pass
@@ -246,7 +246,7 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
             INSERI.idCliente = self.tx_Id.text()
             INSERI.descricao = self.tx_descricao.text()
             INSERI.categoria = self.cb_categoria.currentData()
-            INSERI.dataVencimento = QtCore.QDate.toString(QtCore.QDate.addMonths(
+            INSERI.dataVencimento = QDate.toString(QDate.addMonths(
                 self.dt_Vencimento.date(), i), "yyyy-MM-dd")
             INSERI.valor = self.tx_valor.text()
             INSERI.obs = self.tx_Obs.toPlainText()

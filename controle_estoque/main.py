@@ -4,8 +4,8 @@ import sys
 import random
 import webbrowser
 
-
-from PySide2 import QtCore, QtGui, QtWidgets
+from PySide2.QtCore import Qt
+from PySide2 import QtGui, QtWidgets
 import mysql.connector
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 
@@ -52,7 +52,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         bg = QtGui.QPixmap(self.resourcepath('Images/bg.png'))
         palete = QtGui.QPalette()
         palete.setBrush(QtGui.QPalette.Background,
-                        QtGui.QBrush(bg.scaled(1000, 700, QtCore.Qt.KeepAspectRatio)))
+                        QtGui.QBrush(bg.scaled(1000, 700, Qt.KeepAspectRatio)))
         self.setPalette(palete)
 
         # Icone dos botoes Topo
@@ -203,22 +203,22 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
     """ Fim conteudos Externos """
 
-
+    """ Conteudos tabelas """
     # Conteudo Tabela Centralizdo fonte padrao
     def conteudoTabela(self, tabela, row, col, data):
         item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignJustify |
-                              QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
-        item.setFlags(QtCore.Qt.NoItemFlags)
+        item.setTextAlignment(Qt.AlignJustify |
+                              Qt.AlignHCenter | Qt.AlignVCenter)
+        item.setFlags(Qt.NoItemFlags)
         item.setText(data)
         tabela.setItem(row, col, item)
 
     # Conteudo tabela alinhado a esquerda
     def conteudoTabelaLeft(self, tabela, row, col, data):
         item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignJustify |
-                              QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        item.setFlags(QtCore.Qt.NoItemFlags)
+        item.setTextAlignment(Qt.AlignJustify |
+                              Qt.AlignLeft | Qt.AlignVCenter)
+        item.setFlags(Qt.NoItemFlags)
         item.setText(data)
         tabela.setItem(row, col, item)
 
@@ -227,9 +227,9 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item = QtWidgets.QPushButton()
         # item.setFixedWidth(30)
         # item.setFixedHeight(30)
-        item.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        item.setFocusPolicy(QtCore.Qt.NoFocus)
-        item.setFlat(QtCore.Qt.NoItemFlags)
+        item.setCursor(QtGui.QCursor(Qt.PointingHandCursor))
+        item.setFocusPolicy(Qt.NoFocus)
+        item.setFlat(Qt.NoItemFlags)
         item.setStyleSheet("QPushButton{\n"
                            "background-color: #1E87F0;\n"
                            "border-radius: 2px;\n"
@@ -254,9 +254,9 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item = QtWidgets.QPushButton()
         # item.setFixedWidth(30)
         # item.setFixedHeight(30)
-        item.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        item.setFocusPolicy(QtCore.Qt.NoFocus)
-        item.setFlat(QtCore.Qt.NoItemFlags)
+        item.setCursor(QtGui.QCursor(Qt.PointingHandCursor))
+        item.setFocusPolicy(Qt.NoFocus)
+        item.setFlat(Qt.NoItemFlags)
         item.setStyleSheet("QPushButton{\n"
                            "background-color: " + bg + ";\n"
                            "border-radius: 2px;\n"
@@ -278,8 +278,8 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
     # data e Status entrega tabela compra / venda
     def TabelaEntrega(self, tabela, row, col, data, cor, status):
         item = QtWidgets.QLabel()
-        item.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignHCenter|
-        QtCore.Qt.AlignVCenter)
+        item.setAlignment(Qt.AlignLeading|Qt.AlignHCenter|
+        Qt.AlignVCenter)
         item.setIndent(3)
         item.setMargin(0)
         item.setStyleSheet("background: #FFF")
@@ -295,7 +295,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
     def ValorProduto(self, tabela, row, col, valor):
         item = QtWidgets.QLabel()
         item.setAlignment(
-            QtCore.Qt.AlignLeading|QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+            Qt.AlignLeading|Qt.AlignHCenter|Qt.AlignVCenter)
         item.setMargin(0)
         html = ("""
                 <span style="font-family:'Arial'; font-size:30px;
@@ -316,8 +316,8 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
     # Nome e Telefone tabela cliente/fornecedor e compra/venda
     def TabelaNomeTelefone(self, tabela, row, col, nome, telefone):
         item = QtWidgets.QLabel()
-        item.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|
-        QtCore.Qt.AlignVCenter)
+        item.setAlignment(Qt.AlignLeading|Qt.AlignLeft|
+        Qt.AlignVCenter)
         item.setIndent(3)
         item.setMargin(0)
         item.setStyleSheet('background: #FFF')
@@ -332,7 +332,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
     def TabelaQtdeStatus(self, tabela, row, col, qtde, cor):
         item = QtWidgets.QLabel()
         item.setAlignment(
-            QtCore.Qt.AlignLeading|QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+            Qt.AlignLeading|Qt.AlignHCenter|Qt.AlignVCenter)
         item.setMargin(0)
         html = ("""
                 <span style="font-family:'Arial'; font-size:30px;
@@ -346,7 +346,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
     def TabelaID(self, tabela, row, col, id):
         item = QtWidgets.QLabel()
         item.setAlignment(
-            QtCore.Qt.AlignLeading|QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+            Qt.AlignLeading|Qt.AlignHCenter|Qt.AlignVCenter)
         item.setMargin(0)
         item.setStyleSheet('background: #FFF;')
         html = ("""
@@ -362,11 +362,11 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item = QtWidgets.QPushButton()
         # item.setFixedWidth(70)
         # item.setFixedHeight(30)
-        item.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        item.setCursor(QtGui.QCursor(Qt.PointingHandCursor))
         if status == 1:
             item.setDisabled(True)
-        item.setFocusPolicy(QtCore.Qt.NoFocus)
-        item.setFlat(QtCore.Qt.NoItemFlags)
+        item.setFocusPolicy(Qt.NoFocus)
+        item.setFlat(Qt.NoItemFlags)
         item.setStyleSheet("QPushButton{\n"
                            "background-color: #7AB32E;\n"
                            "border-radius: 2px;\n"
@@ -396,12 +396,12 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
     # Input receber/pagar parcela  compra e venda
     def tx_tabelaReceber(self, tabela, row, col, status, valor):
         item = QtWidgets.QLineEdit()
-        # item.setGeometry(QtCore.QRect(310, 360, 80, 30))
+        # item.setGeometry(QRect(310, 360, 80, 30))
         # item.setFixedWidth(60)
         if status == 1:
             item.setReadOnly(True)
         item.setText(valor)
-        item.setFocusPolicy(QtCore.Qt.WheelFocus)
+        item.setFocusPolicy(Qt.WheelFocus)
         item.setStyleSheet("QLineEdit{\n"
                            "background: #F1F1F1;\n"
                            "border: 2px solid #CFCFCF;\n"
@@ -414,7 +414,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                            "border: 1px solid red;\n"
                            "}")
         item.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
         item.setObjectName("tx_ValorPago")
         item.setPlaceholderText("R$ 0.00")
         tabela.setCellWidget(row, col, item)
@@ -423,7 +423,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
     #Input data tabela parcelas
     def dt_tabela(self, tabela, row, col, data, status):
         item = QtWidgets.QDateEdit()
-        # item.setGeometry(QtCore.QRect(120, 18, 140, 18))
+        # item.setGeometry(QRect(120, 18, 140, 18))
         item.setFixedWidth(90)
         if status == 1:
             item.setReadOnly(True)
