@@ -44,9 +44,11 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
         # Caminho Absoluto
         self.caminho = os.path.abspath(os.path.dirname(sys.argv[0]))
+
         # Abrindo conteudo Home
         self.main_home(self.ct_conteudo)
 
+        # setando background
         bg = QtGui.QPixmap(self.resourcepath('Images/bg.png'))
         palete = QtGui.QPalette()
         palete.setBrush(QtGui.QPalette.Background,
@@ -148,7 +150,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                 botao.setDisabled(True)
             self.bt_Home.setDisabled(True)
 
-    """Abrindo conteudos externos"""
+    """Abrindo Janelas externos"""
     # Home
 
     def janelaHome(self):
@@ -323,19 +325,11 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item.setHtml(html)
         tabela.setCellWidget(row, col, item)
 
-    # Texto Tabela Data Status
-
+    # Status Operação coluna 1 tabela Compra/Venda
     def TabelaStatus(self, tabela, row, col, cor):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(120, 60)
-        # item.setGeometry(QtCore.QRect(600, 90, 181, 60))
+        item = QtWidgets.QLabel()
+        item.setMargin(0)
         item.setStyleSheet("background: {}".format(cor))
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        item.setObjectName("textBrowser")
         tabela.setCellWidget(row, col, item)
 
     def TabelaEntrega(self, tabela, row, col, data, cor, status):
@@ -357,19 +351,17 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         tabela.setCellWidget(row, col, item)
 
     def TabelaNomeTelefone(self, tabela, row, col, nome, telefone):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(250, 60)
+        item = QtWidgets.QLabel()
+        item.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        item.setIndent(3)
+        item.setMargin(0)
         item.setStyleSheet('background: #FFF')
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
+        
         html = (("""<p>
-    <span style="font-size:11px;"><strong><span style="font-size:15px;">{}</span></strong><br />
-    <span style="font-size:12px;"><span style="color: #000;">{}</span></span></span></p>
-""")).format(nome, telefone)
-        item.setHtml(html)
+        <span style="font-family:'Arial'; font-size:14px; ">{}</span><br/>
+        <span style="font-family:'Tahoma'; font-size:10px;">{}</span></p>"""
+        )).format(nome, telefone)
+        item.setText(html)
         tabela.setCellWidget(row, col, item)
 
     def TabelaEmissao(self, tabela, row, col, emissao):
@@ -403,18 +395,17 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         tabela.setCellWidget(row, col, item)
 
     def TabelaID(self, tabela, row, col, id):
-        item = QtWidgets.QTextBrowser()
+        item = QtWidgets.QLabel()
+        item.setAlignment(
+            QtCore.Qt.AlignLeading|QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        item.setMargin(0)
         # item.setFixedSize(120, 60)
         item.setStyleSheet('background: #FFF;')
-        item.setAlignment(QtCore.Qt.AlignCenter)
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        html = ("""<p align="left">
-    <span style="color:#7AB32E;"><strong><span style="font-size:30px; margin: 0 auto; text-align: justify"> {}</span></strong></p>""").format(id)
-        item.setHtml(html)
+        html = ("""
+               <span style="font-family:'Arial'; font-size:30px; 
+               font-weight: bold;color:#7AB32E ">{}</span><br/>
+               """).format(id)
+        item.setText(html)
         tabela.setCellWidget(row, col, item)
 
     def botaoReceberParcela(self, tabela, row, col, funcao, texto, status):
@@ -500,7 +491,8 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                            "     border-bottom-right-radius: 3px;\n"
                            " }\n"
                            "QDateEdit::down-arrow {\n"
-                           "     image: url("+self.resourcepath('Images/down.png')+");\n"
+                           "     image: url(" +
+                           self.resourcepath('Images/down.png')+");\n"
                            " }\n"
                            "QCalendarWidget QAbstractItemView:enabled \n"
                            "  {\n"

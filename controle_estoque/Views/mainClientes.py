@@ -187,7 +187,7 @@ class Ui_ct_MainClientes(object):
         self.tb_Clientes.horizontalHeader().setHighlightSections(False)
         self.tb_Clientes.horizontalHeader().setStretchLastSection(True)
         self.tb_Clientes.verticalHeader().setVisible(False)
-        self.tb_Clientes.verticalHeader().setDefaultSectionSize(50)
+        self.tb_Clientes.verticalHeader().setDefaultSectionSize(40)
         self.tb_Clientes.verticalHeader().setMinimumSectionSize(20)
         self.fr_TituloClientes = QtWidgets.QFrame(self.frameMainClientes)
         self.fr_TituloClientes.setGeometry(QtCore.QRect(0, 0, 1000, 60))

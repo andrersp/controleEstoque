@@ -16,7 +16,11 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         super(MainAPagar, self).setAPagar(frame)
         self.fr_Apagar.show()
 
-        """ Chamanda de funções localizadas no arquivo financeiro.py na pasta Funcoes """
+        """ 
+        Chamanda de funções localizadas no arquivo 
+        financeiro.py na pasta Funcoes 
+        """
+
         # Icone dos botoes
         self.setIconFinanceiro()
 
