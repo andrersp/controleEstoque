@@ -6,8 +6,6 @@ from functools import partial
 from PySide2.QtCore import QUrl
 from PySide2.QtWebEngineWidgets import QWebEngineView
 
-from pycep_correios import consultar_cep
-from pycep_correios.excecoes import ExcecaoPyCEPCorreios
 
 from Views.mainClientes import Ui_ct_MainClientes
 from Views.formClientes import Ui_ct_FormClientes
@@ -99,7 +97,7 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         self.tx_Obs.setText(busca.obsCliente)
         self.tx_Cep.setText(busca.cepCliente)
         self.tx_Endereco.setText(busca.enderecoCliente)
-        self.tx_Numemo.setText(busca.numCliente)
+        self.tx_Numero.setText(busca.numCliente)
         self.tx_Bairro.setText(busca.bairroCliente)
         self.tx_Cidade.setText(busca.cidadeCliente)
         self.tx_Estado.setText(busca.estadoCliente)
@@ -193,7 +191,7 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         INSERI.cepCliente = re.sub(
             '[^[0-9]', '', self.tx_Cep.text())
         INSERI.enderecoCliente = self.tx_Endereco.text().upper()
-        INSERI.numCliente = self.tx_Numemo.text()
+        INSERI.numCliente = self.tx_Numero.text()
         INSERI.bairroCliente = self.tx_Bairro.text().upper()
         INSERI.cidadeCliente = self.tx_Cidade.text().upper()
         INSERI.estadoCliente = self.tx_Estado.text().upper()
@@ -203,22 +201,8 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
 
         pass
 
-    # buscar Cep
+        # Imprimindo
 
-    def buscarCepCliente(self):
-        cep = self.tx_Cep.text()
-
-        try:
-            busca = consultar_cep(cep)
-            self.tx_Endereco.setText(busca['end'])
-            self.tx_Bairro.setText(busca['bairro'])
-            self.tx_Cidade.setText(busca['cidade'])
-            self.tx_Estado.setText(busca['uf'])
-            self.tx_Numemo.setFocus()
-        except ExcecaoPyCEPCorreios as exc:
-            self.tx_Endereco.setText(exc.message)
-
-            # Imprimindo
     def imprimirCliente(self):
         self.documento = QWebEngineView()
 

@@ -844,7 +844,7 @@ color: #797979
      <string>Nº</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="tx_Numemo">
+   <widget class="QLineEdit" name="tx_Numero">
     <property name="geometry">
      <rect>
       <x>580</x>
@@ -1144,7 +1144,7 @@ border: none
   <tabstop>tx_Cep</tabstop>
   <tabstop>bt_BuscaCep</tabstop>
   <tabstop>tx_Endereco</tabstop>
-  <tabstop>tx_Numemo</tabstop>
+  <tabstop>tx_Numero</tabstop>
   <tabstop>tx_Bairro</tabstop>
   <tabstop>tx_Cidade</tabstop>
   <tabstop>tx_Estado</tabstop>

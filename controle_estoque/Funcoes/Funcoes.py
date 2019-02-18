@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
+from functools import partial
+import re
+
+
 from PySide2.QtWidgets import QPushButton
 from PySide2.QtCore import QSize
 from PySide2.QtGui import QPixmap, QIcon
-from functools import partial
-import re
+
+
+from pycep_correios import consultar_cep
+from pycep_correios.excecoes import ExcecaoPyCEPCorreios
 
 
 class Funcao(object):
@@ -73,3 +79,17 @@ class Funcao(object):
         cbox.addItem("À Vista", str(1))
         for i in range(2, 13):
             cbox.addItem("{} Vezes".format(i), i)
+
+    # buscar Cep
+    def buscarCepCliente(self):
+        cep = self.tx_Cep.text()
+
+        try:
+            busca = consultar_cep(cep)
+            self.tx_Endereco.setText(busca['end'])
+            self.tx_Bairro.setText(busca['bairro'])
+            self.tx_Cidade.setText(busca['cidade'])
+            self.tx_Estado.setText(busca['uf'])
+            self.tx_Numero.setFocus()
+        except ExcecaoPyCEPCorreios as exc:
+            self.tx_Endereco.setText(exc.message)
