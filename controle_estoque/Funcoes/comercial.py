@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from PySide2.QtWidgets import QCompleter, QLineEdit
 from PySide2.QtCore import QDate, QDateTime, Qt, QStringListModel
-from PySide2 import QtGui
+from PySide2.QtGui import QIntValidator, QDoubleValidator
 from functools import partial
 from Crud.CrudProdutos import CrudProdutos
 
@@ -11,13 +11,13 @@ class Comercial(object):
 
     def validaCampos(self):
         # Setando Validadot Int nos campos
-        validaInt = QtGui.QIntValidator(0, 9999)
+        validaInt = QIntValidator(0, 9999)
         self.tx_QntdItem.setValidator(validaInt)
         self.tx_IdBuscaItem.setValidator(validaInt)
         self.tx_Id.setValidator(validaInt)
         # Setando Validador float nos campos
-        validarValor = QtGui.QDoubleValidator(0.00, 999.99, 2)
-        validarValor.setNotation(QtGui.QDoubleValidator.StandardNotation)
+        validarValor = QDoubleValidator(0.00, 999.99, 2)
+        validarValor.setNotation(QDoubleValidator.StandardNotation)
         validarValor.setDecimals(2)
         self.tx_Desconto.setValidator(validarValor)
         self.tx_Frete.setValidator(validarValor)

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtCore, QtWidgets, QtGui
+from PySide2.QtGui import QIntValidator, QDoubleValidator
+from PySide2.QtWidgets import QTableWidget, QCompleter, QLineEdit
+from PySide2 import QtCore, QtWidgets
 from functools import partial
 # from Crud.CrudProdutos import CrudProdutos
 
@@ -45,7 +47,7 @@ class Financeiro(object):
         self.tx_addCategoria.setHidden(True)
 
     def tamanhoTabelaFinanceiro(self, frame):
-        for tabela in frame.findChildren(QtWidgets.QTableWidget):
+        for tabela in frame.findChildren(QTableWidget):
             tabela.blockSignals(True)
             tabela.setColumnHidden(0, True)
             tabela.setColumnWidth(1, 10)
@@ -60,15 +62,15 @@ class Financeiro(object):
     # Setando auto complete
     def setAutocompleteFinanceiro(self):
         # Setando Auto complete
-        self.completer = QtWidgets.QCompleter(self)
+        self.completer = QCompleter(self)
         self.completer.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
-        self.completer.setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
+        self.completer.setCompletionMode(QCompleter.PopupCompletion)
         self.model = QtCore.QStringListModel(self)
         self.completer.setModel(self.model)
         self.tx_NomeFantasia.setCompleter(self.completer)
 
     def desabilitaLineEdit(self, frame):
-        for filho in frame.findChildren(QtWidgets.QLineEdit):
+        for filho in frame.findChildren(QLineEdit):
             filho.setReadOnly(True)
         self.cb_categoria.setDisabled(True)
         self.dt_Vencimento.setDisabled(True)
@@ -99,15 +101,11 @@ class Financeiro(object):
 
     def ValidaInputInt(self, campo):
         # Setando Validadot Int nos campos
-        validaInt = QtGui.QIntValidator(0, 9999)
+        validaInt = QIntValidator(0, 9999)
         campo.setValidator(validaInt)
 
     def ValidaInputFloat(self, campo):
-        validarValor = QtGui.QDoubleValidator(0.00, 999.99, 2)
-        validarValor.setNotation(QtGui.QDoubleValidator.StandardNotation)
+        validarValor = QDoubleValidator(0.00, 999.99, 2)
+        validarValor.setNotation(QDoubleValidator.StandardNotation)
         validarValor.setDecimals(2)
         campo.setValidator(validarValor)
-    
-    
-
-
