@@ -446,11 +446,13 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             self.tx_tabelaReceber(self.tb_Parcelas, i, 3, busca.idStatus[
                                   i], str(busca.valor[i] - busca.valorPago[i]))
             self.botaoReceberParcela(self.tb_Parcelas, i, 4,
-                                     partial(self.Pagar, i), "Pagar", busca.idStatus[i])
+                                     partial(self.Pagar, i), "Pagar", 
+                                     busca.idStatus[i])
             self.cb_QtdeParcela.setCurrentIndex(
                 self.cb_QtdeParcela.findData(len(busca.dataVencimento)))
-            self.cb_FormaPagamento.setCurrentIndex(self.cb_FormaPagamento.findData(
-                busca.formaPagamento[0]))
+            self.cb_FormaPagamento.setCurrentIndex(
+                self.cb_FormaPagamento.findData(
+                    busca.formaPagamento[0]))
 
 
     def imprimirCompra(self):

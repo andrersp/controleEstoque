@@ -377,6 +377,8 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         self.dt_Prazo.setDate(busca.prazoEntrega)
         if busca.valorRecebido:
             self.tx_valorRecebido.setText(str(busca.valorRecebido))
+        if busca.statusPagamento == 2:
+            self.bt_GerarParcela.setEnabled(True)
         if busca.statusEntrega == 2:
             self.bt_Entregar.setEnabled(True)
         if busca.statusEntrega == 1:
@@ -423,11 +425,11 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         
 
         if busca.dataVencimento:
-            self.bt_Salvar.setDisabled(True)
             self.bt_GerarParcela.setDisabled(True)
             self.tb_Itens.setColumnHidden(6, True)
             for item in self.fr_addProduto.findChildren(QLineEdit):
                 item.setDisabled(True)
+            self.bt_Salvar.setDisabled(True)
 
         for i in range(len(busca.dataVencimento)):
             self.tb_Parcelas.insertRow(i)
@@ -440,13 +442,15 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             self.tx_tabelaReceber(self.tb_Parcelas, i, 3, busca.idStatus[
                                   i], str(busca.valorPendente[i]))
             self.botaoReceberParcela(self.tb_Parcelas, i, 4,
-                                     partial(self.Receber, i), "Receber", busca.idStatus[i])
+                                     partial(self.Receber, i), "Receber", 
+                                     busca.idStatus[i])
+            self.cb_QtdeParcela.setCurrentIndex(
+                self.cb_QtdeParcela.findData(len(busca.dataVencimento)))
+            self.cb_FormaPagamento.setCurrentIndex(
+                self.cb_FormaPagamento.findData(
+                busca.formaPagamento[0]))
         
-        self.cb_QtdeParcela.setCurrentIndex(
-            self.cb_QtdeParcela.findData(len(busca.dataVencimento)))
-        self.cb_FormaPagamento.setCurrentIndex(self.cb_FormaPagamento.findData(
-            busca.formaPagamento[0]
-        ))
+        
 
     def imprimirVenda(self):
         self.documento = QWebEngineView()

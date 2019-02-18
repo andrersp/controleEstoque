@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtGui, QtCore, QtWidgets
+from PySide2.QtWidgets import QCompleter, QLineEdit
+from PySide2.QtCore import QDate, QDateTime, Qt, QStringListModel
+from PySide2 import QtGui
 from functools import partial
 from Crud.CrudProdutos import CrudProdutos
 
@@ -22,10 +24,10 @@ class Comercial(object):
 
     # Setando Datas Padrão
     def setDatas(self):
-        self.dt_Emissao.setDate(QtCore.QDate.currentDate())
-        self.dt_Prazo.setDate(QtCore.QDate.currentDate().addDays(2))
-        self.dt_Entrega.setDate(QtCore.QDate.currentDate())
-        self.dt_Vencimento.setDate(QtCore.QDate.currentDate())
+        self.dt_Emissao.setDate(QDate.currentDate())
+        self.dt_Prazo.setDate(QDate.currentDate().addDays(2))
+        self.dt_Entrega.setDate(QDate.currentDate())
+        self.dt_Vencimento.setDate(QDate.currentDate())
 
     # Setando Icone dos Botoes
     def setIcones(self):
@@ -116,7 +118,7 @@ class Comercial(object):
                              partial(self.RemoveLInha, row), "#005099")
 
         self.conteudoTabela(self.tb_Itens, row, 7, str(
-            QtCore.QDateTime.toMSecsSinceEpoch(QtCore.QDateTime.currentDateTime())))
+            QDateTime.toMSecsSinceEpoch(QDateTime.currentDateTime())))
 
         self.TotalFinal()
         self.LimpaCampoAddProduto()
@@ -160,7 +162,7 @@ class Comercial(object):
 
     # Limpando campos após adicionar produdo
     def LimpaCampoAddProduto(self):
-        for filho in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
+        for filho in self.fr_addProduto.findChildren(QLineEdit):
             filho.clear()
         self.bt_IncluirItem.setDisabled(True)
         self.tx_IdBuscaItem.setFocus()
@@ -177,7 +179,7 @@ class Comercial(object):
         for i in range(numParcela):
 
             self.tb_Parcelas.insertRow(i)
-            self.dt_tabela(self.tb_Parcelas, i, 1, QtCore.QDate.addMonths(
+            self.dt_tabela(self.tb_Parcelas, i, 1, QDate.addMonths(
                 self.dt_Vencimento.date(), i), 2)
             self.conteudoTabela(self.tb_Parcelas, i, 2,
                                 format(valor_parcela, ".2f"))
@@ -197,10 +199,10 @@ class Comercial(object):
     # Setando auto complete
     def setAutocomplete(self):
         # Setando Auto complete
-        self.completer = QtWidgets.QCompleter(self)
-        self.completer.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
-        self.completer.setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
-        self.model = QtCore.QStringListModel(self)
+        self.completer = QCompleter(self)
+        self.completer.setCaseSensitivity(Qt.CaseInsensitive)
+        self.completer.setCompletionMode(QCompleter.PopupCompletion)
+        self.model = QStringListModel(self)
         self.completer.setModel(self.model)
         self.tx_BuscaItem.setCompleter(self.completer)
         self.tx_NomeFantasia.setCompleter(self.completer)
