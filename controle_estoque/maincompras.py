@@ -86,8 +86,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
                                busca.prazoEntrega[i],
                                self.StatusEntrega(busca.idStatusEntrega[i]),
                                busca.statusEntrega[i].upper())
-            self.TabelaPagamento(self.tb_Compras, i, 5,
-                                 busca.valorTotal[i],
+            self.TabelaEntrega(self.tb_Compras, i, 5,
+                                 "R$ "+str(busca.valorTotal[i]),
                                  self.StatusEntrega(
                                      busca.idStatusPagamento[i]),
                                  busca.statusPagamento[i].upper())

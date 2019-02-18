@@ -92,8 +92,9 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
                                busca.prazoEntrega[i],
                                self.StatusEntrega(busca.idStatusEntrega[i]),
                                busca.statusEntrega[i].upper())
-            self.TabelaPagamento(self.tb_Vendas, i, 5,
-                                 busca.valorTotal[i],
+            # Coluna Valor pedido e status Pagamento
+            self.TabelaEntrega(self.tb_Vendas, i, 5,
+                                 "R$ "+ str(busca.valorTotal[i]),
                                  self.StatusEntrega(
                                      busca.idStatusPagamento[i]),
                                  busca.statusPagamento[i].upper())

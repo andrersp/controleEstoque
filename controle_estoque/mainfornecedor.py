@@ -78,7 +78,9 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
                                  partial(self.SelectFornecedor,
                                          lista.idFornecedor[i]), "#005099")
                 i += 1
+        pass
 
+    # Seleciona Cliente por ID
     def SelectFornecedor(self, id):
         busca = CrudFornecedor()
         self.FormFornecedor()
@@ -120,11 +122,20 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
         # Checando se existe ID válido
         self.IdCheckFornecedor()
 
+        # Tamanho tabela Histórico
+        self.tb_Historico.setColumnWidth(0, 100)
+        self.tb_Historico.setColumnWidth(1, 100)
+        self.tb_Historico.setColumnWidth(2, 100)
+
         # Botao Salvar
         self.bt_Salvar.clicked.connect(self.VerificaInputFornecedor)
 
         # Botão Voltar
         self.bt_Voltar.clicked.connect(self.janelaFornecedor)
+
+        # Buscar Cep
+        self.bt_BuscaCep.clicked.connect(self.buscarCepCliente)
+        self.tx_Cep.returnPressed.connect(self.buscarCepCliente)
 
     # checando campo Id se é Edicao ou Novo Fornecedor
     def IdCheckFornecedor(self):
@@ -181,7 +192,6 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
             telefoneFornecedor=buscaFornecedor.telefone,
             siteFornecedor=buscaFornecedor.site,
             emailFornecedor=buscaFornecedor.email
-
         )
 
         self.documento.load(QtCore.QUrl("file:///" +

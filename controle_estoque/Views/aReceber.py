@@ -253,7 +253,7 @@ class Ui_ct_AReceber(object):
         self.tb_AReceber.horizontalHeader().setStretchLastSection(True)
         self.tb_AReceber.verticalHeader().setVisible(False)
         self.tb_AReceber.verticalHeader().setCascadingSectionResizes(True)
-        self.tb_AReceber.verticalHeader().setDefaultSectionSize(50)
+        self.tb_AReceber.verticalHeader().setDefaultSectionSize(40)
 
         self.tradAReceber(ct_AReceber)
         QtCore.QMetaObject.connectSlotsByName(ct_AReceber)

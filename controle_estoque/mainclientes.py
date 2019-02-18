@@ -3,7 +3,7 @@ import re
 from functools import partial
 
 
-from PySide2 import QtCore
+from PySide2.QtCore import QUrl
 from PySide2.QtWebEngineWidgets import QWebEngineView
 
 from pycep_correios import consultar_cep
@@ -67,11 +67,13 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
                                   self.StatusEntrega(1))
                 self.TabelaID(self.tb_Clientes, i, 1, lista.idCliente[i])
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 2,
-                                        lista.nomeCliente[i], lista.apelidoCliente[i])
+                                        lista.nomeCliente[i],
+                                        lista.apelidoCliente[i])
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 3,
                                         self.formatoNumTelefone(
                                             lista.celularCliente[i]),
-                                        self.formatoNumTelefone(lista.telefoneCliente[i]))
+                                        self.formatoNumTelefone(
+                                            lista.telefoneCliente[i]))
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 4,
                                         lista.emailCliente[i], "")
                 # Sinal click tabela
@@ -80,11 +82,54 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
                 i += 1
             pass
 
-            # Frame Formulário Produtos
+    # Seleciona Cliente por ID
+    def SelectCliente(self, valor):
+        id = valor
+        self.FormClientes()
+        self.tx_Id.setText(str(id))
+        busca = CrudClientes()
+        busca.SelectClienteID(id)
+        self.tx_NomeFantasia.setText(busca.nomeCliente)
+        self.tx_RazaoSocial.setText(busca.apelidoCliente)
+        self.tx_cnpj.setText(busca.cpfCliente)
+        self.tx_InscEstadual.setText(busca.rgCliente)
+        self.tx_Celular.setText(busca.celularCliente)
+        self.tx_Telefone.setText(busca.telefoneCliente)
+        self.tx_Email.setText(busca.emailCliente)
+        self.tx_Obs.setText(busca.obsCliente)
+        self.tx_Cep.setText(busca.cepCliente)
+        self.tx_Endereco.setText(busca.enderecoCliente)
+        self.tx_Numemo.setText(busca.numCliente)
+        self.tx_Bairro.setText(busca.bairroCliente)
+        self.tx_Cidade.setText(busca.cidadeCliente)
+        self.tx_Estado.setText(busca.estadoCliente)
+
+        for row in range(self.tb_Historico.rowCount()):
+            self.tb_Historico.removeRow(row)
+
+        total = '0.00'
+        for row in range(len(busca.dataEntrega)):
+            # print row
+            self.tb_Historico.insertRow(row)
+            self.conteudoTabela(
+                self.tb_Historico, row, 0, str(busca.dataEmissao[row]))
+            self.conteudoTabela(
+                self.tb_Historico, row, 1, str(busca.dataEntrega[row]))
+            self.conteudoTabela(
+                self.tb_Historico, row, 2, str(busca.Total[row]))
+
+            total = float(busca.Total[row]) + float(total)
+
+        self.lb_TotalHistorico.setText(format(float(total), ".2f"))
+        pass
+
+    # Frame Formulário Produtos
     def FormClientes(self):
         # self.DesativaBotaoProdutos()
         self.LimpaFrame(self.ct_containerClientes)
         super(MainClientes, self).setFormClientes(self.ct_containerClientes)
+        self.fr_FormClientes.show()
+
         # ICone Botoes
         self.IconeBotaoMenu(self.bt_Salvar,
                             self.resourcepath('Images/salvar.png'))
@@ -93,19 +138,16 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         self.IconeBotaoMenu(self.bt_BuscaCep,
                             self.resourcepath('Images/find.png'))
 
-        # Data padrão Nascimento
-        self.fr_FormClientes.show()
-
         # Checando se existe ID válido
         self.IdCheckCliente()
 
-        # Tamanho tabela
-        self.tb_Historico.setColumnWidth(0, 80)
-        self.tb_Historico.setColumnWidth(1, 80)
-        self.tb_Historico.setColumnWidth(2, 80)
-        self.tb_Historico.setColumnWidth(3, 80)
+        # Tamanho tabela Histórico
+        self.tb_Historico.setColumnWidth(0, 100)
+        self.tb_Historico.setColumnWidth(1, 100)
+        self.tb_Historico.setColumnWidth(2, 100)
+        self.tb_Historico.setColumnHidden(3, True)
 
-        # Botão Volar
+        # Botão Voltar
         self.bt_Voltar.clicked.connect(self.janelaClientes)
         # Botao Salvar
         self.bt_Salvar.clicked.connect(self.VerificaInputClientes)
@@ -114,12 +156,16 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         self.bt_BuscaCep.clicked.connect(self.buscarCepCliente)
         self.tx_Cep.returnPressed.connect(self.buscarCepCliente)
 
+        pass
+
     # checando campo Id se é Edicao ou Novo Cliente
     def IdCheckCliente(self):
         if not self.tx_Id.text():
             busca = CrudClientes()
             self.tx_Id.setText(str(busca.lastIDCliente()))
+        pass
 
+    # Valida Inputs
     def VerificaInputClientes(self):
         if not self.tx_NomeFantasia.text():
             self.tx_NomeFantasia.setFocus()
@@ -157,51 +203,8 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
 
         pass
 
-    def SelectCliente(self, valor):
-        id = valor
-        self.FormClientes()
-        self.tx_Id.setText(str(id))
-        busca = CrudClientes()
-        busca.SelectClienteID(id)
-        self.tx_NomeFantasia.setText(busca.nomeCliente)
-        self.tx_RazaoSocial.setText(busca.apelidoCliente)
-        self.tx_cnpj.setText(busca.cpfCliente)
-        self.tx_InscEstadual.setText(busca.rgCliente)
-        self.tx_Celular.setText(busca.celularCliente)
-        self.tx_Telefone.setText(busca.telefoneCliente)
-        self.tx_Email.setText(busca.emailCliente)
-        self.tx_Obs.setText(busca.obsCliente)
-        self.tx_Cep.setText(busca.cepCliente)
-        self.tx_Endereco.setText(busca.enderecoCliente)
-        self.tx_Numemo.setText(busca.numCliente)
-        self.tx_Bairro.setText(busca.bairroCliente)
-        self.tx_Cidade.setText(busca.cidadeCliente)
-        self.tx_Estado.setText(busca.estadoCliente)
-
-        for row in range(self.tb_Historico.rowCount()):
-            self.tb_Historico.removeRow(row)
-
-        total = '0.00'
-        for row in range(len(busca.dataEntrega)):
-            # print row
-            self.tb_Historico.insertRow(row)
-            self.conteudoTabela(
-                self.tb_Historico, row, 0, str(busca.dataEmissao[row]))
-            self.conteudoTabela(
-                self.tb_Historico, row, 1, str(busca.dataEntrega[row]))
-            self.conteudoTabela(
-                self.tb_Historico, row, 2, str(busca.Total[row]))
-            self.botaoTabela(self.tb_Historico, row, 3,
-                             partial(self.VerVenda, busca.idPedido[row]), "#069")
-            total = float(busca.Total[row]) + float(total)
-
-        self.lb_TotalHistorico.setText(format(float(total), ".2f"))
-
-    def VerVenda(self, id):
-        self.janelaVendas()
-        self.SelectVendaId(id)
-
     # buscar Cep
+
     def buscarCepCliente(self):
         cep = self.tx_Cep.text()
 
@@ -233,6 +236,6 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
             emailFornecedor=buscaFornecedor.emailCliente
         )
 
-        self.documento.load(QtCore.QUrl("file:///" +
-                                        self.resourcepath("report.html")))
+        self.documento.load(QUrl("file:///" +
+                                 self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)

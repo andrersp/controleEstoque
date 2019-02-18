@@ -102,7 +102,8 @@ class Ui_ct_MainCompras(object):
                                            "     border-bottom-right-radius: 3px;\n"
                                            " }\n"
                                            "QDateEdit::down-arrow {\n"
-                                           "     image: url("+self.resourcepath('Images/down.png')+");\n"
+                                           "     image: url("+self.resourcepath(
+                                               'Images/down.png')+");\n"
                                            " }")
         self.dt_InicioCompra.setCalendarPopup(True)
         self.dt_InicioCompra.setObjectName("dt_InicioCompra")
@@ -137,7 +138,8 @@ class Ui_ct_MainCompras(object):
                                         "     border-bottom-right-radius: 3px;\n"
                                         " }\n"
                                         "QDateEdit::down-arrow {\n"
-                                        "     image: url("+self.resourcepath('Images/down.png')+");\n"
+                                        "     image: url("+self.resourcepath(
+                                            'Images/down.png')+");\n"
                                         " }")
         self.dt_FimCompra.setCalendarPopup(True)
         self.dt_FimCompra.setObjectName("dt_FimCompra")
@@ -267,7 +269,7 @@ class Ui_ct_MainCompras(object):
         self.tb_Compras.horizontalHeader().setStretchLastSection(True)
         self.tb_Compras.verticalHeader().setVisible(False)
         self.tb_Compras.verticalHeader().setCascadingSectionResizes(True)
-        self.tb_Compras.verticalHeader().setDefaultSectionSize(50)
+        self.tb_Compras.verticalHeader().setDefaultSectionSize(40)
         self.fr_TituloCompras = QtWidgets.QFrame(self.frameMainCompras)
         self.fr_TituloCompras.setGeometry(QtCore.QRect(0, 0, 1000, 60))
         self.fr_TituloCompras.setStyleSheet("border: none")
