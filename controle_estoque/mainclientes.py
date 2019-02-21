@@ -209,7 +209,7 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         headertable = ["Cod", "Nome ", "Telefone", "Email"]
         buscaFornecedor = CrudClientes()
         buscaFornecedor.ListaClientesTabela('')
-        html = self.renderTemplate(
+        self.renderTemplate(
             "clientes.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="LISTAGEM CLIENTES",

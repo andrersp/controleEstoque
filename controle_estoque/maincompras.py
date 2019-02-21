@@ -532,4 +532,4 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
         self.documento.load(QUrl("file:///" +
                                         self.resourcepath("report.html")))
-        # self.documento.loadFinished['bool'].connect(self.previaImpressao)
+        self.documento.loadFinished['bool'].connect(self.previaImpressao)

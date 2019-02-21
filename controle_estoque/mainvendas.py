@@ -529,4 +529,4 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         self.documento.load(QUrl("file:///" +
                                         self.resourcepath("report.html")))
-        # self.documento.loadFinished['bool'].connect(self.previaImpressao)
+        self.documento.loadFinished['bool'].connect(self.previaImpressao)

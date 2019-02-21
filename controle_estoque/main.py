@@ -131,7 +131,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
     # Verificando Banco de Dados
     def DbCheck(self):
         try:
-            conecta = Conexao()
+            Conexao()
             busca = CrudEmpresa()
             busca.idEmpresa = '1'
             busca.SelectEmpresaId()
@@ -507,12 +507,15 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
         return cor
 
-    # Imprimindo
+    # Imprimindo em pdf
     def previaImpressao(self, arg):
-        self.documento.page().printToPdf('teste.pdf')
-        webbrowser.open_new('teste.pdf')
+        self.documento.page().printToPdf(self.resourcepath('report.pdf'))
+        self.documento.page().pdfPrintingFinished.connect(self.okPrinter)
+        
 
+    # Função executada após a impresso em pdf concluida
     def okPrinter(self, sucess):
+        webbrowser.open_new(self.resourcepath('report.pdf'))
         pass
 
     def renderTemplate(self, template_file, **kwargs):
