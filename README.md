@@ -1,2 +1,3 @@
-# controleEstoque
-Controle de Estoque PySide2
+# Sistema de Controle de Estoque
+
+
