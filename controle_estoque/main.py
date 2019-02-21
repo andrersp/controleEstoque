@@ -4,10 +4,12 @@ import sys
 import random
 import webbrowser
 
+from PySide2.QtCore import Qt
+from PySide2 import QtGui, QtWidgets
 import mysql.connector
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 
-# from PySide2.QtWebEngineWidgets import QWebEnginePage
+
 from Crud.conexao import Conexao
 from Crud.CrudEmpresa import CrudEmpresa
 from Funcoes.categoriaAPagar import CategoriaAPagar
@@ -27,7 +29,6 @@ from mainfinanceiro import MainFinanceiro
 from mainfornecedor import MainFornecedor
 from mainprodutos import MainProdutos
 from mainvendas import MainVendas
-from PySide2 import QtCore, QtGui, QtWidgets, QtPrintSupport
 from Views.main import Ui_MainWindow
 
 
@@ -43,14 +44,15 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
         # Caminho Absoluto
         self.caminho = os.path.abspath(os.path.dirname(sys.argv[0]))
+
         # Abrindo conteudo Home
         self.main_home(self.ct_conteudo)
 
+        # setando background
         bg = QtGui.QPixmap(self.resourcepath('Images/bg.png'))
-
         palete = QtGui.QPalette()
         palete.setBrush(QtGui.QPalette.Background,
-                        QtGui.QBrush(bg.scaled(1000, 700, QtCore.Qt.KeepAspectRatio)))
+                        QtGui.QBrush(bg.scaled(1000, 700, Qt.KeepAspectRatio)))
         self.setPalette(palete)
 
         # Icone dos botoes Topo
@@ -129,7 +131,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
     # Verificando Banco de Dados
     def DbCheck(self):
         try:
-            conecta = Conexao()
+            Conexao()
             busca = CrudEmpresa()
             busca.idEmpresa = '1'
             busca.SelectEmpresaId()
@@ -148,7 +150,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                 botao.setDisabled(True)
             self.bt_Home.setDisabled(True)
 
-    """Abrindo conteudos externos"""
+    """Abrindo Janelas externos"""
     # Home
 
     def janelaHome(self):
@@ -201,20 +203,22 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
     """ Fim conteudos Externos """
 
-    # Conteudo Tabela sem icone
+    """ Conteudos tabelas """
+    # Conteudo Tabela Centralizdo fonte padrao
     def conteudoTabela(self, tabela, row, col, data):
         item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignJustify |
-                              QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
-        item.setFlags(QtCore.Qt.NoItemFlags)
+        item.setTextAlignment(Qt.AlignJustify |
+                              Qt.AlignHCenter | Qt.AlignVCenter)
+        item.setFlags(Qt.NoItemFlags)
         item.setText(data)
         tabela.setItem(row, col, item)
 
+    # Conteudo tabela alinhado a esquerda
     def conteudoTabelaLeft(self, tabela, row, col, data):
         item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignJustify |
-                              QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        item.setFlags(QtCore.Qt.NoItemFlags)
+        item.setTextAlignment(Qt.AlignJustify |
+                              Qt.AlignLeft | Qt.AlignVCenter)
+        item.setFlags(Qt.NoItemFlags)
         item.setText(data)
         tabela.setItem(row, col, item)
 
@@ -223,9 +227,9 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item = QtWidgets.QPushButton()
         # item.setFixedWidth(30)
         # item.setFixedHeight(30)
-        item.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        item.setFocusPolicy(QtCore.Qt.NoFocus)
-        item.setFlat(QtCore.Qt.NoItemFlags)
+        item.setCursor(QtGui.QCursor(Qt.PointingHandCursor))
+        item.setFocusPolicy(Qt.NoFocus)
+        item.setFlat(Qt.NoItemFlags)
         item.setStyleSheet("QPushButton{\n"
                            "background-color: #1E87F0;\n"
                            "border-radius: 2px;\n"
@@ -239,7 +243,8 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item.setText("EDITAR")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(
-            self.resourcepath('Images/editar.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.resourcepath('Images/editar.png')), 
+            QtGui.QIcon.Normal, QtGui.QIcon.Off)
         item.setIcon(icon1)
         tabela.setCellWidget(row, col, item)
         item.clicked.connect(funcao)
@@ -249,9 +254,9 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item = QtWidgets.QPushButton()
         # item.setFixedWidth(30)
         # item.setFixedHeight(30)
-        item.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        item.setFocusPolicy(QtCore.Qt.NoFocus)
-        item.setFlat(QtCore.Qt.NoItemFlags)
+        item.setCursor(QtGui.QCursor(Qt.PointingHandCursor))
+        item.setFocusPolicy(Qt.NoFocus)
+        item.setFlat(Qt.NoItemFlags)
         item.setStyleSheet("QPushButton{\n"
                            "background-color: " + bg + ";\n"
                            "border-radius: 2px;\n"
@@ -263,169 +268,105 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(
-            self.resourcepath('Images/edit-delete.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.resourcepath('Images/edit-delete.png')), 
+            QtGui.QIcon.Normal, QtGui.QIcon.Off)
         item.setIcon(icon1)
         tabela.setCellWidget(row, col, item)
         item.clicked.connect(funcao)
 
-    # Texto Tabela Valor
-    def TabelaPagamento(self, tabela, row, col, valor, cor, status):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(120, 60)
-        # item.setGeometry(QtCore.QRect(600, 90, 181, 60))
+    
+    # data e Status entrega tabela compra / venda
+    def TabelaEntrega(self, tabela, row, col, data, cor, status):
+        item = QtWidgets.QLabel()
+        item.setAlignment(Qt.AlignLeading|Qt.AlignHCenter|
+        Qt.AlignVCenter)
+        item.setIndent(3)
+        item.setMargin(0)
         item.setStyleSheet("background: #FFF")
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        item.setObjectName("textBrowser")
-        html = (("""<p align="center">
-    <span style="font-size:11px;"><span style="font-family:verdana,geneva,
-    sans-serif;">R$: <strong><span style="font-size:14px;">{}</span></strong><br />
-    <strong><span style="font-size:12px;"><span style="color:{};">{}</span></span></strong></span></span></p>
-""")).format(valor, cor, status)
-        item.setHtml(html)
+        html = ("""
+                <strong style="font-family:Arial; font-size: 13px;">{}<br/>
+                <span style="color:{}; font-size: 12px">{}</span></strong>"""
+                ).format(data, cor, status)
+        item.setText(html)
         tabela.setCellWidget(row, col, item)
+
 
     # Texto Tabela Valor Produtos
     def ValorProduto(self, tabela, row, col, valor):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(120, 60)
-        # item.setGeometry(QtCore.QRect(600, 90, 181, 60))
-        item.setStyleSheet("background: #FFF")
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        item.setObjectName("textBrowser")
-        html = ("""<p align="center">
-    <span style="font-size:11px;"><span style="font-family:verdana,geneva,sans-serif;">R$: <strong><span style="font-size:14px;">{}</span></strong><br />
-    </span></span></p>
-""").format(valor)
-        item.setHtml(html)
+        item = QtWidgets.QLabel()
+        item.setAlignment(
+            Qt.AlignLeading|Qt.AlignHCenter|Qt.AlignVCenter)
+        item.setMargin(0)
+        html = ("""
+                <span style="font-family:'Arial'; font-size:30px;
+                font-weight: bold;"> <span style="font-size: 12px">R$</span> {}</span><br/>
+                """).format(valor)
+        item.setText(html)
         tabela.setCellWidget(row, col, item)
 
-    def TabelaQtdeEstoque(self, tabela, row, col, qtde):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(120, 60)
-        item.setStyleSheet('background: #FFF;')
-        item.setAlignment(QtCore.Qt.AlignCenter)
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        html = ("""<p align="center">
-    <span style="color:#069;"><strong><span style="font-size:16px; margin: 0 auto; text-align: justify"> {}</span><br />
-    </span></strong></p>""").format(qtde)
-        item.setHtml(html)
-        tabela.setCellWidget(row, col, item)
-
-    # Texto Tabela Data Status
-
+    
+    # Status Operação coluna 1 tabela Compra/Venda
     def TabelaStatus(self, tabela, row, col, cor):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(120, 60)
-        # item.setGeometry(QtCore.QRect(600, 90, 181, 60))
+        item = QtWidgets.QLabel()
+        item.setMargin(0)
         item.setStyleSheet("background: {}".format(cor))
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        item.setObjectName("textBrowser")
         tabela.setCellWidget(row, col, item)
 
-    def TabelaEntrega(self, tabela, row, col, data, cor, status):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(120, 60)
-        # item.setGeometry(QtCore.QRect(600, 90, 181, 60))
-        item.setStyleSheet("background: #FFF")
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        item.setObjectName("textBrowser")
-        html = ("""<p align="center">
-    <span style="font-size:11px;"><span style="font-family:verdana,geneva,sans-serif;"><strong><span style="font-size:14px;">{}</span></strong><br />
-    <strong><span style="font-size:12px;"><span style="color:{};">{}</span></span></strong></span></span></p>
-""").format(data, cor, status)
-        item.setHtml(html)
-        tabela.setCellWidget(row, col, item)
-
+    
+    # Nome e Telefone tabela cliente/fornecedor e compra/venda
     def TabelaNomeTelefone(self, tabela, row, col, nome, telefone):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(250, 60)
+        item = QtWidgets.QLabel()
+        item.setAlignment(Qt.AlignLeading|Qt.AlignLeft|
+        Qt.AlignVCenter)
+        item.setIndent(3)
+        item.setMargin(0)
         item.setStyleSheet('background: #FFF')
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        html = (("""<p>
-    <span style="font-size:11px;"><strong><span style="font-size:15px;">{}</span></strong><br />
-    <span style="font-size:12px;"><span style="color: #000;">{}</span></span></span></p>
-""")).format(nome, telefone)
-        item.setHtml(html)
+        html = (("""
+        <span style="font-family:Arial; font-size:13px; ">{}</span><br/>
+        <span style="font-family:Arial; font-size:10px;">{}</span>"""
+        )).format(nome, telefone)
+        item.setText(html)
         tabela.setCellWidget(row, col, item)
 
-    def TabelaEmissao(self, tabela, row, col, emissao):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(120, 60)
-        item.setStyleSheet('background: #FFF')
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        html = ("""<p align="center">
-    <span style="font-size:9px;"><span style="font-family:verdana,geneva,sans-serif;">DATA PEDIDO:<br />
-    <span style="font-size:14px;"><strong>{}</strong></span></span></span></p>""").format(emissao)
-        item.setHtml(html)
-        tabela.setCellWidget(row, col, item)
-
+    # texto quantidade e status produtos tabela Produto
     def TabelaQtdeStatus(self, tabela, row, col, qtde, cor):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(120, 60)
-        item.setStyleSheet('background: #FFF;')
-        item.setAlignment(QtCore.Qt.AlignCenter)
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        html = ("""<p align="center">
-    <span style="color:{};"><strong><span style="font-size:30px; margin: 0 auto; text-align: justify"> {}</span></strong></p>""").format(cor, qtde)
-        item.setHtml(html)
+        item = QtWidgets.QLabel()
+        item.setAlignment(
+            Qt.AlignLeading|Qt.AlignHCenter|Qt.AlignVCenter)
+        item.setMargin(0)
+        html = ("""
+                <span style="font-family:'Arial'; font-size:30px;
+                font-weight: bold;color:{} ">{}</span><br/>
+                """).format(cor, qtde)
+        item.setText(html)
         tabela.setCellWidget(row, col, item)
 
+
+    # Texto ID tabelas
     def TabelaID(self, tabela, row, col, id):
-        item = QtWidgets.QTextBrowser()
-        # item.setFixedSize(120, 60)
+        item = QtWidgets.QLabel()
+        item.setAlignment(
+            Qt.AlignLeading|Qt.AlignHCenter|Qt.AlignVCenter)
+        item.setMargin(0)
         item.setStyleSheet('background: #FFF;')
-        item.setAlignment(QtCore.Qt.AlignCenter)
-        item.setVerticalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setHorizontalScrollBarPolicy(
-            QtCore.Qt.ScrollBarAlwaysOff)
-        item.setOpenLinks(False)
-        html = ("""<p align="left">
-    <span style="color:#7AB32E;"><strong><span style="font-size:30px; margin: 0 auto; text-align: justify"> {}</span></strong></p>""").format(id)
-        item.setHtml(html)
+        html = ("""
+               <span style="font-family:'Arial'; font-size:30px; 
+               font-weight: bold;color:#7AB32E ">{}</span><br/>
+               """).format(id)
+        item.setText(html)
         tabela.setCellWidget(row, col, item)
 
+
+    #Botao Receber/ Pagar Parcela
     def botaoReceberParcela(self, tabela, row, col, funcao, texto, status):
         item = QtWidgets.QPushButton()
         # item.setFixedWidth(70)
         # item.setFixedHeight(30)
-        item.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        item.setCursor(QtGui.QCursor(Qt.PointingHandCursor))
         if status == 1:
             item.setDisabled(True)
-        item.setFocusPolicy(QtCore.Qt.NoFocus)
-        item.setFlat(QtCore.Qt.NoItemFlags)
+        item.setFocusPolicy(Qt.NoFocus)
+        item.setFlat(Qt.NoItemFlags)
         item.setStyleSheet("QPushButton{\n"
                            "background-color: #7AB32E;\n"
                            "border-radius: 2px;\n"
@@ -445,19 +386,22 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item.setFont(font)
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(
-            self.resourcepath('Images/money.png')), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.resourcepath('Images/money.png')), 
+            QtGui.QIcon.Normal, QtGui.QIcon.Off)
         item.setIcon(icon1)
         tabela.setCellWidget(row, col, item)
         item.clicked.connect(funcao)
 
+
+    # Input receber/pagar parcela  compra e venda
     def tx_tabelaReceber(self, tabela, row, col, status, valor):
         item = QtWidgets.QLineEdit()
-        # item.setGeometry(QtCore.QRect(310, 360, 80, 30))
+        # item.setGeometry(QRect(310, 360, 80, 30))
         # item.setFixedWidth(60)
         if status == 1:
             item.setReadOnly(True)
         item.setText(valor)
-        item.setFocusPolicy(QtCore.Qt.WheelFocus)
+        item.setFocusPolicy(Qt.WheelFocus)
         item.setStyleSheet("QLineEdit{\n"
                            "background: #F1F1F1;\n"
                            "border: 2px solid #CFCFCF;\n"
@@ -470,14 +414,16 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                            "border: 1px solid red;\n"
                            "}")
         item.setAlignment(
-            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
         item.setObjectName("tx_ValorPago")
         item.setPlaceholderText("R$ 0.00")
         tabela.setCellWidget(row, col, item)
+    
 
+    #Input data tabela parcelas
     def dt_tabela(self, tabela, row, col, data, status):
         item = QtWidgets.QDateEdit()
-        # item.setGeometry(QtCore.QRect(120, 18, 140, 18))
+        # item.setGeometry(QRect(120, 18, 140, 18))
         item.setFixedWidth(90)
         if status == 1:
             item.setReadOnly(True)
@@ -500,7 +446,8 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                            "     border-bottom-right-radius: 3px;\n"
                            " }\n"
                            "QDateEdit::down-arrow {\n"
-                           "     image: url("+self.resourcepath('Images/down.png')+");\n"
+                           "     image: url(" +
+                           self.resourcepath('Images/down.png')+");\n"
                            " }\n"
                            "QCalendarWidget QAbstractItemView:enabled \n"
                            "  {\n"
@@ -531,6 +478,8 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item.setDate(data)
         tabela.setCellWidget(row, col, item)
 
+
+    #Retorna cor status para quantidade abaixo do minimo
     def StatusStoque(self, qtde, minimo):
         if qtde > minimo:
             cor = "#7AB32E"
@@ -541,6 +490,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
         return cor
 
+    # Retorna Cor status Pagamento e Entrega
     def StatusEntrega(self, *args):
         if len(args) > 1:
             if args[0] == 1 and args[1] == 1:
@@ -557,12 +507,15 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
         return cor
 
-    # Imprimindo
+    # Imprimindo em pdf
     def previaImpressao(self, arg):
-        self.documento.page().printToPdf('teste.pdf')
-        webbrowser.open_new('teste.pdf')
+        self.documento.page().printToPdf(self.resourcepath('report.pdf'))
+        self.documento.page().pdfPrintingFinished.connect(self.okPrinter)
+        
 
+    # Função executada após a impresso em pdf concluida
     def okPrinter(self, sucess):
+        webbrowser.open_new(self.resourcepath('report.pdf'))
         pass
 
     def renderTemplate(self, template_file, **kwargs):

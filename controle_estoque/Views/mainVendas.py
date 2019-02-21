@@ -93,7 +93,8 @@ class Ui_ct_MainVendas(object):
                                           "     border-bottom-right-radius: 3px;\n"
                                           " }\n"
                                           "QDateEdit::down-arrow {\n"
-                                          "     image: url("+self.resourcepath('Images/down.png')+");\n"
+                                          "     image: url("+self.resourcepath(
+                                              'Images/down.png')+");\n"
                                           " }")
         self.dt_InicioVenda.setCalendarPopup(True)
         self.dt_InicioVenda.setObjectName("dt_InicioVenda")
@@ -138,7 +139,8 @@ class Ui_ct_MainVendas(object):
                                        "     border-bottom-right-radius: 3px;\n"
                                        " }\n"
                                        "QDateEdit::down-arrow {\n"
-                                       "     image: url("+self.resourcepath('Images/down.png')+");\n"
+                                       "     image: url("+self.resourcepath(
+                                           'Images/down.png')+");\n"
                                        " }")
         self.dt_FimVenda.setCalendarPopup(True)
         self.dt_FimVenda.setObjectName("dt_FimVenda")
@@ -268,7 +270,7 @@ class Ui_ct_MainVendas(object):
         self.tb_Vendas.horizontalHeader().setStretchLastSection(True)
         self.tb_Vendas.verticalHeader().setVisible(False)
         self.tb_Vendas.verticalHeader().setCascadingSectionResizes(True)
-        self.tb_Vendas.verticalHeader().setDefaultSectionSize(50)
+        self.tb_Vendas.verticalHeader().setDefaultSectionSize(40)
         self.fr_TituloVendas = QtWidgets.QFrame(self.frameMainVendas)
         self.fr_TituloVendas.setGeometry(QtCore.QRect(0, 0, 1000, 60))
         self.fr_TituloVendas.setStyleSheet("border: none")

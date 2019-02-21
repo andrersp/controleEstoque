@@ -1,8 +1,12 @@
 # -*- codind: utf-8 -*-
-from PySide2 import QtCore
+from functools import partial
+
+
+from PySide2.QtCore import QDate, Qt
+
+
 from Views.APagar import Ui_ct_APagar
 from Crud.CrudAPagar import CrudAPagar
-from functools import partial
 from Views.formAPagar import Ui_ct_FormPagar
 from Crud.CrudCategoriaAPagar import CrudCatAPagar
 
@@ -12,7 +16,11 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         super(MainAPagar, self).setAPagar(frame)
         self.fr_Apagar.show()
 
-        """ Chamanda de funções localizadas no arquivo financeiro.py na pasta Funcoes """
+        """ 
+        Chamanda de funções localizadas no arquivo 
+        financeiro.py na pasta Funcoes 
+        """
+
         # Icone dos botoes
         self.setIconFinanceiro()
 
@@ -38,14 +46,14 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
     # Populando tabela a Pagar
     def tabelaAPagar(self):
         busca = CrudAPagar()
-        dataInicio = QtCore.QDate.toString(
+        dataInicio = QDate.toString(
             self.dt_Inicio.date(), "yyyy-MM-dd")
-        dataFim = QtCore.QDate.toString(
+        dataFim = QDate.toString(
             self.dt_Fim.date(), "yyyy-MM-dd")
         busca.dataInicio = dataInicio
         busca.dataFim = dataFim
         busca.status = self.cb_Situacao.itemData(
-            self.cb_Situacao.currentIndex(), QtCore.Qt.UserRole)
+            self.cb_Situacao.currentIndex(), Qt.UserRole)
         busca.listaAPagar()
 
         while self.tb_APagar.rowCount() > 0:
@@ -110,7 +118,7 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         self.ValidaInputFloat(self.tx_valor)
         self.ValidaInputFloat(self.tx_valorPago)
 
-         #valida Campo Int
+        # valida Campo Int
         self.ValidaInputInt(self.tx_Id)
         """ Fim Chamanda financeiro.py  """
 
@@ -198,8 +206,8 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
             INSERI.valorPago = self.tb_APagar.cellWidget(
                 id, 6).text().replace(",", ".")
 
-            INSERI.dataPagamento = QtCore.QDate.toString(
-                QtCore.QDate.currentDate(), "yyyy-MM-dd")
+            INSERI.dataPagamento = QDate.toString(
+                QDate.currentDate(), "yyyy-MM-dd")
 
             INSERI.cadContaPagar()
             self.tabelaAPagar()
@@ -216,8 +224,8 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
             INSERI.idConta = self.tx_Cod.text()
             INSERI.formaPagamento = self.cb_formaPagamento.currentData()
             INSERI.valorPago = self.tx_valorPago.text().replace(",", ".")
-            INSERI.dataPagamento = QtCore.QDate.toString(
-                QtCore.QDate.currentDate(), "yyyy-MM-dd")
+            INSERI.dataPagamento = QDate.toString(
+                QDate.currentDate(), "yyyy-MM-dd")
             INSERI.PagarConta()
             self.BuscaContaAPagar(self.tx_Cod.text())
 
@@ -243,7 +251,7 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
             INSERI.idFornecedor = self.tx_Id.text()
             INSERI.descricao = self.tx_descricao.text()
             INSERI.categoria = self.cb_categoria.currentData()
-            INSERI.dataVencimento = QtCore.QDate.toString(QtCore.QDate.addMonths(
+            INSERI.dataVencimento = QDate.toString(QDate.addMonths(
                 self.dt_Vencimento.date(), i), "yyyy-MM-dd")
             INSERI.valor = self.tx_valor.text()
             INSERI.obs = self.tx_Obs.toPlainText()

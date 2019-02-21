@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtCore, QtGui, QtWidgets
-from Views.mainConfig import Ui_ct_MainConfig
 import configparser
 import os
 import sys
 import re
-import mysql.connector
-from Crud.CrudEmpresa import CrudEmpresa
 import base64
+
+from PySide2.QtCore import QByteArray, QBuffer, Qt
+from PySide2.QtWidgets import QFileDialog
+from PySide2.QtGui import QPixmap
+from Views.mainConfig import Ui_ct_MainConfig
+import mysql.connector
+
+
+from Crud.CrudEmpresa import CrudEmpresa
 
 
 class MainConfig(Ui_ct_MainConfig):
@@ -69,14 +74,14 @@ class MainConfig(Ui_ct_MainConfig):
 
     # upload Logo
     def UploadLogo(self):
-        Dialog = QtWidgets.QFileDialog()
-        Dialog.setOption(QtWidgets.QFileDialog.DontUseNativeDialog, True)
+        Dialog = QFileDialog()
+        Dialog.setOption(QFileDialog.DontUseNativeDialog, True)
 
         fname = Dialog.getOpenFileName(
             self, "Selecionar Logo", "", "Image files (*.jpg *.png)")[0]
 
-        self.lb_LogoEmpresa.setPixmap(QtGui.QPixmap(fname).scaledToWidth(
-            300, QtCore.Qt.TransformationMode(QtCore.Qt.FastTransformation)))
+        self.lb_LogoEmpresa.setPixmap(QPixmap(fname).scaledToWidth(
+            300, Qt.TransformationMode(Qt.FastTransformation)))
         # self.lb_LogoEmpresa.setScaledContents(True)
         self.bt_AddLogo.setHidden(True)
         self.bt_DelLogo.setVisible(True)
@@ -99,18 +104,18 @@ class MainConfig(Ui_ct_MainConfig):
 
             if not conecta.erro:
                 self.lb_StatusTesteDb.setPixmap(
-                    QtGui.QPixmap(self.resourcepath('Images/Sucesso.png')))
+                    QPixmap(self.resourcepath('Images/Sucesso.png')))
                 self.lb_StatusTesteDb.setScaledContents(True)
                 self.bt_SalvarConfigDB.setEnabled(True)
 
             else:
                 self.lb_StatusTesteDb.setPixmap(
-                    QtGui.QPixmap(self.resourcepath('Images/Fail.png')))
+                    QPixmap(self.resourcepath('Images/Fail.png')))
                 self.lb_StatusTesteDb.setScaledContents(True)
 
         except:
             self.lb_StatusTesteDb.setPixmap(
-                QtGui.QPixmap(self.resourcepath('Images/Fail.png')))
+                QPixmap(self.resourcepath('Images/Fail.png')))
             self.lb_StatusTesteDb.setScaledContents(True)
 
     def ConfigDbSave(self):
@@ -162,11 +167,11 @@ class MainConfig(Ui_ct_MainConfig):
             self.bt_AddLogo.setHidden(True)
             self.bt_DelLogo.setVisible(True)
             # print busca.logo
-            pixmap = QtGui.QPixmap()
-            pixmap.loadFromData(QtCore.QByteArray.fromBase64(
+            pixmap = QPixmap()
+            pixmap.loadFromData(QByteArray.fromBase64(
                 busca.logo))
             self.lb_LogoEmpresa.setPixmap(pixmap.scaledToWidth(
-                300, QtCore.Qt.TransformationMode(QtCore.Qt.FastTransformation)))
+                300, Qt.TransformationMode(Qt.FastTransformation)))
 
         pass
 
@@ -194,9 +199,9 @@ class MainConfig(Ui_ct_MainConfig):
         INSERI.subtitulo = self.tx_SubTitulo.text()
 
         if self.lb_LogoEmpresa.pixmap():
-            image = QtGui.QPixmap(self.lb_LogoEmpresa.pixmap())
-            data = QtCore.QByteArray()
-            buf = QtCore.QBuffer(data)
+            image = QPixmap(self.lb_LogoEmpresa.pixmap())
+            data = QByteArray()
+            buf = QBuffer(data)
             image.save(buf, 'PNG')
             logo = str(data.toBase64())[2:-1]
             INSERI.logo = logo

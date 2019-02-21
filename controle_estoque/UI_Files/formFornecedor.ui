@@ -374,7 +374,7 @@ height: 25px;
     </attribute>
     <column>
      <property name="text">
-      <string>DATA</string>
+      <string>EMISSÂO</string>
      </property>
      <property name="textAlignment">
       <set>AlignLeading|AlignVCenter</set>
@@ -382,7 +382,7 @@ height: 25px;
     </column>
     <column>
      <property name="text">
-      <string>TOTAL</string>
+      <string>RECEBIDO</string>
      </property>
      <property name="textAlignment">
       <set>AlignLeading|AlignVCenter</set>
@@ -390,7 +390,7 @@ height: 25px;
     </column>
     <column>
      <property name="text">
-      <string>STATUS</string>
+      <string>VALOR</string>
      </property>
     </column>
    </widget>

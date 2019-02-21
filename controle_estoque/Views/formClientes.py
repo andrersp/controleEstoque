@@ -395,10 +395,10 @@ class Ui_ct_FormClientes(object):
 "color: #797979\n"
 "}")
         self.lb_FormProdutos_12.setObjectName("lb_FormProdutos_12")
-        self.tx_Numemo = QtWidgets.QLineEdit(self.fr_FormClientes)
-        self.tx_Numemo.setGeometry(QtCore.QRect(580, 360, 70, 25))
-        self.tx_Numemo.setFocusPolicy(QtCore.Qt.WheelFocus)
-        self.tx_Numemo.setStyleSheet("QLineEdit{\n"
+        self.tx_Numero = QtWidgets.QLineEdit(self.fr_FormClientes)
+        self.tx_Numero.setGeometry(QtCore.QRect(580, 360, 70, 25))
+        self.tx_Numero.setFocusPolicy(QtCore.Qt.WheelFocus)
+        self.tx_Numero.setStyleSheet("QLineEdit{\n"
 "background: #CFCFCF;\n"
 "border-radius: 2px;\n"
 "color: #000;\n"
@@ -408,11 +408,11 @@ class Ui_ct_FormClientes(object):
 "QLineEdit:Focus {\n"
 "border: 1px solid red;\n"
 "}")
-        self.tx_Numemo.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.tx_Numemo.setInputMask("")
-        self.tx_Numemo.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.tx_Numemo.setPlaceholderText("")
-        self.tx_Numemo.setObjectName("tx_Numemo")
+        self.tx_Numero.setInputMethodHints(QtCore.Qt.ImhNone)
+        self.tx_Numero.setInputMask("")
+        self.tx_Numero.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
+        self.tx_Numero.setPlaceholderText("")
+        self.tx_Numero.setObjectName("tx_Numero")
         self.tx_Bairro = QtWidgets.QLineEdit(self.fr_FormClientes)
         self.tx_Bairro.setGeometry(QtCore.QRect(20, 415, 260, 25))
         self.tx_Bairro.setFocusPolicy(QtCore.Qt.WheelFocus)
@@ -545,8 +545,8 @@ class Ui_ct_FormClientes(object):
         ct_FormClientes.setTabOrder(self.tx_Obs, self.tx_Cep)
         ct_FormClientes.setTabOrder(self.tx_Cep, self.bt_BuscaCep)
         ct_FormClientes.setTabOrder(self.bt_BuscaCep, self.tx_Endereco)
-        ct_FormClientes.setTabOrder(self.tx_Endereco, self.tx_Numemo)
-        ct_FormClientes.setTabOrder(self.tx_Numemo, self.tx_Bairro)
+        ct_FormClientes.setTabOrder(self.tx_Endereco, self.tx_Numero)
+        ct_FormClientes.setTabOrder(self.tx_Numero, self.tx_Bairro)
         ct_FormClientes.setTabOrder(self.tx_Bairro, self.tx_Cidade)
         ct_FormClientes.setTabOrder(self.tx_Cidade, self.tx_Estado)
         ct_FormClientes.setTabOrder(self.tx_Estado, self.tb_Historico)

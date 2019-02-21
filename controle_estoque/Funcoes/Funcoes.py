@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtGui, QtCore, QtWidgets
 from functools import partial
 import re
+
+
+from PySide2.QtWidgets import QPushButton
+from PySide2.QtCore import QSize
+from PySide2.QtGui import QPixmap, QIcon
+
+
+from pycep_correios import consultar_cep
+from pycep_correios.excecoes import ExcecaoPyCEPCorreios
 
 
 class Funcao(object):
@@ -11,39 +19,39 @@ class Funcao(object):
             frame.children()[i].deleteLater()
 
     def DesativaBotao(self, frame, botao):
-        for filho in frame.findChildren(QtWidgets.QPushButton):
+        for filho in frame.findChildren(QPushButton):
             filho.setEnabled(True)
 
         botao.setEnabled(False)
 
     def ativaBotoes(self, frame):
-        for filho in frame.findChildren(QtWidgets.QPushButton):
+        for filho in frame.findChildren(QPushButton):
             filho.setEnabled(True)
 
     def IconeBotaoTopo(self, botao, imagem):
 
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(imagem),
-                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        # icon.addPixmap(QtGui.QPixmap((os.path.join(caminho, imagem)),
-        #                              QtGui.QIcon.Normal, QtGui.QIcon.Off))
+        icon = QIcon()
+        icon.addPixmap(QPixmap(imagem),
+                       QIcon.Normal, QIcon.Off)
+        # icon.addPixmap(QPixmap((os.path.join(caminho, imagem)),
+        #                              QIcon.Normal, QIcon.Off))
         botao.setIcon(icon)
-        botao.setIconSize(QtCore.QSize(50, 35))
+        botao.setIconSize(QSize(50, 35))
 
     def IconeBotaoMenu(self, botao, imagem):
 
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(imagem),
-                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon = QIcon()
+        icon.addPixmap(QPixmap(imagem),
+                       QIcon.Normal, QIcon.Off)
         botao.setIcon(icon)
-        botao.setIconSize(QtCore.QSize(25, 25))
+        botao.setIconSize(QSize(25, 25))
 
     def IconeBotaoForm(self, botao, imagem):
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(imagem),
-                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon = QIcon()
+        icon.addPixmap(QPixmap(imagem),
+                       QIcon.Normal, QIcon.Off)
         botao.setIcon(icon)
-        botao.setIconSize(QtCore.QSize(80, 35))
+        botao.setIconSize(QSize(80, 35))
 
     # Mascara Telefone
     def TelefoneMask(self, telefone):
@@ -71,3 +79,17 @@ class Funcao(object):
         cbox.addItem("À Vista", str(1))
         for i in range(2, 13):
             cbox.addItem("{} Vezes".format(i), i)
+
+    # buscar Cep
+    def buscarCepCliente(self):
+        cep = self.tx_Cep.text()
+
+        try:
+            busca = consultar_cep(cep)
+            self.tx_Endereco.setText(busca['end'])
+            self.tx_Bairro.setText(busca['bairro'])
+            self.tx_Cidade.setText(busca['cidade'])
+            self.tx_Estado.setText(busca['uf'])
+            self.tx_Numero.setFocus()
+        except ExcecaoPyCEPCorreios as exc:
+            self.tx_Endereco.setText(exc.message)

@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'mainFornecedor.ui',
 # licensing of 'mainFornecedor.ui' applies.
 #
-# Created: Sat Feb  9 01:42:09 2019
+# Created: Mon Feb 18 09:34:27 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -129,52 +129,12 @@ class Ui_ct_MainFornecedor(object):
         item = QtWidgets.QTableWidgetItem()
         self.tb_Fornecedor.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        brush = QtGui.QBrush(QtGui.QColor(80, 79, 79))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        item.setForeground(brush)
         self.tb_Fornecedor.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        brush = QtGui.QBrush(QtGui.QColor(80, 79, 79))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        item.setForeground(brush)
         self.tb_Fornecedor.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        brush = QtGui.QBrush(QtGui.QColor(80, 79, 79))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        item.setForeground(brush)
         self.tb_Fornecedor.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        brush = QtGui.QBrush(QtGui.QColor(80, 79, 79))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        item.setForeground(brush)
         self.tb_Fornecedor.setHorizontalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
         self.tb_Fornecedor.setHorizontalHeaderItem(6, item)
@@ -182,7 +142,7 @@ class Ui_ct_MainFornecedor(object):
         self.tb_Fornecedor.horizontalHeader().setHighlightSections(False)
         self.tb_Fornecedor.horizontalHeader().setStretchLastSection(True)
         self.tb_Fornecedor.verticalHeader().setVisible(False)
-        self.tb_Fornecedor.verticalHeader().setDefaultSectionSize(50)
+        self.tb_Fornecedor.verticalHeader().setDefaultSectionSize(40)
         self.fr_TituloFornecedor = QtWidgets.QFrame(self.frameMainFornecedor)
         self.fr_TituloFornecedor.setGeometry(QtCore.QRect(0, 0, 1000, 60))
         self.fr_TituloFornecedor.setStyleSheet("border: none")
@@ -198,10 +158,10 @@ class Ui_ct_MainFornecedor(object):
         self.lb_tituloFornecedor.setStyleSheet("color: #FFF")
         self.lb_tituloFornecedor.setObjectName("lb_tituloFornecedor")
 
-        self.tradMainFornecedor(ct_MainFornecedor)
+        self.tradmainFornecedor(ct_MainFornecedor)
         QtCore.QMetaObject.connectSlotsByName(ct_MainFornecedor)
 
-    def tradMainFornecedor(self, ct_MainFornecedor):
+    def tradmainFornecedor(self, ct_MainFornecedor):
         ct_MainFornecedor.setWindowTitle(QtWidgets.QApplication.translate(
             "ct_MainFornecedor", "Frame", None, -1))
         self.bt_BuscaFornecedor.setToolTip(
@@ -211,7 +171,7 @@ class Ui_ct_MainFornecedor(object):
         self.bt_PrintRelatForn.setToolTip(QtWidgets.QApplication.translate(
             "ct_MainFornecedor", "IMPRIMIR", None, -1))
         self.tb_Fornecedor.horizontalHeaderItem(1).setText(
-            QtWidgets.QApplication.translate("ct_MainFornecedor", "ID", None, -1))
+            QtWidgets.QApplication.translate("ct_MainFornecedor", "COD", None, -1))
         self.tb_Fornecedor.horizontalHeaderItem(2).setText(
             QtWidgets.QApplication.translate("ct_MainFornecedor", "FORNECEDOR", None, -1))
         self.tb_Fornecedor.horizontalHeaderItem(3).setText(

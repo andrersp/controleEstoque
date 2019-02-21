@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-from Crud.conexao import Conexao
 import mysql.connector
+from datetime import date
+
+from Crud.conexao import Conexao
 
 
 class CrudClientes(object):
@@ -55,10 +57,10 @@ class CrudClientes(object):
         c = conecta.conecta.cursor()
 
         try:
-            c.execute(""" INSERT INTO clientes VALUES ('{}', '{}', '{}', '{}', 
-        		'{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', 
+            c.execute(""" INSERT INTO clientes VALUES ('{}', '{}', '{}', '{}',
+        		'{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}',
         		'{}', '{}') ON DUPLICATE KEY UPDATE nome='{}', apelido='{}',
-        		cpf='{}', rg='{}', nascimento='{}', celular='{}', 
+        		cpf='{}', rg='{}', nascimento='{}', celular='{}',
         		telefone='{}', email='{}', obs='{}', cep='{}', endereco='{}',
         		num='{}', bairro='{}', cidade='{}', estado='{}' """
                       .format(self.idCliente, self.nomeCliente,
@@ -94,7 +96,7 @@ class CrudClientes(object):
 
         try:
             c.execute(
-                """ SELECT id, nome, apelido, celular, telefone, email 
+                """ SELECT id, nome, apelido, celular, telefone, email
                 FROM clientes WHERE nome LIKE '%{}%' """
                 .format(cliente))
             row = c.fetchall()
@@ -137,8 +139,9 @@ class CrudClientes(object):
                 self.cidadeCliente = row[14]
                 self.estadoCliente = row[15]
 
-            c.execute(""" SELECT  id, dataEmissao, dataEntrega, valorTotal 
-                from pedidos WHERE clienteID='{}' """.format(self.idCliente))
+            c.execute(""" SELECT  id, dataEmissao, dataEntrega, valorTotal
+                from pedidos WHERE clienteID='{}' AND statusEntrega=1 
+                 """.format(self.idCliente))
             self.idPedido = []
             self.dataEmissao = []
             self.dataEntrega = []
@@ -147,8 +150,8 @@ class CrudClientes(object):
             row = c.fetchall()
             for linha in row:
                 self.idPedido.append(linha[0])
-                self.dataEmissao.append(linha[1])
-                self.dataEntrega.append(linha[2])
+                self.dataEmissao.append(date.strftime(linha[1], "%d/%m/%Y"))
+                self.dataEntrega.append(date.strftime(linha[2], "%d/%m/%Y"))
                 self.Total.append(linha[3])
             c.close()
 

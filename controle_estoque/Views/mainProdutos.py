@@ -203,7 +203,7 @@ class Ui_ct_MainProdutos(object):
         self.tb_produtos.horizontalHeader().setHighlightSections(False)
         self.tb_produtos.horizontalHeader().setStretchLastSection(True)
         self.tb_produtos.verticalHeader().setVisible(False)
-        self.tb_produtos.verticalHeader().setDefaultSectionSize(50)
+        self.tb_produtos.verticalHeader().setDefaultSectionSize(40)
         self.fr_TituloProdutos = QtWidgets.QFrame(self.frameMainProdutos)
         self.fr_TituloProdutos.setGeometry(QtCore.QRect(0, 0, 1000, 60))
         self.fr_TituloProdutos.setStyleSheet("border: none")

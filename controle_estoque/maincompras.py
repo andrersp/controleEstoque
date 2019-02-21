@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtCore, QtWidgets
+from functools import partial
+
+from PySide2.QtCore import QDate, QUrl
+from PySide2.QtWidgets import QLineEdit
 from PySide2.QtWebEngineWidgets import QWebEngineView
+
+
 from Views.mainCompras import Ui_ct_MainCompras
 from Views.formCompras import Ui_ct_FormCompra
 from Crud.CrudCompras import CrudCompras
 from Crud.CrudProdutos import CrudProdutos
 from Crud.CrudFornecedor import CrudFornecedor
 from Crud.CrudAPagar import CrudAPagar
-from functools import partial
 from Funcoes.data import DataAtual
 
 
@@ -54,9 +58,9 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
     def DataTabCompras(self):
         cliente = self.tx_BuscaCompras.text()
         busca = CrudCompras()
-        busca.dataEmissao = QtCore.QDate.toString(
+        busca.dataEmissao = QDate.toString(
             self.dt_InicioCompra.date(), "yyyy-MM-dd")
-        busca.dataFim = QtCore.QDate.toString(self.dt_FimCompra.date(),
+        busca.dataFim = QDate.toString(self.dt_FimCompra.date(),
                                               "yyyy-MM-dd")
         busca.ListaCompratabela(cliente)
 
@@ -82,8 +86,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
                                busca.prazoEntrega[i],
                                self.StatusEntrega(busca.idStatusEntrega[i]),
                                busca.statusEntrega[i].upper())
-            self.TabelaPagamento(self.tb_Compras, i, 5,
-                                 busca.valorTotal[i],
+            self.TabelaEntrega(self.tb_Compras, i, 5,
+                                 "R$ "+str(busca.valorTotal[i]),
                                  self.StatusEntrega(
                                      busca.idStatusPagamento[i]),
                                  busca.statusPagamento[i].upper())
@@ -262,9 +266,9 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             INSERI = CrudCompras()
             INSERI.idCompra = self.tx_Cod.text()
             INSERI.idFornecedor = self.tx_Id.text()
-            INSERI.dataEmissao = QtCore.QDate.toString(
+            INSERI.dataEmissao = QDate.toString(
                 self.dt_Emissao.date(), 'yyyy-MM-dd')
-            INSERI.prazoEntrega = QtCore.QDate.toString(
+            INSERI.prazoEntrega = QDate.toString(
                 self.dt_Prazo.date(), 'yyyy-MM-dd')
             INSERI.desconto = self.tx_Desconto.text()
             INSERI.frete = self.tx_Frete.text()
@@ -314,7 +318,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
                     self.tx_Cod.text(), i + 1, self.tb_Parcelas.rowCount())
                 INSERI.obs = ""
                 INSERI.categoria = 1
-                INSERI.dataVencimento = QtCore.QDate.toString(
+                INSERI.dataVencimento = QDate.toString(
                     self.tb_Parcelas.cellWidget(i, 1).date(), "yyyy-MM-dd")
                 INSERI.valor = self.tb_Parcelas.item(i, 2).text()
                 INSERI.formaPagamento = self.cb_FormaPagamento.currentData()
@@ -330,8 +334,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             INSERI.valorPago = self.tb_Parcelas.cellWidget(
                 id, 3).text().replace(",", ".")
             INSERI.formaPagamento = self.cb_FormaPagamento.currentData()
-            INSERI.dataPagamento = QtCore.QDate.toString(
-                QtCore.QDate.currentDate(), "yyyy-MM-dd")
+            INSERI.dataPagamento = QDate.toString(
+                QDate.currentDate(), "yyyy-MM-dd")
 
             INSERI.PagarConta()
             self.ParcelasAPagar()
@@ -339,7 +343,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
     # Recebendo Produtos DB
     def ReceberProduto(self):
         INSERI = CrudCompras()
-        INSERI.dataEntrega = QtCore.QDate.toString(
+        INSERI.dataEntrega = QDate.toString(
             self.dt_Entrega.date(), "yyyy-MM-dd")
         INSERI.idCompra = self.tx_Cod.text()
         INSERI.ReceberProduto()
@@ -357,8 +361,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
                 i, 4).text().replace(",", ".")
             INSERI.qtdeProduto = self.tb_Itens.item(i, 3).text()
             INSERI.obsProduto = self.tb_Itens.item(i, 2).text()
-            INSERI.data = QtCore.QDate.toString(
-                QtCore.QDate.currentDate(), 'yyyy-MM-dd')
+            INSERI.data = QDate.toString(
+                QDate.currentDate(), 'yyyy-MM-dd')
 
             INSERI.EntradaProduto()
             i += 1
@@ -383,7 +387,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             self.bt_Entregar.setEnabled(True)
         if busca.statusEntrega == 1:
             self.tb_Itens.setColumnHidden(6, True)
-            for item in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
+            for item in self.fr_addProduto.findChildren(QLineEdit):
                 item.setReadOnly(True)
 
         i = 0
@@ -427,7 +431,7 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         if busca.dataVencimento:
             self.bt_GerarParcela.setDisabled(True)
             self.tb_Itens.setColumnHidden(6, True)
-            for item in self.fr_addProduto.findChildren(QtWidgets.QLineEdit):
+            for item in self.fr_addProduto.findChildren(QLineEdit):
                 item.setDisabled(True)
             self.bt_Salvar.setDisabled(True)
 
@@ -442,11 +446,13 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             self.tx_tabelaReceber(self.tb_Parcelas, i, 3, busca.idStatus[
                                   i], str(busca.valor[i] - busca.valorPago[i]))
             self.botaoReceberParcela(self.tb_Parcelas, i, 4,
-                                     partial(self.Pagar, i), "Pagar", busca.idStatus[i])
+                                     partial(self.Pagar, i), "Pagar", 
+                                     busca.idStatus[i])
             self.cb_QtdeParcela.setCurrentIndex(
                 self.cb_QtdeParcela.findData(len(busca.dataVencimento)))
-            self.cb_FormaPagamento.setCurrentIndex(self.cb_FormaPagamento.findData(
-                busca.formaPagamento[0]))
+            self.cb_FormaPagamento.setCurrentIndex(
+                self.cb_FormaPagamento.findData(
+                    busca.formaPagamento[0]))
 
 
     def imprimirCompra(self):
@@ -496,11 +502,11 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             bairroCliente = cliente.bairro,
             estadoCliente = cliente.estado,
             celularCliente = "",
-            dataEmissao = QtCore.QDate.toString(self.dt_Emissao.date(), 
+            dataEmissao = QDate.toString(self.dt_Emissao.date(), 
                                                 "dd-MM-yyyy"),
-            prazoEntrega= QtCore.QDate.toString(self.dt_Prazo.date(), 
+            prazoEntrega= QDate.toString(self.dt_Prazo.date(), 
                                                 "dd-MM-yyyy"),
-            dataEntrega=QtCore.QDate.toString(self.dt_Entrega.date(), 
+            dataEntrega=QDate.toString(self.dt_Entrega.date(), 
                                                 "dd-MM-yyyy"),
             statusEntrega=[busca.statusEntrega, busca.idStatusEntrega],
             statusFinanceiro=busca.idStatusPagamento,
@@ -524,6 +530,6 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             
         )
 
-        self.documento.load(QtCore.QUrl("file:///" +
+        self.documento.load(QUrl("file:///" +
                                         self.resourcepath("report.html")))
-        # self.documento.loadFinished['bool'].connect(self.previaImpressao)
+        self.documento.loadFinished['bool'].connect(self.previaImpressao)

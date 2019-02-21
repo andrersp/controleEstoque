@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'formFornecedor.ui',
 # licensing of 'formFornecedor.ui' applies.
 #
-# Created: Sat Feb  9 00:30:26 2019
+# Created: Mon Feb 18 09:36:05 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -536,14 +536,14 @@ class Ui_ct_FormFornecedor(object):
         self.lb_FormFornecedor_3.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "CNPJ", None, -1))
         self.lb_FormFornecedor_4.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "IE", None, -1))
         self.lb_FormFornecedor_5.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "TELEFONE ", None, -1))
-        self.tx_Telefone.setInputMask(QtWidgets.QApplication.translate("ct_FormFornecedor", "(00) 0000-00000", None, -1))
+        self.tx_Telefone.setInputMask(QtWidgets.QApplication.translate("ct_FormFornecedor", "(00) 0000-0000", None, -1))
         self.tx_Telefone.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "() -", None, -1))
         self.tx_Obs.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormFornecedor", "Observação", None, -1))
         self.lb_FormFornecedor_7.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "OBSERVAÇÃO", None, -1))
         self.lb_FormFornecedor_8.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "ENDEREÇO", None, -1))
-        self.tb_Historico.horizontalHeaderItem(0).setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "DATA", None, -1))
-        self.tb_Historico.horizontalHeaderItem(1).setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "TOTAL", None, -1))
-        self.tb_Historico.horizontalHeaderItem(2).setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "STATUS", None, -1))
+        self.tb_Historico.horizontalHeaderItem(0).setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "EMISSÂO", None, -1))
+        self.tb_Historico.horizontalHeaderItem(1).setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "RECEBIDO", None, -1))
+        self.tb_Historico.horizontalHeaderItem(2).setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "VALOR", None, -1))
         self.lb_FormFornecedor_9.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "HISTÓRICO DE PEDIDOS", None, -1))
         self.tx_Cep.setInputMask(QtWidgets.QApplication.translate("ct_FormFornecedor", "99999-999", None, -1))
         self.tx_Cep.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormFornecedor", "123456789", None, -1))
