@@ -30,9 +30,9 @@ class CrudFormaPagamento(object):
             pass
 
         return self.idFPagamento
-        pass
 
     # LIstando formas de pagamento
+
     def listaFPagamento(self):
         conecta = Conexao()
         c = conecta.conecta.cursor()
@@ -74,7 +74,7 @@ class CrudFormaPagamento(object):
             print(err)
 
 
-busca = CrudFormaPagamento()
-busca.idFPagamento = 3
-busca.descFPagamento = "CARTÃO"
-busca.cadFPagamento()
+# busca = CrudFormaPagamento()
+# busca.idFPagamento = 3
+# busca.descFPagamento = "CARTÃO"
+# busca.cadFPagamento()
