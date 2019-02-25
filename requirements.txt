@@ -2,3 +2,5 @@ PySide2
 mysql-connector
 jinja2
 pycep_correios
+mysqlclient
+peewee

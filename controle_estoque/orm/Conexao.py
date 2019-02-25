@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
+import sys
+import os
+import configparser
+
 from peewee import Model
 from peewee import DatabaseError
 from peewee import InternalError
+from peewee import OperationalError
 from peewee import IntegerField
 from peewee import ForeignKeyField
 from peewee import DecimalField
@@ -9,44 +14,95 @@ from peewee import BigBitField
 from peewee import CharField
 from peewee import PrimaryKeyField
 from peewee import DateField
+from peewee import Field
 from playhouse.mysql_ext import MySQLConnectorDatabase
 
 
-""" 
+"""
 Classe responsável pela conexao com o DB.
 Caso não exista o DB será criado
  """
 
 
 class Conexao(object):
-    def __init__(self, dbhandler="", erro=""):
-        user = 'andre'
-        senha = 'rsp'
-        host = '127.0.0.1'
-        dbname = 'infotec'
+    def __init__(self, dbhandler="", DbHost="", DbName="", DbUser="",
+                 DbPassword="", conecta="", erro=""):
+        self.DbHost = DbHost
+        self.DbName = DbName
+        self.DbUser = DbUser
+        self.DbPassword = DbPassword
+        self.conecta = conecta
         self.erro = erro
-
         self.dbhandler = dbhandler
+
+        # Caminho absoluto config.ini
+        self.path = os.path.abspath(os.path.dirname(sys.argv[0]))
+        config = configparser.ConfigParser()
+        config.sections()
+
+        # Buscando Dados config.ini
+        if config.read(os.path.join(self.path, 'config.ini')):
+            self.DbHost = config['DEFAULT']['DbHost']
+            self.DbName = config['DEFAULT']['DbName']
+            self.DbUser = config['DEFAULT']['DbUser']
+            self.DbPassword = config['DEFAULT']['DbPassword']
+
+        # Realizando a conexao com o DB
         try:
             self.dbhandler = MySQLConnectorDatabase(
-                dbname, user=user, password=senha, host=host
+                self.DbName, user=self.DbUser, password=self.DbPassword, host=self.DbHost
             )
             self.dbhandler.connect()
-        except DatabaseError:
-            import mysql.connector
-            try:
-                conn = mysql.connector.connect(
-                    user=user, password=senha, host=host)
-                cursor = conn.cursor()
-                cursor.execute('SET sql_notes = 0 ;')
-                cursor.execute("create database IF NOT EXISTS %s" % dbname)
+        except:
+            self.erro = "Erro"
 
-            except mysql.connector.Error as err:
-                print(err)
+
+class CreateDb(object):
+    def __init__(self, dbhandler="", DbHost="", DbName="", DbUser="",
+                 DbPassword="", conecta="", erro=""):
+        self.DbHost = DbHost
+        self.DbName = DbName
+        self.DbUser = DbUser
+        self.DbPassword = DbPassword
+        self.conecta = conecta
+        self.erro = erro
+        self.dbhandler = dbhandler
+
+        # Caminho absoluto config.ini
+        self.path = os.path.abspath(os.path.dirname(sys.argv[0]))
+        config = configparser.ConfigParser()
+        config.sections()
+
+        # Buscando Dados config.ini
+        if config.read(os.path.join(self.path, 'config.ini')):
+            self.DbHost = config['DEFAULT']['DbHost']
+            self.DbName = config['DEFAULT']['DbName']
+            self.DbUser = config['DEFAULT']['DbUser']
+            self.DbPassword = config['DEFAULT']['DbPassword']
+
+    def CreateDB(self):
+
+        # Caso banco não exista, Cria
+        import mysql.connector
+        try:
+            conn = mysql.connector.connect(
+                user=self.DbUser, password=self.DbPassword, host=self.DbHost)
+            cursor = conn.cursor()
+            cursor.execute('SET sql_notes = 0 ;')
+            cursor.execute("create database IF NOT EXISTS %s" %
+                           self.DbName)
+
+        except mysql.connector.Error as err:
+            if err.errno == mysql.connector.errorcode.ER_ACCESS_DENIED_ERROR:
+                self.erro = 1  # Erro User e Senha
+            elif err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
+                self.erro = 2  # erro banco de dados inexistente
+            else:
+                self.erro == err
 
 
 # Classe campo personalizado longblob
-class LongBlobCampo(BigBitField):
+class LongBlobCampo(Field):
     field_type = 'LONGBLOB'
 
 
@@ -300,26 +356,76 @@ class ContaAReceber(BaseModel):
         db_table = 'conta_a_receber'
 
 
-# Criando todas as tabelas
-try:
+# Tabela Com os dados da Empresa
 
-    CategoriaProduto.create_table()
-    MarcaProduto.create_table()
-    Produto.create_table()
-    Fornecedor.create_table()
-    Cliente.create_table()
-    CatAPagar.create_table()
-    CatAReceber.create_table()
-    StatusEntrega.create_table()
-    StatusPagamento.create_table()
-    FormaPagamento.create_table()
-    Compra.create_table()
-    Venda.create_table()
-    RelacaoCompra.create_table()
-    RelacaoVenda.create_table()
-    ContaAPagar.create_table()
-    ContaAReceber.create_table()
+class Empresa(BaseModel):
+    id = PrimaryKeyField(null=False)
+    nome_fantasia = CharField(max_length=80)
+    razao_social = CharField(max_length=(80))
+    cnpj = CharField(max_length=20)
+    insc_estadual = CharField(max_length=20)
+    telefone = CharField(max_length=20)
+    email = CharField(max_length=80)
+    site = CharField(max_length=80)
+    obs = CharField(max_length=80)
+    cep = CharField(max_length=12)
+    endereco = CharField(max_length=50)
+    numero = CharField(max_length=5)
+    bairro = CharField(max_length=40)
+    cidade = CharField(max_length=40)
+    estado = CharField(max_length=2)
+    titulo = CharField(max_length=20)
+    subtitulo = CharField(max_length=80)
+    logo = LongBlobCampo()
 
-except InternalError as err:
-    print(err)
-# CatAReceber.create(categoria_a_receber='Venda')
+    class Meta:
+        db_table = 'empresa'
+
+
+# Criando todas as tabelas e inserindo valores padrão
+class CriarTabelas(object):
+
+    def tabelas(self):
+        try:
+
+            # Criando Tabelas
+            Conexao().dbhandler.create_tables([
+                CategoriaProduto,
+                MarcaProduto,
+                Produto,
+                Fornecedor,
+                Cliente,
+                CatAPagar,
+                CatAReceber,
+                StatusEntrega,
+                StatusPagamento,
+                FormaPagamento,
+                Compra,
+                Venda,
+                RelacaoCompra,
+                RelacaoVenda,
+                ContaAPagar,
+                ContaAReceber,
+                Empresa
+            ])
+            """ Inserido valores padrão """
+
+            # Categoria a pagar
+            CatAPagar.get_or_create(categoria_a_pagar='Compra')
+
+            # Categoria a receber
+            CatAReceber.get_or_create(categoria_a_receber='Venda')
+
+            # Forma de Pagamento
+            FormaPagamento.get_or_create(forma_pagamento='À Vista')
+
+            # Status Entrega
+            StatusEntrega.get_or_create(status_entrega='Concluída')
+            StatusEntrega.get_or_create(status_entrega='Pendente')
+
+            # Status Pagamento
+            StatusPagamento.get_or_create(status_pagamento='Concluído')
+            StatusPagamento.get_or_create(status_pagamento='Pendente')
+
+        except InternalError as err:
+            print(err)

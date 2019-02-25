@@ -2,15 +2,16 @@
 
 import peewee
 
-from orm.Conexao import Conexao, Fornecedor
+from orm.Conexao import Conexao, Empresa
 
 
-class CrudFornecedor(object):
+class CrudEmpresa(object):
 
     def __init__(self, id="", nomeFantasia="", razaoSocial="", cnpj="",
                  inscEstadual="", telefone="", email="", site="", obs="",
                  cep="", endereco="", numero="", bairro="", cidade="",
-                 estado="", query=""):
+                 estado="",  titulo="", subtitulo="", logo="",
+                 query=""):
 
         self.id = id
         self.nomeFantasia = nomeFantasia
@@ -27,15 +28,18 @@ class CrudFornecedor(object):
         self.bairro = bairro
         self.cidade = cidade
         self.estado = estado
+        self.titulo = titulo
+        self.subtitulo = subtitulo
+        self.logo = logo
         self.query = query
 
-     # Recebendo última id inserido
+    # Recebendo última id inserido
 
-    def lastIdFornecedor(self):
+    def lastIdEmpresa(self):
         try:
 
             # Query
-            ultimo = Fornecedor.select().order_by(Fornecedor.id.desc()).get()
+            ultimo = Empresa.select().order_by(Empresa.id.desc()).get()
 
             self.id = ultimo.id + 1
 
@@ -52,15 +56,15 @@ class CrudFornecedor(object):
 
         return self.id
 
-    # Cadastro de Fornecedor
+    # Cadastro de Empresa
 
-    def inseriFornecedor(self):
+    def inseriEmpresa(self):
 
         try:
 
             # Query
-            row = Fornecedor.insert(
-                id=self.id,
+            row = Empresa.insert(
+                id=1,
                 nome_fantasia=self.nomeFantasia,
                 razao_social=self.razaoSocial,
                 cnpj=self.cnpj,
@@ -74,7 +78,10 @@ class CrudFornecedor(object):
                 numero=self.numero,
                 bairro=self.bairro,
                 cidade=self.cidade,
-                estado=self.estado
+                estado=self.estado,
+                titulo=self.titulo,
+                subtitulo=self.subtitulo,
+                logo=self.logo
             ).on_conflict_replace()
 
             # Executando a query
@@ -86,14 +93,14 @@ class CrudFornecedor(object):
         except peewee.InternalError as err:
             print(err)
 
-    # Selecionar Fornecedor por Id
+    # Selecionar Empresa por Id
 
-    def SelectFornecedorId(self):
+    def SelectEmpresaId(self):
 
         try:
 
             # Query
-            busca = Fornecedor.get_by_id(self.id)
+            busca = Empresa.get_by_id(1)
 
             # Salvando resultado da Query
             self.id = busca.id
@@ -111,46 +118,13 @@ class CrudFornecedor(object):
             self.bairro = busca.bairro
             self.cidade = busca.cidade
             self.estado = busca.estado
+            self.titulo = busca.titulo
+            self.subtitulo = busca.subtitulo
+            self.logo = busca.logo
 
             # Fechando a Conexao
             Conexao().dbhandler.close()
 
             pass
-
-        except peewee.DoesNotExist as err:
-            print(err)
-            pass
-
-    # Buscando Fornecedor por Nome
-
-    def listaFornecedor(self):
-
-        try:
-
-            # Query
-            self.query = (Fornecedor.select().where(
-                Fornecedor.nome_fantasia.contains(self.nomeFantasia)))
-
-            # Fechando a conexao
-            Conexao().dbhandler.close()
-
-        except peewee.DoesNotExist as err:
-            print(err)
-
-    # Lista AutoComplete Fornecedor
-
-    def autoCompleteFornecedor(self):
-
-        try:
-
-            # Query
-            self.query = (Fornecedor
-                          .select(Fornecedor.id, Fornecedor.nome_fantasia)
-                          .where(Fornecedor.nome_fantasia
-                                 .contains(self.nomeFantasia)))
-
-            # Fechando a Conexao
-            Conexao().dbhandler.close()
-
-        except peewee.DoesNotExist as err:
-            print(err)
+        except peewee.DoesNotExist:
+            self.titulo = None

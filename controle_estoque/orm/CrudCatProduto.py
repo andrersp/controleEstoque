@@ -3,7 +3,7 @@
 import peewee
 
 
-from Conexao import Conexao, CategoriaProduto
+from orm.Conexao import Conexao, CategoriaProduto
 
 
 class CrudCatProduto(object):
@@ -54,7 +54,7 @@ class CrudCatProduto(object):
 
     # Listando todas as categorias
 
-    def listaCatProdutos(self):
+    def listaCatProduto(self):
 
         try:
             # Query

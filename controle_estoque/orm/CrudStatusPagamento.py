@@ -11,18 +11,6 @@ class CrudStatusPagamento(object):
         self.statusPagamento = statusPagamento
         self.query = query
 
-        # Inserindo Dado padrão
-
-        try:
-
-            # Inserindo Dado caso não exista
-            StatusPagamento.get_or_create(status_pagamento='Concluído')
-            StatusPagamento.get_or_create(status_pagamento='Pendente')
-
-        except:
-
-            print(Conexao().erro)
-
     # Recebendo ultimo Id inserido
 
     def lastIdStatusPagamento(self):

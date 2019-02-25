@@ -1651,6 +1651,69 @@ color: #797979
        <string/>
       </property>
      </widget>
+     <widget class="QLabel" name="lb_status_db">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>145</y>
+        <width>241</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+font-size: 8px;
+font-family: &quot;Tahoma&quot;;
+font-weight: bold;
+color: #797979
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_status_user">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>205</y>
+        <width>241</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+font-size: 8px;
+font-family: &quot;Tahoma&quot;;
+font-weight: bold;
+color: red
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lb_status_senha">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>260</y>
+        <width>241</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{
+font-size: 8px;
+font-family: &quot;Tahoma&quot;;
+font-weight: bold;
+color: red
+}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QFrame" name="fr_TopoConfig">

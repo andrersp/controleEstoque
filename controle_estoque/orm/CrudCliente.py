@@ -3,7 +3,7 @@
 import peewee
 
 
-from Conexao import Conexao, Cliente
+from orm.Conexao import Conexao, Cliente
 
 
 class CrudCliente(object):
@@ -130,6 +130,7 @@ class CrudCliente(object):
 
     # Buscando Cliente por nome
     def listaCliente(self):
+
         try:
 
             # Query
@@ -142,7 +143,7 @@ class CrudCliente(object):
 
             pass
 
-        except peewee.DoesNotExist as err:
+        except peewee.InternalError as err:
 
             print(err)
 

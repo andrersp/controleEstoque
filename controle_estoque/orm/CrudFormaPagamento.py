@@ -11,19 +11,6 @@ class CrudFormaPagamento(object):
         self.formaPagamento = formaPagamento
         self.query = query
 
-        # Criando Tabela e dados padrão
-
-        try:
-            # Criando tabela
-            FormaPagamento.create_table()
-
-            # Inserindo Dado caso não exista
-            FormaPagamento.get_or_create(forma_pagamento='À Vista')
-
-        except:
-
-            print(Conexao().erro)
-
     # Recebendo ultimo Id inserido
 
     def lastIdFormaPagamento(self):

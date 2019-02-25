@@ -11,17 +11,6 @@ class CrudStatusEntrega(object):
         self.statusEntrega = statusEntrega
         self.query = query
 
-        # Inserindo Dado padrão
-
-        try:
-            # Inserindo Dado caso não exista
-            StatusEntrega.get_or_create(status_entrega='Concluída')
-            StatusEntrega.get_or_create(status_entrega='Pendente')
-
-        except:
-
-            print(Conexao().erro)
-
     # Recebendo ultimo Id inserido
 
     def lastIdStatusEntrega(self):

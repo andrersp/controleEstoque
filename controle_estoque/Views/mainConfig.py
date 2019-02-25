@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'mainConfig.ui'
 #
-# Created by: PySide2 UI code generator 5.11.3
+# Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -801,6 +801,36 @@ class Ui_ct_MainConfig(object):
 "}")
         self.lb_StatusTesteDb.setText("")
         self.lb_StatusTesteDb.setObjectName("lb_StatusTesteDb")
+        self.lb_status_db = QtWidgets.QLabel(self.tab_database)
+        self.lb_status_db.setGeometry(QtCore.QRect(210, 145, 241, 25))
+        self.lb_status_db.setStyleSheet("QLabel{\n"
+"font-size: 8px;\n"
+"font-family: \"Tahoma\";\n"
+"font-weight: bold;\n"
+"color: #797979\n"
+"}")
+        self.lb_status_db.setText("")
+        self.lb_status_db.setObjectName("lb_status_db")
+        self.lb_status_user = QtWidgets.QLabel(self.tab_database)
+        self.lb_status_user.setGeometry(QtCore.QRect(210, 205, 241, 25))
+        self.lb_status_user.setStyleSheet("QLabel{\n"
+"font-size: 8px;\n"
+"font-family: \"Tahoma\";\n"
+"font-weight: bold;\n"
+"color: red\n"
+"}")
+        self.lb_status_user.setText("")
+        self.lb_status_user.setObjectName("lb_status_user")
+        self.lb_status_senha = QtWidgets.QLabel(self.tab_database)
+        self.lb_status_senha.setGeometry(QtCore.QRect(210, 260, 241, 25))
+        self.lb_status_senha.setStyleSheet("QLabel{\n"
+"font-size: 8px;\n"
+"font-family: \"Tahoma\";\n"
+"font-weight: bold;\n"
+"color: red\n"
+"}")
+        self.lb_status_senha.setText("")
+        self.lb_status_senha.setObjectName("lb_status_senha")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("../Images/icon/sql.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.tab_Config.addTab(self.tab_database, icon1, "")

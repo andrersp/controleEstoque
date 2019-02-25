@@ -3,8 +3,12 @@
 import peewee
 from datetime import date
 
-from Conexao import Conexao, Venda
-from Conexao import Cliente, CatAReceber, StatusEntrega, StatusPagamento
+from orm.Conexao import Conexao
+from orm.Conexao import Venda
+from orm.Conexao import Cliente
+from orm.Conexao import CatAReceber
+from orm.Conexao import StatusEntrega
+from orm.Conexao import StatusPagamento
 
 
 class CrudVenda(object):
@@ -79,6 +83,23 @@ class CrudVenda(object):
             # Executando a Query
             row.execute()
 
+        except peewee.InternalError as err:
+            print(err)
+
+    # Selecionar compras por Cód Cliente
+
+    def selectVendaCliente(self):
+
+        try:
+
+            # Query
+            self.query = (Venda.select(Venda.data_emissao, Venda.data_entrega,
+                                       Venda.valor_total).where(
+                                           Venda.id_cliente == self.idCliente,
+                                           Venda.status_pagamento == 1))
+
+            # Fechandoa Conexao
+            Conexao().dbhandler.close()
         except peewee.InternalError as err:
             print(err)
 

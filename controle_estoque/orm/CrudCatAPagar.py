@@ -11,16 +11,6 @@ class CrudCatAPagar(object):
         self.categoriaPagar = categoriaPagar
         self.query = query
 
-        # Inserindo Dado padrão
-
-        try:
-            # Inserindo Dado caso não exista
-            CatAPagar.get_or_create(categoria_a_pagar='Compra')
-
-        except:
-
-            print(Conexao().erro)
-
     # Recebendo ultimo Id inserido
 
     def lastIdCatAPagar(self):

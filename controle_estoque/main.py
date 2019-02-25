@@ -4,14 +4,14 @@ import sys
 import random
 import webbrowser
 
+
 from PySide2.QtCore import Qt
 from PySide2 import QtGui, QtWidgets
 import mysql.connector
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 
 
-from Crud.conexao import Conexao
-from Crud.CrudEmpresa import CrudEmpresa
+from orm.CrudEmpresa import CrudEmpresa
 from Funcoes.categoriaAPagar import CategoriaAPagar
 from Funcoes.categoriaAReceber import CategoriaAReceber
 from Funcoes.Clientes import Clientes
@@ -130,20 +130,28 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
     # Verificando Banco de Dados
     def DbCheck(self):
+        # busca = CrudEmpresa()
+        # busca.SelectEmpresaId()
+
+       
         try:
-            Conexao()
             busca = CrudEmpresa()
-            busca.idEmpresa = '1'
             busca.SelectEmpresaId()
+            
             if busca.titulo:
+                
                 self.lb_NomeFantasia.setText(busca.titulo)
                 self.lb_NomeFantasia2.setText(busca.subtitulo)
                 self.setWindowTitle(busca.titulo + " " + busca.subtitulo)
+
             else:
+                
                 self.janelaConfig()
                 self.tab_Config.setCurrentIndex(0)
+                
 
         except:
+           
             self.janelaConfig()
             self.tab_Config.setCurrentIndex(1)
             for botao in self.wd_menu.findChildren(QtWidgets.QPushButton):

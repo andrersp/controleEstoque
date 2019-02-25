@@ -11,17 +11,6 @@ class CrudCatAReceber(object):
         self.categoriaReceber = categoriaReceber
         self.query = query
 
-        # Inserindo Dado padrão
-
-        try:
-
-            # Inserindo Dado caso não exista
-            CatAReceber.get_or_create(categoria_a_receber='Venda')
-
-        except:
-
-            print(Conexao().erro)
-
     # Recebendo ultimo Id inserido
 
     def lastIdCatAReceber(self):

@@ -16,7 +16,8 @@ class Conexao(object):
         self.DbPassword = DbPassword
         self.conecta = conecta
         self.erro = erro
-        # self.path = os.path.dirname(os.path.abspath(__file__))
+        
+        
         self.path = os.path.abspath(os.path.dirname(sys.argv[0]))
         config = configparser.ConfigParser()
         config.sections()

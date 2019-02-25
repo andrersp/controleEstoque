@@ -11,8 +11,10 @@ from PySide2.QtGui import QPixmap
 from Views.mainConfig import Ui_ct_MainConfig
 import mysql.connector
 
+from orm.Conexao import CreateDb, CriarTabelas
 
-from Crud.CrudEmpresa import CrudEmpresa
+
+from orm.CrudEmpresa import CrudEmpresa
 
 
 class MainConfig(Ui_ct_MainConfig):
@@ -69,7 +71,7 @@ class MainConfig(Ui_ct_MainConfig):
         # Botao salvar Empresa
         self.bt_SalvarDadosEmpresa.clicked.connect(self.CadEmpresa)
 
-        # Set ID Empresa
+        # # Set ID Empresa
         self.LastIdEmpresa()
 
     # upload Logo
@@ -99,19 +101,42 @@ class MainConfig(Ui_ct_MainConfig):
         conecta.DbUser = str(self.tx_DbUser.text())
         conecta.DbPassword = str(self.tx_DbPass.text())
 
+        self.lb_status_db.clear()
+        self.lb_status_senha.clear()
+        self.lb_status_user.clear()
+
         try:
             conecta.conectar()
 
             if not conecta.erro:
                 self.lb_StatusTesteDb.setPixmap(
                     QPixmap(self.resourcepath('Images/Sucesso.png')))
+                self.lb_status_db.setPixmap(
+                    QPixmap(self.resourcepath('Images/Sucesso.png')))
+                self.lb_status_user.setPixmap(
+                    QPixmap(self.resourcepath('Images/Sucesso.png')))
+                self.lb_status_senha.setPixmap(
+                    QPixmap(self.resourcepath('Images/Sucesso.png')))
                 self.lb_StatusTesteDb.setScaledContents(True)
                 self.bt_SalvarConfigDB.setEnabled(True)
 
-            else:
+            elif conecta.erro == 1:
+                self.lb_status_user.setText("Erro de Usuaŕio ou Senha")
+                self.lb_status_senha.setText("Erro de Usuaŕio ou Senha")
                 self.lb_StatusTesteDb.setPixmap(
                     QPixmap(self.resourcepath('Images/Fail.png')))
                 self.lb_StatusTesteDb.setScaledContents(True)
+            elif conecta.erro == 2:
+                self.lb_status_db.setText("O banco de dados será criado")
+                self.lb_StatusTesteDb.setPixmap(
+                    QPixmap(self.resourcepath('Images/Sucesso.png')))
+
+                self.lb_status_user.setPixmap(
+                    QPixmap(self.resourcepath('Images/Sucesso.png')))
+                self.lb_status_senha.setPixmap(
+                    QPixmap(self.resourcepath('Images/Sucesso.png')))
+                self.lb_StatusTesteDb.setScaledContents(True)
+                self.bt_SalvarConfigDB.setEnabled(True)
 
         except:
             self.lb_StatusTesteDb.setPixmap(
@@ -132,12 +157,14 @@ class MainConfig(Ui_ct_MainConfig):
         path = os.path.abspath(os.path.dirname(sys.argv[0]))
         with open(os.path.join(path, 'config.ini'), 'w') as configfile:
             config.write(configfile)
+        CreateDb().CreateDB()
+        CriarTabelas().tabelas()
         self.janelaConfig()
 
     def LastIdEmpresa(self):
         try:
             busca = CrudEmpresa()
-            self.tx_idEmpresa.setText(str(busca.LasIdEmpresa()))
+            self.tx_idEmpresa.setText(str(busca.lastIdEmpresa()))
             self.SelectEmpresa()
         except:
             self.tx_idEmpresa.setText(str(1))
@@ -146,9 +173,9 @@ class MainConfig(Ui_ct_MainConfig):
         busca = CrudEmpresa()
         busca.idEmpresa = self.tx_idEmpresa.text()
         busca.SelectEmpresaId()
-        self.tx_idEmpresa.setText(str(busca.idEmpresa))
-        self.tx_NomeFantasia.setText(busca.NomeFantasia)
-        self.tx_RazaoSocial.setText(busca.RazaoSocial)
+        self.tx_idEmpresa.setText(str(busca.id))
+        self.tx_NomeFantasia.setText(busca.nomeFantasia)
+        self.tx_RazaoSocial.setText(busca.razaoSocial)
         self.tx_Cnpj.setText(str(busca.cnpj))
         self.tx_IE.setText(str(busca.inscEstadual))
         self.tx_TelefoneEmpresa.setText(str(busca.telefone))
@@ -179,9 +206,9 @@ class MainConfig(Ui_ct_MainConfig):
 
     def CadEmpresa(self):
         INSERI = CrudEmpresa()
-        INSERI.idEmpresa = self.tx_idEmpresa.text()
-        INSERI.NomeFantasia = self.tx_NomeFantasia.text().upper()
-        INSERI.RazaoSocial = self.tx_RazaoSocial.text().upper()
+        INSERI.id = self.tx_idEmpresa.text()
+        INSERI.nomeFantasia = self.tx_NomeFantasia.text().upper()
+        INSERI.razaoSocial = self.tx_RazaoSocial.text().upper()
         INSERI.cnpj = self.tx_Cnpj.text()
         INSERI.inscEstadual = self.tx_IE.text()
         INSERI.telefone = re.sub(
@@ -206,7 +233,7 @@ class MainConfig(Ui_ct_MainConfig):
             logo = str(data.toBase64())[2:-1]
             INSERI.logo = logo
 
-        INSERI.CadEmpresa()
+        INSERI.inseriEmpresa()
         self.lb_NomeFantasia.setText(self.tx_Titulo.text())
         self.lb_NomeFantasia2.setText(INSERI.subtitulo)
         self.setWindowTitle(INSERI.titulo + " " + INSERI.subtitulo)
@@ -231,4 +258,9 @@ class ConexaoTeste(object):
             c.close()
 
         except mysql.connector.Error as err:
-            self.erro = err
+            if err.errno == mysql.connector.errorcode.ER_ACCESS_DENIED_ERROR:
+                self.erro = 1  # Erro User e Senha
+            elif err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
+                self.erro = 2  # erro banco de dados inexistente
+            else:
+                print(err)

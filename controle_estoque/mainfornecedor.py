@@ -10,8 +10,7 @@ from jinja2 import Environment, PackageLoader, FileSystemLoader
 
 from Views.mainFornecedor import Ui_ct_MainFornecedor
 from Views.formFornecedor import Ui_ct_FormFornecedor
-from Crud.CrudFornecedor import CrudFornecedor
-from Crud.CrudEmpresa import CrudEmpresa
+from orm.CrudFornecedor import CrudFornecedor
 
 
 class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
@@ -50,33 +49,35 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
 
     def TabelaFornecedor(self):
         lista = CrudFornecedor()
-        busca = self.tx_BuscaFornecedor.text()
-        lista.ListaFornecedorTabela(busca)
+        lista.nomeFantasia = self.tx_BuscaFornecedor.text()
+        lista.listaFornecedor()
 
         # Limpando Tabela
         while self.tb_Fornecedor.rowCount() > 0:
             self.tb_Fornecedor.removeRow(0)
 
         i = 0
-        if len(lista.NomeFantasia) >= 1:
-            while i < len(lista.NomeFantasia):
+        if len(lista.query) >= 1:
+            for fornecedor in lista.query:
                 self.tb_Fornecedor.insertRow(i)
                 self.TabelaStatus(self.tb_Fornecedor, i,
                                   0, self.StatusEntrega(1))
-                self.TabelaID(self.tb_Fornecedor, i, 1, lista.idFornecedor[i])
+                self.TabelaID(self.tb_Fornecedor, i, 1,
+                              fornecedor.id)
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 2,
-                                        lista.NomeFantasia[i],
-                                        lista.RazaoSocial[i])
+                                        fornecedor.nome_fantasia,
+                                        fornecedor.razao_social)
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 3,
-                                        self.formatoNumTelefone(lista.telefone[i]), "")
+                                        self.formatoNumTelefone(
+                                            fornecedor.telefone), "")
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 4,
-                                        lista.email[i], "")
+                                        fornecedor.email, "")
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 5,
-                                        lista.site[i], "")
+                                        fornecedor.site, "")
                 # Sinal click tabela
                 self.botaoTabela(self.tb_Fornecedor, i, 6,
                                  partial(self.SelectFornecedor,
-                                         lista.idFornecedor[i]), "#005099")
+                                         fornecedor.id), "#005099")
                 i += 1
         pass
 
@@ -84,10 +85,11 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
     def SelectFornecedor(self, id):
         busca = CrudFornecedor()
         self.FormFornecedor()
-        busca.SelectFornecedorId(id)
-        self.tx_Id.setText(str(busca.idFornecedor))
-        self.tx_NomeFantasia.setText(busca.NomeFantasia)
-        self.tx_RazaoSocial.setText(busca.RazaoSocial)
+        busca.id = id
+        busca.SelectFornecedorId()
+        self.tx_Id.setText(str(busca.id))
+        self.tx_NomeFantasia.setText(busca.nomeFantasia)
+        self.tx_RazaoSocial.setText(busca.razaoSocial)
         self.tx_cnpj.setText(str(busca.cnpj))
         self.tx_InscEstadual.setText(str(busca.inscEstadual))
         self.tx_Telefone.setText(str(busca.telefone))
@@ -141,7 +143,7 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
     def IdCheckFornecedor(self):
         if not self.tx_Id.text():
             busca = CrudFornecedor()
-            self.tx_Id.setText(str(busca.LasIdFornecedor()))
+            self.tx_Id.setText(str(busca.lastIdFornecedor()))
 
     # Verificando Campos antes do INPUT
     def VerificaInputFornecedor(self):
@@ -155,9 +157,9 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
     # Cadastrando fornecedor
     def CadFornecedor(self):
         INSERI = CrudFornecedor()
-        INSERI.idFornecedor = self.tx_Id.text()
-        INSERI.NomeFantasia = self.tx_NomeFantasia.text().upper()
-        INSERI.RazaoSocial = self.tx_RazaoSocial.text().upper()
+        INSERI.id = self.tx_Id.text()
+        INSERI.nomeFantasia = self.tx_NomeFantasia.text().upper()
+        INSERI.razaoSocial = self.tx_RazaoSocial.text().upper()
         INSERI.cnpj = self.tx_cnpj.text()
         INSERI.inscEstadual = self.tx_InscEstadual.text()
         INSERI.telefone = re.sub(
@@ -172,7 +174,7 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
         INSERI.bairro = self.tx_Bairro.text().upper()
         INSERI.cidade = self.tx_Cidade.text().upper()
         INSERI.estado = self.tx_Estado.text()
-        INSERI.CadFornecedor()
+        INSERI.inseriFornecedor()
         self.janelaFornecedor()
 
     # Imprimindo

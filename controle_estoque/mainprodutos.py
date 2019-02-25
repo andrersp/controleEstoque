@@ -9,7 +9,9 @@ from PySide2.QtWebEngineWidgets import QWebEngineView
 
 from Views.mainProdutos import Ui_ct_MainProdutos
 from Views.formProdutos import Ui_ct_FormProdutos
-from Crud.CrudProdutos import CrudProdutos
+from orm.CrudProduto import CrudProduto
+from orm.CrudCatProduto import CrudCatProduto
+from orm.CrudMarcaProduto import CrudMarcaProduto
 
 
 class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
@@ -53,36 +55,37 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
 
         # Dados Tabela Produto
     def DataTabProdutos(self):
-        lista = CrudProdutos()
-        busca = self.tx_BuscaProduto.text()
-        lista.ListaProdutoTabela(busca)
-        i = 0
+        lista = CrudProduto()
+        lista.produto = self.tx_BuscaProduto.text()
+        lista.listaProduto()
 
         while self.tb_produtos.rowCount() > 0:
             self.tb_produtos.removeRow(0)
 
-        if len(lista.descricaoProduto) >= 1:
-            while i < len(lista.descricaoProduto):
+        i = 0
+        if len(lista.query) >= 1:
+            for produto in lista.query:
                 self.tb_produtos.insertRow(i)
                 self.conteudoTabela(self.tb_produtos, i, 0,
-                                    str(lista.idProduto[i]))
+                                    str(produto.id))
                 self.TabelaStatus(self.tb_produtos, i, 1,
                                   self.StatusEntrega(1))
-                self.TabelaID(self.tb_produtos, i, 2, lista.idProduto[i])
+                self.TabelaID(self.tb_produtos, i, 2, produto.id)
                 self.TabelaNomeTelefone(self.tb_produtos, i, 3,
-                                        lista.descricaoProduto[i], lista.marca[i])
+                                        produto.produto,
+                                        produto.marca.marca_produto)
                 self.TabelaQtdeStatus(self.tb_produtos, i, 4,
-                                      str(lista.qtdeProduto[i]),
-                                      self.StatusStoque(lista.qtdeProduto[i],
-                                                        lista.estoqueMinimo[i]))
+                                      str(produto.qtde),
+                                      self.StatusStoque(produto.qtde,
+                                                        produto.estoque_minimo))
                 self.ValorProduto(self.tb_produtos, i, 5,
-                                  lista.valorUnitario[i])
+                                  produto.valor_unitario)
                 self.ValorProduto(self.tb_produtos, i, 6,
-                                  lista.valorAtacado[i])
+                                  produto.valor_atacado)
                 # Sinal click tabela
                 self.botaoTabela(self.tb_produtos, i, 7,
                                  partial(
-                                     self.SelectProduto, lista.idProduto[i]),
+                                     self.SelectProduto, produto.id),
                                  "#005099")
                 i += 1
         pass
@@ -218,35 +221,34 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
     # checando campo Id se é Edicao ou Novo Produto
     def IdCheckProduto(self):
         if not self.tx_idProduto.text():
-            busca = CrudProdutos()
+            busca = CrudProduto()
             self.tx_idProduto.setText(str(busca.lastIdProduto()))
 
     # Lista combobox categoria
     def ListaCategoria(self):
-        busca = CrudProdutos()
-        busca.listaCategoria()
-        i = 0
-        while i < len(busca.categoria):
+        busca = CrudCatProduto()
+        busca.listaCatProduto()
+
+        for cat in busca.query:
             self.cb_CategoriaProduto.addItem(
-                busca.categoria[i], str(busca.idCategoria[i]))
-            i += 1
+                cat.categoria_produto, str(cat.id))
 
     # Listando marca por categoria
+
     def listaMarca(self, index):
         self.cb_MarcaProduto.clear()
-        # self.cb_CategoriaProduto.clear()
         self.cb_MarcaProduto.addItem("SELECIONE")
-        busca = CrudProdutos()
+        lista = CrudMarcaProduto()
 
         if self.cb_CategoriaProduto.count() > 0:
             id = self.cb_CategoriaProduto.currentData()
-            busca.idCategoria = id
-        busca.listaMarca()
-        i = 0
-        while i < len(busca.marca):
+            lista.id = id
+        lista.listaMarcaProdutos()
+
+        for marca in lista.query:
             self.cb_MarcaProduto.addItem(
-                busca.marca[i], str(busca.idMarca[i]))
-            i += 1
+                marca.marca_produto, str(marca.id))
+
             pass
         # self.cb_MarcaProduto.addItems(busca.marca)
         # cindex = self.cb_MarcaProduto.findData('4')
@@ -279,16 +281,16 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
     # Add Marca Banco de Dados
     def AddMarcaDb(self):
         rowMarca = self.cb_MarcaProduto.count()
-        INSERT = CrudProdutos()
+        INSERT = CrudMarcaProduto()
         self.cb_MarcaProduto.addItem(
-            self.tx_AddMarca.text(), str(INSERT.lastIdMarca()))
+            self.tx_AddMarca.text(), str(INSERT.lastIdMarcaProduto()))
         self.tx_AddMarca.setHidden(True)
         self.cb_MarcaProduto.setVisible(True)
         self.cb_MarcaProduto.setCurrentIndex(rowMarca)
         self.tx_AddMarca.clear()
-        INSERT.idCategoria = self.cb_CategoriaProduto.currentIndex()
-        INSERT.marca = self.cb_MarcaProduto.currentText()
-        INSERT.Addmarca()
+        INSERT.id = INSERT.lastIdMarcaProduto()
+        INSERT.marca_produto = self.cb_MarcaProduto.currentText()
+        INSERT.inseriMarcaProduto()
         self.CalcelAdd(self.bt_CalcelAddMarca,
                        self.bt_AddMarcaProduto, self.tx_AddMarca,
                        self.cb_MarcaProduto)
@@ -296,14 +298,14 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
     # Add Categoria Banco de Dados
     def AddCategoriaDb(self):
         rowCategoria = self.cb_CategoriaProduto.count()
-        INSERT = CrudProdutos()
+        INSERT = CrudCatProduto()
         self.cb_CategoriaProduto.addItem(
-            self.tx_AddCategoria.text(), INSERT.lasIdcategoria())
+            self.tx_AddCategoria.text(), INSERT.lastIdCatProduto())
         self.tx_AddCategoria.setHidden(True)
         self.cb_CategoriaProduto.setVisible(True)
-        INSERT.idCategoria = INSERT.lasIdcategoria()
-        INSERT.categoria = self.tx_AddCategoria.text()
-        INSERT.AddCategoria()
+        INSERT.id = INSERT.lastIdCatProduto()
+        INSERT.categoria_produto = self.tx_AddCategoria.text()
+        INSERT.inseriCatProduto()
         self.tx_AddCategoria.clear()
 
         self.CalcelAdd(self.bt_CancelAddCatergoria,
@@ -348,18 +350,18 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
 
         # Cadastro Produto
     def cadProduto(self):
-        INSERI = CrudProdutos()
-        INSERI.idProduto = self.tx_idProduto.text()
-        INSERI.descricaoProduto = self.tx_DescricaoProduto.text().upper()
+        INSERI = CrudProduto()
+        INSERI.id = self.tx_idProduto.text()
+        INSERI.produto = self.tx_DescricaoProduto.text().upper()
         if self.lb_FotoProduto.pixmap():
             imagem = QPixmap(self.lb_FotoProduto.pixmap())
             data = QByteArray()
             buf = QBuffer(data)
             imagem.save(buf, 'PNG')
-            INSERI.imagemProduto = str(data.toBase64())[2:-1]
+            INSERI.imagem = str(data.toBase64())[2:-1]
 
-        INSERI.idCategoria = self.cb_CategoriaProduto.currentData()
-        INSERI.idMarca = self.cb_MarcaProduto.currentData()
+        INSERI.categoria = self.cb_CategoriaProduto.currentData()
+        INSERI.marca = self.cb_MarcaProduto.currentData()
         INSERI.estoqueMinimo = self.tx_EstoqueMinimoProduto.text()
         INSERI.estoqueMaximo = self.tx_EstoqueMaximoProduto.text()
         INSERI.obsProduto = self.tx_ObsProduto.text()
@@ -367,7 +369,7 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         INSERI.valorUnitario = self.tx_ValorUnitarioProduto.text()
         INSERI.valorAtacado = self.tx_ValorAtacadoProduto.text()
         INSERI.qtdeAtacado = self.tx_MinimoAtacado.text()
-        INSERI.cadProduto()
+        INSERI.inseriProduto()
 
         self.janelaProdutos()
 
@@ -376,13 +378,14 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         id = valor
         self.FormProdutos()
         self.tx_idProduto.setText(str(id))
-        busca = CrudProdutos()
-        busca.SelectProdutoId(id)
-        self.tx_DescricaoProduto.setText(busca.descricaoProduto)
-        if busca.imagemProduto:
+        busca = CrudProduto()
+        busca.id = id
+        busca.selectProdutoId()
+        self.tx_DescricaoProduto.setText(busca.produto)
+        if busca.imagem:
             pixmap = QPixmap()
             pixmap.loadFromData(
-                QByteArray.fromBase64(busca.imagemProduto))
+                QByteArray.fromBase64(busca.imagem))
             self.lb_FotoProduto.setPixmap(pixmap.scaledToWidth(
                 150, Qt.TransformationMode(Qt.FastTransformation)))
             # self.lb_FotoProduto.setScaledContents(True)
@@ -390,15 +393,15 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
             self.bt_DelImagem.setVisible(True)
 
         self.cb_CategoriaProduto.setCurrentIndex(
-            self.cb_CategoriaProduto.findData(busca.idCategoria))
+            self.cb_CategoriaProduto.findData(busca.categoria.id))
         self.cb_MarcaProduto.setCurrentIndex(
-            self.cb_MarcaProduto.findData(busca.idMarca))
+            self.cb_MarcaProduto.findData(busca.marca.id))
         self.tx_EstoqueMinimoProduto.setText(str(busca.estoqueMinimo))
         self.tx_EstoqueMaximoProduto.setText(str(busca.estoqueMaximo))
         self.tx_ObsProduto.setText(busca.obsProduto)
-        self.tx_ValorCompraProduto.setText(busca.valorCompra)
-        self.tx_ValorUnitarioProduto.setText(busca.valorUnitario)
-        self.tx_ValorAtacadoProduto.setText(busca.valorAtacado)
+        self.tx_ValorCompraProduto.setText(str(busca.valorCompra))
+        self.tx_ValorUnitarioProduto.setText(str(busca.valorUnitario))
+        self.tx_ValorAtacadoProduto.setText(str(busca.valorAtacado))
         self.tx_MinimoAtacado.setText(str(busca.qtdeAtacado))
 
     # Imprimindo
@@ -407,7 +410,7 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
 
         headertable = ["Cod", "Descrição", "Disponível",
                        "Valor Unitário", "Valor Atacado", 'Min. Atacado']
-        busca = CrudProdutos()
+        busca = CrudProduto()
         busca.ListaProdutoTabela(self.tx_BuscaProduto.text())
         html = self.renderTemplate(
             "estoque.html",

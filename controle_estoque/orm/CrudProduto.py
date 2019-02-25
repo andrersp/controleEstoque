@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import peewee
-import base64
 
 
-from Conexao import Conexao, Produto, MarcaProduto, CategoriaProduto
+from orm.Conexao import Conexao, Produto, MarcaProduto, CategoriaProduto
 
 
 class CrudProduto(object):

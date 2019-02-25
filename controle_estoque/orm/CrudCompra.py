@@ -82,6 +82,15 @@ class CrudCompra(object):
         except peewee.InternalError as err:
             print(err)
 
+    # # Selecionar compras por Cód Cliente
+
+    # def selectCompraCliente(self):
+
+    #     try:
+    #         Compra.select().where(Compra.id)
+    #     except peewee.DoesNotExist as err:
+    #         print(err)
+
     # Selecionar compra por ID
 
     def selectCompraId(self):
@@ -130,7 +139,8 @@ class CrudCompra(object):
                                         StatusEntrega.status_entrega,
                                         StatusPagamento.status_pagamento)
                           .join(Fornecedor)
-                          .join(CatAPagar, on=(Compra.categoria == CatAPagar.id))
+                          .join(CatAPagar,
+                                on=(Compra.categoria == CatAPagar.id))
                           .join(StatusEntrega, on=(
                               Compra.status_entrega == StatusEntrega.id))
                           .join(StatusPagamento, on=(
