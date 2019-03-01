@@ -10,10 +10,11 @@ from Views.mainVendas import Ui_ct_MainVendas
 from Views.formVendas import Ui_ct_FormVenda
 
 
-from Crud.CrudPedidos import CrudPedidos
-from Crud.CrudProdutos import CrudProdutos
-from Crud.CrudClientes import CrudClientes
-from Crud.CrudAReceber import CrudAReceber
+from orm.CrudVenda import CrudVenda
+from orm.CrudProduto import CrudProduto
+from orm.CrudContaAReceber import CrudContaAReceber
+from orm.CrudRelVenda import CrudRelVenda
+from orm.CrudCliente import CrudCliente
 from Funcoes.data import DataAtual
 
 # from Funcoes.BuscaProdutos import BuscaProdutos
@@ -61,46 +62,47 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
     # Populando tabela vendas
     def DataTabVendas(self):
         cliente = self.tx_BuscaVendas.text()
-        busca = CrudPedidos()
-        busca.dataEmissao = QDate.toString(
+        lista = CrudVenda()
+        lista.dataEmissao = QDate.toString(
             self.dt_InicioVenda.date(), "yyyy-MM-dd")
 
-        busca.dataFim = QDate.toString(
+        lista.dataFim = QDate.toString(
             self.dt_FimVenda.date(), 'yyyy-MM-dd')
-        busca.ListaVendatabela(cliente)
+        lista.listaVenda(cliente)
 
         while self.tb_Vendas.rowCount() > 0:
             self.tb_Vendas.removeRow(0)
             pass
 
         i = 0
-        while i < len(busca.nomeCliente):
+        while i < len(lista.nomeCliente):
             self.tb_Vendas.insertRow(i)
-            self.conteudoTabela(self.tb_Vendas, i, 0, str(busca.idPedido[i]))
+            self.conteudoTabela(self.tb_Vendas, i, 0, str(lista.id[i]))
 
             self.TabelaStatus(self.tb_Vendas, i, 1,
-                              self.StatusEntrega(busca.idStatusEntrega[i],
-                                                 busca.idStatusPagamento[i]))
+                              self.StatusEntrega(lista.idStatusEntrega[i],
+                                                 lista.idStatusPagamento[i]))
 
             self.TabelaNomeTelefone(
-                self.tb_Vendas, i, 2, busca.nomeCliente[i],
-                self.formatoNumTelefone(busca.telefoneCliente[i]))
+                self.tb_Vendas, i, 2, lista.nomeCliente[i],
+                self.formatoNumTelefone(lista.celularCliente[i]))
             self.TabelaEntrega(self.tb_Vendas, i, 3,
-                               busca.dataEmissao[i],
-                               self.StatusEntrega(busca.idStatusEntrega[i]), "")
+                               lista.dataEmissao[i],
+                               self.StatusEntrega(lista.idStatusEntrega[i]), "")
             self.TabelaEntrega(self.tb_Vendas, i, 4,
-                               busca.prazoEntrega[i],
-                               self.StatusEntrega(busca.idStatusEntrega[i]),
-                               busca.statusEntrega[i].upper())
+                               lista.prazoEntrega[i],
+                               self.StatusEntrega(
+                                   lista.idStatusEntrega[i]),
+                               lista.statusEntrega[i].upper())
             # Coluna Valor pedido e status Pagamento
             self.TabelaEntrega(self.tb_Vendas, i, 5,
-                                 "R$ "+ str(busca.valorTotal[i]),
-                                 self.StatusEntrega(
-                                     busca.idStatusPagamento[i]),
-                                 busca.statusPagamento[i].upper())
+                               "R$ " + str(lista.valorTotal[i]),
+                               self.StatusEntrega(
+                                   lista.idStatusPagamento[i]),
+                               lista.statusPagamento[i].upper())
 
             self.botaoTabela(self.tb_Vendas, i, 6,
-                             partial(self.SelectVendaId, busca.idPedido[i]), "#069")
+                             partial(self.SelectVendaId, lista.id[i]), "#069")
 
             i += 1
 
@@ -191,48 +193,59 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         # Botao Imprimir
         self.bt_Imprimir.clicked.connect(self.imprimirVenda)
-    
-    
 
     # checando campo Id se é Edicao ou Nova Venda
+
     def IdCheckPedido(self):
         if not self.tx_Cod.text():
-            busca = CrudPedidos()
-            self.tx_Cod.setText(str(busca.lastIdPedido()))
-            # setando dataAtual campo entrega e emissão
+            busca = CrudVenda()
+            self.tx_Cod.setText(str(busca.lastIdVenda()))
+            pass
 
-    # Busca Produto por nome
-    def BuscaProdutoNome(self):
-        produto = self.tx_BuscaItem.text()
-        busca = CrudProdutos()
-        busca.ListaProdutoTabela(produto)
-        self.tx_IdBuscaItem.setText(str(busca.idProduto[0]))
-        self.BuscaProdutoId()
+    # Desativando Botões ao abrir formulario de venda
+
+    def DesativaBotaoVendas(self):
+        self.bt_AddNovoVenda.setEnabled(False)
+        self.tx_BuscaVendas.setEnabled(False)
+        self.bt_BuscaVendas.setEnabled(False)
+        pass
+
+    # Ativando botoes ao abrir Main Vendas
+
+    def AtivaBotaoVendas(self):
+        self.bt_AddNovoVenda.setEnabled(True)
+        self.tx_BuscaVendas.setEnabled(True)
+        self.bt_BuscaVendas.setEnabled(True)
+        pass
 
     # Busca produtos por ID
+
     def BuscaProdutoId(self):
         id = int(self.tx_IdBuscaItem.text())
-        busca = CrudProdutos()
-        busca.SelectProdutoId(id)
-        if busca.descricaoProduto:
-            self.tx_BuscaItem.setText(busca.descricaoProduto)
-            self.tx_ValorUnitarioItem.setText(busca.valorUnitario)
+        busca = CrudProduto()
+        busca.id = id
+        busca.selectProdutoId()
+        if busca.produto:
+            self.tx_BuscaItem.setText(busca.produto)
+            self.tx_ValorUnitarioItem.setText(str(busca.valorUnitario))
             self.tx_QntdItem.setFocus()
         else:
             self.tx_BuscaItem.setText("Produto não encontrado")
             self.tx_IdBuscaItem.clear()
             self.tx_IdBuscaItem.setFocus()
+        pass
 
-    # Calculo ValorTotalItem
+    # Calcul valor do item adicionado
     def TotalItem(self):
-        id = self.tx_IdBuscaItem.text()
-        busca = CrudProdutos()
-        busca.SelectProdutoId(id)
+
+        busca = CrudProduto()
+        busca.id = self.tx_IdBuscaItem.text()
+        busca.selectProdutoId()
         if self.tx_QntdItem.text() and self.tx_ValorUnitarioItem.text():
             if float(self.tx_QntdItem.text()) >= int(busca.qtdeAtacado):
-                self.tx_ValorUnitarioItem.setText(busca.valorAtacado)
+                self.tx_ValorUnitarioItem.setText(str(busca.valorAtacado))
             else:
-                self.tx_ValorUnitarioItem.setText(busca.valorUnitario)
+                self.tx_ValorUnitarioItem.setText(str(busca.valorUnitario))
             TotalItem = float(self.tx_QntdItem.text()) * \
                 float(self.tx_ValorUnitarioItem.text())
             self.tx_ValorTotalItem.setText(format(TotalItem, ".2f"))
@@ -242,62 +255,50 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
     # Removendo item da tabela e banco de dados se ouver
 
     def RemoveLInha(self, linha):
-        REMOVE = CrudPedidos()
-        REMOVE.idItemTabela = self.tb_Itens.item(linha, 7).text()
-        REMOVE.DelItem()
+        REMOVE = CrudRelVenda()
+        REMOVE.id = self.tb_Itens.item(linha, 7).text()
+        REMOVE.delItem()
         self.tb_Itens.removeRow(linha)
         for row in range(self.tb_Itens.rowCount()):
             self.botaoRemoveItem(self.tb_Itens, row, 6,
                                  partial(self.RemoveLInha, row), "#005099")
         self.TotalFinal()
-        self.bt_GerarParcela.setDisabled(True)
-
-        # Desativando Botões
-    def DesativaBotaoVendas(self):
-        self.bt_AddNovoVenda.setEnabled(False)
-        self.tx_BuscaVendas.setEnabled(False)
-        self.bt_BuscaVendas.setEnabled(False)
-
-    def AtivaBotaoVendas(self):
-        self.bt_AddNovoVenda.setEnabled(True)
-        self.tx_BuscaVendas.setEnabled(True)
-        self.bt_BuscaVendas.setEnabled(True)
+        pass
 
     # Cadastro a venda
+
     def CadVenda(self):
         if not int(self.tb_Itens.rowCount()) < 1:
-            INSERI = CrudPedidos()
-            INSERI.idPedido = self.tx_Cod.text()
+            INSERI = CrudVenda()
+            INSERI.id = self.tx_Cod.text()
             INSERI.idCliente = self.tx_Id.text()
             INSERI.dataEmissao = QDate.toString(
                 self.dt_Emissao.date(), 'yyyy-MM-dd')
             INSERI.prazoEntrega = QDate.toString(
                 self.dt_Prazo.date(), 'yyyy-MM-dd')
+            INSERI.categoria = 1
             INSERI.desconto = self.tx_Desconto.text()
             INSERI.frete = self.tx_Frete.text()
             INSERI.valorTotal = self.tx_TotalFinal.text()
-            if float(self.lb_ValorPendente.text()) == 0:
-                INSERI.statusPagamento = 1
-            else:
-                INSERI.statusPagamento = 2
-            INSERI.valorPendente = self.lb_ValorPendente.text()
-            INSERI.CadVenda()
+
+            INSERI.inseriVenda()
             self.CadItemVenda()
         pass
 
     # Cadastrando Itens referente ao pedido
+
     def CadItemVenda(self):
-        INSERI = CrudPedidos()
+        INSERI = CrudRelVenda()
         i = 0
         while i < self.tb_Itens.rowCount():
-            INSERI.idItem = self.tb_Itens.item(i, 0).text()
-            INSERI.idPedido = self.tx_Cod.text()
-            INSERI.idItemTabela = self.tb_Itens.item(i, 7).text()
+            INSERI.idProduto = self.tb_Itens.item(i, 0).text()
+            INSERI.idVenda = self.tx_Cod.text()
+            INSERI.id = self.tb_Itens.item(i, 7).text()
             INSERI.qtde = self.tb_Itens.item(i, 3).text()
-            INSERI.valorItem = self.tb_Itens.item(i, 4).text()
-            INSERI.totalItem = self.tb_Itens.item(i, 5).text()
-            INSERI.obsItem = self.tb_Itens.item(i, 2).text()
-            INSERI.CadItensPedido()
+            INSERI.valorUnitario = self.tb_Itens.item(i, 4).text()
+            INSERI.valorTotal = self.tb_Itens.item(i, 5).text()
+            INSERI.obs = self.tb_Itens.item(i, 2).text()
+            INSERI.inseriItens()
             i += 1
 
         self.CadContaVenda()
@@ -307,105 +308,82 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
     # Cadastro de parcelas
     def CadContaVenda(self):
-        INSERI = CrudAReceber()
+
+        INSERI = CrudContaAReceber()
 
         if self.tb_Parcelas.rowCount() > 0:
             for i in range(self.tb_Parcelas.rowCount()):
                 try:
                     self.tb_Parcelas.item(i, 0).text()
-                    INSERI.idConta = self.tb_Parcelas.item(i, 0).text()
+                    INSERI.id = self.tb_Parcelas.item(i, 0).text()
                 except:
-                    INSERI.idConta = ''
+                    INSERI.id = INSERI.lastIdContaAReceber()
                 INSERI.idVenda = self.tx_Cod.text()
                 INSERI.idCliente = self.tx_Id.text()
                 INSERI.descricao = """Pedido de Venda {}. Parcela {} de {} """.format(
                     self.tx_Cod.text(), i + 1, self.tb_Parcelas.rowCount())
-                INSERI.obs = ""
                 INSERI.categoria = 1
                 INSERI.dataVencimento = QDate.toString(
                     self.tb_Parcelas.cellWidget(i, 1).date(), "yyyy-MM-dd")
                 INSERI.valor = self.tb_Parcelas.item(i, 2).text()
                 INSERI.formaPagamento = self.cb_FormaPagamento.currentData()
-                INSERI.cadContaReceber()
-
-    # Recebendo parcela Venda
-    def Receber(self, id):
-        # print(self.tb_Parcelas.item(id, 0).text())
-
-        if self.tb_Parcelas.cellWidget(id, 3).text():
-            INSERI = CrudAReceber()
-            INSERI.idConta = self.tb_Parcelas.item(id, 0).text()
-            INSERI.valorRecebido = self.tb_Parcelas.cellWidget(
-                id, 3).text().replace(",", ".")
-            INSERI.formaPagamento = self.cb_FormaPagamento.currentData()
-            INSERI.dataRecebimento = QDate.toString(
-                QDate.currentDate(), "yyyy-MM-dd")
-            INSERI.ReceberConta()
-            self.ParcelasAReceber()
-
-    # Entregando Produtos DB
-    def Entregar(self):
-        INSERI = CrudPedidos()
-        INSERI.dataEntrega = QDate.toString(
-            self.dt_Entrega.date(), "yyyy-MM-dd")
-        INSERI.idPedido = self.tx_Cod.text()
-        INSERI.Entregar()
-        self.SaidaEstoque()
-        self.SelectVendaId(self.tx_Cod.text())
-
-    # Dando Saida no Estoque
-    def SaidaEstoque(self):
-        INSERI = CrudProdutos()
-        i = 0
-        while i < self.tb_Itens.rowCount():
-            INSERI.idProduto = self.tb_Itens.item(i, 0).text()
-            INSERI.qtdeProduto = self.tb_Itens.item(i, 3).text()
-            INSERI.SaidaProduto()
-            i += 1
+                INSERI.inseriParcelaVenda()
 
     # Selecionando Venda pela tabela
+
     def SelectVendaId(self, id):
-        busca = CrudPedidos()
+        busca = CrudVenda()
         self.FormVendas()
         self.tx_Cod.setText(str(id))
-        busca.SelectVendaID(id)
+        busca.id = id
+        busca.selectVendaId()
 
         self.tx_Id.setText(str(busca.idCliente))
         self.BuscaClienteId(self.tx_IdBuscaItem)
         self.tx_Desconto.setText(str(busca.desconto))
         self.tx_Frete.setText(str(busca.frete))
         self.dt_Prazo.setDate(busca.prazoEntrega)
+
         if busca.valorRecebido:
             self.tx_valorRecebido.setText(str(busca.valorRecebido))
-        if busca.statusPagamento == 2:
+
+        if busca.idStatusPagamento == 2:
             self.bt_GerarParcela.setEnabled(True)
-        if busca.statusEntrega == 2:
+
+        if busca.idStatusEntrega == 2:
             self.bt_Entregar.setEnabled(True)
-        if busca.statusEntrega == 1:
+
+        if busca.idStatusEntrega == 1:
+            self.bt_Entregar.setDisabled(True)
             self.tb_Itens.setColumnHidden(6, True)
             for item in self.fr_addProduto.findChildren(QLineEdit):
                 item.setDisabled(True)
 
+        # Listando itens referente a venda
+        listaItens = CrudRelVenda()
+        listaItens.idVenda = id
+        listaItens.listaItens()
+
         i = 0
-        while i < len(busca.itemDescricao):
+        while i < len(listaItens.valorTotal):
 
             self.tb_Itens.insertRow(i)
             self.conteudoTabela(self.tb_Itens, i, 0,
-                                str(busca.idItem[i]))
+                                str(listaItens.idProduto[i]))
             self.conteudoTabelaLeft(self.tb_Itens, i, 1,
-                                    busca.itemDescricao[i])
+                                    listaItens.produto[i])
             self.conteudoTabelaLeft(self.tb_Itens, i, 2,
-                                    str(busca.obsItem[i]))
+                                    str(listaItens.obs[i]))
             self.conteudoTabela(self.tb_Itens, i, 3,
-                                str(busca.qtde[i]))
+                                str(listaItens.qtde[i]))
             self.conteudoTabela(self.tb_Itens, i, 4,
-                                str(busca.valorItem[i]))
+                                str(listaItens.valorUnitario[i]))
             self.conteudoTabela(self.tb_Itens, i, 5,
-                                str(busca.totalItem[i]))
+                                str(listaItens.valorTotal[i]))
             self.botaoRemoveItem(self.tb_Itens, i, 6,
                                  partial(self.RemoveLInha, i), "#005099")
             self.conteudoTabela(self.tb_Itens, i, 7,
-                                str(busca.idItemTabela[i]))
+                                str(listaItens.id))
             self.TotalFinal()
 
             i += 1
@@ -419,38 +397,102 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         while self.tb_Parcelas.rowCount() > 0:
             self.tb_Parcelas.removeRow(0)
 
-        busca = CrudAReceber()
+        busca = CrudContaAReceber()
         busca.idVenda = self.tx_Cod.text()
-        busca.selectAReceberId()
-        
+        busca.listaParcelas()
 
+        # Se houver parcela gerada desabilita Botao salvar e remover item
         if busca.dataVencimento:
             self.bt_GerarParcela.setDisabled(True)
             self.tb_Itens.setColumnHidden(6, True)
             for item in self.fr_addProduto.findChildren(QLineEdit):
                 item.setDisabled(True)
             self.bt_Salvar.setDisabled(True)
-
-        for i in range(len(busca.dataVencimento)):
+        i = 0
+        while i < len(busca.dataVencimento):
             self.tb_Parcelas.insertRow(i)
             self.conteudoTabela(self.tb_Parcelas, i,
-                                0, str(busca.idConta[i]))
+                                0, str(busca.id[i]))
             self.dt_tabela(self.tb_Parcelas, i,
-                           1, busca.dataVencimento[i], busca.idStatus[i])
+                           1, busca.dataVencimento[i], busca.idStatusPagamento[i])
             self.conteudoTabela(self.tb_Parcelas, i,
                                 2, str(busca.valor[i]))
-            self.tx_tabelaReceber(self.tb_Parcelas, i, 3, busca.idStatus[
-                                  i], str(busca.valorPendente[i]))
+            self.tx_tabelaReceber(self.tb_Parcelas, i, 3,
+                                  busca.idStatusPagamento[i],
+                                  str(busca.valor[i] - busca.valorRecebido[i]))
             self.botaoReceberParcela(self.tb_Parcelas, i, 4,
-                                     partial(self.Receber, i), "Receber", 
-                                     busca.idStatus[i])
+                                     partial(self.Receber, i), "Receber",
+                                     busca.idStatusPagamento[i])
             self.cb_QtdeParcela.setCurrentIndex(
-                self.cb_QtdeParcela.findData(len(busca.dataVencimento)))
+                self.cb_QtdeParcela.findData(len(busca.query)))
             self.cb_FormaPagamento.setCurrentIndex(
                 self.cb_FormaPagamento.findData(
-                busca.formaPagamento[0]))
-        
-        
+                    busca.idFormaPagamento[0]))
+
+            i += 1
+
+    # Recebendo parcela Venda
+    def Receber(self, id):
+
+        if self.tb_Parcelas.cellWidget(id, 3).text():
+
+            # Recebendo parcela
+            INSERI = CrudContaAReceber()
+            INSERI.id = self.tb_Parcelas.item(id, 0).text()
+            INSERI.valorRecebido = self.tb_Parcelas.cellWidget(
+                id, 3).text().replace(",", ".")
+            INSERI.formaPagamento = self.cb_FormaPagamento.currentData()
+            INSERI.dataRecebimento = QDate.toString(
+                QDate.currentDate(), "yyyy-MM-dd")
+
+            # Inserindo valor recebido no DB
+            INSERI.receberConta()
+
+            # Atualizando valor Recebido
+            INSERI = CrudVenda()
+            INSERI.id = self.tx_Cod.text()
+            INSERI.valorRecebido = self.tb_Parcelas.cellWidget(
+                id, 3).text().replace(",", ".")
+
+            # Executando o update no DB
+            INSERI.Receber()
+
+            # Recalculando valores
+            if self.tx_valorRecebido.text():
+                valorRecebido = float(
+                    self.tx_valorRecebido.text()) + float(INSERI.valorRecebido)
+            else:
+                valorRecebido = float(INSERI.valorRecebido)
+
+            self.tx_valorRecebido.setText(format(valorRecebido, '.2f'))
+            self.TotalFinal()
+
+            # populando tabelas de parcelas a receber
+            self.ParcelasAReceber()
+
+    # Entregando Produtos DB
+
+    def Entregar(self):
+        INSERI = CrudVenda()
+        INSERI.dataEntrega = QDate.toString(
+            self.dt_Entrega.date(), "yyyy-MM-dd")
+        INSERI.id = self.tx_Cod.text()
+        INSERI.Entregar()
+        self.SaidaEstoque()
+        self.SelectVendaId(self.tx_Cod.text())
+
+    # Dando Saida no Estoque
+
+    def SaidaEstoque(self):
+        INSERI = CrudProduto()
+        i = 0
+        while i < self.tb_Itens.rowCount():
+            INSERI.id = self.tb_Itens.item(i, 0).text()
+            INSERI.qtdeProduto = self.tb_Itens.item(i, 3).text()
+            INSERI.retiradaEstoque()
+            i += 1
+
+    # Imprimir venda
 
     def imprimirVenda(self):
         self.documento = QWebEngineView()
@@ -467,66 +509,66 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             qtde.append(self.tb_Itens.item(i, 3).text())
             valorUnitario.append(self.tb_Itens.item(i, 4).text())
             totalItem.append(self.tb_Itens.item(i, 5).text())
-        
 
         # Consulta Venda Banco de Dados
-        busca = CrudPedidos()
-        id = self.tx_Cod.text()
-        busca.SelectVendaID(id)
+        busca = CrudVenda()
+        busca.id = self.tx_Cod.text()
+        busca.selectVendaId()
 
         # Consulta Cliente banco de dados
-        cliente = CrudClientes()
-        cliente.SelectClienteID(self.tx_Id.text())
+        cliente = CrudCliente()
+        cliente.id = self.tx_Id.text()
+        cliente.selectClienteId()
 
         # Consulta Financeiro banco de dados
-        financeiro= CrudAReceber()
-        financeiro.idVenda = id
-        financeiro.selectAReceberId()
-    
+        financeiro = CrudContaAReceber()
+        financeiro.idVenda = self.tx_Cod.text()
+        financeiro.listaParcelas()
+
         html = self.renderTemplate(
             "venda.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="Pedido Nº:",
             idPedido=self.tx_Cod.text(),
-            cliente = cliente.nomeCliente,
-            endCliente= [cliente.enderecoCliente, cliente.numCliente],
-            cepCliente = cliente.cepCliente,
-            emailEcliente = cliente.emailCliente,
-            cpfCliente = cliente.cpfCliente,
-            cidadeCliente = cliente.cidadeCliente,
-            telefoneCliente = self.formatoNumTelefone(cliente.telefoneCliente),
-            rgCliente = cliente.rgCliente,
-            bairroCliente = cliente.bairroCliente,
-            estadoCliente = cliente.estadoCliente,
-            celularCliente = self.formatoNumTelefone(cliente.celularCliente),
-            dataEmissao = QDate.toString(self.dt_Emissao.date(), 
-                                                "dd-MM-yyyy"),
-            prazoEntrega= QDate.toString(self.dt_Prazo.date(), 
-                                                "dd-MM-yyyy"),
-            dataEntrega=QDate.toString(self.dt_Entrega.date(), 
-                                                "dd-MM-yyyy"),
+            cliente=cliente.nome,
+            endCliente=[cliente.endereco, cliente.numero],
+            cepCliente=cliente.cep,
+            emailEcliente=cliente.email,
+            cpfCliente=cliente.cpf,
+            cidadeCliente=cliente.cidade,
+            telefoneCliente=self.formatoNumTelefone(cliente.telefone),
+            rgCliente=cliente.rg,
+            bairroCliente=cliente.bairro,
+            estadoCliente=cliente.estado,
+            celularCliente=self.formatoNumTelefone(cliente.celular),
+            dataEmissao=QDate.toString(self.dt_Emissao.date(),
+                                       "dd-MM-yyyy"),
+            prazoEntrega=QDate.toString(self.dt_Prazo.date(),
+                                        "dd-MM-yyyy"),
+            dataEntrega=QDate.toString(self.dt_Entrega.date(),
+                                       "dd-MM-yyyy"),
             statusEntrega=[busca.statusEntrega, busca.idStatusEntrega],
             statusFinanceiro=busca.idStatusPagamento,
             headertable=headertable,
             descProduto=produto,
-            observacao = obs,
+            observacao=obs,
             quantidade=qtde,
             valUnit=valorUnitario,
-            valTotalItens = totalItem,
-            subtotal = self.lb_SubTotal.text(),
-            frete = self.tx_Frete.text(),
-            desconto = self.tx_Desconto.text(),
-            total = self.tx_TotalFinal.text(),
-            formaPagamento = self.cb_FormaPagamento.currentText(),
-            condicao = self.cb_QtdeParcela.currentText(),
-            descParcela = financeiro.descricao,
-            vencimentoparcela = financeiro.dataVencimento,
-            valorParcela = financeiro.valor,
-            situacao= financeiro.status,
-            formaPagamentoParcela= financeiro.fPagamento
-            
+            valTotalItens=totalItem,
+            subtotal=self.lb_SubTotal.text(),
+            frete=self.tx_Frete.text(),
+            desconto=self.tx_Desconto.text(),
+            total=self.tx_TotalFinal.text(),
+            formaPagamento=self.cb_FormaPagamento.currentText(),
+            condicao=self.cb_QtdeParcela.currentText(),
+            descParcela=financeiro.descricao,
+            vencimentoparcela=financeiro.dataVencimento,
+            valorParcela=financeiro.valor,
+            situacao=financeiro.statusPagamento,
+            formaPagamentoParcela=financeiro.formaPagamento
+
         )
 
         self.documento.load(QUrl("file:///" +
-                                        self.resourcepath("report.html")))
+                                 self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)
