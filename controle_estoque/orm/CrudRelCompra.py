@@ -2,10 +2,10 @@
 
 import peewee
 
-from Conexao import Conexao, RelacaoCompra, Produto
+from orm.Conexao import Conexao, RelacaoCompra, Produto
 
 
-class CrudRalacaoCompra(object):
+class CrudRelCompra(object):
     def __init__(self, id="", idCompra="", idProduto="", qtde="",
                  valorUnitario="", valorTotal="", obs="", query=""):
 

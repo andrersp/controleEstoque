@@ -3,7 +3,7 @@ from PySide2.QtWidgets import QCompleter, QLineEdit
 from PySide2.QtCore import QDate, QDateTime, Qt, QStringListModel
 from PySide2.QtGui import QIntValidator, QDoubleValidator
 from functools import partial
-from Crud.CrudProdutos import CrudProdutos
+from orm.CrudProduto import CrudProduto
 
 
 class Comercial(object):
@@ -209,17 +209,19 @@ class Comercial(object):
 
     # AutoComplete Produtos
     def autocompleteProduto(self):
-        produto = self.tx_BuscaItem.text()
-        busca = CrudProdutos()
-        busca.ListaProdutoTabela(produto)
-        lista = busca.descricaoProduto
+        busca = CrudProduto()
+        busca.produto = self.tx_BuscaItem.text()
+        busca.autoCompleteProduto()
+        lista = []
+        for produto in busca.query:
+            lista.append(produto.produto)
         if produto:
             self.model.setStringList(lista)
 
     # Busca Produto por nome
     def BuscaProdutoNome(self):
-        produto = self.tx_BuscaItem.text()
-        busca = CrudProdutos()
-        busca.ListaProdutoTabela(produto)
-        self.tx_IdBuscaItem.setText(str(busca.idProduto[0]))
+        busca = CrudProduto()
+        busca.produto = self.tx_BuscaItem.text()
+        busca.buscaProdutoNome()
+        self.tx_IdBuscaItem.setText(str(busca.id))
         self.BuscaProdutoId()

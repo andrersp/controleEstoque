@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Crud.CrudFormaPagamento import CrudFormaPagamento
+from orm.CrudFormaPagamento import CrudFormaPagamento
 
 
 class FormaPagamento(object):
@@ -7,9 +7,9 @@ class FormaPagamento(object):
     # Populando combobox forma de pagamento
     def CboxFPagamento(self, combobox):
         busca = CrudFormaPagamento()
-        busca.listaFPagamento()
+        busca.listaFormaPagamento()
         combobox.clear()
 
-        for i in range(len(busca.descFPagamento)):
-            combobox.addItem(busca.descFPagamento[i], str(
-                str(busca.idFPagamento[i])))
+        for lista in busca.query:
+            combobox.addItem(lista.forma_pagamento, str(
+                str(lista.id)))

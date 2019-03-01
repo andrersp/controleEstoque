@@ -11,6 +11,7 @@ from jinja2 import Environment, PackageLoader, FileSystemLoader
 from Views.mainFornecedor import Ui_ct_MainFornecedor
 from Views.formFornecedor import Ui_ct_FormFornecedor
 from orm.CrudFornecedor import CrudFornecedor
+from orm.CrudCompra import CrudCompra
 
 
 class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
@@ -103,6 +104,30 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
         self.tx_Cidade.setText(busca.cidade)
         self.tx_Estado.setText(busca.estado)
 
+        # Limpando tabela Histórico de Compras
+        for row in range(self.tb_Historico.rowCount()):
+            self.tb_Historico.removeRow(row)
+
+        # Histórico de Compras cliente
+        total = '0.00'
+        lista = CrudCompra()
+        lista.idFornecedor = id
+        lista.selectCompraFornecedor()
+        i = 0
+
+        for compra in lista.query:
+            # print row
+            self.tb_Historico.insertRow(i)
+            self.conteudoTabela(
+                self.tb_Historico, i, 0, str(compra.data_emissao))
+            self.conteudoTabela(
+                self.tb_Historico, i, 1, str(compra.data_entrega))
+            self.conteudoTabela(
+                self.tb_Historico, i, 2, str(compra.valor_total))
+
+            total = float(compra.valor_total) + float(total)
+
+        self.lb_TotalHistorico.setText(format(float(total), ".2f"))
         pass
 
         # Frame Formulário Produtos

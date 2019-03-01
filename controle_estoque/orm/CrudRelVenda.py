@@ -2,16 +2,17 @@
 
 import peewee
 
-from Conexao import Conexao, RelacaoVenda, Produto
+from orm.Conexao import Conexao, RelacaoVenda, Produto
 
 
-class CrudRalacaoCompra(object):
-    def __init__(self, id="", idVenda="", idProduto="", qtde="",
+class CrudRelVenda(object):
+    def __init__(self, id="", idVenda="", idProduto="", produto="", qtde="",
                  valorUnitario="", valorTotal="", obs="", query=""):
 
         self.id = id
         self.idVenda = idVenda
         self.idProduto = idProduto
+        self.produto = produto
         self.qtde = qtde
         self.valorUnitario = valorUnitario
         self.valorTotal = valorTotal
@@ -32,7 +33,7 @@ class CrudRalacaoCompra(object):
                 valor_unitario=self.valorUnitario,
                 valor_total=self.valorTotal,
                 obs=self.obs
-            )
+            ).on_conflict_replace()
 
             # Executando a Query
             row.execute()
@@ -54,6 +55,27 @@ class CrudRalacaoCompra(object):
                 RelacaoVenda, Produto.id, Produto.produto)
                 .join(Produto)
                 .where(RelacaoVenda.id_venda == self.idVenda))
+
+            # Convertendo variaveis em lista
+            self.id = []
+            self.idVenda = []
+            self.idProduto = []
+            self.produto = []
+            self.qtde = []
+            self.valorUnitario = []
+            self.valorTotal = []
+            self.obs = []
+
+            # Salvando resultado da query e suas listas
+            for row in self.query:
+                self.id.append(row.id)
+                self.idVenda.append(row.id_venda)
+                self.idProduto.append(row.id_produto.id)
+                self.produto.append(row.id_produto.produto)
+                self.qtde.append(row.qtde)
+                self.valorUnitario.append(row.valor_unitario)
+                self.valorTotal.append(row.valor_total)
+                self.obs.append(row.obs)
 
             # Fechando a Conexao
             Conexao().dbhandler.close()

@@ -278,23 +278,25 @@ class RelacaoCompra(BaseModel):
         db_table = 'relacao_compra'
 
 
-# Tabela Compras
+# Tabela Vendas
 class Venda(BaseModel):
     id = PrimaryKeyField(null=False)
-    id_cliente = ForeignKeyField(Cliente, column_name='id_cliente')
+    id_cliente = ForeignKeyField(
+        Cliente, column_name='id_cliente')
     data_emissao = DateField()
     prazo_entrega = DateField()
     data_entrega = DateField()
-    categoria = ForeignKeyField(CatAReceber, column_name='categoria')
+    categoria = ForeignKeyField(
+        CatAReceber, column_name='categoria')
     desconto = DecimalField(9, 2)
     frete = DecimalField(9, 2)
     valor_total = DecimalField(9, 2)
     valor_recebido = DecimalField(9, 2)
     valor_pendente = DecimalField(9, 2)
-    status_entrega = ForeignKeyField(
-        StatusEntrega, column_name='status_entrega', default='2')
-    status_pagamento = ForeignKeyField(
-        StatusPagamento, column_name='status_pagamento', default='2')
+    entrega = ForeignKeyField(
+        StatusEntrega, column_name='entrega', default='2')
+    pagamento = ForeignKeyField(
+        StatusPagamento, column_name='pagamento', default='2')
 
     class Meta:
         db_table = 'venda'
@@ -350,7 +352,7 @@ class ContaAReceber(BaseModel):
     data_recebimento = DateField()
     valor_recebido = DecimalField(9, 2)
     status_pagamento = ForeignKeyField(
-        StatusPagamento, column_name='status_pagamento')
+        StatusPagamento, column_name='status_pagamento', default=2)
 
     class Meta:
         db_table = 'conta_a_receber'

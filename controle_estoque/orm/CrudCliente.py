@@ -169,3 +169,18 @@ class CrudCliente(object):
             print(err)
 
             pass
+
+    # Busca CLiente por nome
+    def buscaClienteNome(self):
+
+        try:
+
+            self.query = Cliente.get(Cliente.nome == self.nome)
+
+            self.id = self.query.id
+            self.nome = self.query.nome
+            self.celular = self.query.celular
+
+            # Query
+        except peewee.DoesNotExist as err:
+            print(err)

@@ -104,14 +104,17 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         self.tx_Cidade.setText(busca.cidade)
         self.tx_Estado.setText(busca.estado)
 
+        # Limpando tabela Histórico de Compras
         for row in range(self.tb_Historico.rowCount()):
             self.tb_Historico.removeRow(row)
 
+        # Histórico de Compras cliente
         total = '0.00'
         lista = CrudVenda()
         lista.idCliente = valor
         lista.selectVendaCliente()
         i = 0
+
         for venda in lista.query:
             # print row
             self.tb_Historico.insertRow(i)

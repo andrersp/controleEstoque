@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import peewee
-from datetime import date
 
-from Conexao import Conexao, Compra
-from Conexao import Fornecedor, CatAPagar, StatusEntrega, StatusPagamento
+
+from orm.Conexao import Conexao
+from orm.Conexao import Compra
+from orm.Conexao import Fornecedor
+from orm.Conexao import CatAPagar
+from orm.Conexao import StatusEntrega
+from orm.Conexao import StatusPagamento
 
 
 class CrudCompra(object):
@@ -82,14 +86,24 @@ class CrudCompra(object):
         except peewee.InternalError as err:
             print(err)
 
-    # # Selecionar compras por Cód Cliente
+    # Selecionar compras por Cód Fornecedor
 
-    # def selectCompraCliente(self):
+    def selectCompraFornecedor(self):
 
-    #     try:
-    #         Compra.select().where(Compra.id)
-    #     except peewee.DoesNotExist as err:
-    #         print(err)
+        try:
+
+            # Query
+            self.query = (Compra.select(Compra.data_emissao,
+                                        Compra.data_entrega,
+                                        Compra.valor_total)
+                          .where(Compra.id_fornecedor == self.idFornecedor,
+                                 Compra.status_pagamento == 1))
+
+            # Fechando a Conexao
+            Conexao().dbhandler.close()
+
+        except peewee.DoesNotExist as err:
+            print(err)
 
     # Selecionar compra por ID
 

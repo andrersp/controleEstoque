@@ -2,7 +2,7 @@
 
 import peewee
 
-from Conexao import Conexao, FormaPagamento
+from orm.Conexao import Conexao, FormaPagamento
 
 
 class CrudFormaPagamento(object):

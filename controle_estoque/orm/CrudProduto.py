@@ -158,3 +158,42 @@ class CrudProduto(object):
 
         except peewee.DoesNotExist as err:
             print(err)
+
+    # Busca produto por Nome Autocomplete
+
+    def buscaProdutoNome(self):
+
+        try:
+
+            # Query
+            self.query = Produto.get(Produto.produto == self.produto)
+
+            # Salvando resultado
+            self.id = self.query.id
+
+            # Fechando a Conexao
+            Conexao().dbhandler.close()
+
+            pass
+        except peewee.DoesNotExist as err:
+            print(err)
+            pass
+
+    # Retirando produto do estoque
+
+    def retiradaEstoque(self):
+
+        try:
+
+            # Query
+            row = (Produto.update(qtde=Produto.qtde - self.qtdeProduto)
+                   .where(Produto.id == self.id))
+
+            # Executando a query
+            row.execute()
+
+            # Fechando a Conexao
+            Conexao().dbhandler.close()
+
+        except peewee.InternalError as err:
+            print(err)
