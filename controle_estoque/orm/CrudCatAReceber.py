@@ -2,7 +2,8 @@
 
 import peewee
 
-from Conexao import Conexao, CatAReceber
+from orm.Conexao import Conexao
+from orm.Conexao import CatAReceber
 
 
 class CrudCatAReceber(object):
@@ -59,6 +60,15 @@ class CrudCatAReceber(object):
 
             # Query
             self.query = CatAReceber.select()
+
+            # Convertendo variaveis em lista
+            self.id = []
+            self.categoriaReceber = []
+
+            # salvando resulta em suas listas
+            for row in self.query:
+                self.id.append(row.id)
+                self.categoriaReceber.append(row.categoria_a_receber)
 
             # Fechando a Conexao
             Conexao().dbhandler.close()

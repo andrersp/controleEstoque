@@ -1,32 +1,32 @@
 # -*- coding: utf-8 -*-
-from Crud.CrudFornecedor import CrudFornecedor
+from orm.CrudFornecedor import CrudFornecedor
 
 
 class Fornecedor(object):
     # AutoComplete Fornecedor
     def autocompleFornecedor(self):
-        fornecedor = self.tx_NomeFantasia.text()
         busca = CrudFornecedor()
-        busca.ListaFornecedorTabela(fornecedor)
-        lista = busca.NomeFantasia
-        if fornecedor:
+        busca.nomeFantasia = self.tx_NomeFantasia.text()
+        busca.autoCompleteFornecedor()
+        lista = busca.nomeFantasia
+        if busca.nomeFantasia:
             self.model.setStringList(lista)
 
     # Busca Fornecedor por nome
     def BuscaFornecedorNome(self, campoFoco):
-        cliente = self.tx_NomeFantasia.text()
         busca = CrudFornecedor()
-        busca.ListaFornecedorTabela(cliente)
-        self.tx_Id.setText(str(busca.idFornecedor[0]))
+        busca.nomeFantasia = self.tx_NomeFantasia.text()
+        busca.listaFornecedor()
+        self.tx_Id.setText(str(busca.id[0]))
         self.BuscaFornecedorId(campoFoco)
 
     # Busca Fornecedor por ID
     def BuscaFornecedorId(self, campoFoco):
-        id = int(self.tx_Id.text())
         busca = CrudFornecedor()
-        busca.SelectFornecedorId(id)
-        if busca.NomeFantasia:
-            self.tx_NomeFantasia.setText(busca.NomeFantasia)
+        busca.id = int(self.tx_Id.text())
+        busca.SelectFornecedorId()
+        if busca.nomeFantasia:
+            self.tx_NomeFantasia.setText(busca.nomeFantasia)
             self.TelefoneMask(busca.telefone)
             self.tx_Telefone.setText(busca.telefone)
             campoFoco.setFocus()

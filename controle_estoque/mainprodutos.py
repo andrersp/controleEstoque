@@ -63,29 +63,29 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
             self.tb_produtos.removeRow(0)
 
         i = 0
-        if len(lista.query) >= 1:
-            for produto in lista.query:
+        if len(lista.produto) >= 1:
+            while i < len(lista.produto):
                 self.tb_produtos.insertRow(i)
                 self.conteudoTabela(self.tb_produtos, i, 0,
-                                    str(produto.id))
+                                    str(lista.id[i]))
                 self.TabelaStatus(self.tb_produtos, i, 1,
                                   self.StatusEntrega(1))
-                self.TabelaID(self.tb_produtos, i, 2, produto.id)
+                self.TabelaID(self.tb_produtos, i, 2, lista.id[i])
                 self.TabelaNomeTelefone(self.tb_produtos, i, 3,
-                                        produto.produto,
-                                        produto.marca.marca_produto)
+                                        lista.produto[i],
+                                        lista.marca[i])
                 self.TabelaQtdeStatus(self.tb_produtos, i, 4,
-                                      str(produto.qtde),
-                                      self.StatusStoque(produto.qtde,
-                                                        produto.estoque_minimo))
+                                      str(lista.qtdeProduto[i]),
+                                      self.StatusStoque(lista.qtdeProduto[i],
+                                                        lista.estoqueMinimo[i]))
                 self.ValorProduto(self.tb_produtos, i, 5,
-                                  produto.valor_unitario)
+                                  lista.valorUnitario[i])
                 self.ValorProduto(self.tb_produtos, i, 6,
-                                  produto.valor_atacado)
+                                  lista.valorAtacado[i])
                 # Sinal click tabela
                 self.botaoTabela(self.tb_produtos, i, 7,
                                  partial(
-                                     self.SelectProduto, produto.id),
+                                     self.SelectProduto, lista.id[i]),
                                  "#005099")
                 i += 1
         pass
@@ -370,8 +370,9 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         INSERI.valorAtacado = self.tx_ValorAtacadoProduto.text()
         INSERI.qtdeAtacado = self.tx_MinimoAtacado.text()
         INSERI.inseriProduto()
+        print(INSERI.marca, INSERI.id)
 
-        self.janelaProdutos()
+        # self.janelaProdutos()
 
     # Selecionando Produto
     def SelectProduto(self, valor):
@@ -393,9 +394,9 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
             self.bt_DelImagem.setVisible(True)
 
         self.cb_CategoriaProduto.setCurrentIndex(
-            self.cb_CategoriaProduto.findData(busca.categoria.id))
+            self.cb_CategoriaProduto.findData(busca.categoria))
         self.cb_MarcaProduto.setCurrentIndex(
-            self.cb_MarcaProduto.findData(busca.marca.id))
+            self.cb_MarcaProduto.findData(busca.marca))
         self.tx_EstoqueMinimoProduto.setText(str(busca.estoqueMinimo))
         self.tx_EstoqueMaximoProduto.setText(str(busca.estoqueMaximo))
         self.tx_ObsProduto.setText(busca.obsProduto)

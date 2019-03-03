@@ -12,7 +12,7 @@ class Comercial(object):
     def validaCampos(self):
         # Setando Validadot Int nos campos
         validaInt = QIntValidator(0, 9999)
-        self.tx_QntdItem.setValidator(validaInt)
+
         self.tx_IdBuscaItem.setValidator(validaInt)
         self.tx_Id.setValidator(validaInt)
         # Setando Validador float nos campos
@@ -21,6 +21,7 @@ class Comercial(object):
         validarValor.setDecimals(2)
         self.tx_Desconto.setValidator(validarValor)
         self.tx_Frete.setValidator(validarValor)
+        self.tx_QntdItem.setValidator(validarValor)
 
     # Setando Datas Padrão
     def setDatas(self):
@@ -109,7 +110,7 @@ class Comercial(object):
                                 self.tx_ObsItem.text())
 
         self.conteudoTabela(self.tb_Itens, row, 3,
-                            self.tx_QntdItem.text())
+                            self.tx_QntdItem.text().replace(',', '.'))
         self.conteudoTabela(self.tb_Itens, row, 4,
                             self.tx_ValorUnitarioItem.text())
         self.conteudoTabela(self.tb_Itens, row, 5,

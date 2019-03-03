@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Crud.CrudCategoriaAReceber import CrudCatAReceber
+from orm.CrudCatAReceber import CrudCatAReceber
 
 
 class CategoriaAReceber(object):
@@ -10,6 +10,6 @@ class CategoriaAReceber(object):
         busca.listaCatAReceber()
         combobox.clear()
 
-        for i in range(len(busca.descCatAReceber)):
-            combobox.addItem(busca.descCatAReceber[i], str(
-                str(busca.idCatAReceber[i])))
+        for i in range(len(busca.categoriaReceber)):
+            combobox.addItem(busca.categoriaReceber[i], str(
+                str(busca.id[i])))

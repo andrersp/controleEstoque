@@ -1,7 +1,10 @@
 # -*- codind: utf-8 -*-
 from PySide2.QtCore import QDate
+
+
 from Views.movConta import Ui_ct_movimento
-from Crud.CrudMovCaixa import CrudMovCaixa
+from orm.CrudContaAReceber import CrudContaAReceber
+from orm.CrudContaAPagar import CrudContaAPagar
 
 
 class MainMovimentoConta(Ui_ct_movimento):
@@ -27,7 +30,7 @@ class MainMovimentoConta(Ui_ct_movimento):
 
         # Funcao chamada botoes
         self.bt_BuscaMovimento.clicked.connect(self.Entrada)
-        self.bt_BuscaMovimento.clicked.connect(self.Despesa)
+        # self.bt_BuscaMovimento.clicked.connect(self.Despesa)
 
         # Chamando primeira consulta
         self.Entrada()
@@ -39,8 +42,8 @@ class MainMovimentoConta(Ui_ct_movimento):
         dataFim = QDate.toString(
             self.dt_fim.date(), "yyyy-MM-dd")
 
-        busca = CrudMovCaixa()
-        busca.dataInicio = dataInicio
+        busca = CrudContaAReceber()
+        busca.dataVencimento = dataInicio
         busca.dataFim = dataFim
         busca.movEntrada()
 
@@ -54,18 +57,18 @@ class MainMovimentoConta(Ui_ct_movimento):
         self.lb_fimDespesa.setText(QDate.toString(
             self.dt_fim.date(), "dd-MM-yyyy"))
 
-        if busca.totaAReceber > 0.01:
-            self.lb_entradaPendente.setText(str(busca.totaAReceber))
-            self.lb_entradaRecebido.setText(str(busca.totalRecebido))
+        if busca.valorAReceber > 0.01:
+            self.lb_entradaPendente.setText(str(busca.valorAReceber))
+            self.lb_entradaRecebido.setText(str(busca.valorRecebido))
 
             # Grafico
-            if busca.totalRecebido:
-                valor = busca.totalRecebido / busca.totaAReceber * 100
+            if busca.valorRecebido:
+                valor = busca.valorRecebido / busca.valorAReceber * 100
                 # formato
                 self.pr_receita.setFormat("%.02f%%" % (valor))
                 # Max e valor
-                self.pr_receita.setMaximum(busca.totaAReceber)
-                self.pr_receita.setValue(busca.totalRecebido)
+                self.pr_receita.setMaximum(busca.valorAReceber)
+                self.pr_receita.setValue(busca.valorRecebido)
             self.detalheEntrada()
         pass
 
@@ -75,10 +78,10 @@ class MainMovimentoConta(Ui_ct_movimento):
         dataFim = QDate.toString(
             self.dt_fim.date(), "yyyy-MM-dd")
 
-        busca = CrudMovCaixa()
-        busca.dataInicio = dataInicio
+        busca = CrudContaAReceber()
+        busca.dataRecebimento = dataInicio
         busca.dataFim = dataFim
-        busca.detalheReceita()
+        busca.detalheEntrada()
 
         while self.tb_receita.rowCount() > 0:
             self.tb_receita.removeRow(0)
@@ -89,7 +92,7 @@ class MainMovimentoConta(Ui_ct_movimento):
             self.conteudoTabelaLeft(
                 self.tb_receita, i, 0, busca.categoria[i])
             self.conteudoTabela(self.tb_receita, i, 1,
-                                "R$ " + str(busca.totalRecebido[i]))
+                                "R$ " + str(busca.valorRecebido[i]))
             i += 1
 
         pass
@@ -100,23 +103,23 @@ class MainMovimentoConta(Ui_ct_movimento):
         dataFim = QDate.toString(
             self.dt_fim.date(), "yyyy-MM-dd")
 
-        busca = CrudMovCaixa()
-        busca.dataInicio = dataInicio
+        busca = CrudContaAPagar()
+        busca.dataVencimento = dataInicio
         busca.dataFim = dataFim
         busca.movDespesa()
 
-        if busca.totaAPagar > 0.01:
-            self.lb_despesaAPagar.setText(str(busca.totaAPagar))
-            self.lb_despesaPaga.setText(str(busca.totalPago))
+        if busca.valorAPagar > 0.01:
+            self.lb_despesaAPagar.setText(str(busca.valorAPagar))
+            self.lb_despesaPaga.setText(str(busca.valorPago))
 
             # Grafico
-            if busca.totalPago:
-                valor = busca.totalPago / busca.totaAPagar * 100
+            if busca.valorPago:
+                valor = busca.valorPago / busca.valorAPagar * 100
                 # formato
                 self.pr_despesa.setFormat("%.02f%%" % (valor))
                 # Max e valor
-                self.pr_despesa.setMaximum(busca.totaAPagar)
-                self.pr_despesa.setValue(busca.totalPago)
+                self.pr_despesa.setMaximum(busca.valorAPagar)
+                self.pr_despesa.setValue(busca.valorPago)
             self.detalheDespesa()
         pass
 
@@ -126,8 +129,8 @@ class MainMovimentoConta(Ui_ct_movimento):
         dataFim = QDate.toString(
             self.dt_fim.date(), "yyyy-MM-dd")
 
-        busca = CrudMovCaixa()
-        busca.dataInicio = dataInicio
+        busca = CrudContaAPagar()
+        busca.dataPagamento = dataInicio
         busca.dataFim = dataFim
         busca.detalheDespesa()
 
@@ -140,7 +143,7 @@ class MainMovimentoConta(Ui_ct_movimento):
             self.conteudoTabelaLeft(
                 self.tb_despesa, i, 0, busca.categoria[i])
             self.conteudoTabela(self.tb_despesa, i, 1,
-                                "R$ " + str(busca.totalPago[i]))
+                                "R$ " + str(busca.valorPago[i]))
             i += 1
         self.calculoMovimento()
         pass

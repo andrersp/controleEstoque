@@ -9,11 +9,7 @@ class Clientes(object):
         busca = CrudCliente()
         busca.nome = self.tx_NomeFantasia.text()
         busca.autoCompleteCliente()
-        lista = []
-
-        for cliente in busca.query:
-            lista.append(cliente.nome)
-
+        lista = busca.nome
         if busca.nome:
             self.model.setStringList(lista)
 

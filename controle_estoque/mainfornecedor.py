@@ -58,27 +58,27 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
             self.tb_Fornecedor.removeRow(0)
 
         i = 0
-        if len(lista.query) >= 1:
-            for fornecedor in lista.query:
+        if len(lista.nomeFantasia) >= 1:
+            while i < len(lista.nomeFantasia):
                 self.tb_Fornecedor.insertRow(i)
                 self.TabelaStatus(self.tb_Fornecedor, i,
                                   0, self.StatusEntrega(1))
                 self.TabelaID(self.tb_Fornecedor, i, 1,
-                              fornecedor.id)
+                              lista.id[i])
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 2,
-                                        fornecedor.nome_fantasia,
-                                        fornecedor.razao_social)
+                                        lista.nomeFantasia[i],
+                                        lista.razaoSocial[i])
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 3,
                                         self.formatoNumTelefone(
-                                            fornecedor.telefone), "")
+                                            lista.telefone[i]), "")
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 4,
-                                        fornecedor.email, "")
+                                        lista.email[i], "")
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 5,
-                                        fornecedor.site, "")
+                                        lista.site[i], "")
                 # Sinal click tabela
                 self.botaoTabela(self.tb_Fornecedor, i, 6,
                                  partial(self.SelectFornecedor,
-                                         fornecedor.id), "#005099")
+                                         lista.id[i]), "#005099")
                 i += 1
         pass
 
@@ -115,17 +115,18 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
         lista.selectCompraFornecedor()
         i = 0
 
-        for compra in lista.query:
+        while i < len(lista.dataEmissao):
             # print row
             self.tb_Historico.insertRow(i)
             self.conteudoTabela(
-                self.tb_Historico, i, 0, str(compra.data_emissao))
+                self.tb_Historico, i, 0, str(lista.dataEmissao[i]))
             self.conteudoTabela(
-                self.tb_Historico, i, 1, str(compra.data_entrega))
+                self.tb_Historico, i, 1, str(lista.dataEntrega[i]))
             self.conteudoTabela(
-                self.tb_Historico, i, 2, str(compra.valor_total))
+                self.tb_Historico, i, 2, str(lista.valorTotal[i]))
 
-            total = float(compra.valor_total) + float(total)
+            total = float(lista.valorTotal[i]) + float(total)
+            i += 1
 
         self.lb_TotalHistorico.setText(format(float(total), ".2f"))
         pass

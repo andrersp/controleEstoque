@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Crud.conexao import Conexao
+from conexao import Conexao
 import mysql.connector
 
 
@@ -20,8 +20,8 @@ class CrudMovCaixa(object):
 
         try:
             c.execute(""" 
-            SELECT COALESCE(SUM(valor), 0) FROM contasAReceber
-            WHERE vencimento BETWEEN '{}' AND '{}'
+            SELECT COALESCE(SUM(valor), 0) FROM conta_a_receber
+            WHERE data_vencimento BETWEEN '{}' AND '{}'
             """.format(self.dataInicio, self.dataFim))
             row = c.fetchone()
             self.totaAReceber = []
@@ -30,8 +30,8 @@ class CrudMovCaixa(object):
                 self.totaAReceber = row[0]
 
             c.execute(""" 
-            SELECT COALESCE(SUM(valorRecebido), 0) FROM contasAReceber
-            WHERE recebido BETWEEN '{}' AND '{}'
+            SELECT COALESCE(SUM(valor_recebido), 0) FROM conta_a_receber
+            WHERE data_recebimento BETWEEN '{}' AND '{}'
             """.format(self.dataInicio, self.dataFim))
             row = c.fetchone()
             if row:
@@ -49,11 +49,11 @@ class CrudMovCaixa(object):
         try:
             c.execute(""" SELECT sum(valorRecebido),
              categoriaAReceber.categoria
-             FROM contasAReceber
+             FROM conta_a_receber
              INNER JOIN categoriaAReceber ON
-             contasAReceber.categoria = categoriaAReceber.id
+             conta_a_receber.categoria = categoriaAReceber.id
              WHERE recebido BETWEEN '{}' AND '{}'
-             GROUP BY contasAReceber.categoria
+             GROUP BY conta_a_receber.categoria
              """.format(self.dataInicio, self.dataFim))
 
             self.totalRecebido = []
@@ -77,7 +77,7 @@ class CrudMovCaixa(object):
 
         try:
             c.execute(""" 
-            SELECT COALESCE(SUM(valor), 0) FROM contasAPagar
+            SELECT COALESCE(SUM(valor), 0) FROM conta_a_pagar
             WHERE vencimento BETWEEN '{}' AND '{}'
             """.format(self.dataInicio, self.dataFim))
             row = c.fetchone()
@@ -87,7 +87,7 @@ class CrudMovCaixa(object):
                 self.totaAPagar = row[0]
 
             c.execute(""" 
-            SELECT COALESCE(SUM(valorPago), 0) FROM contasAPagar
+            SELECT COALESCE(SUM(valorPago), 0) FROM conta_a_pagar
             WHERE recebido BETWEEN '{}' AND '{}'
             """.format(self.dataInicio, self.dataFim))
             row = c.fetchone()
@@ -106,11 +106,11 @@ class CrudMovCaixa(object):
         try:
             c.execute(""" SELECT sum(valorPago),
              categoriaAPagar.categoria
-             FROM contasAPagar
+             FROM conta_a_pagar
              INNER JOIN categoriaAPagar ON
-             contasAPagar.categoria = categoriaAPagar.id
+             conta_a_pagar.categoria = categoriaAPagar.id
              WHERE recebido BETWEEN '{}' AND '{}'
-             GROUP BY contasAPagar.categoria
+             GROUP BY conta_a_pagar.categoria
              """.format(self.dataInicio, self.dataFim))
 
             self.totalPago = []
@@ -129,8 +129,8 @@ class CrudMovCaixa(object):
             pass
 
 
-# busca = CrudMovCaixa()
-# busca.dataInicio = '2019-02-01'
-# busca.dataFim = '2019-02-28'
-# busca.detalheDespesa()
-# print(busca.totalPago, busca.categoria)
+busca = CrudMovCaixa()
+busca.dataInicio = '2019-03-01'
+busca.dataFim = '2019-03-28'
+busca.movEntrada()
+print(busca.totaAReceber, busca.totalRecebido)

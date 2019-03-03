@@ -2,7 +2,8 @@
 
 import peewee
 
-from Conexao import Conexao, StatusPagamento
+from orm.Conexao import Conexao
+from orm.Conexao import StatusPagamento
 
 
 class CrudStatusPagamento(object):
@@ -59,6 +60,17 @@ class CrudStatusPagamento(object):
 
             # Query
             self.query = StatusPagamento.select()
+
+            # Convertendo variaveis em lista
+
+            self.id = []
+            self.statusPagamento = []
+
+            # salvando resultado em suas listas
+
+            for row in self.query:
+                self.id.append(row.id)
+                self.statusPagamento.append(row.status_pagamento)
 
             # Fechando a Conexao
             Conexao().dbhandler.close()

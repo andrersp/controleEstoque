@@ -42,13 +42,9 @@ class CrudFornecedor(object):
             # Fechando Conexao
             Conexao().dbhandler.close()
 
-            pass
-
         except peewee.DoesNotExist:
 
             self.id = 1
-
-            pass
 
         return self.id
 
@@ -75,7 +71,24 @@ class CrudFornecedor(object):
                 bairro=self.bairro,
                 cidade=self.cidade,
                 estado=self.estado
-            ).on_conflict_replace()
+            ).on_conflict(
+                update={
+                    Fornecedor.nome_fantasia: self.nomeFantasia,
+                    Fornecedor.razao_social: self.razaoSocial,
+                    Fornecedor.cnpj: self.cnpj,
+                    Fornecedor.insc_estadual: self.inscEstadual,
+                    Fornecedor.telefone: self.telefone,
+                    Fornecedor.email: self.email,
+                    Fornecedor.site: self.site,
+                    Fornecedor.obs: self.obs,
+                    Fornecedor.cep: self.cep,
+                    Fornecedor.endereco: self.endereco,
+                    Fornecedor.numero: self.numero,
+                    Fornecedor.bairro: self.bairro,
+                    Fornecedor.cidade: self.cidade,
+                    Fornecedor.estado: self.estado
+                }
+            )
 
             # Executando a query
             row.execute()
@@ -85,6 +98,8 @@ class CrudFornecedor(object):
 
         except peewee.InternalError as err:
             print(err)
+
+        pass
 
     # Selecionar Fornecedor por Id
 
@@ -115,11 +130,10 @@ class CrudFornecedor(object):
             # Fechando a Conexao
             Conexao().dbhandler.close()
 
-            pass
-
         except peewee.DoesNotExist as err:
             print(err)
-            pass
+
+        pass
 
     # Buscando Fornecedor por Nome
 
@@ -131,11 +145,30 @@ class CrudFornecedor(object):
             self.query = (Fornecedor.select().where(
                 Fornecedor.nome_fantasia.contains(self.nomeFantasia)))
 
+            # Convertendo variaveis em lista
+            self.id = []
+            self.nomeFantasia = []
+            self.razaoSocial = []
+            self.telefone = []
+            self.email = []
+            self.site = []
+
+            # Salvando resultado da query e suas listas
+            for row in self.query:
+                self.id.append(row.id)
+                self.nomeFantasia.append(row.nome_fantasia)
+                self.razaoSocial.append(row.razao_social)
+                self.telefone.append(row.telefone)
+                self.email.append(row.email)
+                self.site.append(row.site)
+
             # Fechando a conexao
             Conexao().dbhandler.close()
 
         except peewee.DoesNotExist as err:
             print(err)
+
+        pass
 
     # Lista AutoComplete Fornecedor
 
@@ -145,12 +178,21 @@ class CrudFornecedor(object):
 
             # Query
             self.query = (Fornecedor
-                          .select(Fornecedor.id, Fornecedor.nome_fantasia)
+                          .select(Fornecedor.nome_fantasia, Fornecedor.razao_social)
                           .where(Fornecedor.nome_fantasia
                                  .contains(self.nomeFantasia)))
+
+            # Convertendo variaveis em lista
+            self.nomeFantasia = []
+
+            # salvando resultado em sua lista
+            for row in self.query:
+                self.nomeFantasia.append(row.nome_fantasia)
 
             # Fechando a Conexao
             Conexao().dbhandler.close()
 
         except peewee.DoesNotExist as err:
             print(err)
+
+        pass

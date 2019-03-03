@@ -2,7 +2,11 @@
 
 import peewee
 
-from orm.Conexao import Conexao, ContaAReceber, Cliente, StatusPagamento
+from orm.Conexao import Conexao
+from orm.Conexao import ContaAReceber
+from orm.Conexao import Cliente
+from orm.Conexao import StatusPagamento
+from orm.Conexao import CatAReceber
 
 
 class CrudContaAReceber(object):
@@ -11,7 +15,8 @@ class CrudContaAReceber(object):
                  obs="", categoria="", dataVencimento="",
                  valor="", idFormaPagamento="",  formaPagamento="",
                  dataRecebimento="", valorRecebido="", idStatusPagamento="",
-                 statusPagamento="", query="", dataFim=""):
+                 statusPagamento="", query="", dataFim="", valorAReceber="",
+                 nomeCliente="", telefoneCliente=""):
 
         self.id = id
         self.idVenda = idVenda
@@ -29,6 +34,9 @@ class CrudContaAReceber(object):
         self.statusPagamento = statusPagamento
         self.query = query
         self.dataFim = dataFim
+        self.valorAReceber = valorAReceber
+        self.nomeCliente = nomeCliente
+        self.telefoneCliente = telefoneCliente
 
     # Recebendo ultimo id
 
@@ -86,27 +94,28 @@ class CrudContaAReceber(object):
 
             # Convertendo variaveis em lista
             self.id = []
-            self.idVenda = []
-            self.idCliente = []
             self.descricao = []
-            self.obs = []
-            self.categoria = []
             self.dataVencimento = []
             self.valor = []
             self.idFormaPagamento = []
-            self.dataRecebimento = []
+            self.formaPagamento = []
             self.valorRecebido = []
             self.idStatusPagamento = []
+            self.statusPagamento = []
 
             # Salvando resultado da query e suas listas
 
             for row in self.query:
                 self.id.append(row.id)
+                self.descricao.append(row.descricao)
                 self.dataVencimento.append(row.data_vencimento)
                 self.valor.append(row.valor)
                 self.idFormaPagamento.append(row.forma_pagamento.id)
+                self.formaPagamento.append(row.forma_pagamento.forma_pagamento)
                 self.valorRecebido.append(row.valor_recebido)
                 self.idStatusPagamento.append(row.status_pagamento.id)
+                self.statusPagamento.append(
+                    row.status_pagamento.status_pagamento)
 
             # Fechando a Conexao
             Conexao().dbhandler.close()
@@ -114,7 +123,7 @@ class CrudContaAReceber(object):
         except peewee.DoesNotExist as err:
             print(err)
 
-    # Cadastrando Conta a Pagar
+    # Cadastrando Conta a Receber
 
     def inseriContaAReceber(self):
 
@@ -151,7 +160,7 @@ class CrudContaAReceber(object):
             print(err)
 
     # Buscando conta a pagar por vencimento, Cliente e status
-    def listaContaAReceber(self, busca):
+    def listaContaAReceber(self):
 
         try:
 
@@ -169,8 +178,65 @@ class CrudContaAReceber(object):
                 ContaAReceber.status_pagamento == self.statusPagamento)
             )
 
+            # Convertendo variaveis em lista
+            self.id = []
+            self.idCliente = []
+            self.nomeCliente = []
+            self.telefoneCliente = []
+            self.descricao = []
+            self.obs = []
+            self.categoria = []
+            self.dataVencimento = []
+            self.valor = []
+            self.idFormaPagamento = []
+            self.formaPagamento = []
+            self.dataRecebimento = []
+            self.valorRecebido = []
+            self.idStatusPagamento = []
+            self.statusPagamento = []
+
+            # salvando resultado em suas listas
+            for row in self.query:
+                self.id.append(row.id)
+                self.idCliente.append(row.id_cliente.id)
+                self.nomeCliente.append(row.id_cliente.nome)
+                self.telefoneCliente.append(row.id_cliente.celular)
+                self.descricao.append(row.descricao)
+                self.dataVencimento.append(row.data_vencimento)
+                self.valor.append(row.valor)
+                self.idFormaPagamento.append(row.forma_pagamento.id)
+                self.formaPagamento.append(row.forma_pagamento.forma_pagamento)
+                self.valorRecebido.append(row.valor_recebido)
+                self.idStatusPagamento.append(row.status_pagamento.id)
+                self.statusPagamento.append(
+                    row.status_pagamento.status_pagamento)
+
             # Fechando a Conexao
             Conexao().dbhandler.close()
+
+        except peewee.DoesNotExist as err:
+            print(err)
+
+        pass
+
+    # Selecionando conta a receber por ID
+    def selectContaID(self):
+
+        try:
+            row = ContaAReceber.get_by_id(self.id)
+
+            # salvando resultado em variaveis
+            self.id = row.id
+            self.idCliente = row.id_cliente
+            self.descricao = row.descricao
+            self.obs = row.obs
+            self.categoria = row.categoria.id
+            self.dataVencimento = row.data_vencimento
+            self.valor = row.valor
+            self.idFormaPagamento = row.forma_pagamento.id
+            self.dataRecebimento = row.data_recebimento
+            self.valorRecebido = row.valor_recebido
+            self.idStatusPagamento = row.status_pagamento.id
 
         except peewee.DoesNotExist as err:
             print(err)
@@ -203,21 +269,73 @@ class CrudContaAReceber(object):
         except peewee.InternalError as err:
             print(err)
 
+    """  Obtendo Movimentação financeira """
 
-# Inseri = CrudContaAReceber()
+    # Total a receber referente a data selecionada
+    def movEntrada(self):
+
+        try:
+
+            # Query
+            row = (ContaAReceber.select(peewee.fn.SUM(ContaAReceber.valor)
+                                        .alias('valorAReceber'),
+                                        peewee.fn.SUM(
+                                            ContaAReceber.valor_recebido)
+                                        .alias('valorRecebido'))
+                   .where(ContaAReceber.data_vencimento.between(
+                       self.dataVencimento, self.dataFim))
+                   )
+
+            # Salvando resultado
+            for lista in row:
+                self.valorAReceber = lista.valorAReceber
+                self.valorRecebido = lista.valorRecebido
+
+            # Fechando a Conexao
+            Conexao().dbhandler.close()
+
+        except peewee.InternalError as err:
+            print(err)
+
+        pass
+
+    # detalhes entrada por categoria de receita
+    def detalheEntrada(self):
+
+        try:
+
+            # Query
+            self.query = (ContaAReceber.select(peewee.fn.SUM(ContaAReceber.valor_recebido)
+                                               .alias('valor'),
+                                               CatAReceber.categoria_a_receber)
+                          .join(CatAReceber)
+                          .where(ContaAReceber.data_recebimento
+                                 .between(self.dataRecebimento,
+                                          self.dataFim))
+                          .group_by(ContaAReceber.categoria)
+                          )
+
+            # Convertendo variaveis em lista
+            self.valorRecebido = []
+            self.categoria = []
+
+            # Salvando resultado em suas listas
+            for row in self.query:
+                self.categoria.append(row.categoria.categoria_a_receber)
+                self.valorRecebido.append(row.valor)
+
+            # Fechando a Conexao
+            Conexao().dbhandler.close()
+
+        except peewee.InternalError as err:
+            print(err)
+
+        pass
+
+
+Inseri = CrudContaAReceber()
 # Inseri.id = 7
 # Inseri.formaPagamento = 1
-# Inseri.dataRecebimento = '2019-02-27'
-# Inseri.valorRecebido = '25.00'
-# Inseri.receberParcela()
-
-# num_as_str = Case(None, (
-#     (Number.val == 1, 'one'),
-#     (Number.val == 2, 'two'),
-#     (Number.val == 3, 'three')), 'a lot')
-
-#     def updateStatusPagemento(self):
-
-
-# self.formaPagamento, self.dataRecebimento, self.valorRecebido,
-#                               self.updateStatus(), self.idConta))
+Inseri.dataRecebimento = '2019-02-27'
+Inseri.dataFim = '2019-03-31'
+Inseri.detalheEntrada()

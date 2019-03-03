@@ -59,25 +59,25 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         while self.tb_Clientes.rowCount() > 0:
             self.tb_Clientes.removeRow(0)
 
-        if len(lista.query) >= 1:
-            for cliente in lista.query:
+        if len(lista.nome) >= 1:
+            while i < len(lista.nome):
                 self.tb_Clientes.insertRow(i)
                 self.TabelaStatus(self.tb_Clientes, i, 0,
                                   self.StatusEntrega(1))
-                self.TabelaID(self.tb_Clientes, i, 1, cliente.id)
+                self.TabelaID(self.tb_Clientes, i, 1, lista.id[i])
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 2,
-                                        cliente.nome,
-                                        cliente.sobrenome)
+                                        lista.nome[i],
+                                        lista.sobrenome[i])
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 3,
                                         self.formatoNumTelefone(
-                                            cliente.celular),
+                                            lista.celular[i]),
                                         self.formatoNumTelefone(
-                                            cliente.telefone))
+                                            lista.telefone[i]))
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 4,
-                                        cliente.email, "")
+                                        lista.email[i], "")
                 # Sinal click tabela
                 self.botaoTabela(self.tb_Clientes, i, 5, partial(
-                    self.SelectCliente, cliente.id), "#005099")
+                    self.SelectCliente, lista.id[i]), "#005099")
                 i += 1
             pass
 
@@ -115,17 +115,19 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         lista.selectVendaCliente()
         i = 0
 
-        for venda in lista.query:
+        while i < len(lista.dataEmissao):
             # print row
             self.tb_Historico.insertRow(i)
             self.conteudoTabela(
-                self.tb_Historico, i, 0, str(venda.data_emissao))
+                self.tb_Historico, i, 0, str(lista.dataEmissao[i]))
             self.conteudoTabela(
-                self.tb_Historico, i, 1, str(venda.data_entrega))
+                self.tb_Historico, i, 1, str(lista.dataEntrega[i]))
             self.conteudoTabela(
-                self.tb_Historico, i, 2, str(venda.valor_total))
+                self.tb_Historico, i, 2, str(lista.valorTotal[i]))
 
-            total = float(venda.valor_total) + float(total)
+            total = float(lista.valorTotal[i]) + float(total)
+
+            i += 1
 
         self.lb_TotalHistorico.setText(format(float(total), ".2f"))
         i += 1

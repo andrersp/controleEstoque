@@ -255,10 +255,10 @@ class Compra(BaseModel):
     valor_total = DecimalField(9, 2)
     valor_pago = DecimalField(9, 2)
     valor_pendente = DecimalField(9, 2)
-    status_entrega = ForeignKeyField(
-        StatusEntrega, column_name='status_entrega', default='2')
-    status_pagamento = ForeignKeyField(
-        StatusPagamento, column_name='status_pagamento', default='2')
+    entrega = ForeignKeyField(
+        StatusEntrega, column_name='entrega', default='2')
+    pagamento = ForeignKeyField(
+        StatusPagamento, column_name='pagamento', default='2')
 
     class Meta:
         db_table = 'compra'
@@ -419,7 +419,8 @@ class CriarTabelas(object):
             CatAReceber.get_or_create(categoria_a_receber='Venda')
 
             # Forma de Pagamento
-            FormaPagamento.get_or_create(forma_pagamento='À Vista')
+            FormaPagamento.get_or_create(forma_pagamento='Dinheiro')
+            FormaPagamento.get_or_create(forma_pagamento='Cartão')
 
             # Status Entrega
             StatusEntrega.get_or_create(status_entrega='Concluída')

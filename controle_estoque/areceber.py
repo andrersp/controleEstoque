@@ -6,9 +6,12 @@ from PySide2.QtCore import QDate, Qt
 
 
 from Views.aReceber import Ui_ct_AReceber
-from Crud.CrudAReceber import CrudAReceber
 from Views.formAReceber import Ui_ct_FormReceber
-from Crud.CrudCategoriaAReceber import CrudCatAReceber
+
+
+from orm.CrudContaAReceber import CrudContaAReceber
+from orm.CrudCatAReceber import CrudCatAReceber
+from orm.CrudStatusPagamento import CrudStatusPagamento
 
 
 class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
@@ -41,56 +44,60 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
 
     # Populando check Box
     def listaStatus(self):
-        busca = CrudAReceber()
-        busca.listaStatus()
+        busca = CrudStatusPagamento()
+        busca.listaStatusPagamento()
         self.cb_Situacao.clear()
-        for i in range(len(busca.status)):
+
+        i = 0
+        for lista in busca.statusPagamento:
             self.cb_Situacao.addItem(
-                busca.status[i].upper(), str(busca.idStatus[i]))
+                busca.statusPagamento[i].upper(), str(busca.id[i]))
+            i += 1
 
         self.cb_Situacao.setCurrentIndex(
             self.cb_Situacao.findData(2))
 
     # Populando tabela de contas a receber
     def tabelaAReceber(self):
-        busca = CrudAReceber()
+        busca = CrudContaAReceber()
         dataInicio = QDate.toString(
             self.dt_Inicio.date(), "yyyy-MM-dd")
         dataFim = QDate.toString(
             self.dt_Fim.date(), "yyyy-MM-dd")
-        busca.dataInicio = dataInicio
+        busca.dataVencimento = dataInicio
         busca.dataFim = dataFim
-        busca.idStatus = self.cb_Situacao.itemData(
-            self.cb_Situacao.currentIndex(), Qt.UserRole)
-        busca.listaAReceber()
+        busca.statusPagamento = self.cb_Situacao.currentData()
+        busca.listaContaAReceber()
         while self.tb_AReceber.rowCount() > 0:
             self.tb_AReceber.removeRow(0)
-        self.tb_AReceber.clearContents()
 
-        for i in range(len(busca.cliente)):
+        i = 0
+        for lista in busca.nomeCliente:
             self.tb_AReceber.insertRow(i)
-            self.conteudoTabela(self.tb_AReceber, i, 0, str(busca.idConta[i]))
+            self.conteudoTabela(self.tb_AReceber, i, 0, str(busca.id[i]))
             self.TabelaStatus(self.tb_AReceber, i, 1,
                               self.StatusEntrega(1,
-                                                 busca.idStatus[i]))
-            self.TabelaNomeTelefone(self.tb_AReceber, i, 2, busca.cliente[i],
+                                                 busca.idStatusPagamento[i]))
+            self.TabelaNomeTelefone(self.tb_AReceber, i, 2, busca.nomeCliente[i],
                                     busca.telefoneCliente[i])
             self.TabelaNomeTelefone(
                 self.tb_AReceber, i, 3, busca.descricao[i], "")
 
             self.TabelaEntrega(self.tb_AReceber, i, 4,
                                busca.dataVencimento[i],
-                               self.StatusEntrega(busca.idStatus[i]),
-                               busca.status[i].upper())
+                               self.StatusEntrega(busca.idStatusPagamento[i]),
+                               busca.statusPagamento[i].upper())
             self.conteudoTabela(self.tb_AReceber, i, 5,
                                 "R$ "+str(busca.valor[i]))
 
             self.conteudoTabela(self.tb_AReceber, i, 6,
-                                "R$ "+str(busca.valorPendente[i]))
+                                "R$ "+str(busca.valor[i] - busca.valorRecebido[i]))
             self.botaoReceberParcela(
                 self.tb_AReceber, i, 7, partial(
-                    self.BuscaContaAReceber, busca.idConta[i]),
+                    self.BuscaContaAReceber, busca.id[i]),
                 "Receber",  2)
+
+            i += 1
 
     # Cadastro e Edição conta a receber
     def formAReceber(self):
@@ -173,17 +180,17 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
     # checando campo Id se é Edicao ou Nova Venda
     def idCheckAReceber(self):
         if not self.tx_Cod.text():
-            busca = CrudAReceber()
-            self.tx_Cod.setText(str(busca.lastIdAReceber()))
+            busca = CrudContaAReceber()
+            self.tx_Cod.setText(str(busca.lastIdContaAReceber()))
         pass
 
     # Buscando Conta a Receber através de ID recebido da Tabela
     def BuscaContaAReceber(self, id):
         self.formAReceber()
-        busca = CrudAReceber()
-        busca.idConta = id
-        busca.selectContaId()
-        self.tx_Cod.setText(str(busca.idConta))
+        busca = CrudContaAReceber()
+        busca.id = id
+        busca.selectContaID()
+        self.tx_Cod.setText(str(busca.id))
         self.tx_Id.setText(str(busca.idCliente))
         self.BuscaClienteId(self.tx_descricao)
         self.tx_descricao.setText(busca.descricao)
@@ -195,11 +202,11 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         if busca.dataRecebimento:
             self.dt_dataPagamento.setDate(busca.dataRecebimento)
         self.cb_formaPagamento.setCurrentIndex(
-            self.cb_formaPagamento.findData(busca.formaPagamento))
-        self.tx_valorPago.setText(str(busca.valorPendente))
-        self.lb_ValorPendente.setText(str(busca.valorPendente))
+            self.cb_formaPagamento.findData(busca.idFormaPagamento))
+        self.tx_valorPago.setText(str(busca.valor - busca.valorRecebido))
+        self.lb_ValorPendente.setText(str(busca.valor - busca.valorRecebido))
 
-        if busca.idStatus == 1:
+        if busca.idStatusPagamento == 1:
             self.bt_receber.setDisabled(True)
             self.desabilitaLineEdit(self.fr_FormReceber)
         self.cb_repetir.setHidden(True)
@@ -216,13 +223,13 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         elif not self.cb_formaPagamento.currentData():
             self.cb_formaPagamento.setFocus()
         else:
-            INSERI = CrudAReceber()
-            INSERI.idConta = self.tx_Cod.text()
+            INSERI = CrudContaAReceber()
+            INSERI.id = self.tx_Cod.text()
             INSERI.valorRecebido = self.tx_valorPago.text().replace(",", ".")
             INSERI.formaPagamento = self.cb_formaPagamento.currentData()
             INSERI.dataRecebimento = QDate.toString(
                 QDate.currentDate(), "yyyy-MM-dd")
-            INSERI.ReceberConta()
+            INSERI.receberConta()
             self.BuscaContaAReceber(self.tx_Cod.text())
         pass
 
@@ -241,16 +248,17 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         repetir = int(self.cb_repetir.currentData())
         for i in range(repetir):
             id = int(self.tx_Cod.text()) + i
-            INSERI = CrudAReceber()
-            INSERI.idConta = id
+            INSERI = CrudContaAReceber()
+            INSERI.id = id
             INSERI.idCliente = self.tx_Id.text()
             INSERI.descricao = self.tx_descricao.text()
             INSERI.categoria = self.cb_categoria.currentData()
+            INSERI.formaPagamento = self.cb_formaPagamento.currentData()
             INSERI.dataVencimento = QDate.toString(QDate.addMonths(
                 self.dt_Vencimento.date(), i), "yyyy-MM-dd")
             INSERI.valor = self.tx_valor.text()
             INSERI.obs = self.tx_Obs.toPlainText()
-            INSERI.cadContaReceber()
+            INSERI.inseriContaAReceber()
         self.BuscaContaAReceber(self.tx_Cod.text())
 
     # Cadastro Categoria a Receber
@@ -258,9 +266,9 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         INSERI = CrudCatAReceber()
         id = INSERI.lastIdCatAReceber()
         categoria = self.tx_addCategoria.text().upper()
-        INSERI.idCatAReceber = id
-        INSERI.descCatAReceber = categoria
-        INSERI.cadCatAReceber()
+        INSERI.id = id
+        INSERI.categoriaReceber = categoria
+        INSERI.inseriCatAReceber()
         self.cb_categoria.addItem(categoria, str(id))
         self.cb_categoria.setCurrentIndex(self.cb_categoria.findData(str(id)))
         self.CalcelAddFinanceiro(self.bt_CancelAddCatergoria,

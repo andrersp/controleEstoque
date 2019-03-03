@@ -101,7 +101,7 @@ class CrudVenda(object):
             self.query = (Venda.select(Venda.data_emissao, Venda.data_entrega,
                                        Venda.valor_total)
                           .where(Venda.id_cliente == self.idCliente,
-                                 Venda.status_pagamento == 1))
+                                 Venda.pagamento == 1))
 
             # Convertendo variaveis em lista
             self.dataEmissao = []
@@ -142,7 +142,9 @@ class CrudVenda(object):
             self.valorRecebido = busca.valor_recebido
             self.valorPendente = busca.valor_pendente
             self.idStatusEntrega = busca.entrega.id
+            self.statusEntrega = busca.entrega.status_entrega
             self.idStatusPagamento = busca.pagamento.id
+            self.statusPagamento = busca.pagamento.status_pagamento
 
         except peewee.DoesNotExist as err:
             print(err)

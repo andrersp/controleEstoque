@@ -75,7 +75,24 @@ class CrudCliente(object):
                 bairro=self.bairro,
                 cidade=self.cidade,
                 estado=self.estado
-            ).on_conflict_replace()
+            ).on_conflict(
+                update={
+                    Cliente.nome: self.nome,
+                    Cliente.sobrenome: self.sobrenome,
+                    Cliente.cpf: self.cpf,
+                    Cliente.rg: self.rg,
+                    Cliente.celular: self.celular,
+                    Cliente.telefone: self.telefone,
+                    Cliente.email: self.email,
+                    Cliente.obs: self.obs,
+                    Cliente.cep: self.cep,
+                    Cliente.endereco: self.endereco,
+                    Cliente.numero: self.numero,
+                    Cliente.bairro: self.bairro,
+                    Cliente.cidade: self.cidade,
+                    Cliente.estado: self.estado
+                }
+            )
 
             # Execurando a Query
             row.execute()
@@ -138,6 +155,23 @@ class CrudCliente(object):
                 Cliente.nome.contains('{}'
                                       .format(self.nome)))
 
+            # Convertendo variaveis em lista
+            self.id = []
+            self.nome = []
+            self.sobrenome = []
+            self.celular = []
+            self.telefone = []
+            self.email = []
+
+            # Salvando resultado da query e suas listas
+            for row in self.query:
+                self.id.append(row.id)
+                self.nome.append(row.nome)
+                self.sobrenome.append(row.sobrenome)
+                self.celular.append(row.celular)
+                self.telefone.append(row.telefone)
+                self.email.append(row.email)
+
             # fechando a conexao
             Conexao().dbhandler.close()
 
@@ -156,8 +190,15 @@ class CrudCliente(object):
         try:
 
             # Query
-            self.query = (Cliente.select(Cliente.id, Cliente.nome)
+            self.query = (Cliente.select(Cliente.id, Cliente.nome, Cliente.sobrenome)
                           .where(Cliente.nome.contains(self.nome)))
+
+            # Convertendo variavel em lista
+            self.nome = []
+
+            # salvando resultado em lista
+            for row in self.query:
+                self.nome.append(row.nome)
 
             # Fechando Conexao
             Conexao().dbhandler.close()

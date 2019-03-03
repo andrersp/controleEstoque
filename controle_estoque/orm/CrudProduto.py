@@ -67,7 +67,21 @@ class CrudProduto(object):
                 qtde_atacado=self.qtdeAtacado,
                 obs=self.obsProduto
 
-            ).on_conflict_replace()
+            ).on_conflict(
+                update={
+                    Produto.produto: self.produto,
+                    Produto.imagem: self.imagem,
+                    Produto.categoria: self.categoria,
+                    Produto.marca: self.marca,
+                    Produto.estoque_minimo: self.estoqueMinimo,
+                    Produto.estoque_maximo: self.estoqueMaximo,
+                    Produto.valor_compra: self.valorCompra,
+                    Produto.valor_unitario: self.valorUnitario,
+                    Produto.valor_atacado: self.valorAtacado,
+                    Produto.qtde_atacado: self.qtdeAtacado,
+                    Produto.obs: self.obsProduto
+                }
+            )
 
             # Executando a Query
             row.execute()
@@ -93,8 +107,8 @@ class CrudProduto(object):
             self.id = busca.id
             self.produto = busca.produto
             self.imagem = busca.imagem
-            self.categoria = busca.categoria
-            self.marca = busca.marca
+            self.categoria = busca.categoria.id
+            self.marca = busca.marca.id
             self.estoqueMinimo = busca.estoque_minimo
             self.estoqueMaximo = busca.estoque_maximo
             self.qtdeProduto = busca.qtde
@@ -132,6 +146,27 @@ class CrudProduto(object):
                           .join(MarcaProduto)
                           .where(
                 Produto.produto.contains('{}'.format(self.produto))))
+
+            # Convertendo variaveis em lista
+            self.id = []
+            self.produto = []
+            self.marca = []
+            self.estoqueMinimo = []
+            self.qtdeProduto = []
+            self.valorUnitario = []
+            self.valorAtacado = []
+            self.qtdeAtacado = []
+
+            # Salvando resultado da query e suas listas
+            for row in self.query:
+                self.id.append(row.id)
+                self.produto.append(row.produto)
+                self.marca.append(row.marca.marca_produto)
+                self.estoqueMinimo.append(row.estoque_minimo)
+                self.qtdeProduto.append(row.qtde)
+                self.valorUnitario.append(row.valor_unitario)
+                self.valorAtacado.append(row.valor_atacado)
+                self.qtdeAtacado.append(row.qtde_atacado)
 
            # Fechando a Conexao
             Conexao().dbhandler.close()
@@ -190,6 +225,26 @@ class CrudProduto(object):
                    .where(Produto.id == self.id))
 
             # Executando a query
+            row.execute()
+
+            # Fechando a Conexao
+            Conexao().dbhandler.close()
+
+        except peewee.InternalError as err:
+            print(err)
+
+    # Entrada Produto no estoque
+    def entradaEstoque(self):
+
+        try:
+
+            # Query
+            row = (Produto.update(qtde=Produto.qtde + self.qtdeProduto,
+                                  valor_compra=self.valorCompra,
+                                  obs=self.obsProduto)
+                   .where(Produto.id == self.id))
+
+            # Executando query
             row.execute()
 
             # Fechando a Conexao

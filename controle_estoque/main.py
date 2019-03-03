@@ -536,8 +536,8 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         busca.idEmpresa = 1
         busca.SelectEmpresaId()
         base = {'logo': str(busca.logo, encoding='utf-8'),
-                'nomeFantasia': busca.NomeFantasia,
-                'razaoSocial': busca.RazaoSocial,
+                'nomeFantasia': busca.nomeFantasia,
+                'razaoSocial': busca.razaoSocial,
                 'cnpj': busca.cnpj,
                 'endereco': busca.endereco,
                 'numero': busca.numero,
