@@ -8,6 +8,7 @@ from orm.CrudContaAPagar import CrudContaAPagar
 
 
 class MainMovimentoConta(Ui_ct_movimento):
+
     def mainmovconta(self, frame):
         super(MainMovimentoConta, self).setMovConta(frame)
         self.fr_movimento.show()

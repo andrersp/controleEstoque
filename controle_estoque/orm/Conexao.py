@@ -53,6 +53,7 @@ class Conexao(object):
                 self.DbName, user=self.DbUser, password=self.DbPassword, host=self.DbHost
             )
             self.dbhandler.connect()
+            self.dbhandler.close()
         except:
             self.erro = "Erro"
 
@@ -80,7 +81,7 @@ class CreateDb(object):
             self.DbUser = config['DEFAULT']['DbUser']
             self.DbPassword = config['DEFAULT']['DbPassword']
 
-    def CreateDB(self):
+    def createDB(self):
 
         # Caso banco não exista, Cria
         import mysql.connector

@@ -209,14 +209,15 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
 
         headertable = ["Cod", "Nome Fantasia", "Telefone", "Email", "Site"]
         buscaFornecedor = CrudFornecedor()
-        buscaFornecedor.ListaFornecedorTabela(self.tx_BuscaFornecedor.text())
+        buscaFornecedor.nomeFantasia = ''
+        buscaFornecedor.listaFornecedor()
         html = self.renderTemplate(
             "report.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="LISTAGEM FORNECEDOR",
             headertable=headertable,
-            codcliente=buscaFornecedor.idFornecedor,
-            nomeFornecedor=buscaFornecedor.NomeFantasia,
+            codcliente=buscaFornecedor.id,
+            nomeFornecedor=buscaFornecedor.nomeFantasia,
             telefoneFornecedor=buscaFornecedor.telefone,
             siteFornecedor=buscaFornecedor.site,
             emailFornecedor=buscaFornecedor.email

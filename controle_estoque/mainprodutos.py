@@ -412,14 +412,15 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         headertable = ["Cod", "Descrição", "Disponível",
                        "Valor Unitário", "Valor Atacado", 'Min. Atacado']
         busca = CrudProduto()
-        busca.ListaProdutoTabela(self.tx_BuscaProduto.text())
+        busca.produto = self.tx_BuscaProduto.text()
+        busca.listaProduto()
         html = self.renderTemplate(
             "estoque.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="LISTAGEM PRODUTOS",
             headertable=headertable,
-            codProduto=busca.idProduto,
-            descPRoduto=busca.descricaoProduto,
+            codProduto=busca.id,
+            descPRoduto=busca.produto,
             qtdeEstoque=busca.qtdeProduto,
             valorUnitario=busca.valorUnitario,
             valorAtacado=busca.valorAtacado,

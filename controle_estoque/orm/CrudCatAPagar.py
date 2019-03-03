@@ -2,7 +2,8 @@
 
 import peewee
 
-from Conexao import Conexao, CatAPagar
+from orm.Conexao import Conexao
+from orm.Conexao import CatAPagar
 
 
 class CrudCatAPagar(object):
@@ -59,6 +60,15 @@ class CrudCatAPagar(object):
 
             # Query
             self.query = CatAPagar.select()
+
+            # Convertendo variaveis em lista
+            self.id = []
+            self.categoriaPagar = []
+
+            # Salvando resultado em suas lisats
+            for row in self.query:
+                self.id.append(row.id)
+                self.categoriaPagar.append(row.categoria_a_pagar)
 
             # Fechando a Conexao
             Conexao().dbhandler.close()

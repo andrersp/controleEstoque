@@ -219,17 +219,18 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         self.documento = QWebEngineView()
 
         headertable = ["Cod", "Nome ", "Telefone", "Email"]
-        buscaFornecedor = CrudClientes()
-        buscaFornecedor.ListaClientesTabela('')
+        busca = CrudCliente()
+        busca.nome = self.tx_BuscaClientes.text()
+        busca.listaCliente()
         self.renderTemplate(
             "clientes.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="LISTAGEM CLIENTES",
             headertable=headertable,
-            codcliente=buscaFornecedor.idCliente,
-            nome=buscaFornecedor.nome,
-            telefoneFornecedor=buscaFornecedor.celularCliente,
-            emailFornecedor=buscaFornecedor.emailCliente
+            codcliente=busca.id,
+            nome=busca.nome,
+            telefoneFornecedor=busca.celular,
+            emailFornecedor=busca.email
         )
 
         self.documento.load(QUrl("file:///" +

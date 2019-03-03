@@ -331,11 +331,3 @@ class CrudContaAReceber(object):
             print(err)
 
         pass
-
-
-Inseri = CrudContaAReceber()
-# Inseri.id = 7
-# Inseri.formaPagamento = 1
-Inseri.dataRecebimento = '2019-02-27'
-Inseri.dataFim = '2019-03-31'
-Inseri.detalheEntrada()

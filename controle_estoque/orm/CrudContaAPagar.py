@@ -14,11 +14,14 @@ class CrudContaAPagar(object):
     def __init__(self, id="", idCompra="", idFornecedor="", descricao="",
                  obs="", categoria="", dataVencimento="", valor="",
                  formaPagamento="", dataPagamento="", valorPago="",
-                 statusPagamento="", query="", dataFim="", valorAPagar=""):
+                 statusPagamento="", query="", dataFim="", valorAPagar="",
+                 nomeFantasia="", telefone=""):
 
         self.id = id
         self.idCompra = idCompra
         self.idFornecedor = idFornecedor
+        self.nomeFantasia = nomeFantasia
+        self.telefone = telefone
         self.descricao = descricao
         self.obs = obs
         self.categoria = categoria
@@ -154,7 +157,7 @@ class CrudContaAPagar(object):
             print(err)
 
     # Buscando conta a pagar por vencimento, fornecedor e status
-    def listaContaAPagar(self, busca):
+    def listaContaAPagar(self):
 
         try:
 
@@ -172,8 +175,63 @@ class CrudContaAPagar(object):
                 ContaAPagar.status_pagamento == self.statusPagamento)
             )
 
+            # Convertendo variaveis em lista
+            self.id = []
+            self.idFornecedor = []
+            self.nomeFantasia = []
+            self.telefone = []
+            self.descricao = []
+            self.obs = []
+            self.categoria = []
+            self.dataVencimento = []
+            self.valor = []
+            self.idFormaPagamento = []
+            self.formaPagamento = []
+            self.dataPagamento = []
+            self.valorPago = []
+            self.idStatusPagamento = []
+            self.statusPagamento = []
+
+            # salvando resultado em suas listas
+            for row in self.query:
+                self.id.append(row.id)
+                self.idFornecedor.append(row.id_fornecedor.id)
+                self.nomeFantasia.append(row.id_fornecedor.nome_fantasia)
+                self.telefone.append(row.id_fornecedor.telefone)
+                self.descricao.append(row.descricao)
+                self.dataVencimento.append(row.data_vencimento)
+                self.valor.append(row.valor)
+                self.idFormaPagamento.append(row.forma_pagamento.id)
+                self.formaPagamento.append(row.forma_pagamento.forma_pagamento)
+                self.valorPago.append(row.valor_pago)
+                self.idStatusPagamento.append(row.status_pagamento.id)
+                self.statusPagamento.append(
+                    row.status_pagamento.status_pagamento)
+
             # Fechando a Conexao
             Conexao().dbhandler.close()
+
+        except peewee.DoesNotExist as err:
+            print(err)
+
+    # Selecionando conta a Pagar por ID
+    def selectContaID(self):
+
+        try:
+            row = ContaAPagar.get_by_id(self.id)
+
+            # salvando resultado em variaveis
+            self.id = row.id
+            self.idFornecedor = row.id_fornecedor
+            self.descricao = row.descricao
+            self.obs = row.obs
+            self.categoria = row.categoria.id
+            self.dataVencimento = row.data_vencimento
+            self.valor = row.valor
+            self.idFormaPagamento = row.forma_pagamento.id
+            self.dataPagamento = row.data_pagamento
+            self.valorPago = row.valor_pago
+            self.idStatusPagamento = row.status_pagamento.id
 
         except peewee.DoesNotExist as err:
             print(err)

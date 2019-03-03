@@ -6,9 +6,14 @@ from PySide2.QtCore import QDate, Qt
 
 
 from Views.APagar import Ui_ct_APagar
-from Crud.CrudAPagar import CrudAPagar
 from Views.formAPagar import Ui_ct_FormPagar
-from Crud.CrudCategoriaAPagar import CrudCatAPagar
+
+from orm.CrudContaAPagar import CrudContaAPagar
+from orm.CrudCatAPagar import CrudCatAPagar
+
+
+# from Crud.CrudAPagar import CrudAPagar
+# from Crud.CrudCategoriaAPagar import CrudCatAPagar
 
 
 class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
@@ -45,42 +50,41 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
     # Populando tabela a Pagar
     def tabelaAPagar(self):
-        busca = CrudAPagar()
+        busca = CrudContaAPagar()
         dataInicio = QDate.toString(
             self.dt_Inicio.date(), "yyyy-MM-dd")
         dataFim = QDate.toString(
             self.dt_Fim.date(), "yyyy-MM-dd")
-        busca.dataInicio = dataInicio
+        busca.dataVencimento = dataInicio
         busca.dataFim = dataFim
-        busca.status = self.cb_Situacao.itemData(
-            self.cb_Situacao.currentIndex(), Qt.UserRole)
-        busca.listaAPagar()
+        busca.statusPagamento = self.cb_Situacao.currentData()
+        busca.listaContaAPagar()
 
         while self.tb_APagar.rowCount() > 0:
             self.tb_APagar.removeRow(0)
 
-        for i in range(len(busca.fornecedor)):
+        for i in range(len(busca.nomeFantasia)):
             self.tb_APagar.insertRow(i)
-            self.conteudoTabela(self.tb_APagar, i, 0, str(busca.idConta[i]))
+            self.conteudoTabela(self.tb_APagar, i, 0, str(busca.id[i]))
             self.TabelaStatus(self.tb_APagar, i, 1,
                               self.StatusEntrega(1,
-                                                 busca.status[i]))
-            self.TabelaNomeTelefone(self.tb_APagar, i, 2, busca.fornecedor[i],
+                                                 busca.idStatusPagamento[i]))
+            self.TabelaNomeTelefone(self.tb_APagar, i, 2, busca.nomeFantasia[i],
                                     busca.telefone[i])
             self.TabelaNomeTelefone(
                 self.tb_APagar, i, 3, busca.descricao[i], "")
 
             self.TabelaEntrega(self.tb_APagar, i, 4,
                                busca.dataVencimento[i],
-                               self.StatusEntrega(busca.status[i]),
-                               busca.nomeStatus[i].upper())
+                               self.StatusEntrega(busca.idStatusPagamento[i]),
+                               busca.statusPagamento[i].upper())
             self.conteudoTabela(self.tb_APagar, i, 5,
                                 "R$ "+str(busca.valor[i]))
 
             self.conteudoTabela(self.tb_APagar, i, 6,
-                                "R$ "+str(busca.valorPendente[i]))
+                                "R$ "+str(busca.valor[i] - busca.valorPago[i]))
             self.botaoReceberParcela(
-                self.tb_APagar, i, 7, partial(self.BuscaContaAPagar, busca.idConta[i]), "Pagar",  '2')
+                self.tb_APagar, i, 7, partial(self.BuscaContaAPagar, busca.id[i]), "Pagar",  '2')
 
     # Cadastro e Edição conta a pagar
     def formAPagar(self):
@@ -162,17 +166,17 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
     # checando campo Id se é Edicao ou Nova Venda
     def idCheckAPagar(self):
         if not self.tx_Cod.text():
-            busca = CrudAPagar()
-            self.tx_Cod.setText(str(busca.lastIdAPagar()))
+            busca = CrudContaAPagar()
+            self.tx_Cod.setText(str(busca.lastIdContaAPagar()))
         pass
 
     # Buscando Conta a Pagar através de ID recebido da Tabela
     def BuscaContaAPagar(self, id):
         self.formAPagar()
-        busca = CrudAPagar()
-        busca.idConta = id
-        busca.selectContaId()
-        self.tx_Cod.setText(str(busca.idConta))
+        busca = CrudContaAPagar()
+        busca.id = id
+        busca.selectContaID()
+        self.tx_Cod.setText(str(busca.id))
         self.tx_Id.setText(str(busca.idFornecedor))
         self.BuscaFornecedorId(self.tx_descricao)
         self.tx_descricao.setText(busca.descricao)
@@ -184,11 +188,11 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         if busca.dataPagamento:
             self.dt_dataPagamento.setDate(busca.dataPagamento)
         self.cb_formaPagamento.setCurrentIndex(
-            self.cb_formaPagamento.findData(busca.formaPagamento))
-        self.tx_valorPago.setText(str(busca.valorPendente))
-        self.lb_ValorPendente.setText(str(busca.valorPendente))
+            self.cb_formaPagamento.findData(busca.idFormaPagamento))
+        self.tx_valorPago.setText(str(busca.valor - busca.valorPago))
+        self.lb_ValorPendente.setText(str(busca.valor - busca.valorPago))
 
-        if busca.idStatus == 1:
+        if busca.idStatusPagamento == 1:
             self.bt_receber.setDisabled(True)
             self.desabilitaLineEdit(self.fr_FormPagar)
         self.cb_repetir.setHidden(True)
@@ -196,23 +200,7 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         self.lb_obsRepetir.setHidden(True)
         pass
 
-    # Pagando Compra
-    def PagarParcela(self, id):
-        # print(self.tb_parcelasVenda.item(id, 0).text())
-
-        if self.tb_APagar.cellWidget(id, 6).text():
-            INSERI = CrudAPagar()
-            INSERI.idConta = id
-            INSERI.valorPago = self.tb_APagar.cellWidget(
-                id, 6).text().replace(",", ".")
-
-            INSERI.dataPagamento = QDate.toString(
-                QDate.currentDate(), "yyyy-MM-dd")
-
-            INSERI.cadContaPagar()
-            self.tabelaAPagar()
-
-    # Recebendo pagamento DB
+    # realizando pagamento DB
     def PagarParcela(self, id):
 
         if not self.tx_valorPago.text():
@@ -220,13 +208,13 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         elif not self.cb_formaPagamento.currentData():
             self.cb_formaPagamento.setFocus()
         else:
-            INSERI = CrudAPagar()
-            INSERI.idConta = self.tx_Cod.text()
+            INSERI = CrudContaAPagar()
+            INSERI.id = self.tx_Cod.text()
             INSERI.formaPagamento = self.cb_formaPagamento.currentData()
             INSERI.valorPago = self.tx_valorPago.text().replace(",", ".")
             INSERI.dataPagamento = QDate.toString(
                 QDate.currentDate(), "yyyy-MM-dd")
-            INSERI.PagarConta()
+            INSERI.pagarConta()
             self.BuscaContaAPagar(self.tx_Cod.text())
 
         pass
@@ -246,16 +234,17 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         repetir = int(self.cb_repetir.currentData())
         for i in range(repetir):
             id = int(self.tx_Cod.text()) + i
-            INSERI = CrudAPagar()
-            INSERI.idConta = id
+            INSERI = CrudContaAPagar()
+            INSERI.id = id
             INSERI.idFornecedor = self.tx_Id.text()
             INSERI.descricao = self.tx_descricao.text()
             INSERI.categoria = self.cb_categoria.currentData()
             INSERI.dataVencimento = QDate.toString(QDate.addMonths(
                 self.dt_Vencimento.date(), i), "yyyy-MM-dd")
             INSERI.valor = self.tx_valor.text()
+            INSERI.formaPagamento = self.cb_formaPagamento.currentData()
             INSERI.obs = self.tx_Obs.toPlainText()
-            INSERI.cadContaPagar()
+            INSERI.inseriContaAPagar()
         self.BuscaContaAPagar(self.tx_Cod.text())
 
     # Cadastro Categoria a Pagar
@@ -263,9 +252,9 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         INSERI = CrudCatAPagar()
         id = INSERI.lastIdCatAPagar()
         categoria = self.tx_addCategoria.text().upper()
-        INSERI.idCatAPagar = id
-        INSERI.descCatAPagar = categoria
-        INSERI.cadCatAPagar()
+        INSERI.id = id
+        INSERI.categoriaPagar = categoria
+        INSERI.inseriCatAPagar()
         self.cb_categoria.addItem(categoria, str(id))
         self.cb_categoria.setCurrentIndex(self.cb_categoria.findData(str(id)))
         self.CalcelAddFinanceiro(self.bt_CancelAddCatergoria,

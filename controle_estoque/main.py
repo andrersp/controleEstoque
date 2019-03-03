@@ -7,7 +7,7 @@ import webbrowser
 
 from PySide2.QtCore import Qt
 from PySide2 import QtGui, QtWidgets
-import mysql.connector
+
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 
 
@@ -147,16 +147,17 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
             else:
                 
                 self.janelaConfig()
-                self.tab_Config.setCurrentIndex(0)
+                
+                print('1')
                 
 
         except:
            
             self.janelaConfig()
-            self.tab_Config.setCurrentIndex(1)
             for botao in self.wd_menu.findChildren(QtWidgets.QPushButton):
                 botao.setDisabled(True)
             self.bt_Home.setDisabled(True)
+            print('2')
 
     """Abrindo Janelas externos"""
     # Home
