@@ -76,4 +76,4 @@ Software.code-workspace
 # File Teste
 main2.py
 report.html
-config.ini
+*.ini
