@@ -3,7 +3,7 @@
 import peewee
 
 
-from orm.Conexao import Conexao, Cliente
+from Crud.Conexao import Conexao, Cliente
 
 
 class CrudCliente(object):

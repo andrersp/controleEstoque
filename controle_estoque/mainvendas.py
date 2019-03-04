@@ -10,11 +10,11 @@ from Views.mainVendas import Ui_ct_MainVendas
 from Views.formVendas import Ui_ct_FormVenda
 
 
-from orm.CrudVenda import CrudVenda
-from orm.CrudProduto import CrudProduto
-from orm.CrudContaAReceber import CrudContaAReceber
-from orm.CrudRelVenda import CrudRelVenda
-from orm.CrudCliente import CrudCliente
+from Crud.CrudVenda import CrudVenda
+from Crud.CrudProduto import CrudProduto
+from Crud.CrudContaAReceber import CrudContaAReceber
+from Crud.CrudRelVenda import CrudRelVenda
+from Crud.CrudCliente import CrudCliente
 from Funcoes.data import DataAtual
 
 # from Funcoes.BuscaProdutos import BuscaProdutos

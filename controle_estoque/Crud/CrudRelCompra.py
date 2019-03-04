@@ -2,15 +2,16 @@
 
 import peewee
 
-from orm.Conexao import Conexao, RelacaoVenda, Produto
+from Crud.Conexao import Conexao, RelacaoCompra, Produto
 
 
-class CrudRelVenda(object):
-    def __init__(self, id="", idVenda="", idProduto="", produto="", qtde="",
+class CrudRelCompra(object):
+    def __init__(self, id="", idCompra="", idProduto="", produto="",
+                 qtde="",
                  valorUnitario="", valorTotal="", obs="", query=""):
 
         self.id = id
-        self.idVenda = idVenda
+        self.idCompra = idCompra
         self.idProduto = idProduto
         self.produto = produto
         self.qtde = qtde
@@ -25,9 +26,9 @@ class CrudRelVenda(object):
 
         try:
             # Query
-            row = RelacaoVenda.insert(
+            row = RelacaoCompra.insert(
                 id=self.id,
-                id_venda=self.idVenda,
+                id_compra=self.idCompra,
                 id_produto=self.idProduto,
                 qtde=self.qtde,
                 valor_unitario=self.valorUnitario,
@@ -51,14 +52,14 @@ class CrudRelVenda(object):
         try:
 
             # Query
-            self.query = (RelacaoVenda.select(
-                RelacaoVenda, Produto.id, Produto.produto)
+            self.query = (RelacaoCompra.select(
+                RelacaoCompra, Produto.id, Produto.produto)
                 .join(Produto)
-                .where(RelacaoVenda.id_venda == self.idVenda))
+                .where(RelacaoCompra.id_compra == self.idCompra))
 
             # Convertendo variaveis em lista
             self.id = []
-            self.idVenda = []
+            self.idCompra = []
             self.idProduto = []
             self.produto = []
             self.qtde = []
@@ -69,7 +70,7 @@ class CrudRelVenda(object):
             # Salvando resultado da query e suas listas
             for row in self.query:
                 self.id.append(row.id)
-                self.idVenda.append(row.id_venda)
+                self.idCompra.append(row.id_compra)
                 self.idProduto.append(row.id_produto.id)
                 self.produto.append(row.id_produto.produto)
                 self.qtde.append(row.qtde)
@@ -90,8 +91,8 @@ class CrudRelVenda(object):
         try:
 
             # Query
-            self.query = (RelacaoVenda.delete()
-                          .where(RelacaoVenda.id == self.id))
+            self.query = (RelacaoCompra.delete()
+                          .where(RelacaoCompra.id == self.id))
 
             # Executando a query
             self.query.execute()

@@ -2,24 +2,25 @@
 
 import peewee
 
-from orm.Conexao import Conexao, FormaPagamento
+from Crud.Conexao import Conexao
+from Crud.Conexao import CatAPagar
 
 
-class CrudFormaPagamento(object):
-    def __init__(self, id="", formaPagamento="", query=""):
+class CrudCatAPagar(object):
+    def __init__(self, id="", categoriaPagar="", query=""):
         self.id = id
-        self.formaPagamento = formaPagamento
+        self.categoriaPagar = categoriaPagar
         self.query = query
 
     # Recebendo ultimo Id inserido
 
-    def lastIdFormaPagamento(self):
+    def lastIdCatAPagar(self):
 
         try:
 
             # Query
-            ultimo = (FormaPagamento.select().order_by(
-                FormaPagamento.id.desc()).get())
+            ultimo = (CatAPagar.select().order_by(
+                CatAPagar.id.desc()).get())
 
             self.id = ultimo.id + 1
 
@@ -33,14 +34,14 @@ class CrudFormaPagamento(object):
 
     # Cadastrando categoria a receber
 
-    def inseriFormaPagamento(self):
+    def inseriCatAPagar(self):
 
         try:
 
             # Query
-            row = FormaPagamento.insert(
+            row = CatAPagar.insert(
                 id=self.id,
-                categoria_a_receber=self.formaPagamento
+                categoria_a_pagar=self.categoriaPagar
             ).on_conflict_replace()
 
             # Executando a query
@@ -52,13 +53,22 @@ class CrudFormaPagamento(object):
         except peewee.InternalError as err:
             print(err)
 
-    # Listando todas as categorias
-    def listaFormaPagamento(self):
+    # Listando todas as categorias a pagar
+    def listaCatAPagar(self):
 
         try:
 
             # Query
-            self.query = FormaPagamento.select()
+            self.query = CatAPagar.select()
+
+            # Convertendo variaveis em lista
+            self.id = []
+            self.categoriaPagar = []
+
+            # Salvando resultado em suas lisats
+            for row in self.query:
+                self.id.append(row.id)
+                self.categoriaPagar.append(row.categoria_a_pagar)
 
             # Fechando a Conexao
             Conexao().dbhandler.close()

@@ -3,8 +3,8 @@ from PySide2.QtCore import QDate
 
 
 from Views.movConta import Ui_ct_movimento
-from orm.CrudContaAReceber import CrudContaAReceber
-from orm.CrudContaAPagar import CrudContaAPagar
+from Crud.CrudContaAReceber import CrudContaAReceber
+from Crud.CrudContaAPagar import CrudContaAPagar
 
 
 class MainMovimentoConta(Ui_ct_movimento):

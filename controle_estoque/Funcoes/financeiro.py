@@ -3,7 +3,7 @@ from PySide2.QtGui import QIntValidator, QDoubleValidator
 from PySide2.QtWidgets import QTableWidget, QCompleter, QLineEdit
 from PySide2 import QtCore, QtWidgets
 from functools import partial
-# from Crud.CrudProdutos import CrudProdutos
+# from Crud..CrudProdutos import CrudProdutos
 
 
 class Financeiro(object):

@@ -2,25 +2,24 @@
 
 import peewee
 
-from orm.Conexao import Conexao
-from orm.Conexao import StatusPagamento
+from Crud.Conexao import Conexao, FormaPagamento
 
 
-class CrudStatusPagamento(object):
-    def __init__(self, id="", statusPagamento="", query=""):
+class CrudFormaPagamento(object):
+    def __init__(self, id="", formaPagamento="", query=""):
         self.id = id
-        self.statusPagamento = statusPagamento
+        self.formaPagamento = formaPagamento
         self.query = query
 
     # Recebendo ultimo Id inserido
 
-    def lastIdStatusPagamento(self):
+    def lastIdFormaPagamento(self):
 
         try:
 
             # Query
-            ultimo = (StatusPagamento.select().order_by(
-                StatusPagamento.id.desc()).get())
+            ultimo = (FormaPagamento.select().order_by(
+                FormaPagamento.id.desc()).get())
 
             self.id = ultimo.id + 1
 
@@ -34,14 +33,14 @@ class CrudStatusPagamento(object):
 
     # Cadastrando categoria a receber
 
-    def inseriStatusPagamento(self):
+    def inseriFormaPagamento(self):
 
         try:
 
             # Query
-            row = StatusPagamento.insert(
+            row = FormaPagamento.insert(
                 id=self.id,
-                status_pagamento=self.statusPagamento
+                categoria_a_receber=self.formaPagamento
             ).on_conflict_replace()
 
             # Executando a query
@@ -54,23 +53,12 @@ class CrudStatusPagamento(object):
             print(err)
 
     # Listando todas as categorias
-    def listaStatusPagamento(self):
+    def listaFormaPagamento(self):
 
         try:
 
             # Query
-            self.query = StatusPagamento.select()
-
-            # Convertendo variaveis em lista
-
-            self.id = []
-            self.statusPagamento = []
-
-            # salvando resultado em suas listas
-
-            for row in self.query:
-                self.id.append(row.id)
-                self.statusPagamento.append(row.status_pagamento)
+            self.query = FormaPagamento.select()
 
             # Fechando a Conexao
             Conexao().dbhandler.close()

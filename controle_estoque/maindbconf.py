@@ -11,8 +11,8 @@ import mysql.connector
 
 
 from Views.mainDbConfig import Ui_ct_dbConf
-from orm.Conexao import CreateDb, CriarTabelas
-# from orm.Conexao import Conexao
+from Crud.Conexao import CreateDb, CriarTabelas
+# from Crud.Conexao import Conexao
 
 
 class MainDbConf(Ui_ct_dbConf):

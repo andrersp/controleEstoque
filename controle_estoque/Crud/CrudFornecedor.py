@@ -2,7 +2,7 @@
 
 import peewee
 
-from orm.Conexao import Conexao, Fornecedor
+from Crud.Conexao import Conexao, Fornecedor
 
 
 class CrudFornecedor(object):

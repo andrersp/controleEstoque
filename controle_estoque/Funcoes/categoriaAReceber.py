@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from orm.CrudCatAReceber import CrudCatAReceber
+from Crud.CrudCatAReceber import CrudCatAReceber
 
 
 class CategoriaAReceber(object):

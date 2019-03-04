@@ -3,7 +3,7 @@
 import peewee
 
 
-from orm.Conexao import Conexao, Produto, MarcaProduto, CategoriaProduto
+from Crud.Conexao import Conexao, Produto, MarcaProduto, CategoriaProduto
 
 
 class CrudProduto(object):

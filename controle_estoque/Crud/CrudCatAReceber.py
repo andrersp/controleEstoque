@@ -2,25 +2,25 @@
 
 import peewee
 
-from orm.Conexao import Conexao
-from orm.Conexao import CatAPagar
+from Crud.Conexao import Conexao
+from Crud.Conexao import CatAReceber
 
 
-class CrudCatAPagar(object):
-    def __init__(self, id="", categoriaPagar="", query=""):
+class CrudCatAReceber(object):
+    def __init__(self, id="", categoriaReceber="", query=""):
         self.id = id
-        self.categoriaPagar = categoriaPagar
+        self.categoriaReceber = categoriaReceber
         self.query = query
 
     # Recebendo ultimo Id inserido
 
-    def lastIdCatAPagar(self):
+    def lastIdCatAReceber(self):
 
         try:
 
             # Query
-            ultimo = (CatAPagar.select().order_by(
-                CatAPagar.id.desc()).get())
+            ultimo = (CatAReceber.select().order_by(
+                CatAReceber.id.desc()).get())
 
             self.id = ultimo.id + 1
 
@@ -34,14 +34,14 @@ class CrudCatAPagar(object):
 
     # Cadastrando categoria a receber
 
-    def inseriCatAPagar(self):
+    def inseriCatAReceber(self):
 
         try:
 
             # Query
-            row = CatAPagar.insert(
+            row = CatAReceber.insert(
                 id=self.id,
-                categoria_a_pagar=self.categoriaPagar
+                categoria_a_receber=self.categoriaReceber
             ).on_conflict_replace()
 
             # Executando a query
@@ -53,22 +53,22 @@ class CrudCatAPagar(object):
         except peewee.InternalError as err:
             print(err)
 
-    # Listando todas as categorias a pagar
-    def listaCatAPagar(self):
+    # Listando todas as categorias
+    def listaCatAReceber(self):
 
         try:
 
             # Query
-            self.query = CatAPagar.select()
+            self.query = CatAReceber.select()
 
             # Convertendo variaveis em lista
             self.id = []
-            self.categoriaPagar = []
+            self.categoriaReceber = []
 
-            # Salvando resultado em suas lisats
+            # salvando resulta em suas listas
             for row in self.query:
                 self.id.append(row.id)
-                self.categoriaPagar.append(row.categoria_a_pagar)
+                self.categoriaReceber.append(row.categoria_a_receber)
 
             # Fechando a Conexao
             Conexao().dbhandler.close()

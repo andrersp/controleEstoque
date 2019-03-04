@@ -11,10 +11,10 @@ from PySide2.QtGui import QPixmap
 from Views.mainConfig import Ui_ct_MainConfig
 import mysql.connector
 
-from orm.Conexao import CreateDb, CriarTabelas
+from Crud.Conexao import CreateDb, CriarTabelas
 
 
-from orm.CrudEmpresa import CrudEmpresa
+from Crud.CrudEmpresa import CrudEmpresa
 
 
 class MainConfig(Ui_ct_MainConfig):

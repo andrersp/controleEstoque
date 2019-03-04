@@ -9,9 +9,9 @@ from PySide2.QtWebEngineWidgets import QWebEngineView
 
 from Views.mainProdutos import Ui_ct_MainProdutos
 from Views.formProdutos import Ui_ct_FormProdutos
-from orm.CrudProduto import CrudProduto
-from orm.CrudCatProduto import CrudCatProduto
-from orm.CrudMarcaProduto import CrudMarcaProduto
+from Crud.CrudProduto import CrudProduto
+from Crud.CrudCatProduto import CrudCatProduto
+from Crud.CrudMarcaProduto import CrudMarcaProduto
 
 
 class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):

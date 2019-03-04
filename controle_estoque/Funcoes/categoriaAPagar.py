@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from orm.CrudCatAPagar import CrudCatAPagar
+from Crud.CrudCatAPagar import CrudCatAPagar
 
 
 class CategoriaAPagar(object):

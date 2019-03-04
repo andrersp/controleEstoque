@@ -2,7 +2,7 @@
 
 import peewee
 
-from orm.Conexao import Conexao, Empresa
+from Crud.Conexao import Conexao, Empresa
 
 
 class CrudEmpresa(object):

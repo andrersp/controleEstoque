@@ -3,12 +3,12 @@
 import peewee
 
 
-from orm.Conexao import Conexao
-from orm.Conexao import Compra
-from orm.Conexao import Fornecedor
-from orm.Conexao import CatAPagar
-from orm.Conexao import StatusEntrega
-from orm.Conexao import StatusPagamento
+from Crud.Conexao import Conexao
+from Crud.Conexao import Compra
+from Crud.Conexao import Fornecedor
+from Crud.Conexao import CatAPagar
+from Crud.Conexao import StatusEntrega
+from Crud.Conexao import StatusPagamento
 
 
 class CrudCompra(object):

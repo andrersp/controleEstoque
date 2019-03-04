@@ -8,12 +8,12 @@ from PySide2.QtCore import QDate, Qt
 from Views.APagar import Ui_ct_APagar
 from Views.formAPagar import Ui_ct_FormPagar
 
-from orm.CrudContaAPagar import CrudContaAPagar
-from orm.CrudCatAPagar import CrudCatAPagar
+from Crud.CrudContaAPagar import CrudContaAPagar
+from Crud.CrudCatAPagar import CrudCatAPagar
 
 
-# from Crud.CrudAPagar import CrudAPagar
-# from Crud.CrudCategoriaAPagar import CrudCatAPagar
+# from Crud..CrudAPagar import CrudAPagar
+# from Crud..CrudCategoriaAPagar import CrudCatAPagar
 
 
 class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):

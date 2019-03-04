@@ -11,7 +11,7 @@ from PySide2 import QtGui, QtWidgets
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 
 
-from orm.CrudEmpresa import CrudEmpresa
+from Crud.CrudEmpresa import CrudEmpresa
 from Funcoes.categoriaAPagar import CategoriaAPagar
 from Funcoes.categoriaAReceber import CategoriaAReceber
 from Funcoes.Clientes import Clientes

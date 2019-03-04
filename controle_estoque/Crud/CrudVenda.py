@@ -3,11 +3,11 @@
 import peewee
 from datetime import date
 
-from orm.Conexao import Conexao
-from orm.Conexao import Venda
-from orm.Conexao import Cliente
-from orm.Conexao import StatusEntrega
-from orm.Conexao import StatusPagamento
+from Crud.Conexao import Conexao
+from Crud.Conexao import Venda
+from Crud.Conexao import Cliente
+from Crud.Conexao import StatusEntrega
+from Crud.Conexao import StatusPagamento
 
 
 class CrudVenda(object):
