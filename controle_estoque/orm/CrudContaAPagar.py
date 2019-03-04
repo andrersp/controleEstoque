@@ -274,10 +274,14 @@ class CrudContaAPagar(object):
         try:
 
             # Query
-            row = (ContaAPagar.select(peewee.fn.SUM(ContaAPagar.valor)
-                                      .alias('valorAPagar'),
-                                      peewee.fn.SUM(
-                ContaAPagar.valor_pago)
+            row = (ContaAPagar.select(peewee.fn.COALESCE(
+                peewee.fn.SUM(ContaAPagar.valor), 0
+            )
+                .alias('valorAPagar'),
+                peewee.fn.COALESCE(
+                peewee.fn.SUM(
+                    ContaAPagar.valor_pago)
+            )
                 .alias('valorPago'))
                 .where(ContaAPagar.data_vencimento.between(
                        self.dataVencimento, self.dataFim))

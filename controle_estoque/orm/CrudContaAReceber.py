@@ -277,16 +277,22 @@ class CrudContaAReceber(object):
         try:
 
             # Query
-            row = (ContaAReceber.select(peewee.fn.SUM(ContaAReceber.valor)
-                                        .alias('valorAReceber'),
-                                        peewee.fn.SUM(
-                                            ContaAReceber.valor_recebido)
-                                        .alias('valorRecebido'))
-                   .where(ContaAReceber.data_vencimento.between(
+            row = (ContaAReceber.select(
+                peewee.fn.COALESCE(
+                    peewee.fn.SUM(ContaAReceber.valor), 0
+                )
+                .alias('valorAReceber'),
+                peewee.fn.COALESCE(
+                    peewee.fn.SUM(
+                        ContaAReceber.valor_recebido), 0
+                )
+                .alias('valorRecebido'))
+                .where(ContaAReceber.data_vencimento.between(
                        self.dataVencimento, self.dataFim))
-                   )
+            )
 
             # Salvando resultado
+
             for lista in row:
                 self.valorAReceber = lista.valorAReceber
                 self.valorRecebido = lista.valorRecebido
