@@ -139,6 +139,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
             busca.SelectEmpresaId()
             
             if busca.titulo:
+                
                 self.lb_NomeFantasia.setText(busca.titulo)
                 self.lb_NomeFantasia2.setText(busca.subtitulo)
                 self.setWindowTitle(busca.titulo + " " + busca.subtitulo)
@@ -147,7 +148,9 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                 
                 self.janelaConfig()
                 
+                print('1')
                 
+
         except:
            
             self.janelaConfig()

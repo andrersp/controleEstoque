@@ -53,7 +53,7 @@ class Conexao(object):
                 self.DbName, user=self.DbUser, password=self.DbPassword, host=self.DbHost
             )
             self.dbhandler.connect()
-            self.dbhandler.close()
+
         except:
             self.erro = "Erro"
 
