@@ -48,14 +48,20 @@ class Conexao(object):
             self.DbPassword = config['DEFAULT']['DbPassword']
 
         # Realizando a conexao com o DB
+        i = 0
         try:
             self.dbhandler = MySQLConnectorDatabase(
                 self.DbName, user=self.DbUser, password=self.DbPassword, host=self.DbHost
             )
             self.dbhandler.connect()
 
+            print("Sucesso")
+            print(i)
+            i += 1
+
         except:
             self.erro = "Erro"
+            print("erro")
 
 
 class CreateDb(object):
@@ -92,6 +98,8 @@ class CreateDb(object):
             cursor.execute('SET sql_notes = 0 ;')
             cursor.execute("create database IF NOT EXISTS %s" %
                            self.DbName)
+            # tabelas = CriarTabelas()
+            # tabelas.tabelas()
 
         except mysql.connector.Error as err:
             if err.errno == mysql.connector.errorcode.ER_ACCESS_DENIED_ERROR:
@@ -391,6 +399,7 @@ class CriarTabelas(object):
     def tabelas(self):
         try:
 
+            Conexao().dbhandler.close()
             # Criando Tabelas
             Conexao().dbhandler.create_tables([
                 CategoriaProduto,
