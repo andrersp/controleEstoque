@@ -16,6 +16,7 @@ from peewee import PrimaryKeyField
 from peewee import DateField
 from peewee import Field
 from playhouse.mysql_ext import MySQLConnectorDatabase
+from playhouse.pool import PooledMySQLDatabase
 
 
 """
@@ -23,17 +24,54 @@ Classe responsável pela conexao com o DB.
 Caso não exista o DB será criado
  """
 
+# # Caminho absoluto config.ini
+# path = os.path.abspath(os.path.dirname(sys.argv[0]))
+# config = configparser.ConfigParser()
+# config.sections()
+
+# # Buscando Dados config.ini
+# if config.read(os.path.join(path, 'config.ini')):
+#     DbHost = config['DEFAULT']['DbHost']
+#     DbName = config['DEFAULT']['DbName']
+#     DbUser = config['DEFAULT']['DbUser']
+#     DbPassword = config['DEFAULT']['DbPassword']
+
+# try:
+#     dbhandler = PooledMySQLDatabase(
+#         DbName, user=DbUser, password=DbPassword, host=DbHost
+#     )
+#     dbhandler.connect(reuse_if_open=True)
+
+#     print("Sucesso")
+#     import CriarTabelas
+#     with dbhandler.connection_context():
+#         CriarTabelas().tabelas()
+
+#         pass
+
+# except DatabaseError as err:
+#     print(err)
+
+
+# def prepare_database(self):
+#     print("Testadno prepare")
+#     try:
+#         tabelas = CriarTabelas()
+#         tabelas.tabelas()
+#     except InternalError as err:
+#         print(err)
+#         print("INrter")
+
 
 class Conexao(object):
-    def __init__(self, dbhandler="", DbHost="", DbName="", DbUser="",
-                 DbPassword="", conecta="", erro=""):
-        self.DbHost = DbHost
-        self.DbName = DbName
-        self.DbUser = DbUser
-        self.DbPassword = DbPassword
-        self.conecta = conecta
-        self.erro = erro
-        self.dbhandler = dbhandler
+    def conecta(self):
+        # self.DbHost = DbHost
+        # self.DbName = DbName
+        # self.DbUser = DbUser
+        # self.DbPassword = DbPassword
+        # self.conecta = conecta
+        # self.erro = erro
+        # self.dbhandler = dbhandler
 
         # Caminho absoluto config.ini
         self.path = os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -50,7 +88,7 @@ class Conexao(object):
         # Realizando a conexao com o DB
         i = 0
         try:
-            self.dbhandler = MySQLConnectorDatabase(
+            self.dbhandler = PooledMySQLDatabase(
                 self.DbName, user=self.DbUser, password=self.DbPassword, host=self.DbHost
             )
             self.dbhandler.connect()
@@ -58,10 +96,21 @@ class Conexao(object):
             print("Sucesso")
             print(i)
             i += 1
+            with self.dbhandler.connection_context():
+                self.prepare_database()
 
-        except:
-            self.erro = "Erro"
-            print("erro")
+        except InternalError as err:
+            print(err)
+
+    def prepare_database(self):
+
+        try:
+            tabelas = CriarTabelas()
+            tabelas.teste = "andre"
+            tabelas.tabelas()
+
+        except InternalError as err:
+            print("INrter")
 
 
 class CreateDb(object):
@@ -121,6 +170,7 @@ class LongBlobCampo(Field):
 class BaseModel(Model):
     class Meta:
         conecta = Conexao()
+        conecta.conecta()
         database = conecta.dbhandler
 
 
@@ -395,11 +445,14 @@ class Empresa(BaseModel):
 
 # Criando todas as tabelas e inserindo valores padrão
 class CriarTabelas(object):
+    def __init__(self, teste=""):
+        self.teste = teste
+        pass
 
     def tabelas(self):
         try:
 
-            Conexao().dbhandler.close()
+            # Conexao().dbhandler.close()
             # Criando Tabelas
             Conexao().dbhandler.create_tables([
                 CategoriaProduto,

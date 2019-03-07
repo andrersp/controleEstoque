@@ -3,7 +3,7 @@
 import peewee
 
 
-from Crud.Conexao import Conexao, CategoriaProduto
+import Crud.Conexao
 
 
 class CrudCatProduto(object):
@@ -24,7 +24,7 @@ class CrudCatProduto(object):
             self.id = ultimo.id + 1
 
             # Fechando Conexao
-            Conexao().dbhandler.close()
+            Conexao.dbhandler.close()
 
         except:
 

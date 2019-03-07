@@ -2,7 +2,6 @@
 
 import peewee
 
-from Crud.Conexao import Conexao
 from Crud.Conexao import CatAReceber
 
 

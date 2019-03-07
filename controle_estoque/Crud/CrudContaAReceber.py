@@ -2,7 +2,7 @@
 
 import peewee
 
-from Crud.Conexao import Conexao
+
 from Crud.Conexao import ContaAReceber
 from Crud.Conexao import Cliente
 from Crud.Conexao import StatusPagamento

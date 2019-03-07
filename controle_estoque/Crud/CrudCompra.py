@@ -3,7 +3,6 @@
 import peewee
 
 
-from Crud.Conexao import Conexao
 from Crud.Conexao import Compra
 from Crud.Conexao import Fornecedor
 from Crud.Conexao import CatAPagar

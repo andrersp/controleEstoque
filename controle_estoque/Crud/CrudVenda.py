@@ -3,7 +3,7 @@
 import peewee
 from datetime import date
 
-from Crud.Conexao import Conexao
+
 from Crud.Conexao import Venda
 from Crud.Conexao import Cliente
 from Crud.Conexao import StatusEntrega

@@ -3,7 +3,7 @@
 import peewee
 
 
-from Crud.Conexao import Conexao, MarcaProduto
+from Crud.Conexao import MarcaProduto
 
 
 class CrudMarcaProduto(object):
