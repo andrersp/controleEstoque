@@ -109,10 +109,10 @@ class MainDbConf(Ui_ct_dbConf):
             config.write(configfile)
 
         Crud.Conexao.CreateDb().createDB()
-        Crud.Conexao.dbhandler.manual_close()
-        Crud.Conexao.dbhandler.connect()
+        # Crud.Conexao.dbhandler.manual_close()
+        # Crud.Conexao.dbhandler.connect()
 
-        # CriarTabelas().tabelas()
+        Crud.Conexao.CriarTabelas().tabelas()
         self.janelaConfig()
 
 

@@ -3,10 +3,11 @@ import sys
 import os
 import configparser
 
-from peewee import Model
+from Crud.Conexao import Conexao
+from Crud.Conexao import CreateDb
+from Crud.Conexao import BaseModel
 from peewee import DatabaseError
 from peewee import InternalError
-from peewee import OperationalError
 from peewee import IntegerField
 from peewee import ForeignKeyField
 from peewee import DecimalField
@@ -19,159 +20,9 @@ from playhouse.mysql_ext import MySQLConnectorDatabase
 from playhouse.pool import PooledMySQLDatabase
 
 
-"""
-Classe responsável pela conexao com o DB.
-Caso não exista o DB será criado
- """
-
-# # Caminho absoluto config.ini
-# path = os.path.abspath(os.path.dirname(sys.argv[0]))
-# config = configparser.ConfigParser()
-# config.sections()
-
-# # Buscando Dados config.ini
-# if config.read(os.path.join(path, 'config.ini')):
-#     DbHost = config['DEFAULT']['DbHost']
-#     DbName = config['DEFAULT']['DbName']
-#     DbUser = config['DEFAULT']['DbUser']
-#     DbPassword = config['DEFAULT']['DbPassword']
-
-# try:
-#     dbhandler = PooledMySQLDatabase(
-#         DbName, user=DbUser, password=DbPassword, host=DbHost
-#     )
-#     dbhandler.connect(reuse_if_open=True)
-
-#     print("Sucesso")
-#     import CriarTabelas
-#     with dbhandler.connection_context():
-#         CriarTabelas().tabelas()
-
-#         pass
-
-# except DatabaseError as err:
-#     print(err)
-
-
-# def prepare_database(self):
-#     print("Testadno prepare")
-#     try:
-#         tabelas = CriarTabelas()
-#         tabelas.tabelas()
-#     except InternalError as err:
-#         print(err)
-#         print("INrter")
-
-
-class Conexao(object):
-    def conecta(self):
-        # self.DbHost = DbHost
-        # self.DbName = DbName
-        # self.DbUser = DbUser
-        # self.DbPassword = DbPassword
-        # self.conecta = conecta
-        # self.erro = erro
-        # self.dbhandler = dbhandler
-
-        # Caminho absoluto config.ini
-        self.path = os.path.abspath(os.path.dirname(sys.argv[0]))
-        config = configparser.ConfigParser()
-        config.sections()
-
-        # Buscando Dados config.ini
-        if config.read(os.path.join(self.path, 'config.ini')):
-            self.DbHost = config['DEFAULT']['DbHost']
-            self.DbName = config['DEFAULT']['DbName']
-            self.DbUser = config['DEFAULT']['DbUser']
-            self.DbPassword = config['DEFAULT']['DbPassword']
-
-        # Realizando a conexao com o DB
-        i = 0
-        try:
-            self.dbhandler = PooledMySQLDatabase(
-                self.DbName, user=self.DbUser, password=self.DbPassword, host=self.DbHost
-            )
-            self.dbhandler.connect()
-
-            print("Sucesso")
-            print(i)
-            i += 1
-            with self.dbhandler.connection_context():
-                self.prepare_database()
-
-        except:
-            self.erro = "err"
-
-    def prepare_database(self):
-
-        try:
-            tabelas = CriarTabelas()
-            tabelas.teste = "andre"
-            tabelas.tabelas()
-
-        except InternalError as err:
-            print("INrter")
-
-
-class CreateDb(object):
-    def __init__(self, dbhandler="", DbHost="", DbName="", DbUser="",
-                 DbPassword="", conecta="", erro=""):
-        self.DbHost = DbHost
-        self.DbName = DbName
-        self.DbUser = DbUser
-        self.DbPassword = DbPassword
-        self.conecta = conecta
-        self.erro = erro
-        self.dbhandler = dbhandler
-
-        # Caminho absoluto config.ini
-        self.path = os.path.abspath(os.path.dirname(sys.argv[0]))
-        config = configparser.ConfigParser()
-        config.sections()
-
-        # Buscando Dados config.ini
-        if config.read(os.path.join(self.path, 'config.ini')):
-            self.DbHost = config['DEFAULT']['DbHost']
-            self.DbName = config['DEFAULT']['DbName']
-            self.DbUser = config['DEFAULT']['DbUser']
-            self.DbPassword = config['DEFAULT']['DbPassword']
-
-    def createDB(self):
-
-        # Caso banco não exista, Cria
-        import mysql.connector
-        try:
-            conn = mysql.connector.connect(
-                user=self.DbUser, password=self.DbPassword, host=self.DbHost)
-            cursor = conn.cursor()
-            cursor.execute('SET sql_notes = 0 ;')
-            cursor.execute("create database IF NOT EXISTS %s" %
-                           self.DbName)
-            # tabelas = CriarTabelas()
-            # tabelas.tabelas()
-
-        except mysql.connector.Error as err:
-            if err.errno == mysql.connector.errorcode.ER_ACCESS_DENIED_ERROR:
-                self.erro = 1  # Erro User e Senha
-            elif err.errno == mysql.connector.errorcode.ER_BAD_DB_ERROR:
-                self.erro = 2  # erro banco de dados inexistente
-            else:
-                self.erro == err
-
-
 # Classe campo personalizado longblob
 class LongBlobCampo(Field):
     field_type = 'LONGBLOB'
-
-
-# Base model
-
-
-class BaseModel(Model):
-    class Meta:
-        conecta = Conexao()
-        conecta.conecta()
-        database = conecta.dbhandler
 
 
 # Tabela Categoria de produtos
@@ -451,47 +302,71 @@ class CriarTabelas(object):
 
     def tabelas(self):
         try:
+            models = [Cliente, Fornecedor, CatAPagar]
 
             # Conexao().dbhandler.close()
             # Criando Tabelas
-            Conexao().dbhandler.create_tables([
-                CategoriaProduto,
-                MarcaProduto,
-                Produto,
-                Fornecedor,
-                Cliente,
-                CatAPagar,
-                CatAReceber,
-                StatusEntrega,
-                StatusPagamento,
-                FormaPagamento,
-                Compra,
-                Venda,
-                RelacaoCompra,
-                RelacaoVenda,
-                ContaAPagar,
-                ContaAReceber,
-                Empresa
-            ])
+            # Conexao().dbhandler.create_tables([
+            #     CategoriaProduto,
+            #     MarcaProduto,
+            #     Produto,
+            #     Fornecedor,
+            #     Cliente,
+            #     CatAPagar,
+            #     CatAReceber,
+            #     StatusEntrega,
+            #     StatusPagamento,
+            #     FormaPagamento,
+            #     Compra,
+            #     Venda,
+            #     RelacaoCompra,
+            #     RelacaoVenda,
+            #     ContaAPagar,
+            #     ContaAReceber,
+            #     Empresa
+            # ])
+            conecta = Conexao()
+            conecta.conecta()
+            conecta.dbhandler.close_all()
+            print("model")
+
+            with conecta.dbhandler.connection_context():
+                conecta.dbhandler.create_tables(models)
             """ Inserido valores padrão """
 
-            # Categoria a pagar
-            CatAPagar.get_or_create(categoria_a_pagar='Compra')
+            # # Categoria a pagar
+            # CatAPagar.get_or_create(categoria_a_pagar='Compra')
 
-            # Categoria a receber
-            CatAReceber.get_or_create(categoria_a_receber='Venda')
+            # # Categoria a receber
+            # CatAReceber.get_or_create(categoria_a_receber='Venda')
 
-            # Forma de Pagamento
-            FormaPagamento.get_or_create(forma_pagamento='Dinheiro')
-            FormaPagamento.get_or_create(forma_pagamento='Cartão')
+            # # Forma de Pagamento
+            # FormaPagamento.get_or_create(forma_pagamento='Dinheiro')
+            # FormaPagamento.get_or_create(forma_pagamento='Cartão')
 
-            # Status Entrega
-            StatusEntrega.get_or_create(status_entrega='Concluída')
-            StatusEntrega.get_or_create(status_entrega='Pendente')
+            # # Status Entrega
+            # StatusEntrega.get_or_create(status_entrega='Concluída')
+            # StatusEntrega.get_or_create(status_entrega='Pendente')
 
-            # Status Pagamento
-            StatusPagamento.get_or_create(status_pagamento='Concluído')
-            StatusPagamento.get_or_create(status_pagamento='Pendente')
+            # # Status Pagamento
+            # StatusPagamento.get_or_create(status_pagamento='Concluído')
+            # StatusPagamento.get_or_create(status_pagamento='Pendente')
 
         except InternalError as err:
             print(err)
+
+
+# try:
+#     conecta = Conexao()
+#     conecta.conecta()
+#     conecta.dbhandler.connect()
+
+# except:
+#     conecta = CreateDb()
+#     conecta.createDB()
+#     tabelas = CriarTabelas()
+#     tabelas.tabelas()
+
+# # tabelas = CriarTabelas()
+
+# # tabelas.tabelas()
