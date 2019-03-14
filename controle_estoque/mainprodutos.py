@@ -9,9 +9,9 @@ from PySide2.QtWebEngineWidgets import QWebEngineView
 
 from Views.mainProdutos import Ui_ct_MainProdutos
 from Views.formProdutos import Ui_ct_FormProdutos
-from Crud.CrudProduto import CrudProduto
-from Crud.CrudCatProduto import CrudCatProduto
-from Crud.CrudMarcaProduto import CrudMarcaProduto
+from sql.CrudProduto import CrudProduto
+from sql.CrudCatProduto import CrudCatProduto
+from sql.CrudMarcaProduto import CrudMarcaProduto
 
 
 class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
@@ -358,7 +358,9 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
             data = QByteArray()
             buf = QBuffer(data)
             imagem.save(buf, 'PNG')
-            INSERI.imagem = str(data.toBase64())[2:-1]
+            INSERI.imagem = str(data.toBase64()).encode('utf8')[2:-1]
+        else:
+            INSERI.imagem = False
 
         INSERI.categoria = self.cb_CategoriaProduto.currentData()
         INSERI.marca = self.cb_MarcaProduto.currentData()
@@ -372,7 +374,7 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         INSERI.inseriProduto()
         print(INSERI.marca, INSERI.id)
 
-        # self.janelaProdutos()
+        self.janelaProdutos()
 
     # Selecionando Produto
     def SelectProduto(self, valor):

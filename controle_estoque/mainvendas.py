@@ -10,11 +10,11 @@ from Views.mainVendas import Ui_ct_MainVendas
 from Views.formVendas import Ui_ct_FormVenda
 
 
-from Crud.CrudVenda import CrudVenda
-from Crud.CrudProduto import CrudProduto
-from Crud.CrudContaAReceber import CrudContaAReceber
-from Crud.CrudRelVenda import CrudRelVenda
-from Crud.CrudCliente import CrudCliente
+from sql.CrudVenda import CrudVenda
+from sql.CrudProduto import CrudProduto
+from sql.CrudContaAReceber import CrudContaAReceber
+from sql.CrudRelVenda import CrudRelVenda
+from sql.CrudCliente import CrudCliente
 from Funcoes.data import DataAtual
 
 # from Funcoes.BuscaProdutos import BuscaProdutos
@@ -383,7 +383,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             self.botaoRemoveItem(self.tb_Itens, i, 6,
                                  partial(self.RemoveLInha, i), "#005099")
             self.conteudoTabela(self.tb_Itens, i, 7,
-                                str(listaItens.id))
+                                str(listaItens.id[i]))
             self.TotalFinal()
 
             i += 1
@@ -424,7 +424,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
                                      partial(self.Receber, i), "Receber",
                                      busca.idStatusPagamento[i])
             self.cb_QtdeParcela.setCurrentIndex(
-                self.cb_QtdeParcela.findData(len(busca.query)))
+                self.cb_QtdeParcela.findData(len(busca.id)))
             self.cb_FormaPagamento.setCurrentIndex(
                 self.cb_FormaPagamento.findData(
                     busca.idFormaPagamento[0]))

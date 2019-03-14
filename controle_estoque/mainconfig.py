@@ -9,7 +9,7 @@ from mainempresa import MainEmpresa
 from maindbconf import MainDbConf
 
 
-from Crud.CrudEmpresa import CrudEmpresa
+from sql.CrudEmpresa import CrudEmpresa
 
 
 class MainConfig(Ui_ct_MainConfig, MainEmpresa, MainDbConf):

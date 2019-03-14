@@ -8,12 +8,8 @@ from PySide2.QtCore import QDate, Qt
 from Views.APagar import Ui_ct_APagar
 from Views.formAPagar import Ui_ct_FormPagar
 
-from Crud.CrudContaAPagar import CrudContaAPagar
-from Crud.CrudCatAPagar import CrudCatAPagar
-
-
-# from Crud..CrudAPagar import CrudAPagar
-# from Crud..CrudCategoriaAPagar import CrudCatAPagar
+from sql.CrudContaAPagar import CrudContaAPagar
+from sql.CrudCatAPagar import CrudCatAPagar
 
 
 class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
@@ -65,12 +61,16 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
         for i in range(len(busca.nomeFantasia)):
             self.tb_APagar.insertRow(i)
+
             self.conteudoTabela(self.tb_APagar, i, 0, str(busca.id[i]))
+
             self.TabelaStatus(self.tb_APagar, i, 1,
                               self.StatusEntrega(1,
                                                  busca.idStatusPagamento[i]))
+
             self.TabelaNomeTelefone(self.tb_APagar, i, 2, busca.nomeFantasia[i],
                                     busca.telefone[i])
+
             self.TabelaNomeTelefone(
                 self.tb_APagar, i, 3, busca.descricao[i], "")
 
@@ -78,11 +78,13 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
                                busca.dataVencimento[i],
                                self.StatusEntrega(busca.idStatusPagamento[i]),
                                busca.statusPagamento[i].upper())
+
             self.conteudoTabela(self.tb_APagar, i, 5,
                                 "R$ "+str(busca.valor[i]))
 
             self.conteudoTabela(self.tb_APagar, i, 6,
                                 "R$ "+str(busca.valor[i] - busca.valorPago[i]))
+
             self.botaoReceberParcela(
                 self.tb_APagar, i, 7, partial(self.BuscaContaAPagar, busca.id[i]), "Pagar",  '2')
 
@@ -245,6 +247,7 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
             INSERI.formaPagamento = self.cb_formaPagamento.currentData()
             INSERI.obs = self.tx_Obs.toPlainText()
             INSERI.inseriContaAPagar()
+
         self.BuscaContaAPagar(self.tx_Cod.text())
 
     # Cadastro Categoria a Pagar

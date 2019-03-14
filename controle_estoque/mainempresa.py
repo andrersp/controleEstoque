@@ -7,7 +7,7 @@ from PySide2.QtGui import QPixmap
 
 
 from Views.mainEmpresa import Ui_ct_empresa
-from Crud.CrudEmpresa import CrudEmpresa
+from sql.CrudEmpresa import CrudEmpresa
 
 
 class MainEmpresa(Ui_ct_empresa):
@@ -135,8 +135,10 @@ class MainEmpresa(Ui_ct_empresa):
             data = QByteArray()
             buf = QBuffer(data)
             image.save(buf, 'PNG')
-            logo = str(data.toBase64())[2:-1]
+            logo = str(data.toBase64()).encode('utf8')[2:-1]
             INSERI.logo = logo
+        else:
+            INSERI.logo = False
 
         INSERI.inseriEmpresa()
         self.lb_NomeFantasia.setText(self.tx_Titulo.text())

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Crud.CrudFormaPagamento import CrudFormaPagamento
+from sql.CrudFormaPagamento import CrudFormaPagamento
 
 
 class FormaPagamento(object):
@@ -9,7 +9,8 @@ class FormaPagamento(object):
         busca = CrudFormaPagamento()
         busca.listaFormaPagamento()
         combobox.clear()
-
-        for lista in busca.query:
-            combobox.addItem(lista.forma_pagamento, str(
-                str(lista.id)))
+        i = 0
+        for lista in busca.formaPagamento:
+            combobox.addItem(lista, str(
+                str(busca.id[i])))
+            i += 1

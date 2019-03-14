@@ -3,8 +3,8 @@ from PySide2.QtCore import QDate
 
 
 from Views.movConta import Ui_ct_movimento
-from Crud.CrudContaAReceber import CrudContaAReceber
-from Crud.CrudContaAPagar import CrudContaAPagar
+from sql.CrudContaAReceber import CrudContaAReceber
+from sql.CrudContaAPagar import CrudContaAPagar
 
 
 class MainMovimentoConta(Ui_ct_movimento):
@@ -30,8 +30,8 @@ class MainMovimentoConta(Ui_ct_movimento):
         self.tb_despesa.setColumnWidth(1, 100)
 
         # Funcao chamada botoes
-        self.bt_BuscaMovimento.clicked.connect(self.Entrada)
-        # self.bt_BuscaMovimento.clicked.connect(self.Despesa)
+        # self.bt_BuscaMovimento.clicked.connect(self.Entrada)
+        self.bt_BuscaMovimento.clicked.connect(self.Despesa)
 
         # Chamando primeira consulta
         self.Entrada()

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Crud.CrudCliente import CrudCliente
+from sql.CrudCliente import CrudCliente
 
 
 class Clientes(object):

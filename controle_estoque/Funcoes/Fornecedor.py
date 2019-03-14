@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Crud.CrudFornecedor import CrudFornecedor
+from sql.CrudFornecedor import CrudFornecedor
 
 
 class Fornecedor(object):

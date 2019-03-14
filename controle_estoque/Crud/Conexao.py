@@ -29,12 +29,12 @@ Caso não exista o DB será criado
 # config = configparser.ConfigParser()
 # config.sections()
 
-# # Buscando Dados config.ini
-# if config.read(os.path.join(path, 'config.ini')):
-#     DbHost = config['DEFAULT']['DbHost']
-#     DbName = config['DEFAULT']['DbName']
-#     DbUser = config['DEFAULT']['DbUser']
-#     DbPassword = config['DEFAULT']['DbPassword']
+# Buscando Dados config.ini
+if config.read(os.path.join(path, 'config.ini')):
+    DbHost = config['DEFAULT']['DbHost']
+    DbName = config['DEFAULT']['DbName']
+    DbUser = config['DEFAULT']['DbUser']
+    DbPassword = config['DEFAULT']['DbPassword']
 
 # try:
 #     dbhandler = PooledMySQLDatabase(

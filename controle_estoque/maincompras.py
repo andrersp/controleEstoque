@@ -9,11 +9,11 @@ from PySide2.QtWebEngineWidgets import QWebEngineView
 from Views.mainCompras import Ui_ct_MainCompras
 from Views.formCompras import Ui_ct_FormCompra
 
-from Crud.CrudCompra import CrudCompra
-from Crud.CrudFornecedor import CrudFornecedor
-from Crud.CrudProduto import CrudProduto
-from Crud.CrudRelCompra import CrudRelCompra
-from Crud.CrudContaAPagar import CrudContaAPagar
+from sql.CrudCompra import CrudCompra
+from sql.CrudFornecedor import CrudFornecedor
+from sql.CrudProduto import CrudProduto
+from sql.CrudRelCompra import CrudRelCompra
+from sql.CrudContaAPagar import CrudContaAPagar
 
 from Funcoes.data import DataAtual
 
@@ -202,8 +202,9 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
     def BuscaProdutoNomeCompra(self):
         produto = self.tx_BuscaItem.text()
         busca = CrudProduto()
-        busca.ListaProdutoTabela(produto)
-        self.tx_IdBuscaItem.setText(str(busca.idProduto[0]))
+        busca.produto = produto
+        busca.buscaProdutoNome()
+        self.tx_IdBuscaItem.setText(str(busca.id))
         self.BuscaProdutoIdCompra()
 
     # Busca produtos por ID

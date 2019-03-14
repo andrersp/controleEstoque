@@ -9,9 +9,9 @@ from Views.aReceber import Ui_ct_AReceber
 from Views.formAReceber import Ui_ct_FormReceber
 
 
-from Crud.CrudContaAReceber import CrudContaAReceber
-from Crud.CrudCatAReceber import CrudCatAReceber
-from Crud.CrudStatusPagamento import CrudStatusPagamento
+from sql.CrudContaAReceber import CrudContaAReceber
+from sql.CrudCatAReceber import CrudCatAReceber
+from sql.CrudStatusPagamento import CrudStatusPagamento
 
 
 class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):

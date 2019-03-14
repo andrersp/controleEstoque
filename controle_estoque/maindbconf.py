@@ -11,7 +11,8 @@ import mysql.connector
 
 
 from Views.mainDbConfig import Ui_ct_dbConf
-import Crud.Conexao
+from sql.core import Conexao
+from sql.Create import CreateDb
 
 
 class MainDbConf(Ui_ct_dbConf):
@@ -108,11 +109,10 @@ class MainDbConf(Ui_ct_dbConf):
         with open(os.path.join(path, 'config.ini'), 'w') as configfile:
             config.write(configfile)
 
-        Crud.Conexao.CreateDb().createDB()
-        # Crud.Conexao.dbhandler.manual_close()
-        # Crud.Conexao.dbhandler.connect()
+        Criar = CreateDb()
+        Criar.createDB()
+        Criar.tabelas()
 
-        Crud.Conexao.CriarTabelas().tabelas()
         self.janelaConfig()
 
 

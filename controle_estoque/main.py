@@ -11,7 +11,8 @@ from PySide2 import QtGui, QtWidgets
 from jinja2 import Environment, PackageLoader, FileSystemLoader
 
 
-from Crud.CrudEmpresa import CrudEmpresa
+from sql.core import Conexao
+from sql.CrudEmpresa import CrudEmpresa
 from Funcoes.categoriaAPagar import CategoriaAPagar
 from Funcoes.categoriaAReceber import CategoriaAReceber
 from Funcoes.Clientes import Clientes
@@ -130,9 +131,14 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
     # Verificando Banco de Dados
     def DbCheck(self):
-        # busca = CrudEmpresa()
-        # busca.SelectEmpresaId()
+        conecta = Conexao()
 
+        try:
+            conecta.engine.connect()
+            conecta.engine.close()
+        
+        except:
+            print("Nao Conectou")
        
         try:
             busca = CrudEmpresa()
@@ -154,6 +160,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         except:
            
             self.janelaConfig()
+            self.janelaDbConf()
             for botao in self.wd_menu.findChildren(QtWidgets.QPushButton):
                 botao.setDisabled(True)
             self.bt_Home.setDisabled(True)
