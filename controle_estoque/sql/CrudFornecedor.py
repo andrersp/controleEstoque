@@ -39,7 +39,8 @@ class CrudFornecedor(object):
         try:
 
             # Abrindo a Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
             # Query
             ultimo = sessao.query(Fornecedor).order_by(
                 desc(Fornecedor.id)).limit(1).first()
@@ -62,7 +63,8 @@ class CrudFornecedor(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = Fornecedor(
@@ -104,7 +106,8 @@ class CrudFornecedor(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando id
             query = sessao.query(Fornecedor).get(self.id)
@@ -143,7 +146,8 @@ class CrudFornecedor(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
             # Query
             busca = sessao.query(Fornecedor).get(self.id)
 
@@ -167,8 +171,8 @@ class CrudFornecedor(object):
             # Fechando a Conexao
             sessao.close()
 
-        except IntegrityError as err:
-            print(err)
+        except:
+            pass
 
         pass
 
@@ -179,7 +183,8 @@ class CrudFornecedor(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(Fornecedor).filter(
@@ -219,7 +224,8 @@ class CrudFornecedor(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(Fornecedor).filter(
@@ -248,7 +254,8 @@ class CrudFornecedor(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(Fornecedor).filter(

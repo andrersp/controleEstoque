@@ -20,7 +20,8 @@ class CrudCatProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             ultimo = sessao.query(CategoriaProduto).order_by(
@@ -43,7 +44,8 @@ class CrudCatProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = CategoriaProduto(
@@ -69,7 +71,8 @@ class CrudCatProduto(object):
 
         try:
             # Abrindo a Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando id
             row = sessao.query(CategoriaProduto).get(self.id)
@@ -93,7 +96,8 @@ class CrudCatProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(CategoriaProduto).all()

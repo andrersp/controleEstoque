@@ -12,6 +12,8 @@ from jinja2 import Environment, PackageLoader, FileSystemLoader
 
 
 from sql.core import Conexao
+
+from sql.Models import Empresa
 from sql.CrudEmpresa import CrudEmpresa
 from Funcoes.categoriaAPagar import CategoriaAPagar
 from Funcoes.categoriaAReceber import CategoriaAReceber
@@ -131,40 +133,31 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
     # Verificando Banco de Dados
     def DbCheck(self):
-        conecta = Conexao()
 
-        try:
-            conecta.engine.connect()
-            conecta.engine.close()
-        
-        except:
-            print("Nao Conectou")
-       
+        conecta = Conexao()
         try:
             busca = CrudEmpresa()
             busca.SelectEmpresaId()
             
-            if busca.titulo:
-                
-                self.lb_NomeFantasia.setText(busca.titulo)
-                self.lb_NomeFantasia2.setText(busca.subtitulo)
-                self.setWindowTitle(busca.titulo + " " + busca.subtitulo)
-
-            else:
-                
-                self.janelaConfig()
-                
-                print('1')
+            self.lb_NomeFantasia.setText(busca.titulo)
+            self.lb_NomeFantasia2.setText(busca.subtitulo)
+            self.setWindowTitle(busca.titulo + " " + busca.subtitulo)
+            
                 
 
         except:
            
             self.janelaConfig()
+        
+        try:
+            conecta.engine.connect()
+            
+        except:
+            self.janelaConfig()
             self.janelaDbConf()
             for botao in self.wd_menu.findChildren(QtWidgets.QPushButton):
                 botao.setDisabled(True)
             self.bt_Home.setDisabled(True)
-            print('2')
 
     """Abrindo Janelas externos"""
     # Home

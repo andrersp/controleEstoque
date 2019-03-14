@@ -372,7 +372,6 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         INSERI.valorAtacado = self.tx_ValorAtacadoProduto.text()
         INSERI.qtdeAtacado = self.tx_MinimoAtacado.text()
         INSERI.inseriProduto()
-        print(INSERI.marca, INSERI.id)
 
         self.janelaProdutos()
 

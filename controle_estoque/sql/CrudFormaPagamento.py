@@ -20,7 +20,8 @@ class CrudFormaPagamento(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             ultimo = sessao.query(FormaPagamento.id).order_by(
@@ -42,7 +43,8 @@ class CrudFormaPagamento(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
             # Query
             row = FormaPagamento(
                 id=self.id,
@@ -67,7 +69,8 @@ class CrudFormaPagamento(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando id
             row = sessao.query(FormaPagamento).get(self.id)
@@ -90,7 +93,8 @@ class CrudFormaPagamento(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(FormaPagamento).order_by(

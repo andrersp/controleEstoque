@@ -19,7 +19,8 @@ class CrudMarcaProduto(object):
         try:
 
             # Abrindo a Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             ultimo = (sessao.query(MarcaProduto).order_by(
@@ -42,7 +43,8 @@ class CrudMarcaProduto(object):
 
         try:
             # Abrindo a Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = MarcaProduto(
@@ -70,7 +72,8 @@ class CrudMarcaProduto(object):
 
         try:
             # Abrindo a Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando id
             row = sessao.query(MarcaProduto).get(self.id)
@@ -96,7 +99,8 @@ class CrudMarcaProduto(object):
         try:
 
             # Abrindo a Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(MarcaProduto).all()

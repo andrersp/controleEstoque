@@ -19,7 +19,8 @@ class CrudCatAPagar(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             ultimo = sessao.query(CatAPagar.id).order_by(
@@ -41,7 +42,8 @@ class CrudCatAPagar(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = CatAPagar(
@@ -67,7 +69,8 @@ class CrudCatAPagar(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando id
             row = sessao.query(CatAPagar).get(self.id)
@@ -90,7 +93,8 @@ class CrudCatAPagar(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(CatAPagar).all()

@@ -29,7 +29,8 @@ class CrudRelCompra(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = RelacaoCompra(
@@ -60,7 +61,8 @@ class CrudRelCompra(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando ID
 
@@ -90,7 +92,8 @@ class CrudRelCompra(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(
@@ -137,7 +140,8 @@ class CrudRelCompra(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # selecionando ID
             self.query = sessao.query(RelacaoCompra).get(self.id)

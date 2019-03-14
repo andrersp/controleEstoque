@@ -20,7 +20,8 @@ class CrudStatusPagamento(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             ultimo = sessao.query(StatusPagamento.id).order_by(
@@ -42,7 +43,8 @@ class CrudStatusPagamento(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = StatusPagamento(
@@ -68,7 +70,8 @@ class CrudStatusPagamento(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando
             row = sessao.query(StatusPagamento).get(self.id)
@@ -92,7 +95,8 @@ class CrudStatusPagamento(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(StatusPagamento).all()

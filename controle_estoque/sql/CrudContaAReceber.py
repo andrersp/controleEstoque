@@ -49,7 +49,8 @@ class CrudContaAReceber(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             ultimo = (sessao.query(ContaAReceber)
@@ -69,7 +70,8 @@ class CrudContaAReceber(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = ContaAReceber(
@@ -101,7 +103,8 @@ class CrudContaAReceber(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(ContaAReceber).filter(
@@ -140,7 +143,8 @@ class CrudContaAReceber(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = ContaAReceber(
@@ -172,7 +176,8 @@ class CrudContaAReceber(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando id
             row = sessao.query(ContaAReceber).get(self.id)
@@ -201,7 +206,8 @@ class CrudContaAReceber(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(ContaAReceber.__table__,
@@ -254,7 +260,8 @@ class CrudContaAReceber(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = sessao.query(ContaAReceber).get(self.id)
@@ -284,7 +291,8 @@ class CrudContaAReceber(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando ID
             row = sessao.query(ContaAReceber).get(self.id)
@@ -318,7 +326,8 @@ class CrudContaAReceber(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = (sessao.query(func.COALESCE(
@@ -352,7 +361,8 @@ class CrudContaAReceber(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(func.SUM(ContaAReceber.valor_recebido),

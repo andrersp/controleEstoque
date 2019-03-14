@@ -46,7 +46,8 @@ class CrudContaAPagar(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             ultimo = (sessao.query(ContaAPagar.id).order_by(
@@ -68,7 +69,8 @@ class CrudContaAPagar(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = ContaAPagar(
@@ -100,7 +102,8 @@ class CrudContaAPagar(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(ContaAPagar).filter(
@@ -140,7 +143,8 @@ class CrudContaAPagar(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = ContaAPagar(
@@ -172,7 +176,8 @@ class CrudContaAPagar(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando ID
             row = sessao.query(ContaAPagar).get(self.id)
@@ -201,7 +206,8 @@ class CrudContaAPagar(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(ContaAPagar.__table__,
@@ -252,7 +258,8 @@ class CrudContaAPagar(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = sessao.query(ContaAPagar).get(self.id)
@@ -282,7 +289,8 @@ class CrudContaAPagar(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # selecionando ID
 
@@ -319,7 +327,8 @@ class CrudContaAPagar(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = (sessao.query(func.COALESCE(
@@ -351,7 +360,8 @@ class CrudContaAPagar(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(func.SUM(ContaAPagar.valor_pago),

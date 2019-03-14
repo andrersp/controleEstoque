@@ -48,7 +48,8 @@ class CrudVenda(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             ultimo = sessao.query(Venda.id).order_by(
@@ -70,7 +71,8 @@ class CrudVenda(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = Venda(
@@ -102,7 +104,8 @@ class CrudVenda(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando Id
             row = sessao.query(Venda).get(self.id)
@@ -130,7 +133,8 @@ class CrudVenda(object):
         try:
 
             # Abrindo sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(Venda.data_emissao, Venda.data_entrega,
@@ -163,7 +167,8 @@ class CrudVenda(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             busca = sessao.query(Venda).get(self.id)
@@ -196,7 +201,8 @@ class CrudVenda(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(Venda.id,
@@ -260,7 +266,8 @@ class CrudVenda(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando ID
             row = sessao.query(Venda).get(self.id)
@@ -284,7 +291,8 @@ class CrudVenda(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando por ID
             row = sessao.query(Venda).get(self.id)

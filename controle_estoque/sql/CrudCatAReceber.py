@@ -19,8 +19,9 @@ class CrudCatAReceber(object):
 
         try:
 
-            # Abrindo sessao
-            sessao = Session()
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             ultimo = sessao.query(CatAReceber.id).order_by(
@@ -43,7 +44,8 @@ class CrudCatAReceber(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = CatAReceber(
@@ -69,7 +71,8 @@ class CrudCatAReceber(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando id
             row = sessao.query(CatAReceber).get(self.id)
@@ -92,7 +95,8 @@ class CrudCatAReceber(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(CatAReceber).all()

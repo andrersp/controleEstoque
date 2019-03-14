@@ -14,7 +14,6 @@ from sql.CrudFornecedor import CrudFornecedor
 from sql.CrudProduto import CrudProduto
 from sql.CrudRelCompra import CrudRelCompra
 from sql.CrudContaAPagar import CrudContaAPagar
-
 from Funcoes.data import DataAtual
 
 

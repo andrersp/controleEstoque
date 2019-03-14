@@ -20,7 +20,8 @@ class CrudStatusEntrega(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             ultimo = sessao.query(StatusEntrega.id).order_by(
@@ -42,7 +43,8 @@ class CrudStatusEntrega(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = StatusEntrega(
@@ -68,7 +70,8 @@ class CrudStatusEntrega(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando id
 
@@ -92,7 +95,8 @@ class CrudStatusEntrega(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(StatusEntrega).all()

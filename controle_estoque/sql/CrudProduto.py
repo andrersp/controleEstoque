@@ -36,7 +36,8 @@ class CrudProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             ultimo = sessao.query(Produto.id).order_by(
                 desc(Produto.id)).limit(1).first()
@@ -57,7 +58,8 @@ class CrudProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             row = Produto(
@@ -96,7 +98,8 @@ class CrudProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando id
             row = sessao.query(Produto).get(self.id)
@@ -133,7 +136,8 @@ class CrudProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             busca = sessao.query(Produto).get(self.id)
@@ -158,10 +162,7 @@ class CrudProduto(object):
 
             pass
 
-        except IntegrityError as err:
-
-            print(err)
-
+        except:
             pass
 
     # Busca Produto por Nome
@@ -171,7 +172,8 @@ class CrudProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(Produto.id, Produto.produto,
@@ -224,7 +226,8 @@ class CrudProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = (sessao.query(Produto.produto).filter(
@@ -251,7 +254,8 @@ class CrudProduto(object):
         try:
 
             # Abrindo a Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Query
             self.query = sessao.query(Produto.id, Produto.produto).filter(
@@ -274,7 +278,8 @@ class CrudProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando ID Produto
             row = sessao.query(Produto).get(self.id)
@@ -295,7 +300,8 @@ class CrudProduto(object):
         try:
 
             # Abrindo Sessao
-            sessao = Session()
+            conecta = Conexao()
+            sessao = conecta.Session()
 
             # Selecionando ID Produto
             row = sessao.query(Produto).get(self.id)

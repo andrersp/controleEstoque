@@ -150,8 +150,16 @@ class MainMovimentoConta(Ui_ct_movimento):
         pass
 
     def calculoMovimento(self):
-        despesa = float(self.lb_despesaPaga.text())
-        receita = float(self.lb_entradaRecebido.text())
+
+        if self.lb_despesaPaga.text() and self.lb_entradaRecebido.text():
+            despesa = float(self.lb_despesaPaga.text())
+            receita = float(self.lb_entradaRecebido.text())
+        elif self.lb_despesaPaga.text() and not self.lb_entradaRecebido.text():
+            despesa = float(self.lb_despesaPaga.text())
+            receita = 0.00
+        elif not self.lb_despesaPaga.text() and self.lb_entradaRecebido.text():
+            receita = float(self.lb_entradaRecebido.text())
+            despesa = 0.00
 
         total = receita - despesa
         if total < 0:
@@ -172,5 +180,4 @@ class MainMovimentoConta(Ui_ct_movimento):
                                                  "border: none;\n"
                                                  "background: none;\n"
                                                  "}")
-
         self.lb_totalMovimento.setText("R$ "+format(total, ".2f"))

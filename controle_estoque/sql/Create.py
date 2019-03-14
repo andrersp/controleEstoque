@@ -6,7 +6,7 @@ import configparser
 from sqlalchemy.exc import ProgrammingError
 
 from sql.core import Conexao, Base
-import sql.Models
+from sql.Models import *
 
 
 class CreateDb(object):
@@ -56,9 +56,24 @@ class CreateDb(object):
 
     def tabelas(self):
         conecta = Conexao()
-
         try:
-
             Base.metadata.create_all(conecta.engine)
+
+            # Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+            sessao.add_all([
+                StatusPagamento(id=1, status_pagamento='CONCLUÍDO'),
+                StatusPagamento(id=2, status_pagamento='PENDENTE'),
+                CatAReceber(id=1, categoria_a_receber='Venda'),
+                CatAPagar(id=1, categoria_a_pagar='Compra'),
+                FormaPagamento(id=1, forma_pagamento='Dinheiro'),
+                FormaPagamento(id=2, forma_pagamento='Cartão'),
+                StatusEntrega(id=1, status_entrega='ENTREGUE'),
+                StatusEntrega(id=2, status_entrega='PENDENTE')
+            ])
+
+            sessao.commit()
+
         except ProgrammingError as err:
             print(err)

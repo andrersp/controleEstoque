@@ -43,13 +43,10 @@ class Conexao(object):
             'mysql+mysqlconnector://{}:{}@{}/{}?charset=utf8'
             .format(self.DbUser, self.DbPassword,
                     self.DbHost, self.DbName),
-            echo=True)
+            echo=False)
 
         # Criando Sessao
         self.Session = sessionmaker(bind=self.engine)
-
-        # Declarando Base
-        self.Base = declarative_base()
 
 
 Base = declarative_base()

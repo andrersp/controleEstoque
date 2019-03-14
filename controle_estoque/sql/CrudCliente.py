@@ -40,6 +40,7 @@ class CrudCliente(object):
             # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
+
             # Query
             ultimo = sessao.query(Cliente).order_by(
                 desc(Cliente.id)).limit(1).first()
@@ -62,7 +63,7 @@ class CrudCliente(object):
 
         try:
 
-            # Abrindo a sessao
+            # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
 
@@ -105,7 +106,7 @@ class CrudCliente(object):
 
         try:
 
-            # Abrindo a sessao
+            # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
 
@@ -145,8 +146,10 @@ class CrudCliente(object):
     # Buscando cliente por ID
     def selectClienteId(self):
         try:
+
+            # Abrindo Sessao
             conecta = Conexao()
-            conecta.sessao = Session()
+            sessao = conecta.Session()
 
             # Query
             busca = sessao.query(Cliente).get(self.id)
@@ -183,8 +186,9 @@ class CrudCliente(object):
     def listaCliente(self):
 
         try:
-            conecta = Conexao()
 
+            # Abrindo Sessao
+            conecta = Conexao()
             sessao = conecta.Session()
 
             # Query
