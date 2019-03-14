@@ -211,6 +211,9 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
         buscaFornecedor = CrudFornecedor()
         buscaFornecedor.nomeFantasia = ''
         buscaFornecedor.listaFornecedor()
+        telefone = []
+        for row in buscaFornecedor.telefone:
+            telefone.append(self.formatoNumTelefone(row))
         html = self.renderTemplate(
             "report.html",
             estilo=self.resourcepath('Template/estilo.css'),
@@ -218,7 +221,7 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
             headertable=headertable,
             codcliente=buscaFornecedor.id,
             nomeFornecedor=buscaFornecedor.nomeFantasia,
-            telefoneFornecedor=buscaFornecedor.telefone,
+            telefoneFornecedor=telefone,
             siteFornecedor=buscaFornecedor.site,
             emailFornecedor=buscaFornecedor.email
         )

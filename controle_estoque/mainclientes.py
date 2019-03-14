@@ -222,6 +222,9 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         busca = CrudCliente()
         busca.nome = self.tx_BuscaClientes.text()
         busca.listaCliente()
+        telefone = []
+        for row in busca.celular:
+            telefone.append(self.formatoNumTelefone(row))
         self.renderTemplate(
             "clientes.html",
             estilo=self.resourcepath('Template/estilo.css'),
@@ -229,7 +232,7 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
             headertable=headertable,
             codcliente=busca.id,
             nome=busca.nome,
-            telefoneFornecedor=busca.celular,
+            telefoneFornecedor=telefone,
             emailFornecedor=busca.email
         )
 
