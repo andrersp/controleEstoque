@@ -61,7 +61,7 @@ class CrudMarcaProduto(object):
             # Fechando a Conexao
             sessao.close()
 
-        except IntegrityError as err:
+        except IntegrityError:
             self.updateMarcaProduto()
 
         pass

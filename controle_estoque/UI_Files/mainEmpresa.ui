@@ -1154,6 +1154,28 @@ background-color: #40a286
    <zorder>bt_AddLogo</zorder>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>tx_idEmpresa</tabstop>
+  <tabstop>tx_NomeFantasia</tabstop>
+  <tabstop>tx_RazaoSocial</tabstop>
+  <tabstop>tx_Cnpj</tabstop>
+  <tabstop>tx_IE</tabstop>
+  <tabstop>tx_TelefoneEmpresa</tabstop>
+  <tabstop>tx_SiteEmpresa</tabstop>
+  <tabstop>tx_EmailEmpresa</tabstop>
+  <tabstop>tx_ObsEmpresa</tabstop>
+  <tabstop>tx_CepEmpresa</tabstop>
+  <tabstop>bt_LocalizaCepEmpresa</tabstop>
+  <tabstop>tx_Endereco</tabstop>
+  <tabstop>tx_NumEmpresa</tabstop>
+  <tabstop>tx_BairroEmpresa</tabstop>
+  <tabstop>tx_CidadeEmpresa</tabstop>
+  <tabstop>tx_EstadoEmpresa</tabstop>
+  <tabstop>tx_Titulo</tabstop>
+  <tabstop>tx_SubTitulo</tabstop>
+  <tabstop>bt_AddLogo</tabstop>
+  <tabstop>bt_DelLogo</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

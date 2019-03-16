@@ -29,6 +29,7 @@ body {
 	
 	
 }
+
 #topo img {
 	float: left;
 	margin: 10px 0 0 5px;
@@ -42,6 +43,17 @@ body {
 	font-size: 12px ;
 	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
 	line-height: 15px;
+}
+
+ p.recibo {
+	margin: 0;
+	padding: 0;
+	float: right;
+	font-size: 11px ;
+	font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+  line-height: 15px;
+  text-align: right
+
 }
 label.destaque {
 	font-weight: bold;

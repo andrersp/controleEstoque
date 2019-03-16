@@ -38,6 +38,9 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         # Busca Compras
         self.bt_BuscaCompras.clicked.connect(self.DataTabCompras)
 
+        # Imprimir Tabela
+        self.bt_PrintRelatCompras.clicked.connect(self.imprimirTabCompra)
+
         # Setando dat Inicio e Fim da consulta
         self.dt_InicioCompra.setDate(self.primeiroDiaMes())
         self.dt_FimCompra.setDate(self.ultimoDiaMes())
@@ -563,4 +566,40 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
 
         self.documento.load(QUrl("file:///" +
                                         self.resourcepath("report.html")))
+        self.documento.loadFinished['bool'].connect(self.previaImpressao)
+    
+    # Imprimindo Tabela Compras
+    def imprimirTabCompra(self):
+        self.documento = QWebEngineView()
+
+        headertable = ["Fornecedor", "Emissão ",
+                       "Vencimento", "Valor"]
+
+        data_inicio = QDate.toString(self.dt_InicioCompra.date(), "dd-MM-yyyy")
+        data_fim = QDate.toString(self.dt_FimCompra.date(), "dd-MM-yyyy")
+
+        cliente = []
+        descricao = []
+        vencimento = []
+        valor = []
+
+        for i in range(self.tb_Compras.rowCount()):
+            cliente.append(self.tb_Compras.cellWidget(i, 2).text())
+            descricao.append(self.tb_Compras.cellWidget(i, 3).text())
+            vencimento.append(self.tb_Compras.cellWidget(i, 4).text())
+            valor.append(self.tb_Compras.cellWidget(i, 5).text())
+
+        self.renderTemplate(
+            "vendas.html",
+            estilo=self.resourcepath('Template/estilo.css'),
+            titulo="Relatório Compras de de {} à {}".format(
+                data_inicio, data_fim),
+            headertable=headertable,
+            nome=cliente,
+            desc=descricao,
+            venc=vencimento,
+            valor=valor)
+
+        self.documento.load(QUrl("file:///" +
+                                 self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)

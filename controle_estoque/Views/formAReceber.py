@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'formAReceber.ui',
 # licensing of 'formAReceber.ui' applies.
 #
-# Created: Wed Feb 13 14:11:39 2019
+# Created: Fri Mar 15 09:08:36 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -370,7 +370,7 @@ class Ui_ct_FormReceber(object):
         self.dt_dataPagamento.setCalendarPopup(True)
         self.dt_dataPagamento.setObjectName("dt_dataPagamento")
         self.lb_FormVenda_22 = QtWidgets.QLabel(self.fr_financeiroCompra)
-        self.lb_FormVenda_22.setGeometry(QtCore.QRect(20, 320, 130, 30))
+        self.lb_FormVenda_22.setGeometry(QtCore.QRect(20, 320, 120, 30))
         self.lb_FormVenda_22.setStyleSheet("QLabel{\n"
 "font-size: 13px;\n"
 "font-family: \"Arial\";\n"
@@ -381,7 +381,7 @@ class Ui_ct_FormReceber(object):
         self.lb_FormVenda_22.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.lb_FormVenda_22.setObjectName("lb_FormVenda_22")
         self.lb_ValorPendente = QtWidgets.QLabel(self.fr_financeiroCompra)
-        self.lb_ValorPendente.setGeometry(QtCore.QRect(160, 320, 125, 30))
+        self.lb_ValorPendente.setGeometry(QtCore.QRect(140, 320, 70, 30))
         self.lb_ValorPendente.setStyleSheet("QLabel{\n"
 "font-size: 20px;\n"
 "font-family: \"Arial\";\n"
@@ -475,7 +475,7 @@ class Ui_ct_FormReceber(object):
         self.lb_FormVenda_28.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.lb_FormVenda_28.setObjectName("lb_FormVenda_28")
         self.bt_receber = QtWidgets.QPushButton(self.fr_financeiroCompra)
-        self.bt_receber.setEnabled(True)
+        self.bt_receber.setEnabled(False)
         self.bt_receber.setGeometry(QtCore.QRect(160, 140, 125, 30))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
@@ -497,6 +497,30 @@ class Ui_ct_FormReceber(object):
 "}")
         self.bt_receber.setIconSize(QtCore.QSize(75, 35))
         self.bt_receber.setObjectName("bt_receber")
+        self.bt_PrintRecibo = QtWidgets.QPushButton(self.fr_financeiroCompra)
+        self.bt_PrintRecibo.setEnabled(True)
+        self.bt_PrintRecibo.setVisible(False)
+        self.bt_PrintRecibo.setGeometry(QtCore.QRect(220, 320, 100, 30))
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        font.setPointSize(10)
+        font.setWeight(75)
+        font.setBold(True)
+        self.bt_PrintRecibo.setFont(font)
+        self.bt_PrintRecibo.setCursor(QtCore.Qt.PointingHandCursor)
+        self.bt_PrintRecibo.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.bt_PrintRecibo.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
+        self.bt_PrintRecibo.setStyleSheet("QPushButton {\n"
+"background-color: #5C9BBC;\n"
+"color: #FFF;\n"
+"border: none;\n"
+"border-radius: 2px\n"
+" }\n"
+"QPushButton:hover{\n"
+"background-color: #40a286\n"
+"}")
+        self.bt_PrintRecibo.setIconSize(QtCore.QSize(75, 35))
+        self.bt_PrintRecibo.setObjectName("bt_PrintRecibo")
         self.lb_FormCompra_9 = QtWidgets.QLabel(self.fr_FormReceber)
         self.lb_FormCompra_9.setGeometry(QtCore.QRect(450, 180, 100, 20))
         self.lb_FormCompra_9.setStyleSheet("QLabel{\n"
@@ -653,6 +677,21 @@ class Ui_ct_FormReceber(object):
 
         self.tradFormAReceber(ct_FormReceber)
         QtCore.QMetaObject.connectSlotsByName(ct_FormReceber)
+        ct_FormReceber.setTabOrder(self.tx_Cod, self.tx_Id)
+        ct_FormReceber.setTabOrder(self.tx_Id, self.tx_NomeFantasia)
+        ct_FormReceber.setTabOrder(self.tx_NomeFantasia, self.tx_Telefone)
+        ct_FormReceber.setTabOrder(self.tx_Telefone, self.tx_descricao)
+        ct_FormReceber.setTabOrder(self.tx_descricao, self.cb_categoria)
+        ct_FormReceber.setTabOrder(self.cb_categoria, self.bt_AddCategoriaProduto)
+        ct_FormReceber.setTabOrder(self.bt_AddCategoriaProduto, self.bt_CancelAddCatergoria)
+        ct_FormReceber.setTabOrder(self.bt_CancelAddCatergoria, self.dt_Vencimento)
+        ct_FormReceber.setTabOrder(self.dt_Vencimento, self.tx_valor)
+        ct_FormReceber.setTabOrder(self.tx_valor, self.tx_Obs)
+        ct_FormReceber.setTabOrder(self.tx_Obs, self.cb_repetir)
+        ct_FormReceber.setTabOrder(self.cb_repetir, self.tx_addCategoria)
+        ct_FormReceber.setTabOrder(self.tx_addCategoria, self.dt_dataPagamento)
+        ct_FormReceber.setTabOrder(self.dt_dataPagamento, self.tx_valorPago)
+        ct_FormReceber.setTabOrder(self.tx_valorPago, self.cb_formaPagamento)
 
     def tradFormAReceber(self, ct_FormReceber):
         ct_FormReceber.setWindowTitle(QtWidgets.QApplication.translate("ct_FormReceber", "Frame", None, -1))
@@ -679,6 +718,7 @@ class Ui_ct_FormReceber(object):
         self.lb_FormVenda_27.setText(QtWidgets.QApplication.translate("ct_FormReceber", "FORMA PAGAMENTO", None, -1))
         self.lb_FormVenda_28.setText(QtWidgets.QApplication.translate("ct_FormReceber", "VALOR PAGO", None, -1))
         self.bt_receber.setText(QtWidgets.QApplication.translate("ct_FormReceber", "RECEBER", None, -1))
+        self.bt_PrintRecibo.setText(QtWidgets.QApplication.translate("ct_FormReceber", "RECIBO", None, -1))
         self.lb_FormCompra_9.setText(QtWidgets.QApplication.translate("ct_FormReceber", "VALOR", None, -1))
         self.tx_valor.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormReceber", "R$ 0,00", None, -1))
         self.lb_Repetir.setText(QtWidgets.QApplication.translate("ct_FormReceber", "REPETIR", None, -1))

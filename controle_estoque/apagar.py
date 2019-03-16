@@ -1,8 +1,10 @@
 # -*- codind: utf-8 -*-
 from functools import partial
+from datetime import date
 
 
-from PySide2.QtCore import QDate, Qt
+from PySide2.QtCore import QDate, Qt, QUrl
+from PySide2.QtWebEngineWidgets import QWebEngineView
 
 
 from Views.APagar import Ui_ct_APagar
@@ -10,6 +12,7 @@ from Views.formAPagar import Ui_ct_FormPagar
 
 from sql.CrudContaAPagar import CrudContaAPagar
 from sql.CrudCatAPagar import CrudCatAPagar
+from Funcoes.extenso import retorno
 
 
 class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
@@ -41,6 +44,9 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         # Funcao chamada botoes
         self.bt_Busca.clicked.connect(self.tabelaAPagar)
 
+        # Imprimir
+        self.bt_Print.clicked.connect(self.imprimirAPagar)
+
         # Abrindo form cadastrar
         self.bt_AddConta.clicked.connect(self.formAPagar)
 
@@ -58,6 +64,9 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
         while self.tb_APagar.rowCount() > 0:
             self.tb_APagar.removeRow(0)
+
+        self.totalRecebido = 0.00
+        self.totalPendente = 0.00
 
         for i in range(len(busca.nomeFantasia)):
             self.tb_APagar.insertRow(i)
@@ -87,6 +96,12 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
             self.botaoReceberParcela(
                 self.tb_APagar, i, 7, partial(self.BuscaContaAPagar, busca.id[i]), "Pagar",  '2')
+            # Total Pendente
+            self.totalPendente = self.totalPendente + \
+                float((busca.valor[i] - busca.valorPago[i]))
+            # Total Recebido
+            self.totalRecebido = self.totalRecebido + \
+                float(busca.valorPago[i])
 
     # Cadastro e Edição conta a pagar
     def formAPagar(self):
@@ -159,6 +174,9 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         # Botao Pagar
         self.bt_receber.clicked.connect(self.PagarParcela)
 
+        # Imprimir Recibo
+        self.bt_PrintRecibo.clicked.connect(self.imprimirReciboPag)
+
         # Botao Salvar
         self.bt_Salvar.clicked.connect(self.validaCadPagar)
 
@@ -195,8 +213,11 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         self.lb_ValorPendente.setText(str(busca.valor - busca.valorPago))
 
         if busca.idStatusPagamento == 1:
-            self.bt_receber.setDisabled(True)
             self.desabilitaLineEdit(self.fr_FormPagar)
+            self.bt_PrintRecibo.setVisible(True)
+        elif busca.idStatusPagamento == 2:
+            self.bt_receber.setEnabled(True)
+
         self.cb_repetir.setHidden(True)
         self.lb_Repetir.setHidden(True)
         self.lb_obsRepetir.setHidden(True)
@@ -263,3 +284,73 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
         self.CalcelAddFinanceiro(self.bt_CancelAddCatergoria,
                                  self.bt_AddCategoriaProduto, self.tx_addCategoria,
                                  self.cb_categoria)
+
+    # Imprimindo
+    def imprimirAPagar(self):
+        self.documento = QWebEngineView()
+
+        headertable = ["Fornecedor", "Descrição ",
+                       "Vencimento", "Valor", "V. Pendente"]
+
+        data_inicio = QDate.toString(self.dt_Inicio.date(), "dd-MM-yyyy")
+        data_fim = QDate.toString(self.dt_Fim.date(), "dd-MM-yyyy")
+
+        if self.cb_Situacao.currentData() == '1':
+            situacao = "Pago"
+
+        elif self.cb_Situacao.currentData() == '2':
+            situacao = "Pendente"
+
+        cliente = []
+        descricao = []
+        vencimento = []
+        valor = []
+        pendente = []
+        for i in range(self.tb_APagar.rowCount()):
+            cliente.append(self.tb_APagar.cellWidget(i, 2).text())
+            descricao.append(self.tb_APagar.cellWidget(i, 3).text())
+            vencimento.append(self.tb_APagar.cellWidget(i, 4).text())
+            valor.append(self.tb_APagar.item(i, 5).text())
+            pendente.append(self.tb_APagar.item(i, 6).text())
+
+        self.renderTemplate(
+            "apagar.html",
+            estilo=self.resourcepath('Template/estilo.css'),
+            titulo="Relatório de conta a pagar {} de {} à {}".format(
+                situacao, data_inicio, data_fim),
+            headertable=headertable,
+            nome=cliente,
+            desc=descricao,
+            venc=vencimento,
+            valor=valor,
+            pendente=pendente,
+            totalPen=format(self.totalPendente, '.2f'),
+            totalRec=format(self.totalRecebido, '.2f')
+
+        )
+
+        self.documento.load(QUrl("file:///" +
+                                 self.resourcepath("report.html")))
+        self.documento.loadFinished['bool'].connect(self.previaImpressao)
+
+# Imprimindo
+
+    def imprimirReciboPag(self):
+
+        self.documento = QWebEngineView()
+
+        self.renderTemplate(
+            "recibopagamento.html",
+            estilo=self.resourcepath('Template/estilo.css'),
+            cod=self.tx_Cod.text(),
+
+            descricao=self.tx_descricao.text(),
+            valor=self.tx_valor.text().replace('.', ','),
+            valor_ext=retorno(self.tx_valor.text()),
+            data=date.today().strftime("%d-%m-%Y")
+
+        )
+
+        self.documento.load(QUrl("file:///" +
+                                 self.resourcepath("report.html")))
+        self.documento.loadFinished['bool'].connect(self.previaImpressao)

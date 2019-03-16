@@ -28,304 +28,6 @@
    <property name="frameShadow">
     <enum>QFrame::Raised</enum>
    </property>
-   <widget class="QFrame" name="fr_TopoMenuAPagar">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>40</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background:#E1DFE0;
-border: none;</string>
-    </property>
-    <widget class="QPushButton" name="bt_Busca">
-     <property name="geometry">
-      <rect>
-       <x>450</x>
-       <y>5</y>
-       <width>30</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="contextMenuPolicy">
-      <enum>Qt::NoContextMenu</enum>
-     </property>
-     <property name="toolTip">
-      <string>BUSCAR</string>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="bt_Print">
-     <property name="geometry">
-      <rect>
-       <x>490</x>
-       <y>5</y>
-       <width>30</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial</family>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="contextMenuPolicy">
-      <enum>Qt::NoContextMenu</enum>
-     </property>
-     <property name="toolTip">
-      <string>IMPRIMIR</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QDateEdit" name="dt_Inicio">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>16</y>
-       <width>140</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QDateEdit {
-background: #E1DFE0;
-border: none;
-font-family: &quot;Arial&quot;;
-font-size: 20px;
-font-weight: bold;
-color: rgb(80,79,79)
-}
-
- QDateEdit::drop-down {
-     subcontrol-origin: padding;
-     subcontrol-position: top right;
-     width: 25px;
-     border-left-width: 1px;
-     border-left-color: darkgray;
-     border-left-style: solid; /* just a single line */
-     border-top-right-radius: 3px; /* same radius as the QComboBox */
-     border-bottom-right-radius: 3px;
- }
-QDateEdit::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
- }</string>
-     </property>
-     <property name="displayFormat">
-      <string>dd/MM/yyyy</string>
-     </property>
-     <property name="calendarPopup">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lb_FormVenda_27">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>2</y>
-       <width>120</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial Unicode MS&quot;;
-
-color:#1E87F0;
-border: none;
-}</string>
-     </property>
-     <property name="text">
-      <string>DATA ÍNICIO</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lb_FormVenda_28">
-     <property name="geometry">
-      <rect>
-       <x>170</x>
-       <y>2</y>
-       <width>120</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial Unicode MS&quot;;
-
-color:#1E87F0;
-border: none;
-}</string>
-     </property>
-     <property name="text">
-      <string>DATA FIM</string>
-     </property>
-    </widget>
-    <widget class="QDateEdit" name="dt_Fim">
-     <property name="geometry">
-      <rect>
-       <x>170</x>
-       <y>16</y>
-       <width>140</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QDateEdit {
-background: #E1DFE0;
-border: none;
-font-family: &quot;Arial&quot;;
-font-size: 20px;
-font-weight: bold;
-color: rgb(80,79,79)
-}
-
- QDateEdit::drop-down {
-     subcontrol-origin: padding;
-     subcontrol-position: top right;
-     width: 25px;
-     border-left-width: 1px;
-     border-left-color: darkgray;
-     border-left-style: solid; /* just a single line */
-     border-top-right-radius: 3px; /* same radius as the QComboBox */
-     border-bottom-right-radius: 3px;
- }
-QDateEdit::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
- }</string>
-     </property>
-     <property name="displayFormat">
-      <string>dd/MM/yyyy</string>
-     </property>
-     <property name="calendarPopup">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lb_FormVenda_30">
-     <property name="geometry">
-      <rect>
-       <x>320</x>
-       <y>2</y>
-       <width>120</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{
-font-size: 12px;
-font-family: &quot;Arial Unicode MS&quot;;
-
-color:#1E87F0;
-border: none;
-}</string>
-     </property>
-     <property name="text">
-      <string>SITUAÇÃO</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="cb_Situacao">
-     <property name="geometry">
-      <rect>
-       <x>320</x>
-       <y>16</y>
-       <width>120</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QComboBox{
-background: #E1DFE0;
-border: none;
-font-family: &quot;Arial&quot;;
-font-size: 14px;
-font-weight: bold;
-color: rgb(80,79,79)
-}
-
- QComboBox::drop-down {
-     subcontrol-origin: padding;
-     subcontrol-position: top right;
-     width: 25px;
-     border-left-width: 1px;
-     border-left-color: darkgray;
-     border-left-style: solid; /* just a single line */
-     border-top-right-radius: 3px; /* same radius as the QComboBox */
-     border-bottom-right-radius: 3px;
- }
-QComboBox::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
- }
-</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>PENDENTE</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>PAGO</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QPushButton" name="bt_AddConta">
-     <property name="geometry">
-      <rect>
-       <x>900</x>
-       <y>0</y>
-       <width>100</width>
-       <height>40</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="contextMenuPolicy">
-      <enum>Qt::ActionsContextMenu</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-background-color: #7AB32E;
- }
-QPushButton:hover{
-background-color: #40a286
-}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </widget>
    <widget class="QTableWidget" name="tb_APagar">
     <property name="geometry">
      <rect>
@@ -607,6 +309,328 @@ padding: 2px;
       </brush>
      </property>
     </column>
+   </widget>
+   <widget class="QFrame" name="fr_TopoMenuAReceber">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1000</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:#E1DFE0;
+border: none;</string>
+    </property>
+    <widget class="QPushButton" name="bt_Busca">
+     <property name="geometry">
+      <rect>
+       <x>820</x>
+       <y>5</y>
+       <width>30</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::NoContextMenu</enum>
+     </property>
+     <property name="toolTip">
+      <string>BUSCAR</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_Print">
+     <property name="geometry">
+      <rect>
+       <x>860</x>
+       <y>5</y>
+       <width>30</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::NoContextMenu</enum>
+     </property>
+     <property name="toolTip">
+      <string>IMPRIMIR</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="dt_Inicio">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>16</y>
+       <width>140</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QDateEdit {
+background: #E1DFE0;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 20px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+ QDateEdit::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QDateEdit::down-arrow {
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
+ }</string>
+     </property>
+     <property name="displayFormat">
+      <string>dd/MM/yyyy</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_25">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>2</y>
+       <width>120</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+
+color:#1E87F0;
+border: none;
+}</string>
+     </property>
+     <property name="text">
+      <string>DATA ÍNICIO</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_26">
+     <property name="geometry">
+      <rect>
+       <x>530</x>
+       <y>2</y>
+       <width>120</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+
+color:#1E87F0;
+border: none;
+}</string>
+     </property>
+     <property name="text">
+      <string>DATA FIM</string>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="dt_Fim">
+     <property name="geometry">
+      <rect>
+       <x>530</x>
+       <y>16</y>
+       <width>140</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QDateEdit {
+background: #E1DFE0;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 20px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+ QDateEdit::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QDateEdit::down-arrow {
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
+ }</string>
+     </property>
+     <property name="displayFormat">
+      <string>dd/MM/yyyy</string>
+     </property>
+     <property name="calendarPopup">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cb_Situacao">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>16</y>
+       <width>120</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QComboBox{
+background: #E1DFE0;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 14px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 25px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
+ }
+</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>PENDENTE</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>RECEBIDO</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_29">
+     <property name="geometry">
+      <rect>
+       <x>690</x>
+       <y>2</y>
+       <width>120</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+
+color:#1E87F0;
+border: none;
+}</string>
+     </property>
+     <property name="text">
+      <string>SITUAÇÃO</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_AddConta">
+     <property name="geometry">
+      <rect>
+       <x>900</x>
+       <y>0</y>
+       <width>100</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #7AB32E;
+ }
+QPushButton:hover{
+background-color: #40a286
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="tx_Buscar">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>5</y>
+       <width>350</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+color: #000
+}
+</string>
+     </property>
+     <property name="placeholderText">
+      <string>PROCURAR POR...</string>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

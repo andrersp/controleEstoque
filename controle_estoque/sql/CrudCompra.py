@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import datetime
+from datetime import date
+
+
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 from sqlalchemy import case
@@ -187,7 +189,6 @@ class CrudCompra(object):
             self.valorPendente = busca.valor_pendente
             self.idStatusEntrega = busca.entrega
             self.idStatusPagamento = busca.pagamento
-            self.statusPagamento = busca.pagamento
 
             # Fechando Conexao
             sessao.close()
@@ -245,8 +246,10 @@ class CrudCompra(object):
             # Salvando resultado da query e suas listas
             for row in self.query:
                 self.id.append(row.id)
-                self.dataEmissao.append(row.data_emissao)
-                self.prazoEntrega.append(row.prazo_entrega)
+                self.dataEmissao.append(
+                    date.strftime(row.data_emissao, "%d-%m-%Y"))
+                self.prazoEntrega.append(
+                    date.strftime(row.prazo_entrega, "%d-%m-%Y"))
                 self.valorTotal.append(row.valor_total)
                 self.idStatusEntrega.append(row.entrega)
                 self.statusEntrega.append(row.status_entrega)

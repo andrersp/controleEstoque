@@ -38,8 +38,13 @@ class Financeiro(object):
 
         self.IconeBotaoMenu(self.bt_Imprimir,
                             self.resourcepath('Images/gtk-print.png'))
+
+        self.IconeBotaoMenu(
+            self.bt_PrintRecibo, self.resourcepath('Images/gtk-print.png'))
+
         self.IconeBotaoMenu(self.bt_AddCategoriaProduto,
                             self.resourcepath('Images/edit-add.png'))
+
         self.IconeBotaoMenu(self.bt_CancelAddCatergoria,
                             self.resourcepath('Images/edit-delete.png'))
         self.bt_CancelAddCatergoria.setHidden(True)

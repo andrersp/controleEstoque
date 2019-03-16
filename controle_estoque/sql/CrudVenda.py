@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date
+
+
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 from sqlalchemy import case
@@ -241,8 +244,10 @@ class CrudVenda(object):
 
             for row in self.query:
                 self.id.append(row.id)
-                self.dataEmissao.append(row.data_emissao)
-                self.prazoEntrega.append(row.prazo_entrega)
+                self.dataEmissao.append(
+                    date.strftime(row.data_emissao, "%d-%m-%Y"))
+                self.prazoEntrega.append(
+                    date.strftime(row.prazo_entrega, "%d-%m-%Y"))
                 self.valorTotal.append(row.valor_total)
                 self.idStatusEntrega.append(row.entrega)
                 self.statusEntrega.append(row.status_entrega)

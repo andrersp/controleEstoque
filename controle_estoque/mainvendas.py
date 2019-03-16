@@ -33,6 +33,9 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         # Busca Vendas
         self.bt_BuscaVendas.clicked.connect(self.DataTabVendas)
 
+        # Imprimir Tabela
+        self.bt_PrintRelatVendas.clicked.connect(self.imprimirTabVenda)
+
         # Setando data Inicio e Fim da Consulta
         self.dt_InicioVenda.setDate(self.primeiroDiaMes())
         self.dt_FimVenda.setDate(self.ultimoDiaMes())
@@ -568,6 +571,42 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             formaPagamentoParcela=financeiro.formaPagamento
 
         )
+
+        self.documento.load(QUrl("file:///" +
+                                 self.resourcepath("report.html")))
+        self.documento.loadFinished['bool'].connect(self.previaImpressao)
+
+    # Imprimindo Tabela Vendas
+    def imprimirTabVenda(self):
+        self.documento = QWebEngineView()
+
+        headertable = ["Cliente", "Emissão ",
+                       "Vencimento", "Valor"]
+
+        data_inicio = QDate.toString(self.dt_InicioVenda.date(), "dd-MM-yyyy")
+        data_fim = QDate.toString(self.dt_FimVenda.date(), "dd-MM-yyyy")
+
+        cliente = []
+        descricao = []
+        vencimento = []
+        valor = []
+
+        for i in range(self.tb_Vendas.rowCount()):
+            cliente.append(self.tb_Vendas.cellWidget(i, 2).text())
+            descricao.append(self.tb_Vendas.cellWidget(i, 3).text())
+            vencimento.append(self.tb_Vendas.cellWidget(i, 4).text())
+            valor.append(self.tb_Vendas.cellWidget(i, 5).text())
+
+        self.renderTemplate(
+            "vendas.html",
+            estilo=self.resourcepath('Template/estilo.css'),
+            titulo="Relatório Vendas de de {} à {}".format(
+                data_inicio, data_fim),
+            headertable=headertable,
+            nome=cliente,
+            desc=descricao,
+            venc=vencimento,
+            valor=valor)
 
         self.documento.load(QUrl("file:///" +
                                  self.resourcepath("report.html")))

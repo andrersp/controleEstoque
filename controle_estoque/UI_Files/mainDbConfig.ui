@@ -487,6 +487,12 @@ color: #797979
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>tx_IpServer</tabstop>
+  <tabstop>tx_DbName</tabstop>
+  <tabstop>tx_DbUser</tabstop>
+  <tabstop>tx_DbPass</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

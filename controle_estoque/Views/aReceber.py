@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'aReceber.ui',
 # licensing of 'aReceber.ui' applies.
 #
-# Created: Wed Feb 13 01:28:41 2019
+# Created: Fri Mar 15 08:46:39 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -69,8 +69,9 @@ class Ui_ct_AReceber(object):
                                      "     border-bottom-right-radius: 3px;\n"
                                      " }\n"
                                      "QDateEdit::down-arrow {\n"
-                                     "     image: url("+self.resourcepath('Images/down.png')+");\n"
-                                     " }")
+                                     "image: url("+self.resourcepath('Images/down.png')+");\n"
+                                     " }\n"
+                                     "")
         self.dt_Inicio.setCalendarPopup(True)
         self.dt_Inicio.setObjectName("dt_Inicio")
         self.lb_FormVenda_25 = QtWidgets.QLabel(self.fr_TopoMenuAReceber)
@@ -114,8 +115,9 @@ class Ui_ct_AReceber(object):
                                   "     border-bottom-right-radius: 3px;\n"
                                   " }\n"
                                   "QDateEdit::down-arrow {\n"
-                                  "     image: url("+self.resourcepath('Images/down.png')+");\n"
-                                  " }")
+                                  "image: url("+self.resourcepath('Images/down.png')+");\n"
+                                  " }\n"
+                                  "")
         self.dt_Fim.setCalendarPopup(True)
         self.dt_Fim.setObjectName("dt_Fim")
         self.cb_Situacao = QtWidgets.QComboBox(self.fr_TopoMenuAReceber)
@@ -139,7 +141,8 @@ class Ui_ct_AReceber(object):
                                        "     border-bottom-right-radius: 3px;\n"
                                        " }\n"
                                        "QComboBox::down-arrow {\n"
-                                       "     image: url("+self.resourcepath('Images/down.png')+");\n"
+                                       "     image: url("+self.resourcepath(
+                                           'Images/down.png')+");\n"
                                        " }\n"
                                        "")
         self.cb_Situacao.setObjectName("cb_Situacao")
@@ -168,6 +171,17 @@ class Ui_ct_AReceber(object):
                                        "}")
         self.bt_AddConta.setText("")
         self.bt_AddConta.setObjectName("bt_AddConta")
+        self.tx_Buscar = QtWidgets.QLineEdit(self.fr_TopoMenuAReceber)
+        self.tx_Buscar.setGeometry(QtCore.QRect(0, 5, 350, 30))
+        font = QtGui.QFont()
+        font.setFamily("Arial")
+        self.tx_Buscar.setFont(font)
+        self.tx_Buscar.setFocusPolicy(QtCore.Qt.ClickFocus)
+        self.tx_Buscar.setStyleSheet("QLineEdit {\n"
+                                     "color: #000\n"
+                                     "}\n"
+                                     "")
+        self.tx_Buscar.setObjectName("tx_Buscar")
         self.tb_AReceber = QtWidgets.QTableWidget(self.fr_AReceber)
         self.tb_AReceber.setGeometry(QtCore.QRect(0, 40, 1000, 455))
         self.tb_AReceber.setProperty("cursor", QtCore.Qt.PointingHandCursor)
@@ -218,28 +232,8 @@ class Ui_ct_AReceber(object):
         item = QtWidgets.QTableWidgetItem()
         self.tb_AReceber.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        brush = QtGui.QBrush(QtGui.QColor(80, 79, 79))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        item.setForeground(brush)
         self.tb_AReceber.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        item.setTextAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        font = QtGui.QFont()
-        font.setFamily("Segoe UI")
-        font.setPointSize(10)
-        font.setBold(True)
-        font.setWeight(75)
-        item.setFont(font)
-        brush = QtGui.QBrush(QtGui.QColor(80, 79, 79))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        item.setForeground(brush)
         self.tb_AReceber.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.tb_AReceber.setHorizontalHeaderItem(4, item)
@@ -253,7 +247,7 @@ class Ui_ct_AReceber(object):
         self.tb_AReceber.horizontalHeader().setStretchLastSection(True)
         self.tb_AReceber.verticalHeader().setVisible(False)
         self.tb_AReceber.verticalHeader().setCascadingSectionResizes(True)
-        self.tb_AReceber.verticalHeader().setDefaultSectionSize(40)
+        self.tb_AReceber.verticalHeader().setDefaultSectionSize(50)
 
         self.tradAReceber(ct_AReceber)
         QtCore.QMetaObject.connectSlotsByName(ct_AReceber)
@@ -279,6 +273,8 @@ class Ui_ct_AReceber(object):
             "ct_AReceber", "RECEBIDO", None, -1))
         self.lb_FormVenda_29.setText(QtWidgets.QApplication.translate(
             "ct_AReceber", "SITUAÇÃO", None, -1))
+        self.tx_Buscar.setPlaceholderText(QtWidgets.QApplication.translate(
+            "ct_AReceber", "PROCURAR POR...", None, -1))
         self.tb_AReceber.horizontalHeaderItem(0).setText(
             QtWidgets.QApplication.translate("ct_AReceber", "ID", None, -1))
         self.tb_AReceber.horizontalHeaderItem(2).setText(
@@ -290,6 +286,6 @@ class Ui_ct_AReceber(object):
         self.tb_AReceber.horizontalHeaderItem(5).setText(
             QtWidgets.QApplication.translate("ct_AReceber", "VALOR", None, -1))
         self.tb_AReceber.horizontalHeaderItem(6).setText(
-            QtWidgets.QApplication.translate("ct_AReceber", "PENDENTE", None, -1))
+            QtWidgets.QApplication.translate("ct_AReceber", "SALDO", None, -1))
         self.tb_AReceber.horizontalHeaderItem(7).setText(
             QtWidgets.QApplication.translate("ct_AReceber", "RECEBER", None, -1))

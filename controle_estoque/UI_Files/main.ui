@@ -60,6 +60,12 @@ background: url(&quot;Images/bg.png&quot;) 0 0 no-repeat #0884c2
       <height>60</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <property name="styleSheet">
      <string notr="true">background: #4E4E4E</string>
     </property>

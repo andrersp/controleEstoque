@@ -11,6 +11,7 @@ from sql.Models import ContaAPagar
 from sql.Models import Fornecedor
 from sql.Models import StatusPagamento
 from sql.Models import CatAPagar
+from sql.Models import FormaPagamento
 
 
 class CrudContaAPagar(object):
@@ -106,7 +107,12 @@ class CrudContaAPagar(object):
             sessao = conecta.Session()
 
             # Query
-            self.query = (sessao.query(ContaAPagar).filter(
+            self.query = (sessao.query(ContaAPagar.__table__,
+                                       StatusPagamento.status_pagamento,
+                                       FormaPagamento.forma_pagamento.label('fpaga'))
+                          .join(StatusPagamento)
+                          .join(FormaPagamento)
+                          .filter(
                 ContaAPagar.id_compra == self.idCompra))
             self.query.all()
 
@@ -119,6 +125,7 @@ class CrudContaAPagar(object):
             self.formaPagamento = []
             self.valorPago = []
             self.idStatusPagamento = []
+            self.statusPagamento = []
 
             # Salvando resultado da query e suas listas
 
@@ -128,8 +135,10 @@ class CrudContaAPagar(object):
                 self.dataVencimento.append(row.data_vencimento)
                 self.valor.append(row.valor)
                 self.idFormaPagamento.append(row.forma_pagamento)
+                self.formaPagamento.append(row.fpaga)
                 self.valorPago.append(row.valor_pago)
                 self.idStatusPagamento.append(row.pagamento)
+                self.statusPagamento.append(row.status_pagamento)
 
             # Fechando a Conexao
             sessao.close()
@@ -332,21 +341,31 @@ class CrudContaAPagar(object):
 
             # Query
             row = (sessao.query(func.COALESCE(
-                func.SUM(ContaAPagar.valor), 0
-            ),
-                func.COALESCE(
                 func.SUM(ContaAPagar.valor_pago), 0
-            ))
+            ).label('valorPago'))
 
-                .filter(ContaAPagar.data_vencimento.between(
-                    self.dataVencimento, self.dataFim))
+                .filter(ContaAPagar.data_pagamento.between(
+                    self.dataPagamento, self.dataFim))
             )
             row.all()
 
             # Salvando resultado
-            for lista in row:
-                self.valorAPagar = lista[0]
-                self.valorPago = lista[1]
+            for row in row:
+                self.valorPago = row.valorPago
+
+            # Query
+            row = (sessao.query(func.COALESCE(
+                func.SUM(ContaAPagar.valor), 0
+            ).label('valorAPagar'))
+
+                .filter(ContaAPagar.data_vencimento.between(
+                    self.dataPagamento, self.dataFim))
+            )
+            row.all()
+
+            # Salvando resultado
+            for row in row:
+                self.valorAPagar = row.valorAPagar
 
             # Fechando a Conexao
             sessao.close

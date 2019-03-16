@@ -44,7 +44,7 @@ class MainMovimentoConta(Ui_ct_movimento):
             self.dt_fim.date(), "yyyy-MM-dd")
 
         busca = CrudContaAReceber()
-        busca.dataVencimento = dataInicio
+        busca.dataRecebimento = dataInicio
         busca.dataFim = dataFim
         busca.movEntrada()
 
@@ -105,7 +105,7 @@ class MainMovimentoConta(Ui_ct_movimento):
             self.dt_fim.date(), "yyyy-MM-dd")
 
         busca = CrudContaAPagar()
-        busca.dataVencimento = dataInicio
+        busca.dataPagamento = dataInicio
         busca.dataFim = dataFim
         busca.movDespesa()
 

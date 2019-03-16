@@ -11,6 +11,7 @@ from sql.Models import ContaAReceber
 from sql.Models import Cliente
 from sql.Models import StatusPagamento
 from sql.Models import CatAReceber
+from sql.Models import FormaPagamento
 
 
 class CrudContaAReceber(object):
@@ -107,7 +108,12 @@ class CrudContaAReceber(object):
             sessao = conecta.Session()
 
             # Query
-            self.query = (sessao.query(ContaAReceber).filter(
+            self.query = (sessao.query(ContaAReceber.__table__,
+                                       StatusPagamento.status_pagamento,
+                                       FormaPagamento.forma_pagamento.label('fpaga'))
+                          .join(StatusPagamento)
+                          .join(FormaPagamento)
+                          .filter(
                 ContaAReceber.id_venda == self.idVenda))
             self.query.all()
 
@@ -116,8 +122,10 @@ class CrudContaAReceber(object):
             self.descricao = []
             self.dataVencimento = []
             self.valor = []
+            self.formaPagamento = []
             self.idFormaPagamento = []
             self.valorRecebido = []
+            self.statusPagamento = []
             self.idStatusPagamento = []
 
             # Salvando resultado da query e suas listas
@@ -127,6 +135,7 @@ class CrudContaAReceber(object):
                 self.descricao.append(row.descricao)
                 self.dataVencimento.append(row.data_vencimento)
                 self.valor.append(row.valor)
+                self.formaPagamento.append(row.fpaga)
                 self.idFormaPagamento.append(row.forma_pagamento)
                 self.valorRecebido.append(row.valor_recebido)
                 self.idStatusPagamento.append(row.pagamento)
@@ -211,7 +220,6 @@ class CrudContaAReceber(object):
 
             # Query
             self.query = (sessao.query(ContaAReceber.__table__,
-                                       Cliente.id,
                                        Cliente.nome,
                                        Cliente.celular,
                                        StatusPagamento.status_pagamento)
@@ -331,21 +339,31 @@ class CrudContaAReceber(object):
 
             # Query
             row = (sessao.query(func.COALESCE(
-                func.SUM(ContaAReceber.valor), 0
-            ),
-                func.COALESCE(
                 func.SUM(ContaAReceber.valor_recebido), 0
-            ))
+            ).label('valorRecebido'))
 
-                .filter(ContaAReceber.data_vencimento.between(
-                    self.dataVencimento, self.dataFim))
+                .filter(ContaAReceber.data_recebimento.between(
+                    self.dataRecebimento, self.dataFim))
             )
             row.all()
 
             # Salvando resultado
-            for lista in row:
-                self.valorAReceber = lista[0]
-                self.valorRecebido = lista[1]
+            for row in row:
+                self.valorRecebido = row.valorRecebido
+
+            # Query
+            row = (sessao.query(func.COALESCE(
+                func.SUM(ContaAReceber.valor), 0
+            ).label('valorAReceber'))
+
+                .filter(ContaAReceber.data_vencimento.between(
+                    self.dataRecebimento, self.dataFim))
+            )
+            row.all()
+
+            # Salvando resultado
+            for row in row:
+                self.valorAReceber = row.valorAReceber
 
             # Fechando a Conexao
             sessao.close
@@ -365,7 +383,8 @@ class CrudContaAReceber(object):
             sessao = conecta.Session()
 
             # Query
-            self.query = (sessao.query(func.SUM(ContaAReceber.valor_recebido),
+            self.query = (sessao.query(func.SUM(ContaAReceber.valor_recebido).label('entrada'),
+                                       ContaAReceber.categoria,
                                        CatAReceber.categoria_a_receber)
                           .join(CatAReceber)
                           .filter(ContaAReceber.data_recebimento
@@ -381,7 +400,7 @@ class CrudContaAReceber(object):
             # Salvando resultado em suas listas
             for row in self.query:
                 self.categoria.append(row.categoria_a_receber)
-                self.valorRecebido.append(row[0])
+                self.valorRecebido.append(row.entrada)
 
             # Fechando a Conexao
             sessao.close()

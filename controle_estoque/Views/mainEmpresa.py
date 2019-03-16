@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'mainEmpresa.ui',
 # licensing of 'mainEmpresa.ui' applies.
 #
-# Created: Sun Mar  3 16:52:27 2019
+# Created: Fri Mar 15 09:55:46 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -530,6 +530,25 @@ class Ui_ct_empresa(object):
 
         self.tradMainEmpresa(ct_empresa)
         QtCore.QMetaObject.connectSlotsByName(ct_empresa)
+        ct_empresa.setTabOrder(self.tx_idEmpresa, self.tx_NomeFantasia)
+        ct_empresa.setTabOrder(self.tx_NomeFantasia, self.tx_RazaoSocial)
+        ct_empresa.setTabOrder(self.tx_RazaoSocial, self.tx_Cnpj)
+        ct_empresa.setTabOrder(self.tx_Cnpj, self.tx_IE)
+        ct_empresa.setTabOrder(self.tx_IE, self.tx_TelefoneEmpresa)
+        ct_empresa.setTabOrder(self.tx_TelefoneEmpresa, self.tx_SiteEmpresa)
+        ct_empresa.setTabOrder(self.tx_SiteEmpresa, self.tx_EmailEmpresa)
+        ct_empresa.setTabOrder(self.tx_EmailEmpresa, self.tx_ObsEmpresa)
+        ct_empresa.setTabOrder(self.tx_ObsEmpresa, self.tx_CepEmpresa)
+        ct_empresa.setTabOrder(self.tx_CepEmpresa, self.bt_LocalizaCepEmpresa)
+        ct_empresa.setTabOrder(self.bt_LocalizaCepEmpresa, self.tx_Endereco)
+        ct_empresa.setTabOrder(self.tx_Endereco, self.tx_NumEmpresa)
+        ct_empresa.setTabOrder(self.tx_NumEmpresa, self.tx_BairroEmpresa)
+        ct_empresa.setTabOrder(self.tx_BairroEmpresa, self.tx_CidadeEmpresa)
+        ct_empresa.setTabOrder(self.tx_CidadeEmpresa, self.tx_EstadoEmpresa)
+        ct_empresa.setTabOrder(self.tx_EstadoEmpresa, self.tx_Titulo)
+        ct_empresa.setTabOrder(self.tx_Titulo, self.tx_SubTitulo)
+        ct_empresa.setTabOrder(self.tx_SubTitulo, self.bt_AddLogo)
+        ct_empresa.setTabOrder(self.bt_AddLogo, self.bt_DelLogo)
 
     def tradMainEmpresa(self, ct_empresa):
         ct_empresa.setWindowTitle(QtWidgets.QApplication.translate("ct_empresa", "Frame", None, -1))

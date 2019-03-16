@@ -1,8 +1,10 @@
 # -*- codind: utf-8 -*-
 from functools import partial
+from datetime import date
 
 
-from PySide2.QtCore import QDate, Qt
+from PySide2.QtCore import QDate, Qt, QUrl
+from PySide2.QtWebEngineWidgets import QWebEngineView
 
 
 from Views.aReceber import Ui_ct_AReceber
@@ -12,6 +14,8 @@ from Views.formAReceber import Ui_ct_FormReceber
 from sql.CrudContaAReceber import CrudContaAReceber
 from sql.CrudCatAReceber import CrudCatAReceber
 from sql.CrudStatusPagamento import CrudStatusPagamento
+
+from Funcoes.extenso import retorno
 
 
 class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
@@ -37,7 +41,11 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         self.tabelaAReceber()
 
         # Funcao chamada botoes
+        # Buscar
         self.bt_Busca.clicked.connect(self.tabelaAReceber)
+
+        # Imprimir
+        self.bt_Print.clicked.connect(self.imprimirAReceber)
 
         # Abrindo form cadastrar
         self.bt_AddConta.clicked.connect(self.formAReceber)
@@ -71,6 +79,9 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         while self.tb_AReceber.rowCount() > 0:
             self.tb_AReceber.removeRow(0)
 
+        self.totalRecebido = 0.00
+        self.totalPendente = 0.00
+
         i = 0
         for lista in busca.nomeCliente:
             self.tb_AReceber.insertRow(i)
@@ -96,6 +107,13 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
                 self.tb_AReceber, i, 7, partial(
                     self.BuscaContaAReceber, busca.id[i]),
                 "Receber",  2)
+
+            # Total Pendente
+            self.totalPendente = self.totalPendente + \
+                float((busca.valor[i] - busca.valorRecebido[i]))
+            # Total Recebido
+            self.totalRecebido = self.totalRecebido + \
+                float(busca.valorRecebido[i])
 
             i += 1
 
@@ -170,6 +188,9 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         # Botao Receber
         self.bt_receber.clicked.connect(self.ReceberParcela)
 
+        # Imprimir Recibo
+        self.bt_PrintRecibo.clicked.connect(self.imprimirReciboRec)
+
         # Botao Salvar
         self.bt_Salvar.clicked.connect(self.validaCadReceber)
 
@@ -208,7 +229,12 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
 
         if busca.idStatusPagamento == 1:
             self.bt_receber.setDisabled(True)
+            self.bt_PrintRecibo.setVisible(True)
             self.desabilitaLineEdit(self.fr_FormReceber)
+
+        elif busca.idStatusPagamento == 2:
+            self.bt_receber.setEnabled(True)
+
         self.cb_repetir.setHidden(True)
         self.lb_Repetir.setHidden(True)
         self.lb_obsRepetir.setHidden(True)
@@ -274,3 +300,74 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
         self.CalcelAddFinanceiro(self.bt_CancelAddCatergoria,
                                  self.bt_AddCategoriaProduto, self.tx_addCategoria,
                                  self.cb_categoria)
+
+    # Imprimindo
+    def imprimirAReceber(self):
+        self.documento = QWebEngineView()
+
+        headertable = ["Cliente", "Descrição ",
+                       "Vencimento", "Valor", "V. Pendente"]
+
+        data_inicio = QDate.toString(self.dt_Inicio.date(), "dd-MM-yyyy")
+        data_fim = QDate.toString(self.dt_Fim.date(), "dd-MM-yyyy")
+
+        if self.cb_Situacao.currentData() == '1':
+            situacao = "Recebida"
+
+        elif self.cb_Situacao.currentData() == '2':
+            situacao = "Pendente"
+
+        cliente = []
+        descricao = []
+        vencimento = []
+        valor = []
+        pendente = []
+        for i in range(self.tb_AReceber.rowCount()):
+            cliente.append(self.tb_AReceber.cellWidget(i, 2).text())
+            descricao.append(self.tb_AReceber.cellWidget(i, 3).text())
+            vencimento.append(self.tb_AReceber.cellWidget(i, 4).text())
+            valor.append(self.tb_AReceber.item(i, 5).text())
+            pendente.append(self.tb_AReceber.item(i, 6).text())
+
+        self.renderTemplate(
+            "areceber.html",
+            estilo=self.resourcepath('Template/estilo.css'),
+            titulo="Relatório de conta a receber {} de {} à {}".format(
+                situacao, data_inicio, data_fim),
+            headertable=headertable,
+            nome=cliente,
+            desc=descricao,
+            venc=vencimento,
+            valor=valor,
+            pendente=pendente,
+            totalPen=format(self.totalPendente, '.2f'),
+            totalRec=format(self.totalRecebido, '.2f')
+
+
+        )
+
+        self.documento.load(QUrl("file:///" +
+                                 self.resourcepath("report.html")))
+        self.documento.loadFinished['bool'].connect(self.previaImpressao)
+
+    # Imprimindo
+
+    def imprimirReciboRec(self):
+
+        self.documento = QWebEngineView()
+
+        self.renderTemplate(
+            "recibo.html",
+            estilo=self.resourcepath('Template/estilo.css'),
+            cod=self.tx_Cod.text(),
+            nome=self.tx_NomeFantasia.text(),
+            descricao=self.tx_descricao.text(),
+            valor=self.tx_valor.text().replace('.', ','),
+            valor_ext=retorno(self.tx_valor.text()),
+            data=date.today().strftime("%d-%m-%Y")
+
+        )
+
+        self.documento.load(QUrl("file:///" +
+                                 self.resourcepath("report.html")))
+        self.documento.loadFinished['bool'].connect(self.previaImpressao)

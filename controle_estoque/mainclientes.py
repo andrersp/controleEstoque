@@ -213,7 +213,7 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
 
         pass
 
-        # Imprimindo
+    # Imprimindo
 
     def imprimirCliente(self):
         self.documento = QWebEngineView()
