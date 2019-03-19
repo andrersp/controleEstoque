@@ -75,5 +75,5 @@ class CreateDb(object):
 
             sessao.commit()
 
-        except ProgrammingError as err:
-            print(err)
+        except:
+            pass

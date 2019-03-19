@@ -16,6 +16,7 @@ from sql.CrudContaAReceber import CrudContaAReceber
 from sql.CrudRelVenda import CrudRelVenda
 from sql.CrudCliente import CrudCliente
 from Funcoes.data import DataAtual
+from Funcoes.cb_status import cb_statusPagamento, cb_statusEntrega
 
 # from Funcoes.BuscaProdutos import BuscaProdutos
 
@@ -26,12 +27,27 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         super(MainVendas, self).setMainVendas(frame)
         self.frameMainVendas.show()
 
+        # Adicionando botao limpar
+        self.tx_BuscaVendas.setClearButtonEnabled(True)
+
+        """ 
+        Populando combobox status pagamento e entrega.
+        Funcao chamada no arquivo cb_statusPagamento.py na pasta Funcoes
+        """
+        # Pagamento
+        cb_statusPagamento(self.cb_pagamento)
+        # Entrega
+        cb_statusEntrega(self.cb_entrega)
+
         """ Definindo funcões widgets"""
         # Botao Adicionar Venda
         self.bt_AddNovoVenda.clicked.connect(self.FormVendas)
 
         # Busca Vendas
         self.bt_BuscaVendas.clicked.connect(self.DataTabVendas)
+
+        # Busca Instantanea ao digitar nome do cliente
+        self.tx_BuscaVendas.textEdited.connect(self.DataTabVendas)
 
         # Imprimir Tabela
         self.bt_PrintRelatVendas.clicked.connect(self.imprimirTabVenda)
@@ -71,6 +87,9 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         lista.dataFim = QDate.toString(
             self.dt_FimVenda.date(), 'yyyy-MM-dd')
+
+        lista.statusPagamento = self.cb_pagamento.currentData()
+        lista.statusEntrega = self.cb_entrega.currentData()
         lista.listaVenda(cliente)
 
         while self.tb_Vendas.rowCount() > 0:
@@ -411,6 +430,8 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             for item in self.fr_addProduto.findChildren(QLineEdit):
                 item.setDisabled(True)
             self.bt_Salvar.setDisabled(True)
+            self.cb_FormaPagamento.setDisabled(True)
+            self.cb_QtdeParcela.setDisabled(True)
         i = 0
         while i < len(busca.dataVencimento):
             self.tb_Parcelas.insertRow(i)

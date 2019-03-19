@@ -109,7 +109,7 @@ class Financeiro(object):
         campo.setValidator(validaInt)
 
     def ValidaInputFloat(self, campo):
-        validarValor = QDoubleValidator(0.00, 999.99, 2)
+        validarValor = QDoubleValidator(0.00, 9999.99, 2)
         validarValor.setNotation(QDoubleValidator.StandardNotation)
         validarValor.setDecimals(2)
         campo.setValidator(validarValor)

@@ -224,10 +224,16 @@ class CrudCompra(object):
                           .join(StatusEntrega)
                           .join(StatusPagamento)
                           .order_by(desc(Compra.id))
-                          .filter(Fornecedor.nome_fantasia.contains(fornecedor),
+                          .filter(Compra.categoria == '1',
+                                  Compra.pagamento.contains(
+                                      self.statusPagamento),
+                                  Compra.entrega.contains(self.statusEntrega),
+                                  Fornecedor.nome_fantasia.contains(
+                                      fornecedor),
                                   Compra.data_emissao.between(self.dataEmissao,
                                                               self.dataFim),
-                                  Compra.categoria == '1')
+                                  Compra.prazo_entrega.between(self.dataEmissao,
+                                                               self.dataFim))
                           )
             self.query.all()
 
@@ -285,10 +291,8 @@ class CrudCompra(object):
             # Fechando a Conexao
             sessao.close()
 
-        except peewee.InternalError as err:
+        except IntegrityError as err:
             print(err)
-
-    # Atualizando valor recebido e alterando status
 
     # Atualizando valor recebido e alterando status
 
@@ -320,3 +324,24 @@ class CrudCompra(object):
 
         except IntegrityError as err:
             print(err)
+
+    # Lista de Pedidos a receber hoje
+    def pedidosAReceber(self):
+
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            row = sessao.query(Compra.prazo_entrega).filter(
+                Compra.prazo_entrega == date.today()).count()
+
+            # Fechando Conexao
+            sessao.close()
+
+        except IntegrityError as err:
+            print(err)
+
+        return row

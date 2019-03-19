@@ -83,7 +83,8 @@ class MainEmpresa(Ui_ct_empresa):
         self.tx_RazaoSocial.setText(busca.razaoSocial)
         self.tx_Cnpj.setText(str(busca.cnpj))
         self.tx_IE.setText(str(busca.inscEstadual))
-        self.tx_TelefoneEmpresa.setText(str(busca.telefone))
+        self.tx_TelefoneEmpresa.setText(
+            self.formatoNumTelefone((busca.telefone)))
         self.tx_SiteEmpresa.setText(busca.site)
         self.tx_EmailEmpresa.setText(busca.email)
         self.tx_ObsEmpresa.setText(busca.obs)

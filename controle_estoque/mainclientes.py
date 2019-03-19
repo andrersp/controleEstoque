@@ -219,21 +219,27 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         self.documento = QWebEngineView()
 
         headertable = ["Cod", "Nome ", "Telefone", "Email"]
-        busca = CrudCliente()
-        busca.nome = self.tx_BuscaClientes.text()
-        busca.listaCliente()
+        cod = []
+        nome = []
         telefone = []
-        for row in busca.celular:
-            telefone.append(self.formatoNumTelefone(row))
+        email = []
+
+        i = 0
+        for row in range(self.tb_Clientes.rowCount()):
+            cod.append(self.tb_Clientes.cellWidget(i, 1).text())
+            nome.append(self.tb_Clientes.cellWidget(i, 2).text())
+            telefone.append(self.tb_Clientes.cellWidget(i, 3).text())
+            email.append(self.tb_Clientes.cellWidget(i, 4).text())
+
         self.renderTemplate(
             "clientes.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="LISTAGEM CLIENTES",
             headertable=headertable,
-            codcliente=busca.id,
-            nome=busca.nome,
+            codcliente=cod,
+            nome=nome,
             telefoneFornecedor=telefone,
-            emailFornecedor=busca.email
+            emailFornecedor=email
         )
 
         self.documento.load(QUrl("file:///" +

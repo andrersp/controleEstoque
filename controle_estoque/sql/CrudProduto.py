@@ -2,6 +2,7 @@
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
+from sqlalchemy import func
 
 from sql.core import Conexao
 from sql.Models import Produto, CategoriaProduto, MarcaProduto
@@ -184,7 +185,7 @@ class CrudProduto(object):
                                        MarcaProduto.marca_produto
                                        )
                           .join(MarcaProduto)
-                          .filter(Produto.produto.like('%{}%'.format(self.produto)))
+                          .filter(Produto.produto.contains(self.produto))
                           )
             self.query.all()
 
@@ -231,7 +232,7 @@ class CrudProduto(object):
 
             # Query
             self.query = (sessao.query(Produto.produto).filter(
-                Produto.produto.like('%{}%'.format(self.produto))))
+                Produto.produto.contains(self.produto)))
             self.query.all()
 
             # Convertendo variavel em lista
@@ -315,3 +316,45 @@ class CrudProduto(object):
 
         except IntegrityError as err:
             print(err)
+
+    # LIstar produtos com estoque abaixo do minimo
+    def listaEstoqueBaixo(self):
+
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            row = sessao.query(Produto).filter(
+                Produto.qtde < Produto.estoque_minimo).count()
+
+            # Fechando Sessao
+            sessao.close()
+
+        except IntegrityError as err:
+            print(err)
+
+        return row
+
+    # Lista total de Produtos
+
+    def totalProdutoCadastrado(self):
+
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            row = sessao.query(Produto).count()
+
+            # Fechando Sessao
+            sessao.close()
+
+        except IntegrityError as err:
+            print(err)
+
+        return row

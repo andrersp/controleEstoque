@@ -46,6 +46,14 @@ class Funcao(object):
         botao.setIcon(icon)
         botao.setIconSize(QSize(25, 25))
 
+    def IconeHome(self, botao, imagem):
+
+        icon = QIcon()
+        icon.addPixmap(QPixmap(imagem),
+                       QIcon.Normal, QIcon.Off)
+        botao.setIcon(icon)
+        botao.setIconSize(QSize(130, 120))
+
     def IconeBotaoForm(self, botao, imagem):
         icon = QIcon()
         icon.addPixmap(QPixmap(imagem),

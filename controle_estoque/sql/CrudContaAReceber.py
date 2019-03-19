@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date
+
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 from sqlalchemy import case
@@ -139,6 +141,7 @@ class CrudContaAReceber(object):
                 self.idFormaPagamento.append(row.forma_pagamento)
                 self.valorRecebido.append(row.valor_recebido)
                 self.idStatusPagamento.append(row.pagamento)
+                self.statusPagamento.append(row.status_pagamento)
 
             # Fechando a Conexao
             sessao.close()
@@ -248,7 +251,8 @@ class CrudContaAReceber(object):
                 self.nomeCliente.append(row.nome)
                 self.telefoneCliente.append(row.celular)
                 self.descricao.append(row.descricao)
-                self.dataVencimento.append(row.data_vencimento)
+                self.dataVencimento.append(
+                    date.strftime(row.data_vencimento, "%d-%m-%Y"))
                 self.valor.append(row.valor)
                 self.valorRecebido.append(row.valor_recebido)
                 self.idStatusPagamento.append(row.pagamento)
@@ -384,26 +388,52 @@ class CrudContaAReceber(object):
 
             # Query
             self.query = (sessao.query(func.SUM(ContaAReceber.valor_recebido).label('entrada'),
-                                       ContaAReceber.categoria,
-                                       CatAReceber.categoria_a_receber)
+                                       CatAReceber.categoria_a_receber,
+                                       FormaPagamento.forma_pagamento)
                           .join(CatAReceber)
+                          .join(FormaPagamento)
                           .filter(ContaAReceber.data_recebimento
                                   .between(self.dataRecebimento,
                                            self.dataFim))
-                          .group_by(ContaAReceber.categoria)
+                          .group_by(ContaAReceber.forma_pagamento, ContaAReceber.categoria)
                           )
 
             # Convertendo variaveis em lista
             self.valorRecebido = []
             self.categoria = []
+            self.formaPagamento = []
 
             # Salvando resultado em suas listas
             for row in self.query:
                 self.categoria.append(row.categoria_a_receber)
                 self.valorRecebido.append(row.entrada)
+                self.formaPagamento.append(row.forma_pagamento)
 
             # Fechando a Conexao
             sessao.close()
 
         except IntegrityError as err:
             print(err)
+
+    # Total a Receber Hoje
+    def aReceberHoje(self):
+
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            row = (sessao.query(func.COALESCE(
+                func.SUM(ContaAReceber.valor), 0).label('total'))
+                .filter(ContaAReceber.data_vencimento == date.today(), ContaAReceber.pagamento == 2))
+
+            # Salvando Resultado
+            for row in row:
+                self.valorAReceber = row.total
+
+        except IntegrityError as err:
+            print(err)
+
+        return self.valorAReceber

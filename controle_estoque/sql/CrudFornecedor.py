@@ -188,8 +188,7 @@ class CrudFornecedor(object):
 
             # Query
             self.query = sessao.query(Fornecedor).filter(
-                Fornecedor.nome_fantasia.like('%{}%'.format(
-                    self.nomeFantasia)))
+                Fornecedor.nome_fantasia.contains(self.nomeFantasia))
             self.query.all()
 
             # Convertendo variaveis em lista
@@ -229,8 +228,7 @@ class CrudFornecedor(object):
 
             # Query
             self.query = sessao.query(Fornecedor).filter(
-                Fornecedor.nome_fantasia.like('%{}%'.format(
-                    self.nomeFantasia)))
+                Fornecedor.nome_fantasia.contains(self.nomeFantasia))
             self.query.all()
 
             # Convertendo variaveis em lista

@@ -13,9 +13,6 @@ class MainFinanceiro(Ui_ct_MainFinanceiro, DataAtual, MainMovimentoConta,
         super(MainFinanceiro, self).setMainFinanceiro(frame)
         self.frameMainFinanceiro.show()
 
-        # Abrindo janena Movimento Financeiro
-        self.JanelaMovimento()
-
         """ Chamando funcoes ao clicar nos botoes """
         # Movimento Financeiro
         self.bt_MovCaixa.clicked.connect(self.JanelaMovimento)
@@ -25,6 +22,9 @@ class MainFinanceiro(Ui_ct_MainFinanceiro, DataAtual, MainMovimentoConta,
 
         # Conta a Receber
         self.bt_APagar.clicked.connect(self.JanelaAPagar)
+
+        # Abrindo janena Movimento Financeiro
+        self.JanelaMovimento()
 
     def JanelaMovimento(self):
         self.LimpaFrame(self.ct_financeiro)

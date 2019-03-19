@@ -411,21 +411,34 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         self.documento = QWebEngineView()
 
         headertable = ["Cod", "Descrição", "Disponível",
-                       "Valor Unitário", "Valor Atacado", 'Min. Atacado']
-        busca = CrudProduto()
-        busca.produto = self.tx_BuscaProduto.text()
-        busca.listaProduto()
+                       "Valor Unitário", "Valor Atacado"]
+
+        cod = []
+        produto = []
+        qtde = []
+        vunit = []
+        vatac = []
+        qtdeatac = []
+
+        i = 0
+        for i in range(self.tb_produtos.rowCount()):
+            cod.append(self.tb_produtos.cellWidget(i, 2).text())
+            produto.append(self.tb_produtos.cellWidget(i, 3).text())
+            qtde.append(self.tb_produtos.cellWidget(i, 4).text())
+            vunit.append(self.tb_produtos.cellWidget(i, 5).text())
+            vatac.append(self.tb_produtos.cellWidget(i, 6).text())
+
         html = self.renderTemplate(
             "estoque.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="LISTAGEM PRODUTOS",
             headertable=headertable,
-            codProduto=busca.id,
-            descPRoduto=busca.produto,
-            qtdeEstoque=busca.qtdeProduto,
-            valorUnitario=busca.valorUnitario,
-            valorAtacado=busca.valorAtacado,
-            qtdeAtacado=busca.qtdeAtacado
+            codProduto=cod,
+            descPRoduto=produto,
+            qtdeEstoque=qtde,
+            valorUnitario=vunit,
+            valorAtacado=vatac
+
 
         )
 

@@ -224,5 +224,4 @@ class Comercial(object):
         busca.produto = self.tx_BuscaItem.text()
         busca.buscaProdutoNome()
         self.tx_IdBuscaItem.setText(str(busca.id))
-        print("BuscaNome")
         self.BuscaProdutoId()

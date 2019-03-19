@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="3.1845083cm"
+   height="1.9161884cm"
+   viewBox="0 0 31.845083 19.161882"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="novaCompra.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.42092803"
+     inkscape:cx="-34.022482"
+     inkscape:cy="99.461386"
+     inkscape:document-units="cm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="996"
+     inkscape:window-x="0"
+     inkscape:window-y="31"
+     inkscape:window-maximized="1"
+     units="cm"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-23.558483,-85.276782)">
+    <g
+       transform="matrix(0.01349915,0,0,0.01349915,30.801361,96.000101)"
+       style="fill:#e6e6e6;fill-opacity:1"
+       id="g12">
+      <g
+         style="fill:#ffffff;fill-opacity:1"
+         id="g10"
+         transform="matrix(2.4804417,0,0,2.4804417,-16.284859,-864.3184)">
+        <path
+           inkscape:connector-curvature="0"
+           style="fill:#ffffff;fill-opacity:1"
+           id="path2"
+           d="m 370.7,379.4 c -22.9,0 -41.7,18.8 -41.7,41.7 0,22.9 18.8,41.7 41.7,41.7 22.9,0 41.7,-18.8 41.7,-41.7 0,-22.9 -18.8,-41.7 -41.7,-41.7 z m 20.8,41.7 c 0,11.5 -9.4,20.9 -20.9,20.9 -11.5,0 -20.9,-9.4 -20.9,-20.9 0,-11.5 9.4,-20.9 20.9,-20.9 12.6,0.1 22,9.5 20.9,20.9 z" />
+        <path
+           inkscape:connector-curvature="0"
+           style="fill:#ffffff;fill-opacity:1"
+           id="path4"
+           d="m 224.7,379.4 c -22.9,0 -41.7,18.8 -41.7,41.7 0,22.9 18.8,41.7 41.7,41.7 22.9,0 41.7,-18.8 41.7,-41.7 0,-22.9 -18.7,-41.7 -41.7,-41.7 z m 0,62.6 c -11.5,0 -20.9,-9.4 -20.9,-20.9 0,-11.5 9.4,-20.9 20.9,-20.9 11.5,0 20.9,9.4 20.9,20.9 0,11.5 -9.4,20.9 -20.9,20.9 z" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path6"
+           d="M 403,343.1 H 199.7 L 153,182.5 h 316.7 z"
+           style="fill:#ffffff;fill-opacity:1" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path835"
+           d="M 147,161.6 108,28.2 H 11 V 48 h 81.3 l 92.8,315.9 H 416.5 L 501,161.6 Z"
+           style="fill:#ffffff;fill-opacity:1" />
+      </g>
+      <text
+         id="text2049"
+         y="620.37134"
+         x="630.88165"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:313.59997559px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:'Tahoma, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:5.92431593"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:313.59997559px;font-family:Tahoma;-inkscape-font-specification:'Tahoma, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;stroke-width:5.92431593"
+           y="620.37134"
+           x="630.88171"
+           sodipodi:role="line"
+           id="tspan2051">NOVA COMPRA</tspan></text>
+    </g>
+  </g>
+</svg>

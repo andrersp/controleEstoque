@@ -91,7 +91,8 @@ table.TableRelat th, td {
 
   /* table.TableRelat td:nth-child(even) {background: #FFF} */
 table.TableRelat tbody td {
-  border-bottom: 1px solid #CCC
+  border-bottom: 1px solid #CCC;
+  vertical-align: top;
 }
 
 
@@ -216,13 +217,13 @@ table.financeiro tfoot {
   }
 
 table.financeiro tfoot th {
-  font: 11px "Tahoma";
+  font: 13px "Verdana";
   text-align: right
 
 }
 
 table.financeiro tfoot tr th:last-child {
-  font: 12px "Tahoma";
+  font: 14px "Arial";
   text-align: center;
   font-weight: bold
 }

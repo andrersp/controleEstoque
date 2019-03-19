@@ -193,7 +193,7 @@ class CrudCliente(object):
 
             # Query
             query = sessao.query(Cliente).filter(
-                Cliente.nome.like('%{}%'.format(self.nome)))
+                Cliente.nome.contains(self.nome))
             query.all()
 
             # # Convertendo variaveis em lista
@@ -236,7 +236,7 @@ class CrudCliente(object):
 
             # Query
             self.query = sessao.query(Cliente).filter(
-                Cliente.nome.like('%{}%'.format(self.nome)))
+                Cliente.nome.contains(self.nome))
             self.query.all()
 
             # Convertendo variavel em lista

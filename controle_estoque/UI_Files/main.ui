@@ -139,6 +139,16 @@ background: url(&quot;Images/bg.png&quot;) 0 0 no-repeat #0884c2
      <property name="toolTip">
       <string>Tela Inicial</string>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+
+border: none;
+color: #FFF
+}
+QPushButton:hover {
+background: #7AB32E
+}</string>
+     </property>
      <property name="text">
       <string/>
      </property>
@@ -228,6 +238,16 @@ background: url(&quot;Images/bg.png&quot;) 0 0 no-repeat #0884c2
      </property>
      <property name="whatsThis">
       <string/>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+
+border: none;
+color: #FFF
+}
+QPushButton:hover {
+background: #7AB32E
+}</string>
      </property>
      <property name="text">
       <string/>

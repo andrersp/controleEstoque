@@ -5,7 +5,7 @@ import re
 
 from PySide2 import QtCore
 from PySide2.QtWebEngineWidgets import QWebEngineView
-from jinja2 import Environment, PackageLoader, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader
 
 
 from Views.mainFornecedor import Ui_ct_MainFornecedor
@@ -208,22 +208,33 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
         self.documento = QWebEngineView()
 
         headertable = ["Cod", "Nome Fantasia", "Telefone", "Email", "Site"]
-        buscaFornecedor = CrudFornecedor()
-        buscaFornecedor.nomeFantasia = ''
-        buscaFornecedor.listaFornecedor()
-        telefone = []
-        for row in buscaFornecedor.telefone:
-            telefone.append(self.formatoNumTelefone(row))
+
+        codcliente = []
+        nomeFornecedor = []
+        telefoneFornecedor = []
+        siteFornecedor = []
+        emailFornecedor = []
+
+        i = 0
+        for i in range(self.tb_Fornecedor.rowCount()):
+            codcliente.append(self.tb_Fornecedor.cellWidget(i, 1).text())
+            nomeFornecedor.append(self.tb_Fornecedor.cellWidget(i, 2).text())
+            telefoneFornecedor.append(
+                self.tb_Fornecedor.cellWidget(i, 3).text())
+            siteFornecedor.append(self.tb_Fornecedor.cellWidget(i, 4).text())
+            emailFornecedor.append(self.tb_Fornecedor.cellWidget(i, 5).text())
+            i += 1
+
         html = self.renderTemplate(
             "report.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="LISTAGEM FORNECEDOR",
             headertable=headertable,
-            codcliente=buscaFornecedor.id,
-            nomeFornecedor=buscaFornecedor.nomeFantasia,
-            telefoneFornecedor=telefone,
-            siteFornecedor=buscaFornecedor.site,
-            emailFornecedor=buscaFornecedor.email
+            codcliente=codcliente,
+            nomeFornecedor=nomeFornecedor,
+            telefoneFornecedor=telefoneFornecedor,
+            siteFornecedor=siteFornecedor,
+            emailFornecedor=emailFornecedor
         )
 
         self.documento.load(QtCore.QUrl("file:///" +

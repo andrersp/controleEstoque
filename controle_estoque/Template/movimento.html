@@ -1,40 +1,78 @@
 <!DOCTYPE html>
-<html>
 
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-    <style type="text/css">
-        p,
-        li {
-            white-space: pre-wrap;
-        }
-    </style>
-    <link rel="stylesheet" type="text/css" href="{{ estilo }}">
-</head>
+{%  extends "topo.html" %}
 
-<body>
-    <table class='TableRelat'>
-        <caption>{{ titulo }}</caption>
+{% block body %}
 
-        <tbody>
-            {% for row in despesas %}
-            <tr>
-                <td>
-                    {{row}}
-                </td>
-            </tr>
-        </tbody>
-        {% endfor %}
-        <tfoot>
-            <tr>
-                <th colspan="1">Total</th>
-                <th> R$ {{ total }}</th>
-            </tr>
+<table class='TableRelat'>
+    <caption>{{ titulo }}</caption>
+    <thead>
+        <tr>
+            {% for row in headertable %}
+            <th colspan="2"> {{ row }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tr>
+        <td colspan="2">
+            <table class='TableRelat'>
+                <tbody>
+                    {% for i in range(desc_receita | length) %}
+                    <tr>
+                        <td>
+                            {{desc_receita[i]}}
+                        </td>
+                        <td>
+                            {{total_desc[i]}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
 
-        </tfoot>
-    </table>
-</body>
+            </table>
+        </td>
 
-</html>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+        <td colspan="2">
+
+            <table class='TableRelat'>
+                <tbody>
+                    {% for i in range(desc_despesa | length) %}
+                    <tr>
+                        <td>
+                            {{desc_despesa[i]}}
+                        </td>
+                        <td>
+                            {{total_descDespesa[i]}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+
+            </table>
+
+        </td>
+    </tr>
+    <tfoot>
+        <tr>
+            <th style="background: #FFF; color: #000">Total Receita</th>
+            <th style="font-weight: bold"> R$ {{ totalreceita }}</th>
+            <th style="background: #FFF; color: #000">Total Despesas</th>
+            <th> R$ {{ totaldespesa }}</th>
+        </tr>
+        <tr>
+            <th style="background: #FFF"></th>
+            <th style="background: #FFF"></th>
+            <th style="background: #FFF; color: #000">Saldo Final</th>
+            {% if totalFinal2 > 0 %}
+            <th> {{ totalFinal }}</th>
+            {% else %}
+            <th style="background: red">{{ totalFinal }}</th>
+            {%endif%}
+
+        </tr>
+    </tfoot>
+
+
+</table>
+{% endblock %}

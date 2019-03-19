@@ -6,6 +6,8 @@ from datetime import date
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 from sqlalchemy import case
+from sqlalchemy import func
+from sqlalchemy import distinct
 
 
 from sql.core import Conexao
@@ -225,7 +227,10 @@ class CrudVenda(object):
                           .filter(Cliente.nome.contains(cliente),
                                   Venda.data_emissao.between(self.dataEmissao,
                                                              self.dataFim),
-                                  Venda.categoria == '1')
+                                  Venda.categoria == '1',
+                                  Venda.pagamento.contains(
+                                      self.statusPagamento),
+                                  Venda.entrega.contains(self.statusEntrega))
                           )
 
             # Convertendo variaveis em lista
@@ -316,6 +321,34 @@ class CrudVenda(object):
             sessao.commit()
 
             # Fechando a conexao
+            sessao.close()
+
+        except IntegrityError as err:
+            print(err)
+
+    # Relatório Vendas por periodo
+    def relatValorDia(self):
+
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            row = (sessao.query(func.COALESCE(
+                func.SUM(Venda.valor_recebido), 0).label('vendido'),
+                func.COUNT(distinct(Venda.id_cliente)).label('cliente'))
+                .filter(Venda.data_emissao.between(self.dataEmissao,
+                                                   self.dataFim)))
+            row.all()
+
+            # salvando resultado
+            for query in row:
+                self.valorRecebido = str(query.vendido).replace('.', ',')
+                self.idCliente = query.cliente
+
+            # Fechando a COnexao
             sessao.close()
 
         except IntegrityError as err:

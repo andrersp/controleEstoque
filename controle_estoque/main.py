@@ -8,7 +8,7 @@ import webbrowser
 from PySide2.QtCore import Qt
 from PySide2 import QtGui, QtWidgets
 
-from jinja2 import Environment, PackageLoader, FileSystemLoader
+from jinja2 import Environment, FileSystemLoader
 
 
 from sql.core import Conexao
@@ -524,7 +524,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
     # Função executada após a impresso em pdf concluida
     def okPrinter(self, sucess):
-        webbrowser.open_new(self.resourcepath('report.pdf'))
+        webbrowser.open_new_tab(self.resourcepath('report.pdf'))
         pass
 
     def renderTemplate(self, template_file, **kwargs):
@@ -546,7 +546,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                 'cep': busca.cep,
                 'cidade': busca.cidade,
                 'estado': busca.estado,
-                'telefone': busca.telefone}
+                'telefone': self.formatoNumTelefone(busca.telefone)}
         html = template.render(base, **kwargs)
         with open(self.resourcepath('report.html'), 'w') as f:
             f.write(html)

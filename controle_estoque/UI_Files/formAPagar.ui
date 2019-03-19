@@ -1130,7 +1130,7 @@ background-color: #40a286
     <widget class="QPushButton" name="bt_Salvar">
      <property name="geometry">
       <rect>
-       <x>610</x>
+       <x>740</x>
        <y>0</y>
        <width>120</width>
        <height>30</height>
@@ -1164,54 +1164,6 @@ background-color: #40a286
      </property>
      <property name="text">
       <string>SALVAR</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>75</width>
-       <height>35</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="bt_Imprimir">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>740</x>
-       <y>0</y>
-       <width>120</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Tahoma</family>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="contextMenuPolicy">
-      <enum>Qt::ActionsContextMenu</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-background-color: #5C9BBC;
-color: #FFF
- }
-QPushButton:hover{
-background-color: #40a286
-}</string>
-     </property>
-     <property name="text">
-      <string>IMPRIMIR</string>
      </property>
      <property name="iconSize">
       <size>

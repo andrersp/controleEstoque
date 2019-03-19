@@ -553,7 +553,7 @@ class Ui_ct_empresa(object):
     def tradMainEmpresa(self, ct_empresa):
         ct_empresa.setWindowTitle(QtWidgets.QApplication.translate("ct_empresa", "Frame", None, -1))
         self.lb_FormFornecedor_21.setText(QtWidgets.QApplication.translate("ct_empresa", "TITULO", None, -1))
-        self.tx_TelefoneEmpresa.setInputMask(QtWidgets.QApplication.translate("ct_empresa", "(00) 0000-0000", None, -1))
+        self.tx_TelefoneEmpresa.setInputMask(QtWidgets.QApplication.translate("ct_empresa", "(00) 00000-0000", None, -1))
         self.tx_TelefoneEmpresa.setText(QtWidgets.QApplication.translate("ct_empresa", "() -", None, -1))
         self.lb_FormFornecedor_27.setText(QtWidgets.QApplication.translate("ct_empresa", "Nº", None, -1))
         self.tx_RazaoSocial.setPlaceholderText(QtWidgets.QApplication.translate("ct_empresa", "Razão Social", None, -1))

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 from sqlalchemy import case
@@ -249,7 +250,8 @@ class CrudContaAPagar(object):
                 self.nomeFantasia.append(row.nome_fantasia)
                 self.telefone.append(row.telefone)
                 self.descricao.append(row.descricao)
-                self.dataVencimento.append(row.data_vencimento)
+                self.dataVencimento.append(
+                    date.strftime(row.data_vencimento, "%d-%m-%Y"))
                 self.valor.append(row.valor)
                 self.valorPago.append(row.valor_pago)
                 self.idStatusPagamento.append(row.pagamento)
@@ -384,25 +386,52 @@ class CrudContaAPagar(object):
 
             # Query
             self.query = (sessao.query(func.SUM(ContaAPagar.valor_pago),
-                                       CatAPagar.categoria_a_pagar)
+                                       CatAPagar.categoria_a_pagar,
+                                       FormaPagamento.forma_pagamento)
                           .join(CatAPagar)
+                          .join(FormaPagamento)
                           .filter(ContaAPagar.data_pagamento
                                   .between(self.dataPagamento,
                                            self.dataFim))
-                          .group_by(ContaAPagar.categoria)
+                          .group_by(ContaAPagar.forma_pagamento, ContaAPagar.categoria)
                           )
 
             # Convertendo variaveis em lista
             self.valorPago = []
             self.categoria = []
+            self.formaPagamento = []
 
             # Salvando resultado em suas listas
             for row in self.query:
                 self.categoria.append(row.categoria_a_pagar)
                 self.valorPago.append(row[0])
+                self.formaPagamento.append(row.forma_pagamento)
 
             # Fechando a Conexao
             sessao.close()
 
         except IntegrityError as err:
             print(err)
+
+    # Total a Pagar Hoje
+    def aPagarHoje(self):
+
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            row = (sessao.query(func.COALESCE(
+                func.SUM(ContaAPagar.valor), 0).label('total'))
+                .filter(ContaAPagar.data_vencimento == date.today(), ContaAPagar.pagamento == 2))
+
+            # Salvando Resultado
+            for row in row:
+                self.valorAPagar = row.total
+
+        except IntegrityError as err:
+            print(err)
+
+        return self.valorAPagar

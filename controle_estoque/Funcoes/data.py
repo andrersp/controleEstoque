@@ -5,12 +5,14 @@ import calendar
 
 class DataAtual(object):
 
-    def __init__(self, diames="", diasemana="", ultimodia="", primeiroDia="", dataAtual=""):
+    def __init__(self, diames="", diasemana="", ultimodia="", primeiroDia="",
+                 dataAtual="", mes=""):
         self.dataAtual = dataAtual
         self.diames = diames
         self.diasemana = diasemana
         self.ultimodia = ultimodia
         self.primeiroDia = primeiroDia
+        self.mes = mes
 
     def diaAtual(self):
         self.diames = date.today()
@@ -34,3 +36,11 @@ class DataAtual(object):
         self.diames = date.today()
         self.primeiroDia = self.diames.replace(day=1)
         return self.primeiroDia
+
+    def lb_mesAtualHome(self):
+        self.mes = {1: "Janeiro", 2: "Fevereiro", 3: "Março", 4: "Abril",
+                    5: "Maio", 6: "Junho",
+                    7: "Julho", 8: "Agosto", 9: "Setembro", 10: "Outubro",
+                    11: "Novembro", 12: "Dezembro"}
+        self.mes = self.mes[date.today().month]
+        return self.mes

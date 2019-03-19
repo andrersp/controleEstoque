@@ -15,6 +15,7 @@ from sql.CrudProduto import CrudProduto
 from sql.CrudRelCompra import CrudRelCompra
 from sql.CrudContaAPagar import CrudContaAPagar
 from Funcoes.data import DataAtual
+from Funcoes.cb_status import cb_statusEntrega, cb_statusPagamento
 
 
 class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
@@ -22,6 +23,9 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
     def maincompras(self, frame):
         super(MainCompras, self).setMainCompras(frame)
         self.frameMainCompras.show()
+
+         # Adicionando botao limpar
+        self.tx_BuscaCompras.setClearButtonEnabled(True)
 
         # Icone Botoes
         self.IconeBotaoForm(self.bt_AddNovaCompra,
@@ -31,12 +35,25 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
         self.IconeBotaoMenu(self.bt_PrintRelatCompras,
                             self.resourcepath('Images/gtk-print.png'))
 
+                
+        """ 
+        Populando combobox status pagamento e entrega.
+        Funcao chamada no arquivo cb_statusPagamento.py na pasta Funcoes
+        """
+        # Pagamento
+        cb_statusPagamento(self.cb_pagamento)
+        # Entrega
+        cb_statusEntrega(self.cb_entrega)
+
         """ Definindo funcões widgets"""
         # Botao Adicionar Compra
         self.bt_AddNovaCompra.clicked.connect(self.FormCompras)
 
         # Busca Compras
         self.bt_BuscaCompras.clicked.connect(self.DataTabCompras)
+
+        # Busca Instantanea ao digitar nome do fornecedor
+        self.tx_BuscaCompras.textEdited.connect(self.DataTabCompras)
 
         # Imprimir Tabela
         self.bt_PrintRelatCompras.clicked.connect(self.imprimirTabCompra)
@@ -67,6 +84,8 @@ class MainCompras(Ui_ct_MainCompras, Ui_ct_FormCompra, DataAtual):
             self.dt_InicioCompra.date(), "yyyy-MM-dd")
         busca.dataFim = QDate.toString(self.dt_FimCompra.date(),
                                               "yyyy-MM-dd")
+        busca.statusPagamento = self.cb_pagamento.currentData()
+        busca.statusEntrega = self.cb_entrega.currentData()
         busca.listaCompra(cliente)
 
         while self.tb_Compras.rowCount() > 0:

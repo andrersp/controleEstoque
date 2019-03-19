@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'main.ui',
 # licensing of 'main.ui' applies.
 #
-# Created: Fri Feb  8 18:58:54 2019
+# Created: Mon Mar 18 23:15:42 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -36,6 +36,11 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.wd_topo = QtWidgets.QWidget(self.centralwidget)
         self.wd_topo.setGeometry(QtCore.QRect(0, 0, 1000, 60))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.wd_topo.sizePolicy().hasHeightForWidth())
+        self.wd_topo.setSizePolicy(sizePolicy)
         self.wd_topo.setStyleSheet("background: #4E4E4E")
         self.wd_topo.setObjectName("wd_topo")
         self.lb_Data = QtWidgets.QLabel(self.wd_topo)
@@ -62,6 +67,14 @@ class Ui_MainWindow(object):
         self.bt_Home.setGeometry(QtCore.QRect(5, 5, 50, 50))
         self.bt_Home.setCursor(QtCore.Qt.PointingHandCursor)
         self.bt_Home.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.bt_Home.setStyleSheet("QPushButton{\n"
+"\n"
+"border: none;\n"
+"color: #FFF\n"
+"}\n"
+"QPushButton:hover {\n"
+"background: #7AB32E\n"
+"}")
         self.bt_Home.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../../RSP/Images/home.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -94,6 +107,14 @@ class Ui_MainWindow(object):
         self.bt_Exit.setCursor(QtCore.Qt.PointingHandCursor)
         self.bt_Exit.setFocusPolicy(QtCore.Qt.NoFocus)
         self.bt_Exit.setWhatsThis("")
+        self.bt_Exit.setStyleSheet("QPushButton{\n"
+"\n"
+"border: none;\n"
+"color: #FFF\n"
+"}\n"
+"QPushButton:hover {\n"
+"background: #7AB32E\n"
+"}")
         self.bt_Exit.setText("")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("../../RSP/Images/exit.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
@@ -261,7 +282,7 @@ class Ui_MainWindow(object):
         self.bt_Fornecedor.setFocusPolicy(QtCore.Qt.NoFocus)
         self.bt_Fornecedor.setAutoFillBackground(False)
         self.bt_Fornecedor.setStyleSheet("QPushButton{\n"
-"background: #40A286 ;\n"
+"background: 40A286 ;\n"
 "border: none;\n"
 "color: #FFF\n"
 "}\n"
@@ -309,14 +330,4 @@ class Ui_MainWindow(object):
         self.bt_Clientes.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F7", None, -1))
         self.bt_Fornecedor.setText(QtWidgets.QApplication.translate("MainWindow", "Fornecedor", None, -1))
         self.bt_Fornecedor.setShortcut(QtWidgets.QApplication.translate("MainWindow", "F6", None, -1))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
 
