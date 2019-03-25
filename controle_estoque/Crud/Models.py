@@ -4,7 +4,7 @@ from sqlalchemy import Column, String, Integer, Numeric, ForeignKey, Date
 from sqlalchemy.dialects.mysql import LONGBLOB
 
 
-from sql.core import Base
+from core import Base
 
 
 # tabela Cliente
@@ -200,6 +200,7 @@ class Venda(Base):
         Integer, ForeignKey('status_entrega.id'), default='2')
     pagamento = Column(
         Integer, ForeignKey('status_pagamento.id'), default='2')
+    vendedor = Column(Integer, ForeignKey('usuario.id'))
 
     def __repr__(self):
         return self.id
@@ -286,3 +287,39 @@ class ContaAReceber(Base):
 
     def __repr__(self):
         return self.id
+
+
+class Nivel(Base):
+    __tablename__ = 'nivel'
+    id = Column(Integer, primary_key=True)
+    nivel = Column(String(40))
+
+    def __repr__(self):
+        return self.nivel
+
+# Usuarios
+
+
+class Usuarios(Base):
+    __tablename__ = 'usuario'
+    id = Column(Integer, primary_key=True)
+    nome = Column(String(80), index=True)
+    cpf = Column(String(15))
+    rg = Column(String(15))
+    celular = Column(String(15))
+    telefone = Column(String(15))
+    email = Column(String(50))
+    obs = Column(String(100))
+    cep = Column(String(12))
+    endereco = Column(String(40))
+    numero = Column(String(5))
+    bairro = Column(String(40))
+    cidade = Column(String(40))
+    estado = Column(String(2))
+    usuario = Column(String(40), index=True)
+    senha = Column(String(40))
+    nivel = Column(Integer, ForeignKey('nivel.id'))
+    ativo = Column(Integer)
+
+    def __repr__(self):
+        return self.usuario

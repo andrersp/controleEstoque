@@ -3,19 +3,19 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 
-from sql.core import Conexao
-from sql.Models import CatAReceber
+from Crud.core import Conexao
+from Crud.Models import StatusPagamento
 
 
-class CrudCatAReceber(object):
-    def __init__(self, id="", categoriaReceber="", query=""):
+class CrudStatusPagamento(object):
+    def __init__(self, id="", statusPagamento="", query=""):
         self.id = id
-        self.categoriaReceber = categoriaReceber
+        self.statusPagamento = statusPagamento
         self.query = query
 
     # Recebendo ultimo Id inserido
 
-    def lastIdCatAReceber(self):
+    def lastIdStatusPagamento(self):
 
         try:
 
@@ -24,8 +24,8 @@ class CrudCatAReceber(object):
             sessao = conecta.Session()
 
             # Query
-            ultimo = sessao.query(CatAReceber.id).order_by(
-                desc(CatAReceber.id)).limit(1).first()
+            ultimo = sessao.query(StatusPagamento.id).order_by(
+                desc(StatusPagamento.id)).limit(1).first()
 
             self.id = ultimo.id + 1
 
@@ -37,9 +37,8 @@ class CrudCatAReceber(object):
 
         return self.id
 
-    # Cadastrando categoria a receber
-
-    def inseriCatAReceber(self):
+    # Cadastrando Status Pagamento
+    def inseriStatusPagamento(self):
 
         try:
 
@@ -48,9 +47,9 @@ class CrudCatAReceber(object):
             sessao = conecta.Session()
 
             # Query
-            row = CatAReceber(
+            row = StatusPagamento(
                 id=self.id,
-                categoria_a_receber=self.categoriaReceber
+                status_pagamento=self.statusPagamento
             )
 
             # Add Query na sessao
@@ -63,10 +62,10 @@ class CrudCatAReceber(object):
             sessao.close()
 
         except IntegrityError:
-            self.updateCatAReceber()
+            self.updateStatusPagamento()
 
-    # Update categoria a Pagar
-    def updateCatAReceber(self):
+    # Update Status Pagamento
+    def updateStatusPagamento(self):
 
         try:
 
@@ -74,11 +73,12 @@ class CrudCatAReceber(object):
             conecta = Conexao()
             sessao = conecta.Session()
 
-            # Selecionando id
-            row = sessao.query(CatAReceber).get(self.id)
+            # Selecionando
+            row = sessao.query(StatusPagamento).get(self.id)
 
-            # Novos Valores
-            row.categoria_a_receber = self.categoriaReceber
+            # Query
+
+            row.status_pagamento = self.statusPagamento
 
             # Executando a query
             sessao.commit()
@@ -90,7 +90,7 @@ class CrudCatAReceber(object):
             print(err)
 
     # Listando todas as categorias
-    def listaCatAReceber(self):
+    def listaStatusPagamento(self):
 
         try:
 
@@ -99,16 +99,18 @@ class CrudCatAReceber(object):
             sessao = conecta.Session()
 
             # Query
-            self.query = sessao.query(CatAReceber).all()
+            self.query = sessao.query(StatusPagamento).all()
 
             # Convertendo variaveis em lista
-            self.id = []
-            self.categoriaReceber = []
 
-            # Salvando resultado em suas lisats
+            self.id = []
+            self.statusPagamento = []
+
+            # salvando resultado em suas listas
+
             for row in self.query:
                 self.id.append(row.id)
-                self.categoriaReceber.append(row.categoria_a_receber)
+                self.statusPagamento.append(row.status_pagamento)
 
             # Fechando a Conexao
             sessao.close()

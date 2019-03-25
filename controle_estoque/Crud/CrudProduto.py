@@ -4,8 +4,8 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 from sqlalchemy import func
 
-from sql.core import Conexao
-from sql.Models import Produto, CategoriaProduto, MarcaProduto
+from Crud.core import Conexao
+from Crud.Models import Produto, CategoriaProduto, MarcaProduto
 
 
 class CrudProduto(object):

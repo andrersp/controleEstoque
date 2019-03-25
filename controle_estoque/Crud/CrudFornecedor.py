@@ -5,8 +5,8 @@ from sqlalchemy.exc import ProgrammingError
 from sqlalchemy import desc
 
 
-from sql.core import Conexao
-from sql.Models import Fornecedor
+from Crud.core import Conexao
+from Crud.Models import Fornecedor
 
 
 class CrudFornecedor(object):

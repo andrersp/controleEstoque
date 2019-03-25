@@ -5,8 +5,8 @@ import re
 
 
 from Views.movConta import Ui_ct_movimento
-from sql.CrudContaAReceber import CrudContaAReceber
-from sql.CrudContaAPagar import CrudContaAPagar
+from Crud.CrudContaAReceber import CrudContaAReceber
+from Crud.CrudContaAPagar import CrudContaAPagar
 
 
 class MainMovimentoConta(Ui_ct_movimento):
@@ -203,6 +203,7 @@ class MainMovimentoConta(Ui_ct_movimento):
         total_desc = []
         desc_despesa = []
         total_descDespesa = []
+        print(self.username)
 
         if self.tb_receita.rowCount() >= 1:
             for i in range(self.tb_receita.rowCount()):

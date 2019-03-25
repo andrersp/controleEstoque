@@ -11,10 +11,11 @@ from PySide2 import QtGui, QtWidgets
 from jinja2 import Environment, FileSystemLoader
 
 
-from sql.core import Conexao
+from Crud.core import Conexao
 
-from sql.Models import Empresa
-from sql.CrudEmpresa import CrudEmpresa
+from login import MainLogin
+from Crud.Models import Empresa
+from Crud.CrudEmpresa import CrudEmpresa
 from Funcoes.categoriaAPagar import CategoriaAPagar
 from Funcoes.categoriaAReceber import CategoriaAReceber
 from Funcoes.Clientes import Clientes
@@ -38,29 +39,22 @@ from Views.main import Ui_MainWindow
 class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
            Funcao, MainVendas, MainClientes, MainCompras, MainFinanceiro,
            MainFornecedor, MainConfig, Financeiro, Comercial, Fornecedor,
-           Clientes, FormaPagamento, CategoriaAPagar, CategoriaAReceber):
+           Clientes, FormaPagamento, CategoriaAPagar, CategoriaAReceber, MainLogin):
 
     def __init__(self, parent=None):
         super(Main, self).__init__(parent)
+
         self.setupUi(self)
+
         self.centralizar()  # Centrelizando na tela
 
         # Caminho Absoluto
         self.caminho = os.path.abspath(os.path.dirname(sys.argv[0]))
 
-        # Abrindo conteudo Home
-        self.main_home(self.ct_conteudo)
-
-        # setando background
-        bg = QtGui.QPixmap(self.resourcepath('Images/bg.png'))
-        palete = QtGui.QPalette()
-        palete.setBrush(QtGui.QPalette.Background,
-                        QtGui.QBrush(bg.scaled(1000, 700, Qt.KeepAspectRatio)))
-        self.setPalette(palete)
-
         # Icone dos botoes Topo
         self.IconeBotaoTopo(self.bt_Home, self.resourcepath(
             'Images/home.png'))  # HOme
+                
         self.IconeBotaoTopo(self.bt_Exit, self.resourcepath(
             'Images/exit.png'))  # Sair
 
@@ -80,6 +74,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         self.IconeBotaoMenu(self.bt_Conf, self.resourcepath(
             'Images/conf.png'))  # Configuracao
 
+        
         """Ação dos Botões Botoes"""
         # Home
         self.bt_Home.clicked.connect(self.janelaHome)
@@ -104,6 +99,12 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
         # Config
         self.bt_Conf.clicked.connect(self.janelaConfig)
+
+        # Meus dados
+        self.bt_alterSenha.clicked.connect(self.editarUser)
+
+        # Logout
+        self.bt_logout.clicked.connect(self.janelaLogin)
         """ Fim Botoes """
 
         # Setando data no Header
@@ -112,8 +113,13 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         self.lb_Data.setText(data.diames)
         self.lb_DiaSemana.setText(data.diasemana)
 
+        # Abrindo tela Login
+        self.janelaLogin()
+        
+        # Checando conexao com banco de dados
         self.DbCheck()  # Checando banco de dados
 
+        
     # Caminho absoluto
     def resourcepath(self, relative_path):
         base_path = getattr(sys, '_MEIPASS', os.path.dirname(
@@ -143,25 +149,46 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
             self.lb_NomeFantasia2.setText(busca.subtitulo)
             self.setWindowTitle(busca.titulo + " " + busca.subtitulo)
             
-                
-
         except:
            
-            self.janelaConfig()
+            pass
         
         try:
             conecta.engine.connect()
             
         except:
             self.janelaConfig()
+
             self.janelaDbConf()
+            for filho in self.fr_menuConfig.findChildren(QtWidgets.QPushButton):
+                filho.setDisabled(True)
             for botao in self.wd_menu.findChildren(QtWidgets.QPushButton):
                 botao.setDisabled(True)
             self.bt_Home.setDisabled(True)
 
-    """Abrindo Janelas externos"""
-    # Home
+    """Abrindo Janelas externas"""
 
+    # Login
+    def janelaLogin(self):
+        self.LimpaFrame(self.ct_conteudo)
+
+        # Limpando nome de usuário logado
+        self.lb_userName.clear()
+
+        # Desabilitando Botao Meus Dados e Logout
+        self.bt_alterSenha.setDisabled(True)
+        self.bt_logout.setDisabled(True)
+        self.bt_Home.setDisabled(True)
+
+        # Ocultando botoes
+        for filho in self.wd_menu.findChildren(QtWidgets.QPushButton):
+            filho.setHidden(True)
+        
+        # Desabilitando botao Home
+        # self.bt_Home.setDisabled(True)
+        self.mainlogin(self.ct_conteudo)
+
+    # Home
     def janelaHome(self):
         self.LimpaFrame(self.ct_conteudo)
         self.ativaBotoes(self.wd_menu)
@@ -209,6 +236,19 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         self.LimpaFrame(self.ct_conteudo)
         self.DesativaBotao(self.wd_menu, self.bt_Conf)
         self.mainconfig(self.ct_conteudo)
+    
+    def editarUser(self):
+        self.janelaConfig()
+        self.selectUsuario(self.idUser)
+        for filho in self.fr_menuConfig.findChildren(QtWidgets.QPushButton):
+            filho.setDisabled(True)
+        self.cb_nivel.setDisabled(True)
+        self.cb_ativo.setDisabled(True)
+        self.bt_Voltar.setHidden(True)
+
+
+        
+
 
     """ Fim conteudos Externos """
 
@@ -306,6 +346,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item.setAlignment(
             Qt.AlignLeading|Qt.AlignHCenter|Qt.AlignVCenter)
         item.setMargin(0)
+        item.setStyleSheet('background: #FFF')
         html = ("""
                 <span style="font-family:'Arial'; font-size:30px;
                 font-weight: bold;"> <span style="font-size: 12px">R$</span> {}</span><br/>
@@ -343,6 +384,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         item.setAlignment(
             Qt.AlignLeading|Qt.AlignHCenter|Qt.AlignVCenter)
         item.setMargin(0)
+        item.setStyleSheet('background: #FFF')
         html = ("""
                 <span style="font-family:'Arial'; font-size:30px;
                 font-weight: bold;color:{} ">{}</span><br/>

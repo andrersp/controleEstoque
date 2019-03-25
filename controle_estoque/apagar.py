@@ -10,8 +10,8 @@ from PySide2.QtWebEngineWidgets import QWebEngineView
 from Views.APagar import Ui_ct_APagar
 from Views.formAPagar import Ui_ct_FormPagar
 
-from sql.CrudContaAPagar import CrudContaAPagar
-from sql.CrudCatAPagar import CrudCatAPagar
+from Crud.CrudContaAPagar import CrudContaAPagar
+from Crud.CrudCatAPagar import CrudCatAPagar
 from Funcoes.extenso import retorno
 
 

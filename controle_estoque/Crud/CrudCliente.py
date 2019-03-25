@@ -4,8 +4,8 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 
 
-from sql.core import Conexao
-from sql.Models import Cliente
+from Crud.core import Conexao
+from Crud.Models import Cliente
 
 
 class CrudCliente(object):

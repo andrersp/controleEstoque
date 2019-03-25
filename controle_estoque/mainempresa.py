@@ -7,7 +7,7 @@ from PySide2.QtGui import QPixmap
 
 
 from Views.mainEmpresa import Ui_ct_empresa
-from sql.CrudEmpresa import CrudEmpresa
+from Crud.CrudEmpresa import CrudEmpresa
 
 
 class MainEmpresa(Ui_ct_empresa):

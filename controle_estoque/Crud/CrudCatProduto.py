@@ -3,19 +3,19 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 
-from sql.core import Conexao
-from sql.Models import FormaPagamento
+from Crud.core import Conexao
+from Crud.Models import CategoriaProduto
 
 
-class CrudFormaPagamento(object):
-    def __init__(self, id="", formaPagamento="", query=""):
+class CrudCatProduto(object):
+    def __init__(self, id="", categoria_produto="", query=""):
         self.id = id
-        self.formaPagamento = formaPagamento
+        self.categoria_produto = categoria_produto
         self.query = query
 
     # Recebendo ultimo Id inserido
 
-    def lastIdFormaPagamento(self):
+    def lastIdCatProduto(self):
 
         try:
 
@@ -24,59 +24,61 @@ class CrudFormaPagamento(object):
             sessao = conecta.Session()
 
             # Query
-            ultimo = sessao.query(FormaPagamento.id).order_by(
-                desc(FormaPagamento.id)).limit(1).first()
-
+            ultimo = sessao.query(CategoriaProduto).order_by(
+                desc(CategoriaProduto.id)).limit(1).first()
             self.id = ultimo.id + 1
 
-            # Fechando a conexao
+            # Fechando Conexao
             sessao.close()
 
         except:
+
             self.id = 1
 
         return self.id
 
-    # Cadastrando Forma Pagemento
-    def inseriFormaPagamento(self):
+    # Cadastrando categoria produto
+
+    def inseriCatProduto(self):
 
         try:
 
             # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
+
             # Query
-            row = FormaPagamento(
+            row = CategoriaProduto(
                 id=self.id,
-                forma_pagamento=self.formaPagamento
+                categoria_produto=self.categoria_produto
             )
 
-            # Add query na sessao
+            # Salvando query na sessao
             sessao.add(row)
 
-            # Executando a query
+            # Executando query
             sessao.commit()
 
             # Fechando a Conexao
             sessao.close()
 
         except IntegrityError:
-            self.updateFormaPagamento()
+            self.updateCatProduto()
 
-    # Update Forma Pagemento
-    def updateFormaPagamento(self):
+    # Cadastrando categoria produto
+
+    def updateCatProduto(self):
 
         try:
-
-            # Abrindo Sessao
+            # Abrindo a Sessao
             conecta = Conexao()
             sessao = conecta.Session()
 
             # Selecionando id
-            row = sessao.query(FormaPagamento).get(self.id)
+            row = sessao.query(CategoriaProduto).get(self.id)
 
-            # Query
-            row.forma_pagamento = self.formaPagamento
+            # Novos valores
+            row.categoria_produto = self.categoria_produto
 
             # Executando a query
             sessao.commit()
@@ -84,11 +86,12 @@ class CrudFormaPagamento(object):
             # Fechando a Conexao
             sessao.close()
 
-        except IntegrityError:
-            print('err')
+        except IntegrityError as err:
+            print(err)
 
     # Listando todas as categorias
-    def listaFormaPagamento(self):
+
+    def listaCatProduto(self):
 
         try:
 
@@ -97,19 +100,22 @@ class CrudFormaPagamento(object):
             sessao = conecta.Session()
 
             # Query
-            self.query = sessao.query(FormaPagamento).order_by(
-                FormaPagamento.id).all()
+            self.query = sessao.query(CategoriaProduto).all()
 
             # Convertendo variaveis em lista
             self.id = []
-            self.formaPagamento = []
+            self.categoria_produto = []
+
+            # salvando resultado em sua lista
 
             for row in self.query:
                 self.id.append(row.id)
-                self.formaPagamento.append(row.forma_pagamento)
+                self.categoria_produto.append(row.categoria_produto)
 
-                # Fechando a Conexao
+            # Fechando Conexao
             sessao.close()
 
         except IntegrityError as err:
             print(err)
+
+            pass

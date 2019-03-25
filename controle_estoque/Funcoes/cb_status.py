@@ -1,7 +1,7 @@
 # -*- codding: utf-8 -*-
 
-from sql.CrudStatusEntrega import CrudStatusEntrega
-from sql.CrudStatusPagamento import CrudStatusPagamento
+from Crud.CrudStatusEntrega import CrudStatusEntrega
+from Crud.CrudStatusPagamento import CrudStatusPagamento
 
 
 def cb_statusPagamento(box):

@@ -3,19 +3,18 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 
-from sql.core import Conexao
-from sql.Models import StatusPagamento
+from Crud.core import Conexao
+from Crud.Models import CatAPagar
 
 
-class CrudStatusPagamento(object):
-    def __init__(self, id="", statusPagamento="", query=""):
+class CrudCatAPagar(object):
+    def __init__(self, id="", categoriaPagar="", query=""):
         self.id = id
-        self.statusPagamento = statusPagamento
+        self.categoriaPagar = categoriaPagar
         self.query = query
 
     # Recebendo ultimo Id inserido
-
-    def lastIdStatusPagamento(self):
+    def lastIdCatAPagar(self):
 
         try:
 
@@ -24,8 +23,8 @@ class CrudStatusPagamento(object):
             sessao = conecta.Session()
 
             # Query
-            ultimo = sessao.query(StatusPagamento.id).order_by(
-                desc(StatusPagamento.id)).limit(1).first()
+            ultimo = sessao.query(CatAPagar.id).order_by(
+                desc(CatAPagar.id)).limit(1).first()
 
             self.id = ultimo.id + 1
 
@@ -37,8 +36,8 @@ class CrudStatusPagamento(object):
 
         return self.id
 
-    # Cadastrando Status Pagamento
-    def inseriStatusPagamento(self):
+    # Cadastrando categoria a Pagar
+    def inseriCatAPagar(self):
 
         try:
 
@@ -47,9 +46,9 @@ class CrudStatusPagamento(object):
             sessao = conecta.Session()
 
             # Query
-            row = StatusPagamento(
+            row = CatAPagar(
                 id=self.id,
-                status_pagamento=self.statusPagamento
+                categoria_a_pagar=self.categoriaPagar
             )
 
             # Add Query na sessao
@@ -62,10 +61,10 @@ class CrudStatusPagamento(object):
             sessao.close()
 
         except IntegrityError:
-            self.updateStatusPagamento()
+            self.updateCatAPagar()
 
-    # Update Status Pagamento
-    def updateStatusPagamento(self):
+    # Update categoria a Pagar
+    def updateCatAPagar(self):
 
         try:
 
@@ -73,12 +72,11 @@ class CrudStatusPagamento(object):
             conecta = Conexao()
             sessao = conecta.Session()
 
-            # Selecionando
-            row = sessao.query(StatusPagamento).get(self.id)
+            # Selecionando id
+            row = sessao.query(CatAPagar).get(self.id)
 
-            # Query
-
-            row.status_pagamento = self.statusPagamento
+            # Novos Valores
+            row.categoria_a_pagar = self.categoriaPagar
 
             # Executando a query
             sessao.commit()
@@ -89,8 +87,8 @@ class CrudStatusPagamento(object):
         except IntegrityError as err:
             print(err)
 
-    # Listando todas as categorias
-    def listaStatusPagamento(self):
+    # Listando todas as categorias a pagar
+    def listaCatAPagar(self):
 
         try:
 
@@ -99,18 +97,16 @@ class CrudStatusPagamento(object):
             sessao = conecta.Session()
 
             # Query
-            self.query = sessao.query(StatusPagamento).all()
+            self.query = sessao.query(CatAPagar).all()
 
             # Convertendo variaveis em lista
-
             self.id = []
-            self.statusPagamento = []
+            self.categoriaPagar = []
 
-            # salvando resultado em suas listas
-
+            # Salvando resultado em suas lisats
             for row in self.query:
                 self.id.append(row.id)
-                self.statusPagamento.append(row.status_pagamento)
+                self.categoriaPagar.append(row.categoria_a_pagar)
 
             # Fechando a Conexao
             sessao.close()

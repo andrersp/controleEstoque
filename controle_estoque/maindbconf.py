@@ -11,8 +11,8 @@ import mysql.connector
 
 
 from Views.mainDbConfig import Ui_ct_dbConf
-from sql.core import Conexao
-from sql.Create import CreateDb
+from Crud.core import Conexao
+from Crud.Create import CreateDb
 
 
 class MainDbConf(Ui_ct_dbConf):
@@ -113,7 +113,7 @@ class MainDbConf(Ui_ct_dbConf):
         Criar.createDB()
         Criar.tabelas()
 
-        self.janelaConfig()
+        self.janelaLogin()
 
 
 class ConexaoTeste(object):

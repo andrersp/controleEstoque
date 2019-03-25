@@ -4,7 +4,7 @@ from PySide2.QtCore import QDate, QDateTime, Qt, QStringListModel
 from PySide2.QtGui import QIntValidator, QDoubleValidator
 from functools import partial
 
-from sql.CrudProduto import CrudProduto
+from Crud.CrudProduto import CrudProduto
 
 
 class Comercial(object):

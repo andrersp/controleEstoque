@@ -6,30 +6,25 @@ from datetime import date
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 from sqlalchemy import case
-from sqlalchemy import func
-from sqlalchemy import distinct
 
 
-from sql.core import Conexao
-from sql.Models import Venda
-from sql.Models import Cliente
-from sql.Models import StatusEntrega
-from sql.Models import StatusPagamento
+from Crud.core import Conexao
+from Crud.Models import Compra, Fornecedor, StatusEntrega, StatusPagamento, CatAPagar
 
 
-class CrudVenda(object):
+class CrudCompra(object):
 
-    def __init__(self, id="", idCliente="", nomeCliente="", celularCliente="",
-                 dataEmissao="", prazoEntrega="",
+    def __init__(self, id="", idFornecedor="", dataEmissao="", prazoEntrega="",
                  dataEntrega="", categoria="", desconto="", frete="",
-                 valorTotal="", valorRecebido="", valorPendente="",
-                 idStatusEntrega="", statusEntrega="",
-                 idStatusPagamento="", statusPagamento="",
-                 dataFim="", query=""):
+                 valorTotal="", valorPago="", valorPendente="",
+                 idStatusEntrega="", idStatusPagamento="", fornecedor="",
+                 telefone="",
+                 statusEntrega="", statusPagamento="", dataFim="",
+                 query=""):
         self.id = id
-        self.idCliente = idCliente
-        self.nomeCliente = nomeCliente
-        self.celularCliente = celularCliente
+        self.idFornecedor = idFornecedor
+        self.fornecedor = fornecedor
+        self.telefone = telefone
         self.dataEmissao = dataEmissao
         self.prazoEntrega = prazoEntrega
         self.dataEntrega = dataEntrega
@@ -37,7 +32,7 @@ class CrudVenda(object):
         self.desconto = desconto
         self.frete = frete
         self.valorTotal = valorTotal
-        self.valorRecebido = valorRecebido
+        self.valorPago = valorPago
         self.valorPendente = valorPendente
         self.idStatusEntrega = idStatusEntrega
         self.statusEntrega = statusEntrega
@@ -48,17 +43,17 @@ class CrudVenda(object):
 
     # Recebendo ultimo Id inserido
 
-    def lastIdVenda(self):
+    def lastIdCompra(self):
 
         try:
 
-            # Abrindo sessao
+            # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
 
             # Query
-            ultimo = sessao.query(Venda.id).order_by(
-                desc(Venda.id)).limit(1).first()
+            ultimo = sessao.query(Compra.id).order_by(
+                desc(Compra.id)).limit(1).first()
 
             self.id = ultimo.id + 1
 
@@ -70,8 +65,9 @@ class CrudVenda(object):
 
         return self.id
 
-    # Inseri Venda
-    def inseriVenda(self):
+    # Inseri Compra
+
+    def inseriCompra(self):
 
         try:
 
@@ -80,9 +76,9 @@ class CrudVenda(object):
             sessao = conecta.Session()
 
             # Query
-            row = Venda(
+            row = Compra(
                 id=self.id,
-                id_cliente=self.idCliente,
+                id_fornecedor=self.idFornecedor,
                 data_emissao=self.dataEmissao,
                 prazo_entrega=self.prazoEntrega,
                 categoria=self.categoria,
@@ -91,20 +87,20 @@ class CrudVenda(object):
                 valor_total=self.valorTotal,
             )
 
-            # Add Query na Sessao
+            # Add query na sessao
             sessao.add(row)
 
             # Executando a Query
             sessao.commit()
 
-            # Fechado a conexao
+            # Fechando Sessao
             sessao.close()
 
         except IntegrityError:
-            self.updateVenda()
+            self.updateCompra()
 
-    # update Venda
-    def updateVenda(self):
+    # Update Compra
+    def updateCompra(self):
 
         try:
 
@@ -112,12 +108,14 @@ class CrudVenda(object):
             conecta = Conexao()
             sessao = conecta.Session()
 
-            # Selecionando Id
-            row = sessao.query(Venda).get(self.id)
+            # Selecionando ID
+            row = sessao.query(Compra).get(self.id)
 
-            # Novos Valoes
-            row.id_cliente = self.idCliente
+            # novos valores
+            row.id_fornecedor = self.idFornecedor
+            row.data_emissao = self.dataEmissao
             row.prazo_entrega = self.prazoEntrega
+            row.categoria = self.categoria
             row.desconto = self.desconto
             row.frete = self.frete
             row.valor_total = self.valorTotal
@@ -125,28 +123,28 @@ class CrudVenda(object):
             # Executando a Query
             sessao.commit()
 
-            # Fechado a conexao
+            # Fechando Sessao
             sessao.close()
 
         except IntegrityError as err:
             print(err)
 
-    # Lista de compras realizadas pelo cliente
+    # Selecionar compras por Cód Fornecedor
 
-    def selectVendaCliente(self):
+    def selectCompraFornecedor(self):
 
         try:
 
-            # Abrindo sessao
+            # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
 
             # Query
-            self.query = (sessao.query(Venda.data_emissao, Venda.data_entrega,
-                                       Venda.valor_total)
-                          .filter(Venda.id_cliente == self.idCliente,
-                                  Venda.pagamento == 1))
-            self.query.all()
+            self.query = (sessao.query(Compra.data_emissao,
+                                       Compra.data_entrega,
+                                       Compra.valor_total)
+                          .filter(Compra.id_fornecedor == self.idFornecedor,
+                                  Compra.pagamento == 1))
 
             # Convertendo variaveis em lista
             self.dataEmissao = []
@@ -159,28 +157,27 @@ class CrudVenda(object):
                 self.dataEntrega.append(row.data_entrega)
                 self.valorTotal.append(row.valor_total)
 
-            # Fechandoa Conexao
+            # Fechando a Conexao
             sessao.close()
 
         except IntegrityError as err:
             print(err)
 
-    # Selecionar Venda por ID
+    # Selecionar compra por ID
 
-    def selectVendaId(self):
+    def selectCompraId(self):
 
         try:
 
             # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
-
             # Query
-            busca = sessao.query(Venda).get(self.id)
+            busca = sessao.query(Compra).get(self.id)
 
             # Salvando resultado da Query
             self.id = busca.id
-            self.idCliente = busca.id_cliente
+            self.idFornecedor = busca.id_fornecedor
             self.dataEmissao = busca.data_emissao
             self.prazoEntrega = busca.prazo_entrega
             self.dataEntrega = busca.data_entrega
@@ -188,7 +185,7 @@ class CrudVenda(object):
             self.desconto = busca.desconto
             self.frete = busca.frete
             self.valorTotal = busca.valor_total
-            self.valorRecebido = busca.valor_recebido
+            self.valorPago = busca.valor_pago
             self.valorPendente = busca.valor_pendente
             self.idStatusEntrega = busca.entrega
             self.idStatusPagamento = busca.pagamento
@@ -199,9 +196,9 @@ class CrudVenda(object):
         except IntegrityError as err:
             print(err)
 
-    # Selecionar Venda por nome Cliente e data emissão
+    # Selecionar compra por nome fornecedor e data emissão
 
-    def listaVenda(self, cliente):
+    def listaCompra(self, fornecedor):
 
         try:
 
@@ -210,28 +207,35 @@ class CrudVenda(object):
             sessao = conecta.Session()
 
             # Query
-            self.query = (sessao.query(Venda.id,
-                                       Venda.data_emissao,
-                                       Venda.prazo_entrega,
-                                       Venda.valor_total,
-                                       Venda.entrega,
-                                       Venda.pagamento,
-                                       Cliente.nome,
-                                       Cliente.celular,
+            self.query = (sessao.query(Compra.id,
+                                       Compra.id_fornecedor,
+                                       Compra.data_emissao,
+                                       Compra.prazo_entrega,
+                                       Compra.valor_total,
+                                       Compra.entrega,
+                                       Compra.pagamento,
+                                       Fornecedor.nome_fantasia,
+                                       Fornecedor.telefone,
+                                       CatAPagar.categoria_a_pagar,
                                        StatusEntrega.status_entrega,
                                        StatusPagamento.status_pagamento)
-                          .join(Cliente)
+                          .join(Fornecedor)
+                          .join(CatAPagar)
                           .join(StatusEntrega)
                           .join(StatusPagamento)
-                          .order_by(desc(Venda.id))
-                          .filter(Cliente.nome.contains(cliente),
-                                  Venda.data_emissao.between(self.dataEmissao,
-                                                             self.dataFim),
-                                  Venda.categoria == '1',
-                                  Venda.pagamento.contains(
+                          .order_by(desc(Compra.id))
+                          .filter(Compra.categoria == '1',
+                                  Compra.pagamento.contains(
                                       self.statusPagamento),
-                                  Venda.entrega.contains(self.statusEntrega))
+                                  Compra.entrega.contains(self.statusEntrega),
+                                  Fornecedor.nome_fantasia.contains(
+                                      fornecedor),
+                                  Compra.data_emissao.between(self.dataEmissao,
+                                                              self.dataFim),
+                                  Compra.prazo_entrega.between(self.dataEmissao,
+                                                               self.dataFim))
                           )
+            self.query.all()
 
             # Convertendo variaveis em lista
             self.id = []
@@ -242,11 +246,10 @@ class CrudVenda(object):
             self.statusEntrega = []
             self.idStatusPagamento = []
             self.statusPagamento = []
-            self.nomeCliente = []
-            self.celularCliente = []
+            self.fornecedor = []
+            self.telefone = []
 
             # Salvando resultado da query e suas listas
-
             for row in self.query:
                 self.id.append(row.id)
                 self.dataEmissao.append(
@@ -258,8 +261,8 @@ class CrudVenda(object):
                 self.statusEntrega.append(row.status_entrega)
                 self.idStatusPagamento.append(row.pagamento)
                 self.statusPagamento.append(row.status_pagamento)
-                self.nomeCliente.append(row.nome)
-                self.celularCliente.append(row.celular)
+                self.fornecedor.append(row.nome_fantasia)
+                self.telefone.append(row.telefone)
 
             # Fechando a Conexao
             sessao.close()
@@ -267,21 +270,18 @@ class CrudVenda(object):
         except IntegrityError as err:
             print(err)
 
-        pass
-
-    # Atualizando estatus entrega ao entregar produtos
-
-    def Entregar(self):
+    # Atualizando estatus entrega ao receber produtos
+    def receberProduto(self):
 
         try:
 
-            # Abrindo Sessao
+            # Abrindo sessao
             conecta = Conexao()
             sessao = conecta.Session()
 
-            # Selecionando ID
-            row = sessao.query(Venda).get(self.id)
             # Query
+            row = sessao.query(Compra).get(self.id)
+
             row.data_entrega = self.dataEntrega
             row.entrega = 1
 
@@ -296,7 +296,7 @@ class CrudVenda(object):
 
     # Atualizando valor recebido e alterando status
 
-    def Receber(self):
+    def Pagar(self):
 
         try:
 
@@ -304,30 +304,29 @@ class CrudVenda(object):
             conecta = Conexao()
             sessao = conecta.Session()
 
-            # Selecionando por ID
-            row = sessao.query(Venda).get(self.id)
+            # Selecionando Id
+            row = sessao.query(Compra).get(self.id)
 
             # Update status Pagamento
             status = case([
-                (Venda.valor_recebido >= Venda.valor_total, '1')
+                (Compra.valor_pago >= Compra.valor_total, '1')
             ], else_='2'
             )
 
-            # Query
-            row.valor_recebido = Venda.valor_recebido + self.valorRecebido
+            row.valor_pago = Compra.valor_pago + self.valorPago
             row.pagamento = status
 
-            # Executando a query
+            # Executando a Query
             sessao.commit()
 
-            # Fechando a conexao
+            # Fechando a Conexao
             sessao.close()
 
         except IntegrityError as err:
             print(err)
 
-    # Relatório Vendas por periodo
-    def relatValorDia(self):
+    # Lista de Pedidos a receber hoje
+    def pedidosAReceber(self):
 
         try:
 
@@ -336,20 +335,13 @@ class CrudVenda(object):
             sessao = conecta.Session()
 
             # Query
-            row = (sessao.query(func.COALESCE(
-                func.SUM(Venda.valor_recebido), 0).label('vendido'),
-                func.COUNT(distinct(Venda.id_cliente)).label('cliente'))
-                .filter(Venda.data_emissao.between(self.dataEmissao,
-                                                   self.dataFim)))
-            row.all()
+            row = sessao.query(Compra.prazo_entrega).filter(
+                Compra.prazo_entrega == date.today()).count()
 
-            # salvando resultado
-            for query in row:
-                self.valorRecebido = str(query.vendido).replace('.', ',')
-                self.idCliente = query.cliente
-
-            # Fechando a COnexao
+            # Fechando Conexao
             sessao.close()
 
         except IntegrityError as err:
             print(err)
+
+        return row

@@ -10,8 +10,8 @@ from jinja2 import Environment, FileSystemLoader
 
 from Views.mainFornecedor import Ui_ct_MainFornecedor
 from Views.formFornecedor import Ui_ct_FormFornecedor
-from sql.CrudFornecedor import CrudFornecedor
-from sql.CrudCompra import CrudCompra
+from Crud.CrudFornecedor import CrudFornecedor
+from Crud.CrudCompra import CrudCompra
 
 
 class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):

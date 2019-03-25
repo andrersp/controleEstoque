@@ -3,8 +3,8 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 
-from sql.core import Conexao
-from sql.Models import Empresa
+from Crud.core import Conexao
+from Crud.Models import Empresa
 
 
 class CrudEmpresa(object):

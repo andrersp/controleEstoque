@@ -10,11 +10,11 @@ from Views.mainVendas import Ui_ct_MainVendas
 from Views.formVendas import Ui_ct_FormVenda
 
 
-from sql.CrudVenda import CrudVenda
-from sql.CrudProduto import CrudProduto
-from sql.CrudContaAReceber import CrudContaAReceber
-from sql.CrudRelVenda import CrudRelVenda
-from sql.CrudCliente import CrudCliente
+from Crud.CrudVenda import CrudVenda
+from Crud.CrudProduto import CrudProduto
+from Crud.CrudContaAReceber import CrudContaAReceber
+from Crud.CrudRelVenda import CrudRelVenda
+from Crud.CrudCliente import CrudCliente
 from Funcoes.data import DataAtual
 from Funcoes.cb_status import cb_statusPagamento, cb_statusEntrega
 
@@ -302,6 +302,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             INSERI.desconto = self.tx_Desconto.text()
             INSERI.frete = self.tx_Frete.text()
             INSERI.valorTotal = self.tx_TotalFinal.text()
+            INSERI.vendedor = self.idUser
 
             INSERI.inseriVenda()
             self.CadItemVenda()

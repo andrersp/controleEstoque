@@ -5,8 +5,8 @@ import configparser
 
 from sqlalchemy.exc import ProgrammingError
 
-from sql.core import Conexao, Base
-from sql.Models import *
+from Crud.core import Conexao, Base
+from Crud.Models import *
 
 
 class CreateDb(object):
@@ -70,7 +70,14 @@ class CreateDb(object):
                 FormaPagamento(id=1, forma_pagamento='Dinheiro'),
                 FormaPagamento(id=2, forma_pagamento='Cartão'),
                 StatusEntrega(id=1, status_entrega='ENTREGUE'),
-                StatusEntrega(id=2, status_entrega='PENDENTE')
+                StatusEntrega(id=2, status_entrega='PENDENTE'),
+                Empresa(id=1, titulo='Titulo', subtitulo='Subtitulo'),
+                Nivel(id=1, nivel='Vendedor'),
+                Nivel(id=2, nivel='Compras'),
+                Nivel(id=3, nivel='Financeiro'),
+                Nivel(id=4, nivel='Administrador'),
+                Usuarios(id=1, usuario='admin',
+                         senha='admin', nivel='4', ativo=1)
             ])
 
             sessao.commit()

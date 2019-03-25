@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from sql.CrudFormaPagamento import CrudFormaPagamento
+from Crud.CrudFormaPagamento import CrudFormaPagamento
 
 
 class FormaPagamento(object):

@@ -72,7 +72,7 @@ background: url(&quot;Images/bg.png&quot;) 0 0 no-repeat #0884c2
     <widget class="QLabel" name="lb_Data">
      <property name="geometry">
       <rect>
-       <x>880</x>
+       <x>590</x>
        <y>10</y>
        <width>70</width>
        <height>25</height>
@@ -99,7 +99,7 @@ background: url(&quot;Images/bg.png&quot;) 0 0 no-repeat #0884c2
     <widget class="QLabel" name="lb_DiaSemana">
      <property name="geometry">
       <rect>
-       <x>880</x>
+       <x>590</x>
        <y>35</y>
        <width>70</width>
        <height>20</height>
@@ -155,12 +155,6 @@ background: #7AB32E
      <property name="icon">
       <iconset>
        <normaloff>../../RSP/Images/home.png</normaloff>../../RSP/Images/home.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>50</width>
-       <height>35</height>
-      </size>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -252,18 +246,138 @@ background: #7AB32E
      <property name="text">
       <string/>
      </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_userName">
+     <property name="geometry">
+      <rect>
+       <x>670</x>
+       <y>30</y>
+       <width>150</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Sans Serif</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #FFF</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_logout">
+     <property name="geometry">
+      <rect>
+       <x>900</x>
+       <y>5</y>
+       <width>50</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Logout&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+
+border: none;
+color: #FFF
+}
+QPushButton:hover {
+background: #cacaca
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
      <property name="icon">
       <iconset>
-       <normaloff>../../RSP/Images/exit.png</normaloff>../../RSP/Images/exit.png</iconset>
+       <normaloff>../Images/logout.svg</normaloff>../Images/logout.svg</iconset>
      </property>
      <property name="iconSize">
       <size>
        <width>50</width>
-       <height>35</height>
+       <height>40</height>
       </size>
      </property>
-     <property name="flat">
-      <bool>true</bool>
+    </widget>
+    <widget class="QLabel" name="lb_userName_2">
+     <property name="geometry">
+      <rect>
+       <x>670</x>
+       <y>10</y>
+       <width>150</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Sans Serif</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #FFF</string>
+     </property>
+     <property name="text">
+      <string>Bem Vindo</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="bt_alterSenha">
+     <property name="geometry">
+      <rect>
+       <x>840</x>
+       <y>5</y>
+       <width>50</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Meus Dados&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+
+border: none;
+color: #FFF
+}
+QPushButton:hover {
+background: #cacaca
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../Images/altersenha.svg</normaloff>../Images/altersenha.svg</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>50</width>
+       <height>40</height>
+      </size>
      </property>
     </widget>
    </widget>
@@ -325,12 +439,6 @@ background: #7AB32E
      <property name="text">
       <string>Produtos</string>
      </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
      <property name="shortcut">
       <string>F2</string>
      </property>
@@ -377,12 +485,6 @@ background: #7AB32E
      </property>
      <property name="text">
       <string>Vendas</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
      </property>
      <property name="shortcut">
       <string>F3</string>
@@ -431,12 +533,6 @@ background: #7AB32E
      <property name="text">
       <string>Compras</string>
      </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
      <property name="shortcut">
       <string>F7</string>
      </property>
@@ -484,12 +580,6 @@ background: #7AB32E
      <property name="text">
       <string>Financeiro</string>
      </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
      <property name="shortcut">
       <string>F5</string>
      </property>
@@ -536,12 +626,6 @@ background: #7AB32E
      </property>
      <property name="text">
       <string>Configuração</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
      </property>
      <property name="shortcut">
       <string>F6</string>
@@ -595,16 +679,6 @@ QPushButton::menu-indicator {
      <property name="text">
       <string>Clientes</string>
      </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../../RSP/Images/icon/tag-new.png</normaloff>../../RSP/Images/icon/tag-new.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
      <property name="shortcut">
       <string>F7</string>
      </property>
@@ -651,12 +725,6 @@ background: #7AB32E
      </property>
      <property name="text">
       <string>Fornecedor</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
      </property>
      <property name="shortcut">
       <string>F6</string>

@@ -232,81 +232,13 @@ margin-top: 0;
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QPushButton" name="bt_confFinanceiro">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>365</x>
-       <y>2</y>
-       <width>170</width>
-       <height>36</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Arial [Mono]</family>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton{
-background: #40A286 ;
-border: none;
-color: #FFF;
-border-top-left-radius: 4px;
-border-top-right-radius: 4px;
-margin-top: 7px;
-}
-QPushButton:hover {
-background: #7AB32E;
-margin-top: 0;
-}
-QPushButton:disabled {
-background: #7AB32E;
-margin-top: 0;
-}
-</string>
-     </property>
-     <property name="text">
-      <string>FINANCEIRO</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../../RSP/Images/icon/tag-new.png</normaloff>../../RSP/Images/icon/tag-new.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>25</width>
-       <height>25</height>
-      </size>
-     </property>
-     <property name="shortcut">
-      <string>F7</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
     <widget class="QPushButton" name="bt_confDB">
      <property name="enabled">
       <bool>true</bool>
      </property>
      <property name="geometry">
       <rect>
-       <x>545</x>
+       <x>365</x>
        <y>2</y>
        <width>170</width>
        <height>36</height>

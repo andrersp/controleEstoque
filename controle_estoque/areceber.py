@@ -11,9 +11,9 @@ from Views.aReceber import Ui_ct_AReceber
 from Views.formAReceber import Ui_ct_FormReceber
 
 
-from sql.CrudContaAReceber import CrudContaAReceber
-from sql.CrudCatAReceber import CrudCatAReceber
-from sql.CrudStatusPagamento import CrudStatusPagamento
+from Crud.CrudContaAReceber import CrudContaAReceber
+from Crud.CrudCatAReceber import CrudCatAReceber
+from Crud.CrudStatusPagamento import CrudStatusPagamento
 
 from Funcoes.extenso import retorno
 
@@ -242,7 +242,6 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
 
     # Recebendo pagamento DB
     def ReceberParcela(self, id):
-        # print(self.tb_AReceber.item(id, 0).text())
 
         if not self.tx_valorPago.text():
             self.tx_valorPago.setFocus()

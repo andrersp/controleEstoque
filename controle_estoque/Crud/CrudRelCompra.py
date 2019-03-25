@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy import desc
-from sqlalchemy import case
-
-from sql.core import Conexao
-from sql.Models import RelacaoVenda, Produto
 
 
-class CrudRelVenda(object):
-    def __init__(self, id="", idVenda="", idProduto="", produto="", qtde="",
+from Crud.core import Conexao
+from Crud.Models import RelacaoCompra, Produto
+
+
+class CrudRelCompra(object):
+    def __init__(self, id="", idCompra="", idProduto="", produto="",
+                 qtde="",
                  valorUnitario="", valorTotal="", obs="", query=""):
 
         self.id = id
-        self.idVenda = idVenda
+        self.idCompra = idCompra
         self.idProduto = idProduto
         self.produto = produto
         self.qtde = qtde
@@ -22,7 +22,7 @@ class CrudRelVenda(object):
         self.obs = obs
         self.query = query
 
-    # Cadastrando item referente a Venda
+    # Cadastrando item referente a compra
 
     def inseriItens(self):
 
@@ -33,9 +33,9 @@ class CrudRelVenda(object):
             sessao = conecta.Session()
 
             # Query
-            row = RelacaoVenda(
+            row = RelacaoCompra(
                 id=self.id,
-                id_venda=self.idVenda,
+                id_compra=self.idCompra,
                 id_produto=self.idProduto,
                 qtde=self.qtde,
                 valor_unitario=self.valorUnitario,
@@ -43,7 +43,7 @@ class CrudRelVenda(object):
                 obs=self.obs
             )
 
-            # Adicionando query na sessao
+            # Add Query Sessa
             sessao.add(row)
 
             # Executando a Query
@@ -53,10 +53,10 @@ class CrudRelVenda(object):
             sessao.close()
 
         except IntegrityError:
-            self.updateItensVenda()
+            self.updateItens()
 
-    # update item referente a Venda
-    def updateItensVenda(self):
+    # update item referente a compra
+    def updateItens(self):
 
         try:
 
@@ -66,10 +66,11 @@ class CrudRelVenda(object):
 
             # Selecionando ID
 
-            row = sessao.query(RelacaoVenda).get(self.id)
+            row = sessao.query(RelacaoCompra).get(self.id)
 
             # Novos Valores
-            row.id_venda = self.idVenda
+
+            row.id_compra = self.idCompra
             row.id_produto = self.idProduto
             row.qtde = self.qtde
             row.valor_unitario = self.valorUnitario
@@ -85,7 +86,7 @@ class CrudRelVenda(object):
         except IntegrityError as err:
             print(err)
 
-    # Lista Itens por id de Venda
+    # Lista Itens por id de Compra
     def listaItens(self):
 
         try:
@@ -96,18 +97,18 @@ class CrudRelVenda(object):
 
             # Query
             self.query = (sessao.query(
-                RelacaoVenda.id, RelacaoVenda.id_venda,
-                RelacaoVenda.id_produto, RelacaoVenda.qtde,
-                RelacaoVenda.valor_unitario, RelacaoVenda.valor_total,
-                RelacaoVenda.obs,
+                RelacaoCompra.id, RelacaoCompra.id_compra,
+                RelacaoCompra.id_produto, RelacaoCompra.qtde,
+                RelacaoCompra.valor_unitario, RelacaoCompra.valor_total,
+                RelacaoCompra.obs,
                 Produto.produto)
                 .join(Produto)
-                .filter(RelacaoVenda.id_venda == self.idVenda))
+                .filter(RelacaoCompra.id_compra == self.idCompra))
             self.query.all()
 
             # Convertendo variaveis em lista
             self.id = []
-            self.idVenda = []
+            self.idCompra = []
             self.idProduto = []
             self.produto = []
             self.qtde = []
@@ -118,7 +119,7 @@ class CrudRelVenda(object):
             # Salvando resultado da query e suas listas
             for row in self.query:
                 self.id.append(row.id)
-                self.idVenda.append(row.id_venda)
+                self.idCompra.append(row.id_compra)
                 self.idProduto.append(row.id_produto)
                 self.produto.append(row.produto)
                 self.qtde.append(row.qtde)
@@ -142,10 +143,10 @@ class CrudRelVenda(object):
             conecta = Conexao()
             sessao = conecta.Session()
 
-            # Selecionando ID
-            self.query = (sessao.query(RelacaoVenda).get(self.id))
+            # selecionando ID
+            self.query = sessao.query(RelacaoCompra).get(self.id)
 
-            # add query na sessao
+            # Add query na Sessao
             sessao.delete(self.query)
 
             # Executando a query

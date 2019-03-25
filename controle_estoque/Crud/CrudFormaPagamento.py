@@ -3,56 +3,55 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import desc
 
-from sql.core import Conexao
-from sql.Models import MarcaProduto
+from Crud.core import Conexao
+from Crud.Models import FormaPagamento
 
 
-class CrudMarcaProduto(object):
-    def __init__(self, id="", marca_produto="", query=""):
+class CrudFormaPagamento(object):
+    def __init__(self, id="", formaPagamento="", query=""):
         self.id = id
-        self.marca_produto = marca_produto
+        self.formaPagamento = formaPagamento
         self.query = query
 
     # Recebendo ultimo Id inserido
 
-    def lastIdMarcaProduto(self):
+    def lastIdFormaPagamento(self):
+
         try:
 
-            # Abrindo a Sessao
+            # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
 
             # Query
-            ultimo = (sessao.query(MarcaProduto).order_by(
-                desc(MarcaProduto.id)).limit(1).first())
+            ultimo = sessao.query(FormaPagamento.id).order_by(
+                desc(FormaPagamento.id)).limit(1).first()
 
             self.id = ultimo.id + 1
 
-            # Fechando Conexao
+            # Fechando a conexao
             sessao.close()
 
         except:
-
             self.id = 1
 
         return self.id
 
-    # Cadastrando Marca produto
-
-    def inseriMarcaProduto(self):
+    # Cadastrando Forma Pagemento
+    def inseriFormaPagamento(self):
 
         try:
-            # Abrindo a Sessao
+
+            # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
-
             # Query
-            row = MarcaProduto(
+            row = FormaPagamento(
                 id=self.id,
-                marca_produto=self.marca_produto
+                forma_pagamento=self.formaPagamento
             )
 
-            # Add Query na sessao
+            # Add query na sessao
             sessao.add(row)
 
             # Executando a query
@@ -62,24 +61,22 @@ class CrudMarcaProduto(object):
             sessao.close()
 
         except IntegrityError:
-            self.updateMarcaProduto()
+            self.updateFormaPagamento()
 
-        pass
-
-    # Cadastrando Marca produto
-
-    def updateMarcaProduto(self):
+    # Update Forma Pagemento
+    def updateFormaPagamento(self):
 
         try:
-            # Abrindo a Sessao
+
+            # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
 
             # Selecionando id
-            row = sessao.query(MarcaProduto).get(self.id)
+            row = sessao.query(FormaPagamento).get(self.id)
 
-            # Novos valores
-            row.marca_produto = self.marca_produto
+            # Query
+            row.forma_pagamento = self.formaPagamento
 
             # Executando a query
             sessao.commit()
@@ -87,38 +84,32 @@ class CrudMarcaProduto(object):
             # Fechando a Conexao
             sessao.close()
 
-        except IntegrityError as err:
-            print(err)
+        except IntegrityError:
+            print('err')
 
-        pass
-
-    # Listando todas as Marcas
-
-    def listaMarcaProdutos(self):
+    # Listando todas as categorias
+    def listaFormaPagamento(self):
 
         try:
 
-            # Abrindo a Sessao
+            # Abrindo Sessao
             conecta = Conexao()
             sessao = conecta.Session()
 
             # Query
-            self.query = sessao.query(MarcaProduto).all()
+            self.query = sessao.query(FormaPagamento).order_by(
+                FormaPagamento.id).all()
 
             # Convertendo variaveis em lista
             self.id = []
-            self.marca_produto = []
-
-            # salvando resultado em sua lista
+            self.formaPagamento = []
 
             for row in self.query:
                 self.id.append(row.id)
-                self.marca_produto.append(row.marca_produto)
+                self.formaPagamento.append(row.forma_pagamento)
 
-            # Fechando Conexao
+                # Fechando a Conexao
             sessao.close()
 
         except IntegrityError as err:
             print(err)
-
-        pass

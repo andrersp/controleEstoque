@@ -9,11 +9,11 @@ from PySide2.QtWebEngineWidgets import QWebEngineView
 from Views.mainCompras import Ui_ct_MainCompras
 from Views.formCompras import Ui_ct_FormCompra
 
-from sql.CrudCompra import CrudCompra
-from sql.CrudFornecedor import CrudFornecedor
-from sql.CrudProduto import CrudProduto
-from sql.CrudRelCompra import CrudRelCompra
-from sql.CrudContaAPagar import CrudContaAPagar
+from Crud.CrudCompra import CrudCompra
+from Crud.CrudFornecedor import CrudFornecedor
+from Crud.CrudProduto import CrudProduto
+from Crud.CrudRelCompra import CrudRelCompra
+from Crud.CrudContaAPagar import CrudContaAPagar
 from Funcoes.data import DataAtual
 from Funcoes.cb_status import cb_statusEntrega, cb_statusPagamento
 

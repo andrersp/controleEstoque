@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'mainConfig.ui',
 # licensing of 'mainConfig.ui' applies.
 #
-# Created: Sun Mar  3 16:22:21 2019
+# Created: Sat Mar 23 13:32:36 2019
 #      by: pyside2-uic  running on PySide2 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -115,42 +115,9 @@ class Ui_ct_MainConfig(object):
         self.bt_confUser.setIconSize(QtCore.QSize(25, 25))
         self.bt_confUser.setFlat(True)
         self.bt_confUser.setObjectName("bt_confUser")
-        self.bt_confFinanceiro = QtWidgets.QPushButton(self.fr_menuConfig)
-        self.bt_confFinanceiro.setEnabled(True)
-        self.bt_confFinanceiro.setGeometry(QtCore.QRect(365, 2, 170, 36))
-        font = QtGui.QFont()
-        font.setFamily("Arial [Mono]")
-        font.setPointSize(10)
-        font.setWeight(75)
-        font.setBold(True)
-        self.bt_confFinanceiro.setFont(font)
-        self.bt_confFinanceiro.setCursor(QtCore.Qt.PointingHandCursor)
-        self.bt_confFinanceiro.setFocusPolicy(QtCore.Qt.NoFocus)
-        self.bt_confFinanceiro.setAutoFillBackground(False)
-        self.bt_confFinanceiro.setStyleSheet("QPushButton{\n"
-                                             "background: #40A286 ;\n"
-                                             "border: none;\n"
-                                             "color: #FFF;\n"
-                                             "border-top-left-radius: 4px;\n"
-                                             "border-top-right-radius: 4px;\n"
-                                             "margin-top: 7px;\n"
-                                             "}\n"
-                                             "QPushButton:hover {\n"
-                                             "background: #7AB32E;\n"
-                                             "margin-top: 0;\n"
-                                             "}\n"
-                                             "QPushButton:disabled {\n"
-                                             "background: #7AB32E;\n"
-                                             "margin-top: 0;\n"
-                                             "}\n"
-                                             "")
-        self.bt_confFinanceiro.setIcon(icon)
-        self.bt_confFinanceiro.setIconSize(QtCore.QSize(25, 25))
-        self.bt_confFinanceiro.setFlat(True)
-        self.bt_confFinanceiro.setObjectName("bt_confFinanceiro")
         self.bt_confDB = QtWidgets.QPushButton(self.fr_menuConfig)
         self.bt_confDB.setEnabled(True)
-        self.bt_confDB.setGeometry(QtCore.QRect(545, 2, 170, 36))
+        self.bt_confDB.setGeometry(QtCore.QRect(365, 2, 170, 36))
         font = QtGui.QFont()
         font.setFamily("Arial [Mono]")
         font.setPointSize(10)
@@ -197,10 +164,6 @@ class Ui_ct_MainConfig(object):
         self.bt_confUser.setText(QtWidgets.QApplication.translate(
             "ct_MainConfig", "USUÁRIOS", None, -1))
         self.bt_confUser.setShortcut(
-            QtWidgets.QApplication.translate("ct_MainConfig", "F7", None, -1))
-        self.bt_confFinanceiro.setText(QtWidgets.QApplication.translate(
-            "ct_MainConfig", "FINANCEIRO", None, -1))
-        self.bt_confFinanceiro.setShortcut(
             QtWidgets.QApplication.translate("ct_MainConfig", "F7", None, -1))
         self.bt_confDB.setText(QtWidgets.QApplication.translate(
             "ct_MainConfig", "BANCO DE DADOS", None, -1))

@@ -8,11 +8,11 @@ from PySide2.QtCore import Qt
 
 from Views.home import Ui_ct_Home
 
-from sql.CrudVenda import CrudVenda
-from sql.CrudProduto import CrudProduto
-from sql.CrudCompra import CrudCompra
-from sql.CrudContaAReceber import CrudContaAReceber
-from sql.CrudContaAPagar import CrudContaAPagar
+from Crud.CrudVenda import CrudVenda
+from Crud.CrudProduto import CrudProduto
+from Crud.CrudCompra import CrudCompra
+from Crud.CrudContaAReceber import CrudContaAReceber
+from Crud.CrudContaAPagar import CrudContaAPagar
 
 
 class MainHome(Ui_ct_Home):
