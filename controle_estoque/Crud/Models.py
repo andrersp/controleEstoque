@@ -4,7 +4,7 @@ from sqlalchemy import Column, String, Integer, Numeric, ForeignKey, Date
 from sqlalchemy.dialects.mysql import LONGBLOB
 
 
-from core import Base
+from Crud.core import Base
 
 
 # tabela Cliente

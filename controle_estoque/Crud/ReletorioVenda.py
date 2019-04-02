@@ -38,39 +38,36 @@ class RelatorioVenda(object):
             sessao = conecta.Session()
 
             # Query
+            vendedor = (sessao.query(Venda.vendedor)
+                        .filter(Venda.vendedor.contains(self.idVendedor))
+                        .group_by(Venda.vendedor)
+                        )
+            for row in vendedor:
+                print(row.vendedor)
+            
+            
+            
+            for row in vendedor:
+                query = (sessao.query(Venda.__table__, Usuarios.nome)
+                         .join(Usuarios, Venda.vendedor == Usuarios.id)
+                         .filter(Venda.vendedor == row.vendedor)
+                         .order_by(Usuarios.nome)
+                         )
+                query.all()
 
-            query = (sessao.query(Venda.vendedor)
-                     .filter(Venda.data_emissao.between(
-                         self.dataInicio, self.dataFim))
-                     .group_by(Venda.vendedor).subquery()
-                     )
+                self.idVenda = []
+                self.dataVenda = []
+                self.totalVenda = []
+                self.numItens = []
+                self.qtde = []
+                self.dataInicio = []
+                self.dataFim = []
 
-            query2 = (sessao.query(Venda.__table__,
-                                   query.c.vendedor, Usuarios.nome)
-                      .join(Usuarios, Venda.vendedor == Usuarios.id)
-                      .group_by(Venda.id)
-                      )
-
-            self.idVenda = []
-            self.dataVenda = []
-            self.totalVenda = []
-            self.numItens = []
-            self.idProduto = []
-            self.produto = []
-            self.qtde = []
-            self.idVendedor = []
-            self.vendedor = []
-            self.dataInicio = []
-            self.dataFim = []
-
-            for row in query2:
-                # self.idVenda.append(row.id)
-                # self.dataVenda.append(row.data_emissao)
-                # self.totalVenda.append(row.valor_total)
-                # self.numItens.append(row.quant)
-                # self.vendedor.append(row.nome)
-
-                print(row.nome, row.valor_total)
+                for row in query:
+                    print(row.valor_total)
+                    self.idVenda.append(row.id)
+                    self.dataVenda.append(row.data_emissao)
+                    self.totalVenda.append(row.valor_total)
 
             # Fechando Sessao
             sessao.close()
@@ -82,12 +79,9 @@ class RelatorioVenda(object):
 busca = RelatorioVenda()
 busca.dataInicio = '2019-01-01'
 busca.dataFim = '2019-03-30'
+busca.idVendedor = ''
 busca.RelatorioVendedor()
 
-# i = 0
-# for row in busca.vendedor:
-#     print(row)
-#     for detalhe in row:
-#         print(busca.totalVenda[i])
-
-#     i += 1
+i = 0
+for row in busca.totalVenda:
+    print(row)
