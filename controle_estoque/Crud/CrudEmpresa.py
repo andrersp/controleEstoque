@@ -1,17 +1,23 @@
 # -*- coding: utf-8 -*-
-from Crud.conexao import Conexao
-import mysql.connector
+
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy import desc
+
+from Crud.core import Conexao
+from Crud.Models import Empresa
 
 
 class CrudEmpresa(object):
 
-    def __init__(self, idEmpresa="", NomeFantasia="", RazaoSocial="", cnpj="",
-                 inscEstadual="", telefone="", email="", site="", obs="", cep="",
-                 endereco="", numero="", bairro="", cidade="", estado="",
-                 titulo="", subtitulo="", logo=""):
-        self.idEmpresa = idEmpresa
-        self.NomeFantasia = NomeFantasia
-        self.RazaoSocial = RazaoSocial
+    def __init__(self, id="", nomeFantasia="", razaoSocial="", cnpj="",
+                 inscEstadual="", telefone="", email="", site="", obs="",
+                 cep="", endereco="", numero="", bairro="", cidade="",
+                 estado="",  titulo="", subtitulo="", logo="",
+                 query=""):
+
+        self.id = id
+        self.nomeFantasia = nomeFantasia
+        self.razaoSocial = razaoSocial
         self.cnpj = cnpj
         self.inscEstadual = inscEstadual
         self.telefone = telefone
@@ -27,92 +33,159 @@ class CrudEmpresa(object):
         self.titulo = titulo
         self.subtitulo = subtitulo
         self.logo = logo
-    # Buscanado ultimo ID
+        self.query = query
 
-    def LasIdEmpresa(self):
-        conecta = Conexao()
-        c = conecta.conecta.cursor()
+    # Recebendo última id inserido
+
+    def lastIdEmpresa(self):
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            ultimo = sessao.query(Empresa).order_by(
+                desc(Empresa.id)).limite(1).first()
+
+            self.id = ultimo.id + 1
+
+            # Fechando Conexao
+            sessao.close()
+
+            pass
+
+        except:
+
+            self.id = 1
+
+            pass
+
+        return self.id
+
+    # Cadastro de Empresa
+    def inseriEmpresa(self):
 
         try:
-            c.execute(" SELECT id FROM empresa ORDER BY id DESC LIMIT 1")
-            row = c.fetchone()
-            if row:
-                self.idEmpresa = row[0]
-            else:
-                self.idEmpresa = 1
-            c.close()
-        except mysql.connector.Error as err:
-            print(err)
 
-        return self.idEmpresa
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
 
-    # Cadastro Empresa
-    def CadEmpresa(self):
-        conecta = Conexao()
-        c = conecta.conecta.cursor()
+            # Query
+            row = Empresa(
+                id=1,
+                nome_fantasia=self.nomeFantasia,
+                razao_social=self.razaoSocial,
+                cnpj=self.cnpj,
+                insc_estadual=self.inscEstadual,
+                telefone=self.telefone,
+                email=self.email,
+                site=self.site,
+                obs=self.obs,
+                cep=self.cep,
+                endereco=self.endereco,
+                numero=self.numero,
+                bairro=self.bairro,
+                cidade=self.cidade,
+                estado=self.estado,
+                titulo=self.titulo,
+                subtitulo=self.subtitulo,
+                logo=self.logo
+            )
+
+            # Add Query sessao
+            sessao.add(row)
+
+            # Executando a query
+            sessao.commit()
+
+            # Fechando a Conexao
+            sessao.close()
+
+        except IntegrityError:
+
+            self.updateEmpresa()
+
+    # Update de Empresa
+    def updateEmpresa(self):
 
         try:
-            c.execute(""" INSERT INTO empresa VALUES ('{}', '{}', '{}', '{}', 
-                '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', 
-                '{}', '{}', '{}', '{}')  ON DUPLICATE KEY UPDATE nomeFantasia ='{}', 
-                razaoSocial="{}", cnpj='{}', inscEstadual='{}', telefone='{}',
-                email='{}', site='{}', obs='{}', cep='{}', endereco='{}',
-                numero='{}', bairro='{}', cidade='{}', estado='{}',
-                titulo='{}', subtitulo='{}', logo='{}'
-                 """.format(self.idEmpresa,
-                            self.NomeFantasia, self.RazaoSocial, self.cnpj,
-                            self.inscEstadual, self.telefone, self.email,
-                            self.site, self.obs, self.cep, self.endereco,
-                            self.numero, self.bairro, self.cidade, self.estado,
-                            self.titulo, self.subtitulo, self.logo,
-                            self.NomeFantasia, self.RazaoSocial, self.cnpj,
-                            self.inscEstadual, self.telefone, self.email,
-                            self.site, self.obs, self.cep, self.endereco,
-                            self.numero, self.bairro, self.cidade, self.estado,
-                            self.titulo, self.subtitulo, self.logo))
-            conecta.conecta.commit()
-            c.close()
-        except mysql.connector.Error as err:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Selecionando ID
+            row = sessao.query(Empresa).get(1)
+
+            # Novos Valores
+
+            row.nome_fantasia = self.nomeFantasia
+            row.razao_social = self.razaoSocial
+            row.cnpj = self.cnpj
+            row.insc_estadual = self.inscEstadual
+            row.telefone = self.telefone
+            row.email = self.email
+            row.site = self.site
+            row.obs = self.obs
+            row.cep = self.cep
+            row.endereco = self.endereco
+            row.numero = self.numero
+            row.bairro = self.bairro
+            row.cidade = self.cidade
+            row.estado = self.estado
+            row.titulo = self.titulo
+            row.subtitulo = self.subtitulo
+            row.logo = self.logo
+
+            # Add Query sessao
+            sessao.add(row)
+
+            # Executando a query
+            sessao.commit()
+
+            # Fechando a Conexao
+            sessao.close()
+
+        except IntegrityError as err:
             print(err)
 
+    # Selecionar Empresa por Id
     def SelectEmpresaId(self):
-        conecta = Conexao()
-        c = conecta.conecta.cursor()
 
         try:
-            c.execute(
-                """SELECT * FROM empresa WHERE id='{}'"""
-                .format(self.idEmpresa))
-            row = c.fetchone()
-            if row:
-                self.idEmpresa = row[0]
-                self.NomeFantasia = row[1]
-                self.RazaoSocial = row[2]
-                self.cnpj = row[3]
-                self.inscEstadual = row[4]
-                self.telefone = row[5]
-                self.email = row[6]
-                self.site = row[7]
-                self.obs = row[8]
-                self.cep = row[9]
-                self.endereco = row[10]
-                self.numero = row[11]
-                self.bairro = row[12]
-                self.cidade = row[13]
-                self.estado = row[14]
-                self.titulo = row[15]
-                self.subtitulo = row[16]
-                self.logo = row[17]
 
-            c.close()
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
 
-        except mysql.connector.Error as err:
-            print(err)
+            # Query
+            busca = sessao.query(Empresa).get(1)
 
+            # Salvando resultado da Query
+            self.id = busca.id
+            self.nomeFantasia = busca.nome_fantasia
+            self.razaoSocial = busca.razao_social
+            self.cnpj = busca.cnpj
+            self.inscEstadual = busca.insc_estadual
+            self.telefone = busca.telefone
+            self.email = busca.email
+            self.site = busca.site
+            self.obs = busca.obs
+            self.cep = busca.cep
+            self.endereco = busca.endereco
+            self.numero = busca.numero
+            self.bairro = busca.bairro
+            self.cidade = busca.cidade
+            self.estado = busca.estado
+            self.titulo = busca.titulo
+            self.subtitulo = busca.subtitulo
+            self.logo = busca.logo
 
-# busca = CrudEmpresa()
-# busca.SelectEmpresaId(1)
-# # busca.NomeFantasia = "Azul e RazaoSocial"
-# # busca.RazaoSocial = "Azul"
-# # busca.ListaEmpresaTabela('')
-# print busca.NomeFantasia
+            # Fechando a Conexao
+            sessao.close()
+
+            pass
+        except:
+            self.titulo = None

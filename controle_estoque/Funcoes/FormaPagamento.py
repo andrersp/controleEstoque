@@ -7,9 +7,10 @@ class FormaPagamento(object):
     # Populando combobox forma de pagamento
     def CboxFPagamento(self, combobox):
         busca = CrudFormaPagamento()
-        busca.listaFPagamento()
+        busca.listaFormaPagamento()
         combobox.clear()
-
-        for i in range(len(busca.descFPagamento)):
-            combobox.addItem(busca.descFPagamento[i], str(
-                str(busca.idFPagamento[i])))
+        i = 0
+        for lista in busca.formaPagamento:
+            combobox.addItem(lista, str(
+                str(busca.id[i])))
+            i += 1

@@ -2,17 +2,17 @@
 {% extends "topo.html" %}
 
 {% block body %}
-	<table class='TableRelat' >
-		<caption>{{ titulo }}</caption>
+<table class='TableRelat'>
+	<caption>{{ titulo }}</caption>
 
-		<thead >
+	<thead>
 		<tr>
 			{% for row in headertable %}
 			<th> {{ row }}</th>
 			{% endfor %}
 		</tr>
-		</thead>
-		<tbody>
+	</thead>
+	<tbody>
 		{% for i in range(descPRoduto | length)  %}
 		<tr>
 			<td>
@@ -26,26 +26,24 @@
 			</td>
 			<td>
 				{{ valorUnitario[i]}}
-				
+
 			</td>
 			<td>
 				{{ valorAtacado[i] }}
 			</td>
-			<td>
-				{{ qtdeAtacado[i] }}
-			</td>
-				
+
+
 		</tr>
-		</tbody>
-		{% endfor %}
-		<!-- <tfoot>
+	</tbody>
+	{% endfor %}
+	<!-- <tfoot>
 			<tr>
 				<th colspan="4">Só testando</th>
 				<th>Thats Ok</th>
 			</tr>
 			
 		</tfoot> -->
-	</table>
+</table>
 
 
 

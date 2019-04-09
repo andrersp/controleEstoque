@@ -103,7 +103,7 @@ background-color: #40a286
       <rect>
        <x>0</x>
        <y>5</y>
-       <width>500</width>
+       <width>300</width>
        <height>30</height>
       </rect>
      </property>
@@ -158,7 +158,7 @@ color: #000
     <widget class="QLabel" name="lb_FormVenda_22">
      <property name="geometry">
       <rect>
-       <x>670</x>
+       <x>460</x>
        <y>2</y>
        <width>120</width>
        <height>16</height>
@@ -180,7 +180,7 @@ border: none;
     <widget class="QDateEdit" name="dt_InicioCompra">
      <property name="geometry">
       <rect>
-       <x>520</x>
+       <x>310</x>
        <y>16</y>
        <width>140</width>
        <height>20</height>
@@ -206,7 +206,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }</string>
      </property>
      <property name="displayFormat">
@@ -219,7 +219,7 @@ QDateEdit::down-arrow {
     <widget class="QLabel" name="lb_FormVenda_21">
      <property name="geometry">
       <rect>
-       <x>520</x>
+       <x>310</x>
        <y>2</y>
        <width>120</width>
        <height>16</height>
@@ -241,7 +241,7 @@ border: none;
     <widget class="QDateEdit" name="dt_FimCompra">
      <property name="geometry">
       <rect>
-       <x>670</x>
+       <x>460</x>
        <y>16</y>
        <width>140</width>
        <height>20</height>
@@ -267,7 +267,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }</string>
      </property>
      <property name="displayFormat">
@@ -275,6 +275,123 @@ QDateEdit::down-arrow {
      </property>
      <property name="calendarPopup">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_30">
+     <property name="geometry">
+      <rect>
+       <x>715</x>
+       <y>0</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+
+color:#1E87F0;
+border: none;
+}</string>
+     </property>
+     <property name="text">
+      <string>ENTREGA</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cb_entrega">
+     <property name="geometry">
+      <rect>
+       <x>715</x>
+       <y>14</y>
+       <width>95</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QComboBox{
+background: #E1DFE0;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 11px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 18px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
+ }
+</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cb_pagamento">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>16</y>
+       <width>95</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QComboBox{
+background: #E1DFE0;
+border: none;
+font-family: &quot;Arial&quot;;
+font-size: 11px;
+font-weight: bold;
+color: rgb(80,79,79)
+}
+ QComboBox::drop-down {
+     subcontrol-origin: padding;
+     subcontrol-position: top right;
+     width: 18px;
+     border-left-width: 1px;
+     border-left-color: darkgray;
+     border-left-style: solid; /* just a single line */
+     border-top-right-radius: 3px; /* same radius as the QComboBox */
+     border-bottom-right-radius: 3px;
+ }
+QComboBox::down-arrow {
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
+ }
+</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>CONCLUIDO</string>
+      </property>
+     </item>
+    </widget>
+    <widget class="QLabel" name="lb_FormVenda_29">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>2</y>
+       <width>95</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{
+font-size: 12px;
+font-family: &quot;Arial Unicode MS&quot;;
+
+color:#1E87F0;
+border: none;
+}</string>
+     </property>
+     <property name="text">
+      <string>PAGAMENTO</string>
      </property>
     </widget>
    </widget>

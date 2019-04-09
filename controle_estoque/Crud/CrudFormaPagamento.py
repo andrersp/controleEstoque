@@ -1,80 +1,115 @@
 # -*- coding: utf-8 -*-
-from Crud.conexao import Conexao
-import mysql.connector
+
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy import desc
+
+from Crud.core import Conexao
+from Crud.Models import FormaPagamento
 
 
 class CrudFormaPagamento(object):
-    def __init__(self, idFPagamento="", descFPagamento=""):
-        self.idFPagamento = idFPagamento
-        self.descFPagamento = descFPagamento
+    def __init__(self, id="", formaPagamento="", query=""):
+        self.id = id
+        self.formaPagamento = formaPagamento
+        self.query = query
 
-    # Ultimo Id Forma de Pagamento
-    def lastIdFPagamento(self):
-        conecta = Conexao()
-        c = conecta.conecta.cursor()
+    # Recebendo ultimo Id inserido
 
-        try:
-            c.execute(
-                """ SELECT id from formaPagamento ORDER BY id DESC LIMIT 1 """)
-            row = c.fetchone()
-
-            if row:
-                self.idFPagamento = row[0] + 1
-            else:
-                self.idFPagamento = 1
-
-            c.close()
-            pass
-        except mysql.connector.Error as err:
-            print(err)
-            pass
-
-        return self.idFPagamento
-        pass
-
-    # LIstando formas de pagamento
-    def listaFPagamento(self):
-        conecta = Conexao()
-        c = conecta.conecta.cursor()
+    def lastIdFormaPagamento(self):
 
         try:
-            c.execute(""" SELECT * FROM formaPagamento """)
-            row = c.fetchall()
 
-            self.idFPagamento = []
-            self.descFPagamento = []
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
 
-            if row:
-                for lista in row:
-                    self.idFPagamento.append(lista[0])
-                    self.descFPagamento.append(lista[1])
+            # Query
+            ultimo = sessao.query(FormaPagamento.id).order_by(
+                desc(FormaPagamento.id)).limit(1).first()
 
-            c.close()
-            pass
-        except mysql.connector.Error as err:
-            print(err)
-            pass
+            self.id = ultimo.id + 1
 
-        pass
+            # Fechando a conexao
+            sessao.close()
 
-    # Cadastro forma de pagamento
-    def cadFPagamento(self):
-        conecta = Conexao()
-        c = conecta.conecta.cursor()
+        except:
+            self.id = 1
+
+        return self.id
+
+    # Cadastrando Forma Pagemento
+    def inseriFormaPagamento(self):
 
         try:
-            c.execute(""" INSERT INTO formaPagamento VALUES ('{}', '{}')
-            ON DUPLICATE KEY UPDATE categoria = '{}' """
-                      .format(self.idFPagamento, self.descFPagamento,
-                              self.descFPagamento))
-            conecta.conecta.commit()
-            c.close()
-            pass
-        except mysql.connector.Error as err:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+            # Query
+            row = FormaPagamento(
+                id=self.id,
+                forma_pagamento=self.formaPagamento
+            )
+
+            # Add query na sessao
+            sessao.add(row)
+
+            # Executando a query
+            sessao.commit()
+
+            # Fechando a Conexao
+            sessao.close()
+
+        except IntegrityError:
+            self.updateFormaPagamento()
+
+    # Update Forma Pagemento
+    def updateFormaPagamento(self):
+
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Selecionando id
+            row = sessao.query(FormaPagamento).get(self.id)
+
+            # Query
+            row.forma_pagamento = self.formaPagamento
+
+            # Executando a query
+            sessao.commit()
+
+            # Fechando a Conexao
+            sessao.close()
+
+        except IntegrityError:
+            print('err')
+
+    # Listando todas as categorias
+    def listaFormaPagamento(self):
+
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            self.query = sessao.query(FormaPagamento).order_by(
+                FormaPagamento.id).all()
+
+            # Convertendo variaveis em lista
+            self.id = []
+            self.formaPagamento = []
+
+            for row in self.query:
+                self.id.append(row.id)
+                self.formaPagamento.append(row.forma_pagamento)
+
+                # Fechando a Conexao
+            sessao.close()
+
+        except IntegrityError as err:
             print(err)
-
-
-busca = CrudFormaPagamento()
-busca.idFPagamento = 3
-busca.descFPagamento = "CARTÃO"
-busca.cadFPagamento()

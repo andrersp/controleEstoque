@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-from PySide2.QtGui import QIntValidator, QDoubleValidator
-from PySide2.QtWidgets import QTableWidget, QCompleter, QLineEdit
-from PySide2 import QtCore, QtWidgets
+from PyQt5.QtGui import QIntValidator, QDoubleValidator
+from PyQt5.QtWidgets import QTableWidget, QCompleter, QLineEdit
+from PyQt5 import QtCore, QtWidgets
 from functools import partial
-# from Crud.CrudProdutos import CrudProdutos
 
 
 class Financeiro(object):
@@ -39,8 +38,13 @@ class Financeiro(object):
 
         self.IconeBotaoMenu(self.bt_Imprimir,
                             self.resourcepath('Images/gtk-print.png'))
+
+        self.IconeBotaoMenu(
+            self.bt_PrintRecibo, self.resourcepath('Images/gtk-print.png'))
+
         self.IconeBotaoMenu(self.bt_AddCategoriaProduto,
                             self.resourcepath('Images/edit-add.png'))
+
         self.IconeBotaoMenu(self.bt_CancelAddCatergoria,
                             self.resourcepath('Images/edit-delete.png'))
         self.bt_CancelAddCatergoria.setHidden(True)
@@ -105,7 +109,7 @@ class Financeiro(object):
         campo.setValidator(validaInt)
 
     def ValidaInputFloat(self, campo):
-        validarValor = QDoubleValidator(0.00, 999.99, 2)
+        validarValor = QDoubleValidator(0.00, 9999.99, 2)
         validarValor.setNotation(QDoubleValidator.StandardNotation)
         validarValor.setDecimals(2)
         campo.setValidator(validarValor)

@@ -137,7 +137,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }
 QCalendarWidget QAbstractItemView:enabled 
   {
@@ -258,7 +258,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }
 QCalendarWidget QAbstractItemView:enabled 
   {
@@ -1036,7 +1036,7 @@ background: none
 }</string>
      </property>
      <property name="text">
-      <string>R$ 250,00</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

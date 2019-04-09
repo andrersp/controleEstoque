@@ -137,7 +137,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }</string>
      </property>
      <property name="displayFormat">
@@ -220,7 +220,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QDateEdit::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }</string>
      </property>
      <property name="displayFormat">
@@ -259,7 +259,7 @@ color: rgb(80,79,79)
      border-bottom-right-radius: 3px;
  }
 QComboBox::down-arrow {
-     image: url("+self.resourcepath('Images/down.png')+");
+     image: url(&quot;+self.resourcepath('Images/down.png')+&quot;);
  }
 </string>
      </property>
@@ -324,6 +324,33 @@ background-color: #40a286
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="tx_Buscar">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>5</y>
+       <width>350</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+color: #000
+}
+</string>
+     </property>
+     <property name="placeholderText">
+      <string>PROCURAR POR...</string>
      </property>
     </widget>
    </widget>

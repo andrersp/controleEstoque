@@ -220,7 +220,7 @@ border: 1px solid red;
 }</string>
     </property>
     <property name="inputMask">
-     <string>(00) 0000-0000</string>
+     <string>(00) 0000-00000</string>
     </property>
     <property name="text">
      <string>() -</string>
@@ -1109,6 +1109,25 @@ border: none
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>tx_Id</tabstop>
+  <tabstop>tx_NomeFantasia</tabstop>
+  <tabstop>tx_RazaoSocial</tabstop>
+  <tabstop>tx_cnpj</tabstop>
+  <tabstop>tx_InscEstadual</tabstop>
+  <tabstop>tx_Telefone</tabstop>
+  <tabstop>tx_Site</tabstop>
+  <tabstop>tx_Email</tabstop>
+  <tabstop>tx_Obs</tabstop>
+  <tabstop>tx_Cep</tabstop>
+  <tabstop>bt_BuscaCep</tabstop>
+  <tabstop>tx_Endereco</tabstop>
+  <tabstop>tx_Numero</tabstop>
+  <tabstop>tx_Bairro</tabstop>
+  <tabstop>tx_Cidade</tabstop>
+  <tabstop>tx_Estado</tabstop>
+  <tabstop>tb_Historico</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

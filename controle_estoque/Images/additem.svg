@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="3.7506752cm"
+   height="1.916188cm"
+   viewBox="0 0 37.506752 19.161879"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="additem.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.6837121"
+     inkscape:cx="116.27882"
+     inkscape:cy="60.782456"
+     inkscape:document-units="cm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="996"
+     inkscape:window-x="0"
+     inkscape:window-y="31"
+     inkscape:window-maximized="1"
+     units="cm"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-60.132341,-158.24749)">
+    <path
+       style="fill:#ffffff;stroke-width:1.41916203"
+       inkscape:connector-curvature="0"
+       id="path848"
+       d="m 66.554889,158.24749 h 1.448405 v 14.55208 h -1.448405 z m 2.334888,14.55208 h 0.815434 v -14.55208 h -0.815434 z m 1.403194,0 h 0.81382 v -14.55208 h -0.81382 z m 1.88438,0 h 1.782653 v -14.55208 h -1.782653 z m 3.210069,0 h 0.891326 V 158.24749 H 75.38742 Z m 2.273528,0 h 3.694485 v -14.55208 h -3.694485 z m 9.626975,0 h 1.214271 v -14.55208 h -1.214271 z m 2.27353,-14.55208 v 14.55208 h 1.655091 v -14.55208 z m -6.723704,14.55208 h 0.794443 v -14.55208 h -0.794443 z m 1.932823,0 h 0.794443 v -14.55208 h -0.794443 z"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccc"
+       inkscape:export-filename="/Files/Sistema/controleEstoque/controle_estoque/Images/additem.png"
+       inkscape:export-xdpi="95"
+       inkscape:export-ydpi="95" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:'Tahoma, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.07997323"
+       x="79.050049"
+       y="177.34529"
+       id="text834"><tspan
+         sodipodi:role="line"
+         id="tspan832"
+         x="79.050049"
+         y="177.34529"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333311px;font-family:Tahoma;-inkscape-font-specification:'Tahoma, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;stroke-width:0.07997323">ADICIONAR ITEM</tspan></text>
+  </g>
+</svg>

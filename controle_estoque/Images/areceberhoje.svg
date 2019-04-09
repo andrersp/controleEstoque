@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="3.9877665cm"
+   height="1.9161882cm"
+   viewBox="0 0 39.877665 19.161881"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="areceberhoje.svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient11907"
+       x1="394.25"
+       xlink:href="#linearGradient10813"
+       gradientUnits="userSpaceOnUse"
+       y1="127.62"
+       gradientTransform="matrix(0.45578764,0,0,0.45578764,-827.93332,428.14189)"
+       x2="394.25"
+       y2="321.12" />
+    <linearGradient
+       id="linearGradient10813">
+      <stop
+         id="stop10815"
+         stop-color="#359b44"
+         offset="0" />
+      <stop
+         id="stop10817"
+         stop-color="#32cc49"
+         offset="1" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.6837121"
+     inkscape:cx="-68.217953"
+     inkscape:cy="50.008865"
+     inkscape:document-units="cm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="996"
+     inkscape:window-x="0"
+     inkscape:window-y="31"
+     inkscape:window-maximized="1"
+     units="cm"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(126.42373,-56.285894)">
+    <g
+       transform="matrix(0.03386552,0,0,0.03386552,-82.037538,45.599327)"
+       id="g1784"
+       style="fill:#ffffff">
+      <path
+         id="path11728"
+         d="m -658.00619,486.31197 c -1.7857,0 -3.22297,1.4242 -3.22297,3.20554 v 27.90474 h -27.88732 c -1.78134,0 -3.2186,1.41985 -3.2186,3.20119 v 19.55989 c 0,1.78134 1.43726,3.2186 3.2186,3.2186 h 27.88732 v 27.88733 c 0,1.78133 1.43727,3.2186 3.22297,3.2186 h 19.53811 c 1.78569,0 3.22296,-1.43727 3.22296,-3.2186 v -27.88733 h 27.88732 c 1.78134,0 3.2186,-1.43726 3.2186,-3.2186 v -19.55989 c 0,-1.78134 -1.43726,-3.20119 -3.2186,-3.20119 h -27.88732 v -27.90474 c 0,-1.78134 -1.43727,-3.20554 -3.22296,-3.20554 z"
+         style="fill:#ffffff;stroke-width:0.43553525"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:#ffffff"
+         d="m -752.94264,516.04591 v -54.344 c 25.526,4.476 25.531,20.337 25.531,26.111 h 30.589 c 0,-31.9 -20.682,-52.481 -56.12,-56.962 v -21.724 h -30.589 v 21.724 c -35.437,4.481 -56.12,25.061 -56.12,56.962 0,31.901 20.682,52.48 56.12,56.961 v 54.344 c -25.526,-4.476 -25.531,-20.337 -25.531,-26.111 h -30.589 c 0,31.9 20.682,52.481 56.12,56.962 v 21.724 h 30.589 v -21.724 c 35.437,-4.481 56.12,-25.061 56.12,-56.962 0,-31.901 -20.683,-52.48 -56.12,-56.961 z m -56.12,-28.233 c 0,-5.774 0.005,-21.635 25.531,-26.111 v 52.221 c -25.526,-4.475 -25.531,-20.335 -25.531,-26.11 z m 56.12,111.306 v -52.222 c 25.526,4.476 25.531,20.337 25.531,26.111 0,5.774 -0.005,21.634 -25.531,26.111 z"
+         id="path980" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:#ffffff"
+         d="m -616.50442,315.55892 h -210.782 c -60.355,0 -109.46,49.104 -109.46,109.461 v 51.652 l -19.521,-19.521 -21.628,21.629 56.444,56.444 56.443,-56.444 -21.629,-21.629 -19.52,19.52 v -51.652 c 0,-43.489 35.381,-78.872 78.871,-78.872 h 210.781 c 43.488,0 78.871,35.381 78.871,78.872 v 78.379 h 30.589 v -78.379 c 0,-60.356 -49.104,-109.46 -109.459,-109.46 z"
+         id="path982" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:#ffffff"
+         d="m -465.89542,590.44792 -56.444,-56.443 -56.443,56.443 21.63,21.629 19.52,-19.52 v 43.244 c 0,43.488 -35.381,78.871 -78.871,78.871 h -210.783 c -43.488,0 -78.871,-35.381 -78.871,-78.871 v -69.971 h -30.589 v 69.971 c 0,60.356 49.104,109.45999 109.46,109.45999 h 210.782 c 60.355,0 109.46,-49.10299 109.46,-109.45999 v -43.245 l 19.521,19.52 z"
+         id="path984" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.96935797px;line-height:1.25;font-family:Tahoma;-inkscape-font-specification:'Tahoma, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.07498639;"
+       x="-106.60037"
+       y="75.26635"
+       id="text1827"><tspan
+         id="tspan1825"
+         sodipodi:role="line"
+         x="-106.60037"
+         y="75.26635"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.96935797px;font-family:Tahoma;-inkscape-font-specification:'Tahoma, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#ffffff;stroke-width:0.07498639;">CONTAS A RECEBER</tspan></text>
+  </g>
+</svg>

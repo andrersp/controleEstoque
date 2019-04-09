@@ -3,13 +3,14 @@ import re
 from functools import partial
 
 
-from PySide2.QtCore import QUrl
-from PySide2.QtWebEngineWidgets import QWebEngineView
+from PyQt5.QtCore import QUrl
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 
 from Views.mainClientes import Ui_ct_MainClientes
 from Views.formClientes import Ui_ct_FormClientes
-from Crud.CrudClientes import CrudClientes
+from Crud.CrudCliente import CrudCliente
+from Crud.CrudVenda import CrudVenda
 
 
 class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
@@ -50,33 +51,33 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
     # Dados Tabela
 
     def TabelaClientes(self):
-        lista = CrudClientes()
-        busca = self.tx_BuscaClientes.text()
-        lista.ListaClientesTabela(busca)
+        lista = CrudCliente()
+        lista.nome = self.tx_BuscaClientes.text()
+        lista.listaCliente()
         i = 0
 
         while self.tb_Clientes.rowCount() > 0:
             self.tb_Clientes.removeRow(0)
 
-        if len(lista.nomeCliente) >= 1:
-            while i < len(lista.nomeCliente):
+        if len(lista.nome) >= 1:
+            while i < len(lista.nome):
                 self.tb_Clientes.insertRow(i)
                 self.TabelaStatus(self.tb_Clientes, i, 0,
                                   self.StatusEntrega(1))
-                self.TabelaID(self.tb_Clientes, i, 1, lista.idCliente[i])
+                self.TabelaID(self.tb_Clientes, i, 1, lista.id[i])
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 2,
-                                        lista.nomeCliente[i],
-                                        lista.apelidoCliente[i])
+                                        lista.nome[i],
+                                        lista.sobrenome[i])
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 3,
                                         self.formatoNumTelefone(
-                                            lista.celularCliente[i]),
+                                            lista.celular[i]),
                                         self.formatoNumTelefone(
-                                            lista.telefoneCliente[i]))
+                                            lista.telefone[i]))
                 self.TabelaNomeTelefone(self.tb_Clientes, i, 4,
-                                        lista.emailCliente[i], "")
+                                        lista.email[i], "")
                 # Sinal click tabela
                 self.botaoTabela(self.tb_Clientes, i, 5, partial(
-                    self.SelectCliente, lista.idCliente[i]), "#005099")
+                    self.SelectCliente, lista.id[i]), "#005099")
                 i += 1
             pass
 
@@ -85,40 +86,51 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
         id = valor
         self.FormClientes()
         self.tx_Id.setText(str(id))
-        busca = CrudClientes()
-        busca.SelectClienteID(id)
-        self.tx_NomeFantasia.setText(busca.nomeCliente)
-        self.tx_RazaoSocial.setText(busca.apelidoCliente)
-        self.tx_cnpj.setText(busca.cpfCliente)
-        self.tx_InscEstadual.setText(busca.rgCliente)
-        self.tx_Celular.setText(busca.celularCliente)
-        self.tx_Telefone.setText(busca.telefoneCliente)
-        self.tx_Email.setText(busca.emailCliente)
-        self.tx_Obs.setText(busca.obsCliente)
-        self.tx_Cep.setText(busca.cepCliente)
-        self.tx_Endereco.setText(busca.enderecoCliente)
-        self.tx_Numero.setText(busca.numCliente)
-        self.tx_Bairro.setText(busca.bairroCliente)
-        self.tx_Cidade.setText(busca.cidadeCliente)
-        self.tx_Estado.setText(busca.estadoCliente)
+        busca = CrudCliente()
+        busca.id = self.tx_Id.text()
+        busca.selectClienteId()
+        self.tx_NomeFantasia.setText(busca.nome)
+        self.tx_RazaoSocial.setText(busca.sobrenome)
+        self.tx_cnpj.setText(busca.cpf)
+        self.tx_InscEstadual.setText(busca.rg)
+        self.tx_Celular.setText(busca.celular)
+        self.tx_Telefone.setText(busca.telefone)
+        self.tx_Email.setText(busca.email)
+        self.tx_Obs.setText(busca.obs)
+        self.tx_Cep.setText(busca.cep)
+        self.tx_Endereco.setText(busca.endereco)
+        self.tx_Numero.setText(busca.numero)
+        self.tx_Bairro.setText(busca.bairro)
+        self.tx_Cidade.setText(busca.cidade)
+        self.tx_Estado.setText(busca.estado)
 
+        # Limpando tabela Histórico de Compras
         for row in range(self.tb_Historico.rowCount()):
             self.tb_Historico.removeRow(row)
 
+        # Histórico de Compras cliente
         total = '0.00'
-        for row in range(len(busca.dataEntrega)):
-            # print row
-            self.tb_Historico.insertRow(row)
-            self.conteudoTabela(
-                self.tb_Historico, row, 0, str(busca.dataEmissao[row]))
-            self.conteudoTabela(
-                self.tb_Historico, row, 1, str(busca.dataEntrega[row]))
-            self.conteudoTabela(
-                self.tb_Historico, row, 2, str(busca.Total[row]))
+        lista = CrudVenda()
+        lista.idCliente = valor
+        lista.selectVendaCliente()
+        i = 0
 
-            total = float(busca.Total[row]) + float(total)
+        while i < len(lista.dataEmissao):
+            # print row
+            self.tb_Historico.insertRow(i)
+            self.conteudoTabela(
+                self.tb_Historico, i, 0, str(lista.dataEmissao[i]))
+            self.conteudoTabela(
+                self.tb_Historico, i, 1, str(lista.dataEntrega[i]))
+            self.conteudoTabela(
+                self.tb_Historico, i, 2, str(lista.valorTotal[i]))
+
+            total = float(lista.valorTotal[i]) + float(total)
+
+            i += 1
 
         self.lb_TotalHistorico.setText(format(float(total), ".2f"))
+        i += 1
         pass
 
     # Frame Formulário Produtos
@@ -159,8 +171,8 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
     # checando campo Id se é Edicao ou Novo Cliente
     def IdCheckCliente(self):
         if not self.tx_Id.text():
-            busca = CrudClientes()
-            self.tx_Id.setText(str(busca.lastIDCliente()))
+            busca = CrudCliente()
+            self.tx_Id.setText(str(busca.lastIdCliente()))
         pass
 
     # Valida Inputs
@@ -173,51 +185,61 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
             self.CadCliente()
 
     def CadCliente(self):
-        INSERI = CrudClientes()
-        INSERI.idCliente = self.tx_Id.text()
-        INSERI.nomeCliente = self.tx_NomeFantasia.text().upper()
-        INSERI.apelidoCliente = self.tx_RazaoSocial.text().upper()
-        INSERI.cpfCliente = re.sub(
+        INSERI = CrudCliente()
+        INSERI.id = self.tx_Id.text()
+        INSERI.nome = self.tx_NomeFantasia.text().upper()
+        INSERI.sobrenome = self.tx_RazaoSocial.text().upper()
+        INSERI.cpf = re.sub(
             '[^[0-9]', '', self.tx_cnpj.text())
-        INSERI.rgCliente = re.sub(
+        INSERI.rg = re.sub(
             '[^[0-9]', '', self.tx_InscEstadual.text())
 
-        INSERI.celularCliente = re.sub(
+        INSERI.celular = re.sub(
             '[^[0-9]', '', self.tx_Celular.text())
-        INSERI.telefoneCliente = re.sub(
+        INSERI.telefone = re.sub(
             '[^[0-9]', '', self.tx_Telefone.text())
-        INSERI.emailCliente = self.tx_Email.text()
-        INSERI.obsCliente = self.tx_Obs.text().upper()
-        INSERI.cepCliente = re.sub(
+        INSERI.email = self.tx_Email.text()
+        INSERI.obs = self.tx_Obs.text().upper()
+        INSERI.cep = re.sub(
             '[^[0-9]', '', self.tx_Cep.text())
-        INSERI.enderecoCliente = self.tx_Endereco.text().upper()
-        INSERI.numCliente = self.tx_Numero.text()
-        INSERI.bairroCliente = self.tx_Bairro.text().upper()
-        INSERI.cidadeCliente = self.tx_Cidade.text().upper()
-        INSERI.estadoCliente = self.tx_Estado.text().upper()
-        INSERI.CadCliente()
+        INSERI.endereco = self.tx_Endereco.text().upper()
+        INSERI.numero = self.tx_Numero.text()
+        INSERI.bairro = self.tx_Bairro.text().upper()
+        INSERI.cidade = self.tx_Cidade.text().upper()
+        INSERI.estado = self.tx_Estado.text().upper()
+        INSERI.inseriCliente()
 
         self.janelaClientes()
 
         pass
 
-        # Imprimindo
+    # Imprimindo
 
     def imprimirCliente(self):
         self.documento = QWebEngineView()
 
         headertable = ["Cod", "Nome ", "Telefone", "Email"]
-        buscaFornecedor = CrudClientes()
-        buscaFornecedor.ListaClientesTabela('')
+        cod = []
+        nome = []
+        telefone = []
+        email = []
+
+        i = 0
+        for row in range(self.tb_Clientes.rowCount()):
+            cod.append(self.tb_Clientes.cellWidget(i, 1).text())
+            nome.append(self.tb_Clientes.cellWidget(i, 2).text())
+            telefone.append(self.tb_Clientes.cellWidget(i, 3).text())
+            email.append(self.tb_Clientes.cellWidget(i, 4).text())
+
         self.renderTemplate(
             "clientes.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="LISTAGEM CLIENTES",
             headertable=headertable,
-            codcliente=buscaFornecedor.idCliente,
-            nomeCliente=buscaFornecedor.nomeCliente,
-            telefoneFornecedor=buscaFornecedor.celularCliente,
-            emailFornecedor=buscaFornecedor.emailCliente
+            codcliente=cod,
+            nome=nome,
+            telefoneFornecedor=telefone,
+            emailFornecedor=email
         )
 
         self.documento.load(QUrl("file:///" +

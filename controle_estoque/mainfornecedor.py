@@ -3,15 +3,15 @@ from functools import partial
 import re
 
 
-from PySide2 import QtCore
-from PySide2.QtWebEngineWidgets import QWebEngineView
-from jinja2 import Environment, PackageLoader, FileSystemLoader
+from PyQt5 import QtCore
+from PyQt5.QtWebEngineWidgets import QWebEngineView
+from jinja2 import Environment, FileSystemLoader
 
 
 from Views.mainFornecedor import Ui_ct_MainFornecedor
 from Views.formFornecedor import Ui_ct_FormFornecedor
 from Crud.CrudFornecedor import CrudFornecedor
-from Crud.CrudEmpresa import CrudEmpresa
+from Crud.CrudCompra import CrudCompra
 
 
 class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
@@ -50,25 +50,27 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
 
     def TabelaFornecedor(self):
         lista = CrudFornecedor()
-        busca = self.tx_BuscaFornecedor.text()
-        lista.ListaFornecedorTabela(busca)
+        lista.nomeFantasia = self.tx_BuscaFornecedor.text()
+        lista.listaFornecedor()
 
         # Limpando Tabela
         while self.tb_Fornecedor.rowCount() > 0:
             self.tb_Fornecedor.removeRow(0)
 
         i = 0
-        if len(lista.NomeFantasia) >= 1:
-            while i < len(lista.NomeFantasia):
+        if len(lista.nomeFantasia) >= 1:
+            while i < len(lista.nomeFantasia):
                 self.tb_Fornecedor.insertRow(i)
                 self.TabelaStatus(self.tb_Fornecedor, i,
                                   0, self.StatusEntrega(1))
-                self.TabelaID(self.tb_Fornecedor, i, 1, lista.idFornecedor[i])
+                self.TabelaID(self.tb_Fornecedor, i, 1,
+                              lista.id[i])
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 2,
-                                        lista.NomeFantasia[i],
-                                        lista.RazaoSocial[i])
+                                        lista.nomeFantasia[i],
+                                        lista.razaoSocial[i])
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 3,
-                                        self.formatoNumTelefone(lista.telefone[i]), "")
+                                        self.formatoNumTelefone(
+                                            lista.telefone[i]), "")
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 4,
                                         lista.email[i], "")
                 self.TabelaNomeTelefone(self.tb_Fornecedor, i, 5,
@@ -76,7 +78,7 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
                 # Sinal click tabela
                 self.botaoTabela(self.tb_Fornecedor, i, 6,
                                  partial(self.SelectFornecedor,
-                                         lista.idFornecedor[i]), "#005099")
+                                         lista.id[i]), "#005099")
                 i += 1
         pass
 
@@ -84,10 +86,11 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
     def SelectFornecedor(self, id):
         busca = CrudFornecedor()
         self.FormFornecedor()
-        busca.SelectFornecedorId(id)
-        self.tx_Id.setText(str(busca.idFornecedor))
-        self.tx_NomeFantasia.setText(busca.NomeFantasia)
-        self.tx_RazaoSocial.setText(busca.RazaoSocial)
+        busca.id = id
+        busca.SelectFornecedorId()
+        self.tx_Id.setText(str(busca.id))
+        self.tx_NomeFantasia.setText(busca.nomeFantasia)
+        self.tx_RazaoSocial.setText(busca.razaoSocial)
         self.tx_cnpj.setText(str(busca.cnpj))
         self.tx_InscEstadual.setText(str(busca.inscEstadual))
         self.tx_Telefone.setText(str(busca.telefone))
@@ -101,6 +104,31 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
         self.tx_Cidade.setText(busca.cidade)
         self.tx_Estado.setText(busca.estado)
 
+        # Limpando tabela Histórico de Compras
+        for row in range(self.tb_Historico.rowCount()):
+            self.tb_Historico.removeRow(row)
+
+        # Histórico de Compras cliente
+        total = '0.00'
+        lista = CrudCompra()
+        lista.idFornecedor = id
+        lista.selectCompraFornecedor()
+        i = 0
+
+        while i < len(lista.dataEmissao):
+            # print row
+            self.tb_Historico.insertRow(i)
+            self.conteudoTabela(
+                self.tb_Historico, i, 0, str(lista.dataEmissao[i]))
+            self.conteudoTabela(
+                self.tb_Historico, i, 1, str(lista.dataEntrega[i]))
+            self.conteudoTabela(
+                self.tb_Historico, i, 2, str(lista.valorTotal[i]))
+
+            total = float(lista.valorTotal[i]) + float(total)
+            i += 1
+
+        self.lb_TotalHistorico.setText(format(float(total), ".2f"))
         pass
 
         # Frame Formulário Produtos
@@ -141,7 +169,7 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
     def IdCheckFornecedor(self):
         if not self.tx_Id.text():
             busca = CrudFornecedor()
-            self.tx_Id.setText(str(busca.LasIdFornecedor()))
+            self.tx_Id.setText(str(busca.lastIdFornecedor()))
 
     # Verificando Campos antes do INPUT
     def VerificaInputFornecedor(self):
@@ -155,9 +183,9 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
     # Cadastrando fornecedor
     def CadFornecedor(self):
         INSERI = CrudFornecedor()
-        INSERI.idFornecedor = self.tx_Id.text()
-        INSERI.NomeFantasia = self.tx_NomeFantasia.text().upper()
-        INSERI.RazaoSocial = self.tx_RazaoSocial.text().upper()
+        INSERI.id = self.tx_Id.text()
+        INSERI.nomeFantasia = self.tx_NomeFantasia.text().upper()
+        INSERI.razaoSocial = self.tx_RazaoSocial.text().upper()
         INSERI.cnpj = self.tx_cnpj.text()
         INSERI.inscEstadual = self.tx_InscEstadual.text()
         INSERI.telefone = re.sub(
@@ -172,7 +200,7 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
         INSERI.bairro = self.tx_Bairro.text().upper()
         INSERI.cidade = self.tx_Cidade.text().upper()
         INSERI.estado = self.tx_Estado.text()
-        INSERI.CadFornecedor()
+        INSERI.inseriFornecedor()
         self.janelaFornecedor()
 
     # Imprimindo
@@ -180,18 +208,33 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
         self.documento = QWebEngineView()
 
         headertable = ["Cod", "Nome Fantasia", "Telefone", "Email", "Site"]
-        buscaFornecedor = CrudFornecedor()
-        buscaFornecedor.ListaFornecedorTabela(self.tx_BuscaFornecedor.text())
+
+        codcliente = []
+        nomeFornecedor = []
+        telefoneFornecedor = []
+        siteFornecedor = []
+        emailFornecedor = []
+
+        i = 0
+        for i in range(self.tb_Fornecedor.rowCount()):
+            codcliente.append(self.tb_Fornecedor.cellWidget(i, 1).text())
+            nomeFornecedor.append(self.tb_Fornecedor.cellWidget(i, 2).text())
+            telefoneFornecedor.append(
+                self.tb_Fornecedor.cellWidget(i, 3).text())
+            siteFornecedor.append(self.tb_Fornecedor.cellWidget(i, 4).text())
+            emailFornecedor.append(self.tb_Fornecedor.cellWidget(i, 5).text())
+            i += 1
+
         html = self.renderTemplate(
             "report.html",
             estilo=self.resourcepath('Template/estilo.css'),
             titulo="LISTAGEM FORNECEDOR",
             headertable=headertable,
-            codcliente=buscaFornecedor.idFornecedor,
-            nomeFornecedor=buscaFornecedor.NomeFantasia,
-            telefoneFornecedor=buscaFornecedor.telefone,
-            siteFornecedor=buscaFornecedor.site,
-            emailFornecedor=buscaFornecedor.email
+            codcliente=codcliente,
+            nomeFornecedor=nomeFornecedor,
+            telefoneFornecedor=telefoneFornecedor,
+            siteFornecedor=siteFornecedor,
+            emailFornecedor=emailFornecedor
         )
 
         self.documento.load(QtCore.QUrl("file:///" +

@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
-from Crud.conexao import Conexao
-import mysql.connector
+
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import ProgrammingError
+from sqlalchemy import desc
+
+
+from Crud.core import Conexao
+from Crud.Models import Fornecedor
 
 
 class CrudFornecedor(object):
 
-    def __init__(self, idFornecedor="", NomeFantasia="", RazaoSocial="", cnpj="",
-                 inscEstadual="", telefone="", email="", site="", obs="", cep="",
-                 endereco="", numero="", bairro="", cidade="", estado=""):
-        self.idFornecedor = idFornecedor
-        self.NomeFantasia = NomeFantasia
-        self.RazaoSocial = RazaoSocial
+    def __init__(self, id="", nomeFantasia="", razaoSocial="", cnpj="",
+                 inscEstadual="", telefone="", email="", site="", obs="",
+                 cep="", endereco="", numero="", bairro="", cidade="",
+                 estado="", query=""):
+
+        self.id = id
+        self.nomeFantasia = nomeFantasia
+        self.razaoSocial = razaoSocial
         self.cnpj = cnpj
         self.inscEstadual = inscEstadual
         self.telefone = telefone
@@ -23,116 +31,241 @@ class CrudFornecedor(object):
         self.bairro = bairro
         self.cidade = cidade
         self.estado = estado
-    # Buscanado ultimo ID
-    """" nada """
+        self.query = query
 
-    def LasIdFornecedor(self):
-        conecta = Conexao()
-        c = conecta.conecta.cursor()
+     # Recebendo última id inserido
+
+    def lastIdFornecedor(self):
+        try:
+
+            # Abrindo a Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+            # Query
+            ultimo = sessao.query(Fornecedor).order_by(
+                desc(Fornecedor.id)).limit(1).first()
+
+            self.id = ultimo.id + 1
+
+            # Fechando Conexao
+            sessao.close()
+
+        except:
+
+            self.id = 1
+
+        return self.id
+
+    # Cadastro de Fornecedor
+
+    def inseriFornecedor(self):
 
         try:
-            c.execute(" SELECT id FROM fornecedor ORDER BY id DESC LIMIT 1")
-            row = c.fetchone()
-            if row:
-                self.idFornecedor = row[0] + 1
-            else:
-                self.idFornecedor = 1
-            c.close()
-        except mysql.connector.Error as err:
-            print(err)
 
-        return self.idFornecedor
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
 
-    # Cadastro Fornecedor
-    def CadFornecedor(self):
-        conecta = Conexao()
-        c = conecta.conecta.cursor()
+            # Query
+            row = Fornecedor(
+                id=self.id,
+                nome_fantasia=self.nomeFantasia,
+                razao_social=self.razaoSocial,
+                cnpj=self.cnpj,
+                insc_estadual=self.inscEstadual,
+                telefone=self.telefone,
+                email=self.email,
+                site=self.site,
+                obs=self.obs,
+                cep=self.cep,
+                endereco=self.endereco,
+                numero=self.numero,
+                bairro=self.bairro,
+                cidade=self.cidade,
+                estado=self.estado
+            )
 
-        try:
-            c.execute(""" INSERT INTO fornecedor VALUES ('{}', '{}', '{}', '{}', 
-            	'{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}', 
-            	'{}')  ON DUPLICATE KEY UPDATE nomeFantasia ='{}', 
-            	razaoSocial="{}", cnpj='{}', inscEstadual='{}', telefone='{}',
-            	email='{}', site='{}', obs='{}', cep='{}', endereco='{}',
-            	numero='{}', bairro='{}', cidade='{}', estado='{}'
-            	 """.format(self.idFornecedor,
-                         self.NomeFantasia, self.RazaoSocial, self.cnpj,
-                         self.inscEstadual, self.telefone, self.email,
-                         self.site, self.obs, self.cep, self.endereco,
-                         self.numero, self.bairro, self.cidade, self.estado,
-                         self.NomeFantasia, self.RazaoSocial, self.cnpj,
-                         self.inscEstadual, self.telefone, self.email,
-                         self.site, self.obs, self.cep, self.endereco,
-                         self.numero, self.bairro, self.cidade, self.estado))
-            conecta.conecta.commit()
-            c.close()
-        except mysql.connector.Error as err:
-            print(err)
+            # Add Query na sessao
+            sessao.add(row)
 
-    # LIstando Clientes para tabela e busca
-    def ListaFornecedorTabela(self, fornecedor):
-        conecta = Conexao()
-        c = conecta.conecta.cursor()
+            # Executando a query
+            sessao.commit()
 
-        self.idFornecedor = []
-        self.NomeFantasia = []
-        self.RazaoSocial = []
-        self.telefone = []
-        self.email = []
-        self.site = []
+            # Fechando a Conexao
+            sessao.close()
+
+        except IntegrityError:
+            self.updateFornecedor()
+
+        pass
+
+    # Atualiza cadastro de Fornecedor
+
+    def updateFornecedor(self):
 
         try:
-            c.execute(""" SELECT id, nomeFantasia, razaoSocial, telefone, email,
-        	site FROM fornecedor WHERE nomeFantasia LIKE '%{}%' """
-                      .format(fornecedor))
-            row = c.fetchall()
-            if row:
-                for linha in row:
-                    self.idFornecedor.append(linha[0])
-                    self.NomeFantasia.append(linha[1])
-                    self.RazaoSocial.append(linha[2])
-                    self.telefone.append(linha[3])
-                    self.email.append(linha[4])
-                    self.site.append(linha[5])
-            c.close()
-        except mysql.connector.Error as err:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Selecionando id
+            query = sessao.query(Fornecedor).get(self.id)
+
+            # Novos Valores
+            query.nome_fantasia = self.nomeFantasia
+            query.razao_social = self.razaoSocial
+            query.cnpj = self.cnpj
+            query.insc_estadual = self.inscEstadual
+            query.telefone = self.telefone
+            query.email = self.email
+            query.site = self.site
+            query.obs = self.obs
+            query.cep = self.cep
+            query.endereco = self.endereco
+            query.numero = self.numero
+            query.bairro = self.bairro
+            query.cidade = self.cidade
+            query.estado = self.estado
+
+            # Executando a query
+            sessao.commit()
+
+            # Fechando a Conexao
+            sessao.close()
+
+        except ProgrammingError as err:
             print(err)
 
-    def SelectFornecedorId(self, id):
-        conecta = Conexao()
-        self.idFornecedor = id
-        c = conecta.conecta.cursor()
+        pass
+
+    # Selecionar Fornecedor por Id
+
+    def SelectFornecedorId(self):
 
         try:
-            c.execute(
-                """SELECT * FROM fornecedor WHERE id='{}'"""
-                .format(self.idFornecedor))
-            row = c.fetchone()
-            if row:
-                self.idFornecedor = row[0]
-                self.NomeFantasia = row[1]
-                self.RazaoSocial = row[2]
-                self.cnpj = row[3]
-                self.inscEstadual = row[4]
-                self.telefone = row[5]
-                self.email = row[6]
-                self.site = row[7]
-                self.obs = row[8]
-                self.cep = row[9]
-                self.endereco = row[10]
-                self.numero = row[11]
-                self.bairro = row[12]
-                self.cidade = row[13]
-                self.estado = row[14]
-            c.close()
 
-        except mysql.connector.Error as err:
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+            # Query
+            busca = sessao.query(Fornecedor).get(self.id)
+
+            # Salvando resultado da Query
+            self.id = busca.id
+            self.nomeFantasia = busca.nome_fantasia
+            self.razaoSocial = busca.razao_social
+            self.cnpj = busca.cnpj
+            self.inscEstadual = busca.insc_estadual
+            self.telefone = busca.telefone
+            self.email = busca.email
+            self.site = busca.site
+            self.obs = busca.obs
+            self.cep = busca.cep
+            self.endereco = busca.endereco
+            self.numero = busca.numero
+            self.bairro = busca.bairro
+            self.cidade = busca.cidade
+            self.estado = busca.estado
+
+            # Fechando a Conexao
+            sessao.close()
+
+        except:
+            pass
+
+        pass
+
+    # Buscando Fornecedor por Nome
+
+    def listaFornecedor(self):
+
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            self.query = sessao.query(Fornecedor).filter(
+                Fornecedor.nome_fantasia.contains(self.nomeFantasia))
+            self.query.all()
+
+            # Convertendo variaveis em lista
+            self.id = []
+            self.nomeFantasia = []
+            self.razaoSocial = []
+            self.telefone = []
+            self.email = []
+            self.site = []
+
+            # Salvando resultado da query e suas listas
+            for row in self.query:
+                self.id.append(row.id)
+                self.nomeFantasia.append(row.nome_fantasia)
+                self.razaoSocial.append(row.razao_social)
+                self.telefone.append(row.telefone)
+                self.email.append(row.email)
+                self.site.append(row.site)
+
+            # Fechando a conexao
+            sessao.close()
+
+        except ProgrammingError as err:
             print(err)
 
+        pass
 
-# busca = CrudFornecedor()
-# busca.SelectFornecedorId(1)
-# # busca.NomeFantasia = "Azul e RazaoSocial"
-# # busca.RazaoSocial = "Azul"
-# # busca.ListaFornecedorTabela('')
-# print busca.NomeFantasia
+    # Lista AutoComplete Fornecedor
+
+    def autoCompleteFornecedor(self):
+
+        try:
+
+            # Abrindo Sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            self.query = sessao.query(Fornecedor).filter(
+                Fornecedor.nome_fantasia.contains(self.nomeFantasia))
+            self.query.all()
+
+            # Convertendo variaveis em lista
+            self.nomeFantasia = []
+
+            # salvando resultado em sua lista
+            for row in self.query:
+                self.nomeFantasia.append(row.nome_fantasia)
+
+            # Fechando a Conexao
+            sessao.close()
+
+        except ProgrammingError as err:
+            print(err)
+
+        pass
+
+    # Busca Fornecedor por nome
+    def buscaNomeFornecedor(self):
+
+        try:
+
+            # Abrindo sessao
+            conecta = Conexao()
+            sessao = conecta.Session()
+
+            # Query
+            self.query = sessao.query(Fornecedor).filter(
+                Fornecedor.nome_fantasia == self.nomeFantasia).first()
+
+            # Salvando resultado
+            self.id = self.query.id
+            self.nomeFantasia = self.query.nome_fantasia
+            self.telefone = self.query.telefone
+
+            # Fechando a Conexao
+            sessao.close()
+
+        except IntegrityError as err:
+            print(err)

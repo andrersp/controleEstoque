@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from PySide2.QtWidgets import QCompleter, QLineEdit
-from PySide2.QtCore import QDate, QDateTime, Qt, QStringListModel
-from PySide2.QtGui import QIntValidator, QDoubleValidator
+from PyQt5.QtWidgets import QCompleter, QLineEdit
+from PyQt5.QtCore import QDate, QDateTime, Qt, QStringListModel
+from PyQt5.QtGui import QIntValidator, QDoubleValidator
 from functools import partial
-from Crud.CrudProdutos import CrudProdutos
+
+from Crud.CrudProduto import CrudProduto
 
 
 class Comercial(object):
@@ -12,7 +13,7 @@ class Comercial(object):
     def validaCampos(self):
         # Setando Validadot Int nos campos
         validaInt = QIntValidator(0, 9999)
-        self.tx_QntdItem.setValidator(validaInt)
+
         self.tx_IdBuscaItem.setValidator(validaInt)
         self.tx_Id.setValidator(validaInt)
         # Setando Validador float nos campos
@@ -21,6 +22,7 @@ class Comercial(object):
         validarValor.setDecimals(2)
         self.tx_Desconto.setValidator(validarValor)
         self.tx_Frete.setValidator(validarValor)
+        self.tx_QntdItem.setValidator(validarValor)
 
     # Setando Datas Padrão
     def setDatas(self):
@@ -109,7 +111,7 @@ class Comercial(object):
                                 self.tx_ObsItem.text())
 
         self.conteudoTabela(self.tb_Itens, row, 3,
-                            self.tx_QntdItem.text())
+                            self.tx_QntdItem.text().replace(',', '.'))
         self.conteudoTabela(self.tb_Itens, row, 4,
                             self.tx_ValorUnitarioItem.text())
         self.conteudoTabela(self.tb_Itens, row, 5,
@@ -209,17 +211,17 @@ class Comercial(object):
 
     # AutoComplete Produtos
     def autocompleteProduto(self):
-        produto = self.tx_BuscaItem.text()
-        busca = CrudProdutos()
-        busca.ListaProdutoTabela(produto)
-        lista = busca.descricaoProduto
-        if produto:
-            self.model.setStringList(lista)
+        busca = CrudProduto()
+        busca.produto = self.tx_BuscaItem.text()
+        busca.autoCompleteProduto()
+        lista = []
+        if busca.produto:
+            self.model.setStringList(busca.produto)
 
     # Busca Produto por nome
     def BuscaProdutoNome(self):
-        produto = self.tx_BuscaItem.text()
-        busca = CrudProdutos()
-        busca.ListaProdutoTabela(produto)
-        self.tx_IdBuscaItem.setText(str(busca.idProduto[0]))
+        busca = CrudProduto()
+        busca.produto = self.tx_BuscaItem.text()
+        busca.buscaProdutoNome()
+        self.tx_IdBuscaItem.setText(str(busca.id))
         self.BuscaProdutoId()

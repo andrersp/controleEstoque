@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from Crud.CrudCategoriaAPagar import CrudCatAPagar
+from Crud.CrudCatAPagar import CrudCatAPagar
 
 
 class CategoriaAPagar(object):
@@ -10,6 +10,6 @@ class CategoriaAPagar(object):
         busca.listaCatAPagar()
         combobox.clear()
 
-        for i in range(len(busca.descCatAPagar)):
-            combobox.addItem(busca.descCatAPagar[i], str(
-                str(busca.idCatAPagar[i])))
+        for i in range(len(busca.categoriaPagar)):
+            combobox.addItem(busca.categoriaPagar[i], str(
+                str(busca.id[i])))

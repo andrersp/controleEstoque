@@ -2,44 +2,40 @@
 {% extends "topo.html" %}
 
 {% block body %}
-	<table class='TableRelat' >
-		<caption>{{ titulo }}</caption>
+<table class='TableRelat'>
+	<caption>{{ titulo }}</caption>
 
-		<thead >
+	<thead>
 		<tr>
 			{% for row in headertable %}
 			<th> {{ row }}</th>
 			{% endfor %}
 		</tr>
-		</thead>
-		<tbody>
-		{% for i in range(nomeCliente | length)  %}
+	</thead>
+	<tbody>
+		{% for i in range(nome | length)  %}
 		<tr>
-			<td>
-				{{codcliente[i]}}
+
+			<td width="20">
+				{{ codcliente[i] }}
 			</td>
 			<td>
-				{{ nomeCliente[i] }}
+				{{ nome[i] }}
 			</td>
 			<td>
-				{{ telefoneFornecedor[i]}}
+				{{ telefoneFornecedor[i] }}
 			</td>
 			<td>
-				{{ emailFornecedor[i]}}
-				
+				{{ emailFornecedor[i] }}
 			</td>
-				
+
+
 		</tr>
-		</tbody>
 		{% endfor %}
-		<!-- <tfoot>
-			<tr>
-				<th colspan="4">Só testando</th>
-				<th>Thats Ok</th>
-			</tr>
-			
-		</tfoot> -->
-	</table>
+	</tbody>
+
+
+</table>
 
 
 

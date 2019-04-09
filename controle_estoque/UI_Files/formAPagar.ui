@@ -674,7 +674,7 @@ border: none;
       <rect>
        <x>20</x>
        <y>320</y>
-       <width>130</width>
+       <width>120</width>
        <height>30</height>
       </rect>
      </property>
@@ -697,9 +697,9 @@ border: none
     <widget class="QLabel" name="lb_ValorPendente">
      <property name="geometry">
       <rect>
-       <x>160</x>
+       <x>140</x>
        <y>320</y>
-       <width>125</width>
+       <width>70</width>
        <height>30</height>
       </rect>
      </property>
@@ -908,6 +908,56 @@ background-color: #40a286
       </size>
      </property>
     </widget>
+    <widget class="QPushButton" name="bt_PrintRecibo">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>320</y>
+       <width>100</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Tahoma</family>
+       <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::ActionsContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+background-color: #5C9BBC;
+color: #FFF;
+border: none;
+border-radius: 2px
+ }
+QPushButton:hover{
+background-color: #40a286
+}</string>
+     </property>
+     <property name="text">
+      <string>RECIBO</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>75</width>
+       <height>35</height>
+      </size>
+     </property>
+    </widget>
    </widget>
    <widget class="QLabel" name="lb_FormCompra_9">
     <property name="geometry">
@@ -1080,7 +1130,7 @@ background-color: #40a286
     <widget class="QPushButton" name="bt_Salvar">
      <property name="geometry">
       <rect>
-       <x>610</x>
+       <x>740</x>
        <y>0</y>
        <width>120</width>
        <height>30</height>
@@ -1114,54 +1164,6 @@ background-color: #40a286
      </property>
      <property name="text">
       <string>SALVAR</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>75</width>
-       <height>35</height>
-      </size>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="bt_Imprimir">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>740</x>
-       <y>0</y>
-       <width>120</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Tahoma</family>
-       <pointsize>10</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="contextMenuPolicy">
-      <enum>Qt::ActionsContextMenu</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-background-color: #5C9BBC;
-color: #FFF
- }
-QPushButton:hover{
-background-color: #40a286
-}</string>
-     </property>
-     <property name="text">
-      <string>IMPRIMIR</string>
      </property>
      <property name="iconSize">
       <size>
@@ -1249,6 +1251,24 @@ border: 1px solid red;
    <zorder>bt_AddCategoriaProduto</zorder>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>tx_Cod</tabstop>
+  <tabstop>tx_Id</tabstop>
+  <tabstop>tx_NomeFantasia</tabstop>
+  <tabstop>tx_Telefone</tabstop>
+  <tabstop>tx_descricao</tabstop>
+  <tabstop>cb_categoria</tabstop>
+  <tabstop>bt_AddCategoriaProduto</tabstop>
+  <tabstop>bt_CancelAddCatergoria</tabstop>
+  <tabstop>dt_Vencimento</tabstop>
+  <tabstop>tx_valor</tabstop>
+  <tabstop>tx_Obs</tabstop>
+  <tabstop>cb_repetir</tabstop>
+  <tabstop>dt_dataPagamento</tabstop>
+  <tabstop>cb_formaPagamento</tabstop>
+  <tabstop>tx_valorPago</tabstop>
+  <tabstop>tx_addCategoria</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

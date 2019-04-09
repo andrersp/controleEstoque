@@ -3,12 +3,12 @@
 # Form implementation generated from reading ui file 'formFornecedor.ui',
 # licensing of 'formFornecedor.ui' applies.
 #
-# Created: Mon Feb 18 09:36:05 2019
-#      by: pyside2-uic  running on PySide2 5.12.1
+# Created: Fri Mar 15 09:54:22 2019
+#      by: PyQt5-uic  running on PyQt5 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PySide2 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_ct_FormFornecedor(object):
     def setFormFornecedor(self, ct_FormFornecedor):
@@ -527,6 +527,22 @@ class Ui_ct_FormFornecedor(object):
 
         self.tradFormFornecedor(ct_FormFornecedor)
         QtCore.QMetaObject.connectSlotsByName(ct_FormFornecedor)
+        ct_FormFornecedor.setTabOrder(self.tx_Id, self.tx_NomeFantasia)
+        ct_FormFornecedor.setTabOrder(self.tx_NomeFantasia, self.tx_RazaoSocial)
+        ct_FormFornecedor.setTabOrder(self.tx_RazaoSocial, self.tx_cnpj)
+        ct_FormFornecedor.setTabOrder(self.tx_cnpj, self.tx_InscEstadual)
+        ct_FormFornecedor.setTabOrder(self.tx_InscEstadual, self.tx_Telefone)
+        ct_FormFornecedor.setTabOrder(self.tx_Telefone, self.tx_Site)
+        ct_FormFornecedor.setTabOrder(self.tx_Site, self.tx_Email)
+        ct_FormFornecedor.setTabOrder(self.tx_Email, self.tx_Obs)
+        ct_FormFornecedor.setTabOrder(self.tx_Obs, self.tx_Cep)
+        ct_FormFornecedor.setTabOrder(self.tx_Cep, self.bt_BuscaCep)
+        ct_FormFornecedor.setTabOrder(self.bt_BuscaCep, self.tx_Endereco)
+        ct_FormFornecedor.setTabOrder(self.tx_Endereco, self.tx_Numero)
+        ct_FormFornecedor.setTabOrder(self.tx_Numero, self.tx_Bairro)
+        ct_FormFornecedor.setTabOrder(self.tx_Bairro, self.tx_Cidade)
+        ct_FormFornecedor.setTabOrder(self.tx_Cidade, self.tx_Estado)
+        ct_FormFornecedor.setTabOrder(self.tx_Estado, self.tb_Historico)
 
     def tradFormFornecedor(self, ct_FormFornecedor):
         ct_FormFornecedor.setWindowTitle(QtWidgets.QApplication.translate("ct_FormFornecedor", "Frame", None, -1))
@@ -536,7 +552,7 @@ class Ui_ct_FormFornecedor(object):
         self.lb_FormFornecedor_3.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "CNPJ", None, -1))
         self.lb_FormFornecedor_4.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "IE", None, -1))
         self.lb_FormFornecedor_5.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "TELEFONE ", None, -1))
-        self.tx_Telefone.setInputMask(QtWidgets.QApplication.translate("ct_FormFornecedor", "(00) 0000-0000", None, -1))
+        self.tx_Telefone.setInputMask(QtWidgets.QApplication.translate("ct_FormFornecedor", "(00) 0000-00000", None, -1))
         self.tx_Telefone.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "() -", None, -1))
         self.tx_Obs.setPlaceholderText(QtWidgets.QApplication.translate("ct_FormFornecedor", "Observação", None, -1))
         self.lb_FormFornecedor_7.setText(QtWidgets.QApplication.translate("ct_FormFornecedor", "OBSERVAÇÃO", None, -1))
