@@ -5,9 +5,9 @@ import sys
 import re
 import base64
 
-from PySide2.QtCore import QByteArray, QBuffer, Qt
-from PySide2.QtWidgets import QFileDialog
-from PySide2.QtGui import QPixmap
+from PyQt5.QtCore import QByteArray, QBuffer, Qt
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtGui import QPixmap
 from Views.mainConfig import Ui_ct_MainConfig
 import mysql.connector
 

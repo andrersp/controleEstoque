@@ -6,7 +6,7 @@ import os
 import sys
 
 
-from PySide2.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap
 import mysql.connector
 
 

@@ -3,7 +3,7 @@
 from datetime import date
 
 
-from PySide2.QtCore import Qt
+from PyQt5.QtCore import Qt
 
 
 from Views.home import Ui_ct_Home

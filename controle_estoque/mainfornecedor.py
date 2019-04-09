@@ -3,8 +3,8 @@ from functools import partial
 import re
 
 
-from PySide2 import QtCore
-from PySide2.QtWebEngineWidgets import QWebEngineView
+from PyQt5 import QtCore
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 from jinja2 import Environment, FileSystemLoader
 
 

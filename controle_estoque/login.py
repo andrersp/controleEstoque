@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from PySide2.QtWidgets import QPushButton
+from PyQt5.QtWidgets import QPushButton
 
 
 # View

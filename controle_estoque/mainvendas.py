@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from functools import partial
 
-from PySide2.QtCore import QDate, QUrl
-from PySide2.QtWidgets import QLineEdit
-from PySide2.QtWebEngineWidgets import QWebEngineView
+from PyQt5.QtCore import QDate, QUrl
+from PyQt5.QtWidgets import QLineEdit
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 
 from Views.mainVendas import Ui_ct_MainVendas

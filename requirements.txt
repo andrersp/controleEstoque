@@ -1,4 +1,4 @@
-PySide2
+PyQt5
 mysql-connector
 jinja2
 pycep_correios

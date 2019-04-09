@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from functools import partial
 
-from PySide2.QtCore import Qt, QByteArray, QUrl, QBuffer
-from PySide2.QtGui import QIntValidator, QDoubleValidator, QPixmap
-from PySide2.QtWidgets import QFileDialog
-from PySide2.QtWebEngineWidgets import QWebEngineView
+from PyQt5.QtCore import Qt, QByteArray, QUrl, QBuffer
+from PyQt5.QtGui import QIntValidator, QDoubleValidator, QPixmap
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 
 from Views.mainProdutos import Ui_ct_MainProdutos

@@ -1,6 +1,6 @@
 # -*- codind: utf-8 -*-
-from PySide2.QtCore import QDate, QUrl
-from PySide2.QtWebEngineWidgets import QWebEngineView
+from PyQt5.QtCore import QDate, QUrl
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 import re
 
 

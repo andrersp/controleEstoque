@@ -3,8 +3,8 @@ import re
 from functools import partial
 
 
-from PySide2.QtCore import QUrl
-from PySide2.QtWebEngineWidgets import QWebEngineView
+from PyQt5.QtCore import QUrl
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 
 from Views.mainClientes import Ui_ct_MainClientes

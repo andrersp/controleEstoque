@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from PySide2.QtGui import QIntValidator, QDoubleValidator
-from PySide2.QtWidgets import QTableWidget, QCompleter, QLineEdit
-from PySide2 import QtCore, QtWidgets
+from PyQt5.QtGui import QIntValidator, QDoubleValidator
+from PyQt5.QtWidgets import QTableWidget, QCompleter, QLineEdit
+from PyQt5 import QtCore, QtWidgets
 from functools import partial
 
 

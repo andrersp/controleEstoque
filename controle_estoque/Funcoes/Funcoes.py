@@ -3,9 +3,9 @@ from functools import partial
 import re
 
 
-from PySide2.QtWidgets import QPushButton
-from PySide2.QtCore import QSize
-from PySide2.QtGui import QPixmap, QIcon
+from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtCore import QSize
+from PyQt5.QtGui import QPixmap, QIcon
 
 
 from pycep_correios import consultar_cep

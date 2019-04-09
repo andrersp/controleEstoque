@@ -5,8 +5,8 @@ import random
 import webbrowser
 
 
-from PySide2.QtCore import Qt
-from PySide2 import QtGui, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5 import QtGui, QtWidgets
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -47,6 +47,12 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
         self.setupUi(self)
 
         self.centralizar()  # Centrelizando na tela
+
+        # Background
+        palete = QtGui.QPalette()
+        palete.setBrush(QtGui.QPalette.Background, QtGui.QBrush(QtGui.QPixmap(self.resourcepath('Images/bg.png'))))
+        self.setPalette(palete)
+        
 
         # Caminho Absoluto
         self.caminho = os.path.abspath(os.path.dirname(sys.argv[0]))

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import re
 
-from PySide2.QtCore import QByteArray, QBuffer, Qt
-from PySide2.QtWidgets import QFileDialog
-from PySide2.QtGui import QPixmap
+from PyQt5.QtCore import QByteArray, QBuffer, Qt
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtGui import QPixmap
 
 
 from Views.mainEmpresa import Ui_ct_empresa

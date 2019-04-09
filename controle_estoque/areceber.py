@@ -3,8 +3,8 @@ from functools import partial
 from datetime import date
 
 
-from PySide2.QtCore import QDate, Qt, QUrl
-from PySide2.QtWebEngineWidgets import QWebEngineView
+from PyQt5.QtCore import QDate, Qt, QUrl
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 
 
 from Views.aReceber import Ui_ct_AReceber

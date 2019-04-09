@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from PySide2.QtWidgets import QCompleter, QLineEdit
-from PySide2.QtCore import QDate, QDateTime, Qt, QStringListModel
-from PySide2.QtGui import QIntValidator, QDoubleValidator
+from PyQt5.QtWidgets import QCompleter, QLineEdit
+from PyQt5.QtCore import QDate, QDateTime, Qt, QStringListModel
+from PyQt5.QtGui import QIntValidator, QDoubleValidator
 from functools import partial
 
 from Crud.CrudProduto import CrudProduto
