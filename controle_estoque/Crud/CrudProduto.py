@@ -152,9 +152,9 @@ class CrudProduto(object):
             self.estoqueMinimo = busca.estoque_minimo
             self.estoqueMaximo = busca.estoque_maximo
             self.qtdeProduto = busca.qtde
-            self.valorCompra = busca.valor_compra
-            self.valorUnitario = busca.valor_unitario
-            self.valorAtacado = busca.valor_atacado
+            self.valorCompra = format(busca.valor_compra, ".2f")
+            self.valorUnitario = format(busca.valor_unitario, ".2f")
+            self.valorAtacado = format(busca.valor_atacado, ".2f")
             self.qtdeAtacado = busca.qtde_atacado
             self.obsProduto = busca.obs
 
@@ -206,8 +206,8 @@ class CrudProduto(object):
                 self.marca.append(row.marca_produto)
                 self.estoqueMinimo.append(row.estoque_minimo)
                 self.qtdeProduto.append(row.qtde)
-                self.valorUnitario.append(row.valor_unitario)
-                self.valorAtacado.append(row.valor_atacado)
+                self.valorUnitario.append(format(row.valor_unitario, ".2f"))
+                self.valorAtacado.append(format(row.valor_atacado, ".2f"))
                 self.qtdeAtacado.append(row.qtde_atacado)
 
            # Fechando a Conexao

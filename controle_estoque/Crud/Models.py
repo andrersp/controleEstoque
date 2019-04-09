@@ -1,7 +1,7 @@
 # coding=utf-8
 
-from sqlalchemy import Column, String, Integer, Numeric, ForeignKey, Date
-from sqlalchemy.dialects.mysql import LONGBLOB
+from sqlalchemy import Column, String, Integer, Float, ForeignKey, Date, BLOB
+# from sqlalchemy.dialects.mysql import BLOB
 
 
 from Crud.core import Base
@@ -78,15 +78,15 @@ class Produto(Base):
     __tablename__ = 'produto'
     id = Column(Integer, primary_key=True)
     produto = Column(String(80), index=True)
-    imagem = Column(LONGBLOB(length=None))
+    imagem = Column(BLOB(length=None))
     categoria = Column(Integer, ForeignKey('categoria_produto.id'))
     marca = Column(Integer, ForeignKey('marca_produto.id'))
     estoque_minimo = Column(Integer, default=0)
     estoque_maximo = Column(Integer, default=0)
     qtde = Column(Integer, default=0)
-    valor_compra = Column(Numeric(9, 2), default='0.00')
-    valor_unitario = Column(Numeric(9, 2), default='0.00')
-    valor_atacado = Column(Numeric(9, 2), default='0.00')
+    valor_compra = Column(Float(9, 2), default='0.00')
+    valor_unitario = Column(Float(9, 2), default='0.00')
+    valor_atacado = Column(Float(9, 2), default='0.00')
     qtde_atacado = Column(Integer, default=5)
     obs = Column(String(80))
 
@@ -153,11 +153,11 @@ class Compra(Base):
     prazo_entrega = Column(Date)
     data_entrega = Column(Date)
     categoria = Column(Integer, ForeignKey('categoria_a_pagar.id'))
-    desconto = Column(Numeric(9, 2), default='0.00')
-    frete = Column(Numeric(9, 2), default='0.00')
-    valor_total = Column(Numeric(9, 2), default='0.00')
-    valor_pago = Column(Numeric(9, 2), default='0.00')
-    valor_pendente = Column(Numeric(9, 2), default='0.00')
+    desconto = Column(Float(9, 2), default='0.00')
+    frete = Column(Float(9, 2), default='0.00')
+    valor_total = Column(Float(9, 2), default='0.00')
+    valor_pago = Column(Float(9, 2), default='0.00')
+    valor_pendente = Column(Float(9, 2), default='0.00')
     entrega = Column(Integer, ForeignKey('status_entrega.id'), default='2')
     pagamento = Column(Integer, ForeignKey('status_pagamento.id'), default='2')
 
@@ -171,9 +171,9 @@ class RelacaoCompra(Base):
     id = Column(String(25), primary_key=True)
     id_compra = Column(Integer, ForeignKey('compra.id'))
     id_produto = Column(Integer, ForeignKey('produto.id'))
-    qtde = Column(Numeric(9, 2), default='0.00')
-    valor_unitario = Column(Numeric(9, 2), default='0.00')
-    valor_total = Column(Numeric(9, 2), default='0.00')
+    qtde = Column(Float(9, 2), default='0.00')
+    valor_unitario = Column(Float(9, 2), default='0.00')
+    valor_total = Column(Float(9, 2), default='0.00')
     obs = Column(String(50))
 
     def __repr__(self):
@@ -191,11 +191,11 @@ class Venda(Base):
     data_entrega = Column(Date)
     categoria = Column(
         Integer, ForeignKey('categoria_a_receber.id'))
-    desconto = Column(Numeric(9, 2), default='0.00')
-    frete = Column(Numeric(9, 2), default='0.00')
-    valor_total = Column(Numeric(9, 2), default='0.00')
-    valor_recebido = Column(Numeric(9, 2), default='0.00')
-    valor_pendente = Column(Numeric(9, 2), default='0.00')
+    desconto = Column(Float(9, 2), default='0.00')
+    frete = Column(Float(9, 2), default='0.00')
+    valor_total = Column(Float(9, 2), default='0.00')
+    valor_recebido = Column(Float(9, 2), default='0.00')
+    valor_pendente = Column(Float(9, 2), default='0.00')
     entrega = Column(
         Integer, ForeignKey('status_entrega.id'), default='2')
     pagamento = Column(
@@ -212,9 +212,9 @@ class RelacaoVenda(Base):
     id = Column(String(25), primary_key=True)
     id_venda = Column(Integer, ForeignKey('venda.id'))
     id_produto = Column(Integer, ForeignKey('produto.id'))
-    qtde = Column(Numeric(9, 2), default='0.00')
-    valor_unitario = Column(Numeric(9, 2), default='0.00')
-    valor_total = Column(Numeric(9, 2), default='0.00')
+    qtde = Column(Float(9, 2), default='0.00')
+    valor_unitario = Column(Float(9, 2), default='0.00')
+    valor_total = Column(Float(9, 2), default='0.00')
     obs = Column(String(80))
 
     def __repr__(self):
@@ -241,7 +241,7 @@ class Empresa(Base):
     estado = Column(String(2))
     titulo = Column(String(20))
     subtitulo = Column(String(80))
-    logo = Column(LONGBLOB(length=None))
+    logo = Column(BLOB(length=None))
 
     def __repr__(self):
         return self.nome_fantasia
@@ -257,10 +257,10 @@ class ContaAPagar(Base):
     obs = Column(String(100))
     categoria = Column(Integer, ForeignKey('categoria_a_pagar.id'))
     data_vencimento = Column(Date)
-    valor = Column(Numeric(9, 2), default='0.00')
+    valor = Column(Float(9, 2), default='0.00')
     forma_pagamento = Column(Integer, ForeignKey('forma_de_pagamento.id'))
     data_pagamento = Column(Date)
-    valor_pago = Column(Numeric(9, 2), default='0.00')
+    valor_pago = Column(Float(9, 2), default='0.00')
     pagamento = Column(Integer, ForeignKey(
         'status_pagamento.id'), default='2')
 
@@ -278,10 +278,10 @@ class ContaAReceber(Base):
     obs = Column(String(100))
     categoria = Column(Integer, ForeignKey('categoria_a_receber.id'))
     data_vencimento = Column(Date)
-    valor = Column(Numeric(9, 2), default='0.00')
+    valor = Column(Float(9, 2), default='0.00')
     forma_pagamento = Column(Integer, ForeignKey('forma_de_pagamento.id'))
     data_recebimento = Column(Date)
-    valor_recebido = Column(Numeric(9, 2), default='0.00')
+    valor_recebido = Column(Float(9, 2), default='0.00')
     pagamento = Column(Integer, ForeignKey(
         'status_pagamento.id'), default='2')
 

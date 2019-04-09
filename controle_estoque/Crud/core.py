@@ -38,11 +38,9 @@ class Conexao(object):
             DbPassword = ''
 
         # Engine
-        self.engine = create_engine(
-            'mysql+mysqlconnector://{}:{}@{}/{}?charset=utf8'
-            .format(self.DbUser, self.DbPassword,
-                    self.DbHost, self.DbName),
-            echo=False)
+        db = os.path.join(path, 'database.db')
+        self.engine = create_engine('sqlite:///' + db,
+                                    echo=False)
 
         # Criando Sessao
         self.Session = sessionmaker(bind=self.engine)

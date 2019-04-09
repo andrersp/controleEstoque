@@ -203,7 +203,6 @@ class MainMovimentoConta(Ui_ct_movimento):
         total_desc = []
         desc_despesa = []
         total_descDespesa = []
-        print(self.usuario)
 
         if self.tb_receita.rowCount() >= 1:
             for i in range(self.tb_receita.rowCount()):

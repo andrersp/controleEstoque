@@ -84,3 +84,6 @@ class CreateDb(object):
 
         except:
             pass
+
+
+# CreateDb().tabelas()

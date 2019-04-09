@@ -35,6 +35,8 @@ from mainprodutos import MainProdutos
 from mainvendas import MainVendas
 from Views.main import Ui_MainWindow
 
+from Crud.Create import CreateDb
+
 
 class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
            Funcao, MainVendas, MainClientes, MainCompras, MainFinanceiro,
@@ -58,6 +60,10 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
         # Caminho Absoluto
         self.caminho = os.path.abspath(os.path.dirname(sys.argv[0]))
+
+        # Criando banco de Dados
+        create = CreateDb()
+        create.tabelas()
 
         # Icone dos botoes Topo
         self.IconeBotaoTopo(self.bt_Home, self.resourcepath(
