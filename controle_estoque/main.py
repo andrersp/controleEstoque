@@ -50,7 +50,9 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
         # Background
         palete = QtGui.QPalette()
-        palete.setBrush(QtGui.QPalette.Background, QtGui.QBrush(QtGui.QPixmap(self.resourcepath('Images/bg.png'))))
+        palete.setBrush(QtGui.QPalette.Background, 
+                        QtGui.QBrush(QtGui.QPixmap(
+                            self.resourcepath('Images/bg.png'))))
         self.setPalette(palete)
         
 
