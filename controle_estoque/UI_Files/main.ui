@@ -80,7 +80,7 @@ background: url(&quot;Images/bg.png&quot;) 0 0 no-repeat #0884c2
      </property>
      <property name="font">
       <font>
-       <family>Arial [Mono]</family>
+       <family>Arial</family>
        <pointsize>18</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -171,7 +171,7 @@ background: #7AB32E
      </property>
      <property name="font">
       <font>
-       <family>Arial [Mono]</family>
+       <family>Arial</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -198,7 +198,7 @@ background: #7AB32E
      </property>
      <property name="font">
       <font>
-       <family>Arial [Mono]</family>
+       <family>Arial</family>
        <pointsize>12</pointsize>
       </font>
      </property>

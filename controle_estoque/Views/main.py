@@ -28,10 +28,7 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         MainWindow.setFont(font)
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        MainWindow.setStyleSheet("QMainWindow {\n"
-                                 "background: url(\"Images/bg.png\") 0 0 no-repeat #0884c2\n"
-                                 "}\n"
-                                 "")
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("")
         self.centralwidget.setObjectName("centralwidget")
@@ -49,7 +46,7 @@ class Ui_MainWindow(object):
         self.lb_Data = QtWidgets.QLabel(self.wd_topo)
         self.lb_Data.setGeometry(QtCore.QRect(590, 10, 70, 25))
         font = QtGui.QFont()
-        font.setFamily("Arial [Mono]")
+        font.setFamily("Arial")
         font.setPointSize(18)
         font.setBold(True)
         font.setWeight(75)
@@ -88,7 +85,7 @@ class Ui_MainWindow(object):
         self.lb_NomeFantasia = QtWidgets.QLabel(self.wd_topo)
         self.lb_NomeFantasia.setGeometry(QtCore.QRect(60, 10, 120, 20))
         font = QtGui.QFont()
-        font.setFamily("Arial [Mono]")
+        font.setFamily("Arial")
         font.setPointSize(12)
         font.setBold(True)
         font.setWeight(75)
@@ -99,7 +96,7 @@ class Ui_MainWindow(object):
         self.lb_NomeFantasia2 = QtWidgets.QLabel(self.wd_topo)
         self.lb_NomeFantasia2.setGeometry(QtCore.QRect(60, 30, 120, 20))
         font = QtGui.QFont()
-        font.setFamily("Arial [Mono]")
+        font.setFamily("Arial")
         font.setPointSize(12)
         self.lb_NomeFantasia2.setFont(font)
         self.lb_NomeFantasia2.setStyleSheet("color: #FFF")
