@@ -345,7 +345,7 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
 
         )
 
-        self.documento.load(QUrl("file:///" +
+        self.documento.load(QUrl.fromLocalFile(
                                  self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)
 
@@ -367,6 +367,6 @@ class MainAReceber(Ui_ct_AReceber, Ui_ct_FormReceber):
 
         )
 
-        self.documento.load(QUrl("file:///" +
+        self.documento.load(QUrl.fromLocalFile(
                                  self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)

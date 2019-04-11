@@ -242,6 +242,6 @@ class MainClientes(Ui_ct_MainClientes, Ui_ct_FormClientes):
             emailFornecedor=email
         )
 
-        self.documento.load(QUrl("file:///" +
-                                 self.resourcepath("report.html")))
+        self.documento.load(QUrl.fromLocalFile(
+            self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)

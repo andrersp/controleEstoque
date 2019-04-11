@@ -442,6 +442,6 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
 
         )
 
-        self.documento.load(QUrl("file:///" +
-                                 self.resourcepath("report.html")))
+        self.documento.load(QUrl.fromLocalFile(
+            self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)
