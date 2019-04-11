@@ -28,10 +28,7 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         MainWindow.setFont(font)
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-        MainWindow.setStyleSheet("QMainWindow {\n"
-                                 "background: url(\"Images/bg.png\") 0 0 no-repeat #0884c2\n"
-                                 "}\n"
-                                 "")
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("")
         self.centralwidget.setObjectName("centralwidget")

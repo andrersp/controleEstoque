@@ -1,65 +1,46 @@
-# Nome do produto
-> Descrição curta sobre o que seu projeto faz.
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
+# Controle De Estoque e Vendas
+> Cadastro de Produtos, Clientes e Fornecedores, Vendas, Contas a pagar e receber
 
-De um a dois parágrafos sobre o que é seu projeto e o que ele faz.
+ [![Python 3.6](https://img.shields.io/badge/Python-3.6-green.svg)](https://www.python.org/downloads/release/python-360/) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
-![](../header.png)
+Sistema desenvolvido com foco na facilidade e agilidade de uso.  
+
+
+
 
 ## Instalação
 
 OS X & Linux:
 
 ```sh
-npm install my-crazy-module --save
-```
-
-Windows:
-
-```sh
-edit autoexec.bat
+pip install -r requeriments.txt
 ```
 
 ## Exemplo de uso
 
-Alguns exemplos interessantes e úteis sobre como seu projeto pode ser utilizado. Adicione blocos de códigos e, se necessário, screenshots.
+ Tela Inicial
+![Tela Inicial](https://previews.dropbox.com/p/thumb/AAZK4aPOBBv_OC5aHFpbXBMjMoPex_DUcaPRRJ24ORFogF4ZlBzBYur5bE4iPGLERmbs7TxAnx30N6y4r4H337z0nul4TGNRpVCktSIkEsG8WTjE7epNklLDidFttVQmd3H5X6ZYRse_heGxxOeyd-OLy4o2pQ8QrxhcgXz6rlOFIUP5yedFJ5E6RpirrDs9sCriHqbgsUjz4QGzVr93Qi-ki8IlrX4WUWVH6R23SjcRNTSLU11D6gAFhPqrkBdwWC77g64qEpmXZWAuf3FuJGyYH4LFpyx_2lgvuCK7T3f-vkqC9O-awbCq81wJBh7P6doFEbaTwtS-FWwgXeevXq3A85RMZ02644KvLq-5OYPsYkFGCN-8FKacpPt3uwYNY3ZbJQztHAOH4Gu4yImNmHLW/p.png?size_mode=5)
 
-_Para mais exemplos, consulte a [Wiki][wiki]._ 
 
 ## Configuração para Desenvolvimento
 
-Descreva como instalar todas as dependências para desenvolvimento e como rodar um test-suite automatizado de algum tipo. Se necessário, faça isso para múltiplas plataformas.
+Para desenvolvimento instale todas as dependências 
 
 ```sh
-make install
-npm test
+pip instal -r requirements-dev.txt
 ```
 
 ## Histórico de lançamentos
 
-* 0.2.1
-    * MUDANÇA: Atualização de docs (código do módulo permanece inalterado)
-* 0.2.0
-    * MUDANÇA: Remove `setDefaultXYZ()`
-    * ADD: Adiciona `init()`
-* 0.1.1
-    * CONSERTADO: Crash quando chama `baz()` (Obrigado @NomeDoContribuidorGeneroso!)
-* 0.1.0
-    * O primeiro lançamento adequado
-    * MUDANÇA: Renomeia `foo()` para `bar()`
 * 0.0.1
     * Trabalho em andamento
 
 ## Meta
 
-Seu Nome – [@SeuNome](https://twitter.com/...) – SeuEmail@exemplo.com
+André França – [@rspandre]([https://web.facebook.com/andrefrancarsp](https://web.facebook.com/andrefrancarsp)) – rsp.assistencia@gmail.com
 
-Distribuído sob a licença XYZ. Veja `LICENSE` para mais informações.
-
-[https://github.com/yourname/github-link](https://github.com/othonalberto/)
+[https://github.com/andrersp/](https://github.com/andrersp/)
 
 ## Contributing
 
@@ -69,9 +50,4 @@ Distribuído sob a licença XYZ. Veja `LICENSE` para mais informações.
 4. _Push_ (`git push origin feature/fooBar`)
 5. Crie um novo _Pull Request_
 
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/seunome/seuprojeto/wiki
+
