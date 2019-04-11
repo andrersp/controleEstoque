@@ -50,9 +50,9 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
 
         # Background
         palete = QtGui.QPalette()
-        palete.setBrush(QtGui.QPalette.Background, 
-                        QtGui.QBrush(QtGui.QPixmap(
-                            self.resourcepath('Images/bg.png'))))
+        image = QtGui.QPixmap(self.resourcepath('Images/bg.png'))
+        brush = QtGui.QBrush(image)
+        palete.setBrush(QtGui.QPalette.Background, brush)
         self.setPalette(palete)
         
 
@@ -598,7 +598,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                 'estado': busca.estado,
                 'telefone': self.formatoNumTelefone(busca.telefone)}
         html = template.render(base, **kwargs)
-        with open(self.resourcepath('report.html'), 'w') as f:
+        with open(self.resourcepath('report.html'), 'w', encoding='utf-8') as f:
             f.write(html)
 
         return html

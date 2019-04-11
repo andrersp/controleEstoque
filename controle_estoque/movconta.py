@@ -244,6 +244,6 @@ class MainMovimentoConta(Ui_ct_movimento):
             totalFinal2=float(totalFinal2)
         )
 
-        self.documento.load(QUrl("file:///" +
+        self.documento.load(QUrl.fromLocalFile(
                                  self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)

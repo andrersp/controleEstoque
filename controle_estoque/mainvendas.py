@@ -594,7 +594,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
 
         )
 
-        self.documento.load(QUrl("file:///" +
+        self.documento.load(QUrl.fromLocalFile(
                                  self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)
 
@@ -630,6 +630,6 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             venc=vencimento,
             valor=valor)
 
-        self.documento.load(QUrl("file:///" +
+        self.documento.load(QUrl.fromLocalFile(
                                  self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)
