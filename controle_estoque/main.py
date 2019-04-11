@@ -598,7 +598,7 @@ class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
                 'estado': busca.estado,
                 'telefone': self.formatoNumTelefone(busca.telefone)}
         html = template.render(base, **kwargs)
-        with open(self.resourcepath('report.html'), 'w') as f:
+        with open(self.resourcepath('report.html'), 'w', encoding='utf-8') as f:
             f.write(html)
 
         return html

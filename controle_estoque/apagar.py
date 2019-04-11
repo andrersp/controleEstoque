@@ -329,7 +329,7 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
         )
 
-        self.documento.load(QUrl("file:///" +
+        self.documento.load(QUrl.fromLocalFile(
                                  self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)
 
@@ -351,6 +351,6 @@ class MainAPagar(Ui_ct_APagar, Ui_ct_FormPagar):
 
         )
 
-        self.documento.load(QUrl("file:///" +
+        self.documento.load(QUrl.fromLocalFile(
                                  self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)
