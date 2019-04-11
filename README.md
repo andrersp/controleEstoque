@@ -20,7 +20,7 @@ pip install -r requeriments.txt
 ## Exemplo de uso
 
  Tela Inicial
-![Tela Inicial](https://previews.dropbox.com/p/thumb/AAZK4aPOBBv_OC5aHFpbXBMjMoPex_DUcaPRRJ24ORFogF4ZlBzBYur5bE4iPGLERmbs7TxAnx30N6y4r4H337z0nul4TGNRpVCktSIkEsG8WTjE7epNklLDidFttVQmd3H5X6ZYRse_heGxxOeyd-OLy4o2pQ8QrxhcgXz6rlOFIUP5yedFJ5E6RpirrDs9sCriHqbgsUjz4QGzVr93Qi-ki8IlrX4WUWVH6R23SjcRNTSLU11D6gAFhPqrkBdwWC77g64qEpmXZWAuf3FuJGyYH4LFpyx_2lgvuCK7T3f-vkqC9O-awbCq81wJBh7P6doFEbaTwtS-FWwgXeevXq3A85RMZ02644KvLq-5OYPsYkFGCN-8FKacpPt3uwYNY3ZbJQztHAOH4Gu4yImNmHLW/p.png?size_mode=5)
+![Home](https://photos.app.goo.gl/78cqoXdWbtYA8ThM9)
 
 
 ## Configuração para Desenvolvimento
