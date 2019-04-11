@@ -1,46 +1,65 @@
+# Nome do produto
+> Descrição curta sobre o que seu projeto faz.
 
-# Controle De Estoque e Vendas
-> Cadastro de Produtos, Clientes e Fornecedores, Vendas, Contas a pagar e receber
+[![NPM Version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Downloads Stats][npm-downloads]][npm-url]
 
- [![Python 3.6](https://img.shields.io/badge/Python-3.6-green.svg)](https://www.python.org/downloads/release/python-360/) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+De um a dois parágrafos sobre o que é seu projeto e o que ele faz.
 
-Sistema desenvolvido com foco na facilidade e agilidade de uso.  
-
-
-
+![](../header.png)
 
 ## Instalação
 
 OS X & Linux:
 
 ```sh
-pip install -r requeriments.txt
+npm install my-crazy-module --save
+```
+
+Windows:
+
+```sh
+edit autoexec.bat
 ```
 
 ## Exemplo de uso
 
- Tela Inicial
-![Tela Inicial](https://photos.app.goo.gl/M2b3HfWeV4yL9qNb6)
+Alguns exemplos interessantes e úteis sobre como seu projeto pode ser utilizado. Adicione blocos de códigos e, se necessário, screenshots.
 
+_Para mais exemplos, consulte a [Wiki][wiki]._ 
 
 ## Configuração para Desenvolvimento
 
-Para desenvolvimento instale todas as dependências 
+Descreva como instalar todas as dependências para desenvolvimento e como rodar um test-suite automatizado de algum tipo. Se necessário, faça isso para múltiplas plataformas.
 
 ```sh
-pip instal -r requirements-dev.txt
+make install
+npm test
 ```
 
 ## Histórico de lançamentos
 
+* 0.2.1
+    * MUDANÇA: Atualização de docs (código do módulo permanece inalterado)
+* 0.2.0
+    * MUDANÇA: Remove `setDefaultXYZ()`
+    * ADD: Adiciona `init()`
+* 0.1.1
+    * CONSERTADO: Crash quando chama `baz()` (Obrigado @NomeDoContribuidorGeneroso!)
+* 0.1.0
+    * O primeiro lançamento adequado
+    * MUDANÇA: Renomeia `foo()` para `bar()`
 * 0.0.1
     * Trabalho em andamento
 
 ## Meta
 
-André França – [@rspandre]([https://web.facebook.com/andrefrancarsp](https://web.facebook.com/andrefrancarsp)) – rsp.assistencia@gmail.com
+Seu Nome – [@SeuNome](https://twitter.com/...) – SeuEmail@exemplo.com
 
-[https://github.com/andrersp/](https://github.com/andrersp/)
+Distribuído sob a licença XYZ. Veja `LICENSE` para mais informações.
+
+[https://github.com/yourname/github-link](https://github.com/othonalberto/)
 
 ## Contributing
 
@@ -50,4 +69,9 @@ André França – [@rspandre]([https://web.facebook.com/andrefrancarsp](https:/
 4. _Push_ (`git push origin feature/fooBar`)
 5. Crie um novo _Pull Request_
 
-
+[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/datadog-metrics
+[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
+[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
+[wiki]: https://github.com/seunome/seuprojeto/wiki
