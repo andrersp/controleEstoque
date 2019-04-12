@@ -28,7 +28,7 @@ pip install -r requeriments.txt
 Para desenvolvimento instale todas as dependências 
 
 ```sh
-pip instal -r requirements-dev.txt
+pip install -r requirements-dev.txt
 ```
 
 ## Histórico de lançamentos
