@@ -29,10 +29,10 @@ pip install -r requeriments.txt
  ![Cadastro de Produto](SC/cadproduto.png)
 
  Lista de Clientes
- ![Lista de Clientes] (SC/listacliente.png)
+ ![Lista de Clientes](SC/listacliente.png)
 
  Lista de Vendas
- ![Lista de Vendas] (SC/listavenda.png)
+ ![Lista de Vendas](SC/listavenda.png)
 
 
 
