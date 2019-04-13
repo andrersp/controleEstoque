@@ -23,7 +23,7 @@ pip install -r requeriments.txt
 ![Tela Inicial](SC/home.png)
 
  Lista de Produtos
- ![Lista de Produtos](SC/listaproduto.png])
+ ![Lista de Produtos](SC/listaproduto.png)
 
  Cadastro de Produto
  ![Cadastro de Produto](SC/cadproduto.png)
