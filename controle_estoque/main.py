@@ -36,6 +36,10 @@ from mainvendas import MainVendas
 from Views.main import Ui_MainWindow
 
 
+# Icons 
+import Images
+
+
 class Main(QtWidgets.QMainWindow, Ui_MainWindow, MainHome, MainProdutos,
            Funcao, MainVendas, MainClientes, MainCompras, MainFinanceiro,
            MainFornecedor, MainConfig, Financeiro, Comercial, Fornecedor,
