@@ -17,10 +17,23 @@ OS X & Linux:
 pip install -r requeriments.txt
 ```
 
-## Exemplo de uso
+## Telas do Sistema
 
  Tela Inicial
 ![Tela Inicial](SC/home.png)
+
+ Lista de Produtos
+ ![Lista de Produtos](SC/listaproduto.png])
+
+ Cadastro de Produto
+ ![Cadastro de Produto](SC/cadproduto.png)
+
+ Lista de Clientes
+ ![Lista de Clientes] (SC/listacliente.png)
+
+ Lista de Vendas
+ ![Lista de Vendas] (SC/listavenda.png)
+
 
 
 ## Configuração para Desenvolvimento
