@@ -165,7 +165,7 @@ background: #7AB32E
       <rect>
        <x>60</x>
        <y>10</y>
-       <width>120</width>
+       <width>220</width>
        <height>20</height>
       </rect>
      </property>
@@ -192,7 +192,7 @@ background: #7AB32E
       <rect>
        <x>60</x>
        <y>30</y>
-       <width>120</width>
+       <width>220</width>
        <height>20</height>
       </rect>
      </property>

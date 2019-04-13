@@ -538,7 +538,7 @@ class Ui_ct_FormUsuario(object):
 "     border-bottom-right-radius: 3px;\n"
 " }\n"
 "QComboBox::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }\n"
 "")
         self.cb_nivel.setObjectName("cb_nivel")
@@ -565,7 +565,7 @@ class Ui_ct_FormUsuario(object):
 "     border-bottom-right-radius: 3px;\n"
 " }\n"
 "QComboBox::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }\n"
 "")
         self.cb_ativo.setObjectName("cb_ativo")
