@@ -10,12 +10,6 @@
     <height>700</height>
    </rect>
   </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
   <property name="minimumSize">
    <size>
     <width>900</width>
@@ -40,6 +34,10 @@
   </property>
   <property name="windowTitle">
    <string>Azul e Rosa Personalizados</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../Imagens.qrc">
+    <normaloff>:/Images/icon.ico</normaloff>:/Images/icon.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {
@@ -304,8 +302,8 @@ background: #cacaca
       <string/>
      </property>
      <property name="icon">
-      <iconset>
-       <normaloff>../Images/logout.svg</normaloff>../Images/logout.svg</iconset>
+      <iconset resource="../Imagens.qrc">
+       <normaloff>:/Images/Images/logout.svg</normaloff>:/Images/Images/logout.svg</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -370,8 +368,8 @@ background: #cacaca
       <string/>
      </property>
      <property name="icon">
-      <iconset>
-       <normaloff>../Images/altersenha.svg</normaloff>../Images/altersenha.svg</iconset>
+      <iconset resource="../Imagens.qrc">
+       <normaloff>:/Images/Images/altersenha.svg</normaloff>:/Images/Images/altersenha.svg</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -752,7 +750,9 @@ background: #7AB32E
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Imagens.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>bt_Exit</sender>

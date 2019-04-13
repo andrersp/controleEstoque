@@ -13,13 +13,6 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1000, 700)
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            MainWindow.sizePolicy().hasHeightForWidth())
-        MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setMinimumSize(QtCore.QSize(900, 700))
         MainWindow.setMaximumSize(QtCore.QSize(1000, 700))
         font = QtGui.QFont()
@@ -28,7 +21,14 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         MainWindow.setFont(font)
         MainWindow.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/Images/icon.ico"),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
+        MainWindow.setStyleSheet("QMainWindow {\n"
+                                 "background: url(\"Images/bg.png\") 0 0 no-repeat #0884c2\n"
+                                 "}\n"
+                                 "")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setStyleSheet("")
         self.centralwidget.setObjectName("centralwidget")
@@ -76,10 +76,10 @@ class Ui_MainWindow(object):
                                    "background: #7AB32E\n"
                                    "}")
         self.bt_Home.setText("")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../RSP/Images/home.png"),
-                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_Home.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("../../RSP/Images/home.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.bt_Home.setIcon(icon1)
         self.bt_Home.setFlat(True)
         self.bt_Home.setObjectName("bt_Home")
         self.lb_NomeFantasia = QtWidgets.QLabel(self.wd_topo)
@@ -141,10 +141,10 @@ class Ui_MainWindow(object):
                                      "background: #cacaca\n"
                                      "}")
         self.bt_logout.setText("")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(self.resourcepath("Images/logout.svg")),
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/Images/Images/logout.svg"),
                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_logout.setIcon(icon1)
+        self.bt_logout.setIcon(icon2)
         self.bt_logout.setIconSize(QtCore.QSize(50, 40))
         self.bt_logout.setObjectName("bt_logout")
         self.lb_userName_2 = QtWidgets.QLabel(self.wd_topo)
@@ -172,10 +172,10 @@ class Ui_MainWindow(object):
                                          "background: #cacaca\n"
                                          "}")
         self.bt_alterSenha.setText("")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap(self.resourcepath(
-            "Images/altersenha.svg")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bt_alterSenha.setIcon(icon2)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(
+            ":/Images/Images/altersenha.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.bt_alterSenha.setIcon(icon3)
         self.bt_alterSenha.setIconSize(QtCore.QSize(50, 40))
         self.bt_alterSenha.setObjectName("bt_alterSenha")
         self.wd_menu = QtWidgets.QWidget(self.centralwidget)
