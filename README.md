@@ -20,7 +20,7 @@ pip install -r requeriments.txt
 ## Exemplo de uso
 
  Tela Inicial
-![Tela Inicial](ScreenShot/home.pg)
+![Tela Inicial](SC/home.pg)
 
 
 ## Configuração para Desenvolvimento
