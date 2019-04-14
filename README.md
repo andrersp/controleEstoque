@@ -34,6 +34,9 @@ pip install -r requeriments.txt
  Lista de Vendas
  ![Lista de Vendas](SC/listavenda.png)
 
+ Nova Venda
+ ![Nova Venda](SC/vendas.png)
+
 
 
 ## Configuração para Desenvolvimento
