@@ -31,11 +31,17 @@ pip install -r requeriments.txt
  Lista de Clientes
  ![Lista de Clientes](SC/listacliente.png)
 
+ Cadastro de Clientes
+ ![Cadastro de Cliente](SC/cadcliente.png)
+
  Lista de Vendas
  ![Lista de Vendas](SC/listavenda.png)
 
  Nova Venda
  ![Nova Venda](SC/vendas.png)
+
+ Resumo Financeiro
+ ![Resumo Financenrio](SC/resfinanceiro.png)
 
 
 
