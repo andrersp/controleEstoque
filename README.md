@@ -34,6 +34,9 @@ pip install -r requeriments.txt
  Lista de Vendas
  ![Lista de Vendas](SC/listavenda.png)
 
+ Resumo Financeiro por período 
+ ![Resumo Financeiro](SC/resfinanceiro.png)
+
 
 
 ## Configuração para Desenvolvimento
