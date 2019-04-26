@@ -573,7 +573,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             dataEntrega=QDate.toString(self.dt_Entrega.date(),
                                        "dd-MM-yyyy"),
             statusEntrega=[busca.idStatusEntrega, busca.statusEntrega],
-            statusFinanceiro=busca.statusPagamento,
+            statusFinanceiro=busca.idStatusPagamento,
             headertable=headertable,
             descProduto=produto,
             observacao=obs,
@@ -595,7 +595,7 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
         )
 
         self.documento.load(QUrl.fromLocalFile(
-                                 self.resourcepath("report.html")))
+            self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)
 
     # Imprimindo Tabela Vendas
@@ -631,5 +631,5 @@ class MainVendas(Ui_ct_MainVendas, Ui_ct_FormVenda, DataAtual):
             valor=valor)
 
         self.documento.load(QUrl.fromLocalFile(
-                                 self.resourcepath("report.html")))
+            self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)

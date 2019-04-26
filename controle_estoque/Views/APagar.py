@@ -206,8 +206,7 @@ class Ui_ct_APagar(object):
                                        "     border-bottom-right-radius: 3px;\n"
                                        " }\n"
                                        "QComboBox::down-arrow {\n"
-                                       "     image: url("+self.resourcepath(
-                                           'Images/down.png')+");\n"
+                                       "     image: url(:/Images/Images/down.png);\n"
                                        " }\n"
                                        "")
         self.cb_Situacao.setObjectName("cb_Situacao")
