@@ -144,14 +144,13 @@ class CrudRelVenda(object):
 
             # Selecionando ID
             self.query = (sessao.query(RelacaoVenda).get(self.id))
+            if self.query:
+                # add query na sessao
+                sessao.delete(self.query)
+                # Executando a query
+                sessao.commit()
 
-            # add query na sessao
-            sessao.delete(self.query)
-
-            # Executando a query
-            sessao.commit()
-
-            # Fechando Conexao
+            # # Fechando Conexao
             sessao.close()
 
         except IntegrityError as err:
