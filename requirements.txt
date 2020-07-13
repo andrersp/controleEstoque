@@ -1,5 +1,6 @@
 PyQt5
-mysql-connector
+PyQtWebEngine
+mysql-connector-python
 jinja2
 pycep_correios
 mysqlclient
