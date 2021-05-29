@@ -35,9 +35,17 @@
 	<span>Data Entrega: <b>{{ dataEntrega }}</b></span>
 	{% endif %}
 	<!--  -->
+	{% if statusFinanceiro == 1 %}
+	<span>Pagamento: <b>Pago</b></span>
+	{% else %}
+	<span>Pagamento: <b>Pendente</b></span>
+	{% endif %}
 
-	<span>Pagamento: <b>{{ statusFinanceiro }}</b></span>
-	<span>Entrega: <b>{{ statusEntrega[1] }}</b></span>
+	{% if statusEntrega[0] == 1 %}
+	<span>Entrega: <b>Entregue</b></span>
+	{% else %}
+	<span>Entrega: <b>Pendente</b></span>
+	{% endif %}
 </class>
 
 <table class='TableRelat'>

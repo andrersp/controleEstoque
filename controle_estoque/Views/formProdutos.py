@@ -110,7 +110,7 @@ class Ui_ct_FormProdutos(object):
                                                "     border-bottom-right-radius: 3px;\n"
                                                " }\n"
                                                "QComboBox::down-arrow {\n"
-                                               "     image: url("+self.resourcepath('Images/down.png')+");\n"
+                                               "     image: url(:/Images/Images/down.png);\n"
                                                " }\n"
                                                "")
         self.cb_CategoriaProduto.setObjectName("cb_CategoriaProduto")
@@ -165,7 +165,7 @@ class Ui_ct_FormProdutos(object):
                                            "     border-bottom-right-radius: 3px;\n"
                                            " }\n"
                                            "QComboBox::down-arrow {\n"
-                                           "     image: url("+self.resourcepath('Images/down.png')+");\n"
+                                           "     image: url(:/Images/Images/down.png);\n"
                                            " }\n"
                                            "")
         self.cb_MarcaProduto.setInsertPolicy(

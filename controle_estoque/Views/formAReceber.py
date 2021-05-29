@@ -178,7 +178,7 @@ class Ui_ct_FormReceber(object):
 "     border-bottom-right-radius: 3px;\n"
 " }\n"
 "QComboBox::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }\n"
 "")
         self.cb_categoria.setObjectName("cb_categoria")
@@ -237,7 +237,7 @@ class Ui_ct_FormReceber(object):
 "     border-bottom-right-radius: 3px;\n"
 " }\n"
 "QDateEdit::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }\n"
 "\n"
 "QCalendarWidget QAbstractItemView:enabled \n"
@@ -338,7 +338,7 @@ class Ui_ct_FormReceber(object):
 "     border-bottom-right-radius: 3px;\n"
 " }\n"
 "QDateEdit::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }\n"
 "\n"
 "QCalendarWidget QAbstractItemView:enabled \n"
@@ -451,7 +451,7 @@ class Ui_ct_FormReceber(object):
 "\n"
 " }\n"
 "QComboBox::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }\n"
 "QComboBox QAbstractItemView {\n"
 "    border: 1px solid darkgray;\n"
@@ -569,7 +569,7 @@ class Ui_ct_FormReceber(object):
 "     border-bottom-right-radius: 3px;\n"
 " }\n"
 "QComboBox::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }\n"
 "")
         self.cb_repetir.setObjectName("cb_repetir")

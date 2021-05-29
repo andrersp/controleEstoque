@@ -307,6 +307,8 @@ class CrudProduto(object):
             # Selecionando ID Produto
             row = sessao.query(Produto).get(self.id)
             row.qtde = row.qtde + float(self.qtdeProduto)
+            row.valorCompra = self.valorCompra
+            row.obs = self.obsProduto
 
             # Executando a query
             sessao.commit()

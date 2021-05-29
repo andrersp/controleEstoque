@@ -322,7 +322,7 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
                         float(self.tx_ValorCompraProduto.text().replace(',', '.'))
                     lucro = lucro / \
                         float(args[0].text().replace(',', '.')) * 100
-                args[1].setText(format(lucro, ".2f"))
+                    args[1].setText(format(lucro, ".2f"))
 
     # Verificando Inputs
     def VerificaInputProduto(self):
@@ -367,9 +367,9 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
         INSERI.estoqueMinimo = self.tx_EstoqueMinimoProduto.text()
         INSERI.estoqueMaximo = self.tx_EstoqueMaximoProduto.text()
         INSERI.obsProduto = self.tx_ObsProduto.text()
-        INSERI.valorCompra = self.tx_ValorCompraProduto.text()
-        INSERI.valorUnitario = self.tx_ValorUnitarioProduto.text()
-        INSERI.valorAtacado = self.tx_ValorAtacadoProduto.text()
+        INSERI.valorCompra = self.tx_ValorCompraProduto.text().replace(",", ".")
+        INSERI.valorUnitario = self.tx_ValorUnitarioProduto.text().replace(",", ".")
+        INSERI.valorAtacado = self.tx_ValorAtacadoProduto.text().replace(",", ".")
         INSERI.qtdeAtacado = self.tx_MinimoAtacado.text()
         INSERI.inseriProduto()
 
@@ -442,6 +442,6 @@ class MainProdutos(Ui_ct_MainProdutos, Ui_ct_FormProdutos):
 
         )
 
-        self.documento.load(QUrl("file:///" +
-                                 self.resourcepath("report.html")))
+        self.documento.load(QUrl.fromLocalFile(
+            self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)

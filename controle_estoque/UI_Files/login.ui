@@ -78,7 +78,8 @@ background: #CFCFCF;
 border-radius: 2px;
 color: #000;
 font: 13px &quot;Arial&quot; ;
-background: url('/Files/Sistema/controleEstoque/controle_estoque/Images/user.png') right center no-repeat
+background: url(:/Images/Images/user.png) right center no-repeat;
+
 }
 QLineEdit:Focus {
 border: 1px solid red;
@@ -95,9 +96,6 @@ border: 1px solid red;
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-    </property>
-    <property name="readOnly">
-     <bool>false</bool>
     </property>
     <property name="placeholderText">
      <string>Seu Usuário</string>
@@ -146,7 +144,7 @@ background: #CFCFCF;
 border-radius: 2px;
 color: #000;
 font: 13px &quot;Arial&quot; ;
-background: url('/Files/Sistema/controleEstoque/controle_estoque/Images/senha.png') right center no-repeat
+background: url(':Images/Images/senha.png') right center no-repeat
 
 }
 QLineEdit:Focus {
@@ -247,6 +245,8 @@ background: none
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Imagens.qrc"/>
+ </resources>
  <connections/>
 </ui>

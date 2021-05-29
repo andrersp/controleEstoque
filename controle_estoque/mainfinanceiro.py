@@ -11,6 +11,12 @@ class MainFinanceiro(Ui_ct_MainFinanceiro, DataAtual, MainMovimentoConta,
 
     def mainfinanceiro(self, frame):
         super(MainFinanceiro, self).setMainFinanceiro(frame)
+
+        # Ocultando botoes ainda sem funcção
+        self.bt_ajustesFinanceiro.setHidden(True)
+        self.bt_relatCompras.setHidden(True)
+        self.bt_relatVendas.setHidden(True)
+
         self.frameMainFinanceiro.show()
 
         """ Chamando funcoes ao clicar nos botoes """

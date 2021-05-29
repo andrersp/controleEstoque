@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="Images">
+    <file>Images/exit.png</file>
+    <file>Images/logout.svg</file>
+    <file>Images/altersenha.svg</file>
+    <file>icon.ico</file>
+    <file>Images/user.png</file>
+    <file>Images/senha.png</file>
+    <file>Images/down.png</file>
+  </qresource>
+</RCC>

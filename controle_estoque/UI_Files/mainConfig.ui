@@ -113,7 +113,7 @@ border-bottom: 2px solid #069;</string>
      </property>
      <property name="font">
       <font>
-       <family>Arial [Mono]</family>
+       <family>Arial</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -178,7 +178,7 @@ margin-top: 0;
      </property>
      <property name="font">
       <font>
-       <family>Arial [Mono]</family>
+       <family>Arial</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -246,7 +246,7 @@ margin-top: 0;
      </property>
      <property name="font">
       <font>
-       <family>Arial [Mono]</family>
+       <family>Arial</family>
        <pointsize>10</pointsize>
        <weight>75</weight>
        <bold>true</bold>

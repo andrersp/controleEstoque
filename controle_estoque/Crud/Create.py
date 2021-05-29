@@ -75,14 +75,18 @@ class CreateDb(object):
                 Nivel(id=1, nivel='Vendedor'),
                 Nivel(id=2, nivel='Compras'),
                 Nivel(id=3, nivel='Financeiro'),
-                Nivel(id=4, nivel='Administrador'),
-                Usuarios(id=1, usuario='admin',
-                         senha='admin', nivel='4', ativo=1)
+                Nivel(id=4, nivel='Administrador')
             ])
 
             sessao.commit()
 
-        except:
+            sessao.add(Usuarios(id=1, usuario='admin',
+                         senha='admin', nivel=4, ativo=1))
+
+            sessao.commit()
+
+        except Exception as e:
+            print("ERRO: "+e)
             pass
 
 

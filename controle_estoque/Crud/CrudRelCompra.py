@@ -146,11 +146,12 @@ class CrudRelCompra(object):
             # selecionando ID
             self.query = sessao.query(RelacaoCompra).get(self.id)
 
-            # Add query na Sessao
-            sessao.delete(self.query)
+            if self.query:
+                # Add query na Sessao
+                sessao.delete(self.query)
 
-            # Executando a query
-            sessao.commit()
+                # Executando a query
+                sessao.commit()
 
             # Fechando Conexao
             sessao.close()
