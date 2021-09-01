@@ -91,7 +91,7 @@ class Ui_ct_MainVendas(object):
                                           "     border-bottom-right-radius: 3px;\n"
                                           " }\n"
                                           "QDateEdit::down-arrow {\n"
-                                          "     image: url(\"+self.resourcepath(\'Images/down.png\')+\");\n"
+                                          "     image: url(:Images/Images/down.png);\n"
                                           " }")
         self.dt_InicioVenda.setCalendarPopup(True)
         self.dt_InicioVenda.setObjectName("dt_InicioVenda")
@@ -136,7 +136,7 @@ class Ui_ct_MainVendas(object):
                                        "     border-bottom-right-radius: 3px;\n"
                                        " }\n"
                                        "QDateEdit::down-arrow {\n"
-                                       "     image: url(\"+self.resourcepath(\'Images/down.png\')+\");\n"
+                                       "     image: url(:Images/Images/down.png);\n"
                                        " }")
         self.dt_FimVenda.setCalendarPopup(True)
         self.dt_FimVenda.setObjectName("dt_FimVenda")
@@ -171,8 +171,7 @@ class Ui_ct_MainVendas(object):
                                         "     border-bottom-right-radius: 3px;\n"
                                         " }\n"
                                         "QComboBox::down-arrow {\n"
-                                        "     image: url("+self.resourcepath(
-                                            'Images/down.png')+");\n"
+                                        "     image: url(:Images/Images/down.png);\n"
                                         " }\n"
                                         "")
         self.cb_pagamento.setObjectName("cb_pagamento")
@@ -207,8 +206,7 @@ class Ui_ct_MainVendas(object):
                                       "     border-bottom-right-radius: 3px;\n"
                                       " }\n"
                                       "QComboBox::down-arrow {\n"
-                                      "     image: url("+self.resourcepath(
-                                          'Images/down.png')+");\n"
+                                      "     image: url(:Images/Images/down.png);\n"
                                       " }\n"
                                       "")
         self.cb_entrega.setObjectName("cb_entrega")

@@ -239,7 +239,7 @@ class Empresa(Base):
     bairro = Column(String(40))
     cidade = Column(String(40))
     estado = Column(String(2))
-    titulo = Column(String(20))
+    titulo = Column(String(50))
     subtitulo = Column(String(80))
     logo = Column(BLOB(length=None))
 

@@ -158,7 +158,7 @@ class Ui_ct_FormCompra(object):
 "     border-bottom-right-radius: 3px;\n"
 " }\n"
 "QDateEdit::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }")
         self.dt_Emissao.setCalendarPopup(True)
         self.dt_Emissao.setObjectName("dt_Emissao")
@@ -193,7 +193,7 @@ class Ui_ct_FormCompra(object):
 "     border-bottom-right-radius: 3px;\n"
 " }\n"
 "QDateEdit::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }")
         self.dt_Prazo.setCalendarPopup(True)
         self.dt_Prazo.setObjectName("dt_Prazo")
@@ -258,7 +258,7 @@ class Ui_ct_FormCompra(object):
 "     border-bottom-right-radius: 3px;\n"
 " }\n"
 "QDateEdit::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }")
         self.dt_Entrega.setCalendarPopup(True)
         self.dt_Entrega.setObjectName("dt_Entrega")
@@ -725,7 +725,7 @@ class Ui_ct_FormCompra(object):
 "\n"
 " }\n"
 "QComboBox::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }\n"
 "QComboBox QAbstractItemView {\n"
 "    border: 1px solid darkgray;\n"
@@ -784,7 +784,7 @@ class Ui_ct_FormCompra(object):
 "\n"
 " }\n"
 "QComboBox::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }\n"
 "QComboBox QAbstractItemView {\n"
 "    border: 1px solid darkgray;\n"
@@ -833,7 +833,7 @@ class Ui_ct_FormCompra(object):
 "     border-bottom-right-radius: 3px;\n"
 " }\n"
 "QDateEdit::down-arrow {\n"
-"     image: url("+self.resourcepath('Images/down.png')+");\n"
+"     image: url(:/Images/Images/down.png);\n"
 " }\n"
 "QCalendarWidget QAbstractItemView:enabled \n"
 "  {\n"

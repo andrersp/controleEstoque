@@ -62,28 +62,90 @@ class CreateDb(object):
             # Sessao
             conecta = Conexao()
             sessao = conecta.Session()
-            sessao.add_all([
-                StatusPagamento(id=1, status_pagamento='CONCLUÍDO'),
-                StatusPagamento(id=2, status_pagamento='PENDENTE'),
-                CatAReceber(id=1, categoria_a_receber='Venda'),
-                CatAPagar(id=1, categoria_a_pagar='Compra'),
-                FormaPagamento(id=1, forma_pagamento='Dinheiro'),
-                FormaPagamento(id=2, forma_pagamento='Cartão'),
-                StatusEntrega(id=1, status_entrega='ENTREGUE'),
-                StatusEntrega(id=2, status_entrega='PENDENTE'),
-                Empresa(id=1, titulo='Titulo', subtitulo='Subtitulo'),
-                Nivel(id=1, nivel='Vendedor'),
-                Nivel(id=2, nivel='Compras'),
-                Nivel(id=3, nivel='Financeiro'),
-                Nivel(id=4, nivel='Administrador'),
-                Usuarios(id=1, usuario='admin',
-                         senha='admin', nivel='4', ativo=1)
-            ])
+            entidades_padrao = [
+                {
+                    'ent': StatusPagamento,
+                    'id': 1,
+                    'insert': StatusPagamento(id=1, status_pagamento='CONCLUÍDO'),
+                },
+                {
+                    'ent': StatusPagamento,
+                    'id': 2,
+                    'insert': StatusPagamento(id=2, status_pagamento='PENDENTE'),
+                },
+                {
+                    'ent': CatAReceber,
+                    'id': 1,
+                    'insert': CatAReceber(id=1, categoria_a_receber='Venda'),
+                },
+                {
+                    'ent': CatAPagar,
+                    'id': 1,
+                    'insert': CatAPagar(id=1, categoria_a_pagar='Compra'),
+                },               
+                {
+                    'ent': FormaPagamento,
+                    'id': 1,
+                    'insert': FormaPagamento(id=1, forma_pagamento='Dinheiro'),
+                },
+                {
+                    'ent': FormaPagamento,
+                    'id': 2,
+                    'insert': FormaPagamento(id=2, forma_pagamento='Cartão'),
+                },
+                {
+                    'ent': StatusEntrega,
+                    'id': 1,
+                    'insert': StatusEntrega(id=1, status_entrega='ENTREGUE'),
+                },
+                {
+                    'ent': StatusEntrega,
+                    'id': 2,
+                    'insert': StatusEntrega(id=2, status_entrega='PENDENTE'),
+                },
+                {
+                    'ent': Empresa,
+                    'id': 1,
+                    'insert': Empresa(id=1, titulo='Titulo', subtitulo='Subtitulo'),
+                },
+                {
+                    'ent': Nivel,
+                    'id': 1,
+                    'insert': Nivel(id=1, nivel='Vendedor'),
+                },
+                {
+                    'ent': Nivel,
+                    'id': 2,
+                    'insert': Nivel(id=2, nivel='Compras'),
+                },
+                {
+                    'ent': Nivel,
+                    'id': 3,
+                    'insert': Nivel(id=3, nivel='Financeiro'),
+                },
+                {
+                    'ent': Nivel,
+                    'id': 4,
+                    'insert': Nivel(id=4, nivel='Administrador')
+                }
+            ]
+
+            for entidade in entidades_padrao:
+                if sessao.get(entidade['ent'], entidade['id']) == None:
+                    sessao.add(entidade['insert'])
 
             sessao.commit()
 
-        except:
-            pass
+            if sessao.get(Usuarios, 1) == None:
+                sessao.add(Usuarios(id=1, usuario='admin',
+                            senha='admin', nivel=4, ativo=1))
+                sessao.commit()
+
+        except Exception as e:
+            print(f"ERRO: {e}")
+            
+        finally:
+            sessao.close()
 
 
 # CreateDb().tabelas()

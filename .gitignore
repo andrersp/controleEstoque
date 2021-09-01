@@ -72,6 +72,7 @@ target/
 Software.code-workspace
 *.html
 *.pdf
+*.qrc
 
 # File Teste
 main2.py

@@ -237,6 +237,6 @@ class MainFornecedor(Ui_ct_MainFornecedor, Ui_ct_FormFornecedor):
             emailFornecedor=emailFornecedor
         )
 
-        self.documento.load(QtCore.QUrl("file:///" +
+        self.documento.load(QtCore.QUrl.fromLocalFile(
                                         self.resourcepath("report.html")))
         self.documento.loadFinished['bool'].connect(self.previaImpressao)

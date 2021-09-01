@@ -10,12 +10,6 @@
     <height>700</height>
    </rect>
   </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
   <property name="minimumSize">
    <size>
     <width>900</width>
@@ -40,6 +34,10 @@
   </property>
   <property name="windowTitle">
    <string>Azul e Rosa Personalizados</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../Imagens.qrc">
+    <normaloff>:/Images/icon.ico</normaloff>:/Images/icon.ico</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow {
@@ -80,7 +78,7 @@ background: url(&quot;Images/bg.png&quot;) 0 0 no-repeat #0884c2
      </property>
      <property name="font">
       <font>
-       <family>Arial [Mono]</family>
+       <family>Arial</family>
        <pointsize>18</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -165,13 +163,13 @@ background: #7AB32E
       <rect>
        <x>60</x>
        <y>10</y>
-       <width>120</width>
+       <width>220</width>
        <height>20</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Arial [Mono]</family>
+       <family>Arial</family>
        <pointsize>12</pointsize>
        <weight>75</weight>
        <bold>true</bold>
@@ -192,13 +190,13 @@ background: #7AB32E
       <rect>
        <x>60</x>
        <y>30</y>
-       <width>120</width>
+       <width>220</width>
        <height>20</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Arial [Mono]</family>
+       <family>Arial</family>
        <pointsize>12</pointsize>
       </font>
      </property>
@@ -304,8 +302,8 @@ background: #cacaca
       <string/>
      </property>
      <property name="icon">
-      <iconset>
-       <normaloff>../Images/logout.svg</normaloff>../Images/logout.svg</iconset>
+      <iconset resource="../Imagens.qrc">
+       <normaloff>:/Images/Images/logout.svg</normaloff>:/Images/Images/logout.svg</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -370,8 +368,8 @@ background: #cacaca
       <string/>
      </property>
      <property name="icon">
-      <iconset>
-       <normaloff>../Images/altersenha.svg</normaloff>../Images/altersenha.svg</iconset>
+      <iconset resource="../Imagens.qrc">
+       <normaloff>:/Images/Images/altersenha.svg</normaloff>:/Images/Images/altersenha.svg</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -752,7 +750,9 @@ background: #7AB32E
    </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../Imagens.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>bt_Exit</sender>

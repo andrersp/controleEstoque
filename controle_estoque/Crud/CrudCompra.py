@@ -295,7 +295,6 @@ class CrudCompra(object):
             print(err)
 
     # Atualizando valor recebido e alterando status
-
     def Pagar(self):
 
         try:

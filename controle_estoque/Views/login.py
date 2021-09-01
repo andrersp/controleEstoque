@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'login.ui',
-# licensing of 'login.ui' applies.
+# Form implementation generated from reading ui file 'login.ui'
 #
-# Created: Fri Mar 22 09:40:29 2019
-#      by: PyQt5-uic  running on PyQt5 5.12.1
+# Created by: PyQt5 UI code generator 5.12.1
 #
 # WARNING! All changes made in this file will be lost!
+
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -44,8 +43,7 @@ class Ui_ct_login(object):
                                    "border-radius: 2px;\n"
                                    "color: #000;\n"
                                    "font: 13px \"Arial\" ;\n"
-                                   "background: url(" + self.resourcepath('Images/user.png') +
-                                   ") right center no-repeat\n"
+                                   "background: url(:/Images/Images/user.png) right center no-repeat;\n"
                                    "}\n"
                                    "QLineEdit:Focus {\n"
                                    "border: 1px solid red;\n"
@@ -55,7 +53,6 @@ class Ui_ct_login(object):
         self.tx_user.setCursorPosition(0)
         self.tx_user.setAlignment(
             QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        self.tx_user.setReadOnly(False)
         self.tx_user.setObjectName("tx_user")
         self.lb_FormCompra_5 = QtWidgets.QLabel(self.frame_login)
         self.lb_FormCompra_5.setGeometry(QtCore.QRect(20, 110, 120, 20))
@@ -76,8 +73,7 @@ class Ui_ct_login(object):
                                     "border-radius: 2px;\n"
                                     "color: #000;\n"
                                     "font: 13px \"Arial\" ;\n"
-                                    "background: url(" + self.resourcepath(
-                                        'Images/senha.png')+") right center no-repeat\n"
+                                    "background: url(:Images/Images/senha.png) right center no-repeat\n"
                                     "\n"
                                     "}\n"
                                     "QLineEdit:Focus {\n"
@@ -96,10 +92,10 @@ class Ui_ct_login(object):
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         font.setPointSize(10)
-        font.setWeight(75)
         font.setBold(True)
+        font.setWeight(75)
         self.bt_login.setFont(font)
-        self.bt_login.setCursor(QtCore.Qt.PointingHandCursor)
+        self.bt_login.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.bt_login.setFocusPolicy(QtCore.Qt.NoFocus)
         self.bt_login.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
         self.bt_login.setStyleSheet("QPushButton {\n"
@@ -128,15 +124,10 @@ class Ui_ct_login(object):
         QtCore.QMetaObject.connectSlotsByName(ct_login)
 
     def tradLogin(self, ct_login):
-        ct_login.setWindowTitle(QtWidgets.QApplication.translate(
-            "ct_login", "Frame", None, -1))
-        self.lb_FormCompra_4.setText(
-            QtWidgets.QApplication.translate("ct_login", "USUÁRIO", None, -1))
-        self.tx_user.setPlaceholderText(
-            QtWidgets.QApplication.translate("ct_login", "Seu Usuário", None, -1))
-        self.lb_FormCompra_5.setText(
-            QtWidgets.QApplication.translate("ct_login", "SENHA", None, -1))
-        self.tx_senha.setPlaceholderText(
-            QtWidgets.QApplication.translate("ct_login", "Sua Senha", None, -1))
-        self.bt_login.setText(QtWidgets.QApplication.translate(
-            "ct_login", "LOGIN", None, -1))
+        _translate = QtCore.QCoreApplication.translate
+        ct_login.setWindowTitle(_translate("ct_login", "Frame"))
+        self.lb_FormCompra_4.setText(_translate("ct_login", "USUÁRIO"))
+        self.tx_user.setPlaceholderText(_translate("ct_login", "Seu Usuário"))
+        self.lb_FormCompra_5.setText(_translate("ct_login", "SENHA"))
+        self.tx_senha.setPlaceholderText(_translate("ct_login", "Sua Senha"))
+        self.bt_login.setText(_translate("ct_login", "LOGIN"))
