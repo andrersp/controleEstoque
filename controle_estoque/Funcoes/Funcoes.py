@@ -7,10 +7,7 @@ from PyQt5.QtWidgets import QPushButton
 from PyQt5.QtCore import QSize
 from PyQt5.QtGui import QPixmap, QIcon
 
-
-from pycep_correios import get_address_from_cep
-from pycep_correios.exceptions import CEPNotFound, ConnectionError, InvalidCEP
-
+from brazilcep import get_address_from_cep, exceptions
 
 class Funcao(object):
 
@@ -108,9 +105,9 @@ class Funcao(object):
             self.tx_Numero.setFocus()
         except ConnectionError:
             self.tx_Endereco.setText('Sem conexão com serviço dos Correios')
-        except InvalidCEP:
+        except exceptions.InvalidCEP as eic:
             self.tx_Endereco.setText('CEP inválido')
-        except CEPNotFound:
+        except exceptions.CEPNotFound as ecnf:
             self.tx_Endereco.setText('CEP não encontrado')
         except:
             self.tx_Endereco.setText('Erro desconhecido')
